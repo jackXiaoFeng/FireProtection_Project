@@ -1,0 +1,23 @@
+platform :ios, ‘6.0’
+inhibit_all_warnings!
+
+target 'MyProject' do
+pod 'AFNetworking', '~> 2.5.0'
+pod 'Mantle', '~> 1.5.1'
+pod 'ReactiveCocoa', '~> 2.4.7'
+pod 'SDWebImage', '~> 3.7.2'
+pod 'Masonry', '~> 0.6.1'
+pod 'MBProgressHUD', '~> 0.9.1'
+pod 'Reachability', '~> 3.2'
+pod 'CCLogSystem', '~> 1.0.1'
+pod 'iToast', '~> 0.0.1'
+pod 'JSONKit', '~> 1.5pre'
+pod 'INTULocationManager', '~> 3.0.0'
+pod 'EGODatabase', '~> 2.0'
+pod 'DateTools'
+pod 'TTTAttributedLabel'
+pod 'JSPatch'
+pod 'UMengAnalytics'
+pod 'NJKWebViewProgress', '~> 0.2.3'
+pod 'pop','~> 1.0.8'
+end
