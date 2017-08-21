@@ -1,0 +1,43 @@
+//
+//  ImportDefineHeader.h
+//  Architecture
+//
+//  Created by xiaofeng on 16/6/20.
+//  Copyright © 2016年 xiaofeng. All rights reserved.
+//
+
+#ifndef ImportDefineHeader_h
+#define ImportDefineHeader_h
+
+/*
+ Base
+ */
+#import "BaseNavigationController.h"
+#import "BaseViewController.h"
+#import "TabBarViewController.h"
+#import "AppDelegate.h"
+
+/*
+ Define
+ */
+#import "CustomDefineHeader.h"
+#import "UIDefineHeader.h"
+
+/*
+ Category
+ */
+#import "UIView+Positioning.h"
+#import "UIColor+RGBColor.h"
+#import "UIImageView+WebCache.h"
+
+//皮肤资源
+//#import "IndexPageSkin.h"
+#import "AppCommonSkin.h"
+//app信息
+//#import "Sysconfig.h"
+#import "TicketSkin.h"
+
+
+
+
+#endif /* ImportDefineHeader_h */
