@@ -29,6 +29,8 @@
 		3AA1C8941F4AAE27004A52EF /* InvestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8911F4AAE27004A52EF /* InvestViewController.m */; };
 		3AA1C89A1F4AAE2F004A52EF /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8971F4AAE2F004A52EF /* AccountViewController.m */; };
 		3AA1C8A01F4AAE3A004A52EF /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C89D1F4AAE3A004A52EF /* MoreViewController.m */; };
+		3AA1C8A31F4AB0F7004A52EF /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8A21F4AB0F7004A52EF /* MainTableViewCell.m */; };
+		3AA1C8A81F4AC186004A52EF /* MainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8A71F4AC186004A52EF /* MainModel.m */; };
 		3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EEC1F46D586005B600D /* NSString+Utils.m */; };
 		3AD29EF01F46D586005B600D /* UIColor+RGBColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EEE1F46D586005B600D /* UIColor+RGBColor.m */; };
 		3AD29EFE1F46D69F005B600D /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EF31F46D69F005B600D /* DDPageControl.m */; };
@@ -107,6 +109,10 @@
 		3AA1C8971F4AAE2F004A52EF /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
 		3AA1C89C1F4AAE3A004A52EF /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		3AA1C89D1F4AAE3A004A52EF /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
+		3AA1C8A11F4AB0F7004A52EF /* MainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewCell.h; sourceTree = "<group>"; };
+		3AA1C8A21F4AB0F7004A52EF /* MainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewCell.m; sourceTree = "<group>"; };
+		3AA1C8A61F4AC186004A52EF /* MainModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainModel.h; sourceTree = "<group>"; };
+		3AA1C8A71F4AC186004A52EF /* MainModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainModel.m; sourceTree = "<group>"; };
 		3AD29EEA1F46D3EB005B600D /* ConfigDefineHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigDefineHeader.h; sourceTree = "<group>"; };
 		3AD29EEB1F46D586005B600D /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		3AD29EEC1F46D586005B600D /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
@@ -417,6 +423,8 @@
 		3AA1C88C1F4AADB1004A52EF /* model */ = {
 			isa = PBXGroup;
 			children = (
+				3AA1C8A61F4AC186004A52EF /* MainModel.h */,
+				3AA1C8A71F4AC186004A52EF /* MainModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -424,6 +432,8 @@
 		3AA1C88D1F4AADB1004A52EF /* view */ = {
 			isa = PBXGroup;
 			children = (
+				3AA1C8A11F4AB0F7004A52EF /* MainTableViewCell.h */,
+				3AA1C8A21F4AB0F7004A52EF /* MainTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -717,6 +727,7 @@
 			files = (
 				3AA1C8581F4A6F44004A52EF /* TADotView.m in Sources */,
 				3A95ACF11D17D4BA0026EAFE /* AppDelegate.m in Sources */,
+				3AA1C8A81F4AC186004A52EF /* MainModel.m in Sources */,
 				3AA1C8A01F4AAE3A004A52EF /* MoreViewController.m in Sources */,
 				3AA1C8561F4A6F44004A52EF /* TAAbstractDotView.m in Sources */,
 				3AD29EF01F46D586005B600D /* UIColor+RGBColor.m in Sources */,
@@ -730,6 +741,7 @@
 				3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */,
 				3AA1C8591F4A6F44004A52EF /* TAPageControl.m in Sources */,
 				3AA1C8621F4A6FD3004A52EF /* SDCollectionViewCell.m in Sources */,
+				3AA1C8A31F4AB0F7004A52EF /* MainTableViewCell.m in Sources */,
 				3A95ACEE1D17D4BA0026EAFE /* main.m in Sources */,
 				3A95AD351D17E9B50026EAFE /* UIView+Positioning.m in Sources */,
 				3AA1C89A1F4AAE2F004A52EF /* AccountViewController.m in Sources */,

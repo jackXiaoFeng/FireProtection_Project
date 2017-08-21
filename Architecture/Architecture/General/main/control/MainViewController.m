@@ -9,14 +9,18 @@
 #import "MainViewController.h"
 #import "SDCycleScrollView.h"
 #import "RoundnessProgressView.h"
+#import "MainTableViewCell.h"
+#include "MainModel.h"
 
-
-@interface MainViewController ()<SDCycleScrollViewDelegate>
+@interface MainViewController ()<SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
 //轮播图
 @property (nonatomic,strong)SDCycleScrollView *cycleScrollView;
 //圆形进度条
 @property (nonatomic,strong)RoundnessProgressView *roundnessProgressView;
+
+@property (nonatomic, strong)UITableView *tableView;
+
 
 @property (assign, nonatomic)int controlHeight;
 
@@ -29,8 +33,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.titleLb.text = @"巡检操作";
+    self.view.backgroundColor = DEF_COLOR_RGB(248, 248, 248);
     
     self.controlHeight = (self.view.height-DEF_NAVIGATIONBAR_HEIGHT-DEF_TABBAR_HEIGHT)/3;
+    
+    NSLog(@"--%f----%f",DEF_DEVICE_HEIGHT,self.view.height);
     
     
     // 情景二：采用网络图片实现
@@ -43,11 +50,15 @@
     _imagesURLStrings = imagesURLStrings;
     // 模拟加载延迟
     @weakify(self)
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         @strongify(self)
         self.cycleScrollView.imageURLStringsGroup = imagesURLStrings;
-        self.roundnessProgressView.progressSections =98.0;
+        
     });
+    
+    self.tableView.backgroundColor = DEF_COLOR_RGB(248, 248, 248);
+    
+    //self.roundnessProgressView.progressSections =98.0;
     
     /*
      block监听点击方式
@@ -57,8 +68,6 @@
      };
      
      */
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -69,6 +78,37 @@
     //    [你的CycleScrollview adjustWhenControllerViewWillAppera];
 }
 
+
+#pragma mark - delegate  dataSource -
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return (DEF_DEVICE_WIDTH, DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT - DEF_TABBAR_HEIGHT- self.controlHeight)/3;
+}
+
+-(NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 3;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentify = @"GroupCellIdentify";
+    MainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentify];
+    if (!cell) {
+        cell = [[MainTableViewCell alloc]initWithStyle:UITableViewCellxiugStyleDefault reuseIdentifier:cellIdentify];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    MainModel *model = [[MainModel alloc]init];
+    model.row = indexPath.row;
+    cell.mainModel = model;
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 #pragma mark - SDCycleScrollViewDelegate
 
@@ -91,10 +131,7 @@
  */
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 #pragma mark - get -
 -(SDCycleScrollView *)cycleScrollView
@@ -117,7 +154,7 @@
 - (RoundnessProgressView *)roundnessProgressView
 {
     if (!_roundnessProgressView) {
-        _roundnessProgressView = [[RoundnessProgressView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT + self.controlHeight + 10, 200, 200)];
+        _roundnessProgressView = [[RoundnessProgressView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT + self.controlHeight, 100, 100)];
         _roundnessProgressView.thicknessWidth = 4;
         _roundnessProgressView.completedColor = [UIColor UIColorFromRGB:0xE0DBDB alpha:1];
         _roundnessProgressView.labelColor = [UIColor UIColorFromRGB:COLOR_APP_MAIN alpha:1];
@@ -130,6 +167,25 @@
     return _roundnessProgressView;
 }
 
+#pragma mark - get
+- (UITableView *)tableView
+{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT + self.controlHeight, DEF_DEVICE_WIDTH, DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT - DEF_TABBAR_HEIGHT- self.controlHeight) style:UITableViewStylePlain];
+        _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+        _tableView.delegate =self;
+        _tableView.dataSource = self;
+        [self.view addSubview:_tableView];
+        
+        //_tableView.tableFooterView = [UIView new];
+    }
+    return _tableView;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 /*
 #pragma mark - Navigation
 
