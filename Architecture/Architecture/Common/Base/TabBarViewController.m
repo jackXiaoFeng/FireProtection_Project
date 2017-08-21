@@ -33,20 +33,20 @@
 -(void)setupChildControllers{
     // 添加电影
     UIViewController *HomeVc = DEF_VIEW_CONTROLLER_INIT(@"MainViewController");
-    [self addChildVCWith:HomeVc title:@"首页" nmlImgName:@"icon_film" selImgName:@"icon_film_selected"];
+    [self addChildVCWith:HomeVc title:@"主页" nmlImgName:@"icon_film" selImgName:@"icon_film_selected"];
     
     //添加影院
     UIViewController *CinemaVc = DEF_VIEW_CONTROLLER_INIT(@"InvestViewController");
-    [self addChildVCWith:CinemaVc title:@"投资" nmlImgName:@"icon_cinema" selImgName:
+    [self addChildVCWith:CinemaVc title:@"告警" nmlImgName:@"icon_cinema" selImgName:
      @"icon_cinema_selected"];
     
     //添加发现
     UIViewController *OrderVc = DEF_VIEW_CONTROLLER_INIT(@"AccountViewController");
-    [self addChildVCWith:OrderVc title:@"账户" nmlImgName:@"icon_Activity" selImgName:@"icon_Activity_selected"];
+    [self addChildVCWith:OrderVc title:@"巡检" nmlImgName:@"icon_Activity" selImgName:@"icon_Activity_selected"];
     
     //添加我的
     UIViewController *MineVc = DEF_VIEW_CONTROLLER_INIT(@"MoreViewController");
-    [self addChildVCWith:MineVc title:@"更多" nmlImgName:@"icon_my" selImgName:@"icon_my_selected"];
+    [self addChildVCWith:MineVc title:@"设备" nmlImgName:@"icon_my" selImgName:@"icon_my_selected"];
     
     [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
  }

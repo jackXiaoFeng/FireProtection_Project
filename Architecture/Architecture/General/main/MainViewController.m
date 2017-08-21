@@ -8,59 +8,104 @@
 
 #import "MainViewController.h"
 #import "DYMRollingBannerVC.h"
-@interface MainViewController ()
+#import "SDCycleScrollView.h"
+#import "UIImageView+WebCache.h"
+
+@interface MainViewController ()<SDCycleScrollViewDelegate>
+
+@property (nonatomic,strong)SDCycleScrollView *cycleScrollView;
+
+
+@property (assign, nonatomic)int controlHeight;
 
 @end
 
 @implementation MainViewController
-
+{
+    NSArray *_imagesURLStrings;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor greenColor];
+    self.titleLb.text = @"巡检操作";
     
-    DYMRollingBannerVC *vc = [[DYMRollingBannerVC alloc]init];
+    self.controlHeight = (self.view.height-DEF_NAVIGATIONBAR_HEIGHT-DEF_TABBAR_HEIGHT)/3;
     
-    vc.view.frame = CGRectMake(0, 100, DEF_DEVICE_WIDTH, 400);
-    // 1. Set the inteval for rolling (optional, the default value is 1 sec)
-    vc.rollingInterval = 5;
     
-    // 2. set the placeholder image (optional, the default place holder is nil)
-    vc.placeHolderImage = [UIImage imageNamed:@"default"];
+    // 情景二：采用网络图片实现
+    NSArray *imagesURLStrings = @[
+                                  @"http://img.zcool.cn/community/012913577243b50000018c1bc29917.jpg",
+                                  @"http://img.zcool.cn/community/0188fd5699f69232f87574bed8dc90.jpg",
+                                  @"http://img.zcool.cn/community/01a66457551b416ac72525aeeaa9cd.jpg",
+                                  @"http://img.zcool.cn/community/01a2e056a4897132f875520ffc6c25.jpg"
+                                  ];
+    _imagesURLStrings = imagesURLStrings;
+    // 模拟加载延迟
+    @weakify(self)
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        @strongify(self)
+        self.cycleScrollView.imageURLStringsGroup = imagesURLStrings;
+    });
     
-    // 3. define the way how you load the image from a remote url
-    [vc setRemoteImageLoadingBlock:^(UIImageView *imageView, NSString *imageUrlStr, UIImage *placeHolderImage) {
-        [imageView sd_cancelCurrentImageLoad];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrlStr] placeholderImage:placeHolderImage options:SDWebImageProgressiveDownload];
-    }];
-    
-    // 4. setup the rolling images
-    vc.rollingImages = @[@"http://easyread.ph.126.net/G8GtEi-zmPQzvS5w7ScxmQ==/7806606224489671909.jpg"
-                         , @"http://www.qqpk.cn/Article/UploadFiles/201312/20131212154331984.jpg"
-                         , @"http://epaper.syd.com.cn/sywb/res/1/20080108/42241199752656275.jpg"
-//                         , [UIImage imageNamed:@"001"]
-//                         , [UIImage imageNamed:@"002"]
-                         ];
-    
-    // 5. add a handler when a tap event occours (optional, default do noting)
-    [vc addBannerTapHandler:^(NSInteger whichIndex) {
-        NSLog(@"banner tapped, index = %@", @(whichIndex));
-    }];
-    
-    // 6. If 'YES', the auto scrolling will scroll to the right
-    vc.isAutoScrollingBackward = YES;
-    
-    // 7. start auto rolling (optional, default does not auto roll)
-    [vc startRolling];
-
-    
-    [self.view addSubview:vc.view];
-
-    // Do any additional setup after loading the view.
+    /*
+     block监听点击方式
+     
+     cycleScrollView2.clickItemOperationBlock = ^(NSInteger index) {
+     NSLog(@">>>>>  %ld", (long)index);
+     };
+     
+     */
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // 如果你发现你的CycleScrollview会在viewWillAppear时图片卡在中间位置，你可以调用此方法调整图片位置
+    //    [你的CycleScrollview adjustWhenControllerViewWillAppera];
+}
+
+
+#pragma mark - SDCycleScrollViewDelegate
+
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+{
+    NSLog(@"---点击了第%ld张图片", (long)index);
+    
+    [self.navigationController pushViewController:[NSClassFromString(@"DemoVCWithXib") new] animated:YES];
+}
+
+
+/*
+ 
+ // 滚动到第几张图回调
+ - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index
+ {
+ NSLog(@">>>>>> 滚动到第%ld张图", (long)index);
+ }
+ 
+ */
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - get -
+-(SDCycleScrollView *)cycleScrollView
+{
+    if (!_cycleScrollView) {
+        // 网络加载 --- 创建带标题的图片轮播器
+        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, self.view.width, self.controlHeight) delegate:self placeholderImage:[UIImage imageNamed:@"bannerPlacehoder"]];
+        _cycleScrollView.autoScrollTimeInterval = 4.0;
+        
+        _cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
+        _cycleScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+        //cycleScrollView2.titlesGroup = titles;
+        _cycleScrollView.currentPageDotColor = [UIColor whiteColor]; // 自定义分页控件小圆标颜色
+        [self.view addSubview:_cycleScrollView];
+    }
+    return _cycleScrollView;
 }
 
 /*

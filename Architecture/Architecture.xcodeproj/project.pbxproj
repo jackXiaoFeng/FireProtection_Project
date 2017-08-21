@@ -21,6 +21,13 @@
 		3A95AD421D17EBC40026EAFE /* InvestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95AD411D17EBC40026EAFE /* InvestViewController.m */; };
 		3A95AD451D17EBDC0026EAFE /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95AD441D17EBDC0026EAFE /* AccountViewController.m */; };
 		3A95AD481D17EBEB0026EAFE /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95AD471D17EBEB0026EAFE /* MoreViewController.m */; };
+		3AA1C8561F4A6F44004A52EF /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C84C1F4A6F44004A52EF /* TAAbstractDotView.m */; };
+		3AA1C8571F4A6F44004A52EF /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C84E1F4A6F44004A52EF /* TAAnimatedDotView.m */; };
+		3AA1C8581F4A6F44004A52EF /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8501F4A6F44004A52EF /* TADotView.m */; };
+		3AA1C8591F4A6F44004A52EF /* TAPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8521F4A6F44004A52EF /* TAPageControl.m */; };
+		3AA1C8621F4A6FD3004A52EF /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C85D1F4A6FD3004A52EF /* SDCollectionViewCell.m */; };
+		3AA1C8631F4A6FD3004A52EF /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C85F1F4A6FD3004A52EF /* SDCycleScrollView.m */; };
+		3AA1C8641F4A6FD3004A52EF /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8611F4A6FD3004A52EF /* UIView+SDExtension.m */; };
 		3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EEC1F46D586005B600D /* NSString+Utils.m */; };
 		3AD29EF01F46D586005B600D /* UIColor+RGBColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EEE1F46D586005B600D /* UIColor+RGBColor.m */; };
 		3AD29EFE1F46D69F005B600D /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EF31F46D69F005B600D /* DDPageControl.m */; };
@@ -86,6 +93,20 @@
 		3A95AD441D17EBDC0026EAFE /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
 		3A95AD461D17EBEB0026EAFE /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		3A95AD471D17EBEB0026EAFE /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
+		3AA1C84B1F4A6F44004A52EF /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
+		3AA1C84C1F4A6F44004A52EF /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
+		3AA1C84D1F4A6F44004A52EF /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
+		3AA1C84E1F4A6F44004A52EF /* TAAnimatedDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAnimatedDotView.m; sourceTree = "<group>"; };
+		3AA1C84F1F4A6F44004A52EF /* TADotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TADotView.h; sourceTree = "<group>"; };
+		3AA1C8501F4A6F44004A52EF /* TADotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TADotView.m; sourceTree = "<group>"; };
+		3AA1C8511F4A6F44004A52EF /* TAPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPageControl.h; sourceTree = "<group>"; };
+		3AA1C8521F4A6F44004A52EF /* TAPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPageControl.m; sourceTree = "<group>"; };
+		3AA1C85C1F4A6FD3004A52EF /* SDCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCollectionViewCell.h; sourceTree = "<group>"; };
+		3AA1C85D1F4A6FD3004A52EF /* SDCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCollectionViewCell.m; sourceTree = "<group>"; };
+		3AA1C85E1F4A6FD3004A52EF /* SDCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCycleScrollView.h; sourceTree = "<group>"; };
+		3AA1C85F1F4A6FD3004A52EF /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
+		3AA1C8601F4A6FD3004A52EF /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
+		3AA1C8611F4A6FD3004A52EF /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
 		3AD29EEA1F46D3EB005B600D /* ConfigDefineHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigDefineHeader.h; sourceTree = "<group>"; };
 		3AD29EEB1F46D586005B600D /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		3AD29EEC1F46D586005B600D /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
@@ -268,6 +289,8 @@
 		3A95AD241D17E0490026EAFE /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				3AA1C85B1F4A6FD3004A52EF /* SDCycleScrollView */,
+				3AA1C84A1F4A6F44004A52EF /* PageControl */,
 				3AD29EF11F46D69F005B600D /* DDPageControl */,
 				3AD29EF41F46D69F005B600D /* DYMRollingBanner */,
 				3AD29EFB1F46D69F005B600D /* PageImageScrollView */,
@@ -345,6 +368,34 @@
 				3A95AD471D17EBEB0026EAFE /* MoreViewController.m */,
 			);
 			path = more;
+			sourceTree = "<group>";
+		};
+		3AA1C84A1F4A6F44004A52EF /* PageControl */ = {
+			isa = PBXGroup;
+			children = (
+				3AA1C84B1F4A6F44004A52EF /* TAAbstractDotView.h */,
+				3AA1C84C1F4A6F44004A52EF /* TAAbstractDotView.m */,
+				3AA1C84D1F4A6F44004A52EF /* TAAnimatedDotView.h */,
+				3AA1C84E1F4A6F44004A52EF /* TAAnimatedDotView.m */,
+				3AA1C84F1F4A6F44004A52EF /* TADotView.h */,
+				3AA1C8501F4A6F44004A52EF /* TADotView.m */,
+				3AA1C8511F4A6F44004A52EF /* TAPageControl.h */,
+				3AA1C8521F4A6F44004A52EF /* TAPageControl.m */,
+			);
+			path = PageControl;
+			sourceTree = "<group>";
+		};
+		3AA1C85B1F4A6FD3004A52EF /* SDCycleScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				3AA1C85C1F4A6FD3004A52EF /* SDCollectionViewCell.h */,
+				3AA1C85D1F4A6FD3004A52EF /* SDCollectionViewCell.m */,
+				3AA1C85E1F4A6FD3004A52EF /* SDCycleScrollView.h */,
+				3AA1C85F1F4A6FD3004A52EF /* SDCycleScrollView.m */,
+				3AA1C8601F4A6FD3004A52EF /* UIView+SDExtension.h */,
+				3AA1C8611F4A6FD3004A52EF /* UIView+SDExtension.m */,
+			);
+			path = SDCycleScrollView;
 			sourceTree = "<group>";
 		};
 		3AD29EF11F46D69F005B600D /* DDPageControl */ = {
@@ -579,12 +630,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A95ACF41D17D4BA0026EAFE /* ViewController.m in Sources */,
+				3AA1C8581F4A6F44004A52EF /* TADotView.m in Sources */,
 				3AD29F001F46D69F005B600D /* DYMBannerVC.m in Sources */,
 				3A95AD421D17EBC40026EAFE /* InvestViewController.m in Sources */,
 				3A95ACF11D17D4BA0026EAFE /* AppDelegate.m in Sources */,
+				3AA1C8561F4A6F44004A52EF /* TAAbstractDotView.m in Sources */,
 				3AD29EF01F46D586005B600D /* UIColor+RGBColor.m in Sources */,
+				3AA1C8631F4A6FD3004A52EF /* SDCycleScrollView.m in Sources */,
 				3A95AD2B1D17E3E70026EAFE /* BaseNavigationController.m in Sources */,
 				3AD29EFF1F46D69F005B600D /* DYMBannerPool.m in Sources */,
+				3AA1C8571F4A6F44004A52EF /* TAAnimatedDotView.m in Sources */,
 				3A95AD451D17EBDC0026EAFE /* AccountViewController.m in Sources */,
 				3AD29F021F46D69F005B600D /* PageImageScrollView.m in Sources */,
 				3AD29EFE1F46D69F005B600D /* DDPageControl.m in Sources */,
@@ -592,9 +647,12 @@
 				3AD29F011F46D69F005B600D /* DYMRollingBannerVC.m in Sources */,
 				3A95AD381D17EA410026EAFE /* TabBarViewController.m in Sources */,
 				3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */,
+				3AA1C8591F4A6F44004A52EF /* TAPageControl.m in Sources */,
+				3AA1C8621F4A6FD3004A52EF /* SDCollectionViewCell.m in Sources */,
 				3A95ACEE1D17D4BA0026EAFE /* main.m in Sources */,
 				3A95AD351D17E9B50026EAFE /* UIView+Positioning.m in Sources */,
 				3A95AD481D17EBEB0026EAFE /* MoreViewController.m in Sources */,
+				3AA1C8641F4A6FD3004A52EF /* UIView+SDExtension.m in Sources */,
 				3A95AD2E1D17E4E60026EAFE /* BaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
