@@ -43,6 +43,10 @@
 #import "UIView+Positioning.h"
 #import "UIColor+RGBColor.h"
 #import "UIImageView+WebCache.h"
+/*
+ Util
+ */
+#import "CMUtility.h"
 
 //皮肤资源
 //#import "IndexPageSkin.h"

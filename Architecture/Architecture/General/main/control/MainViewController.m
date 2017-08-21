@@ -7,14 +7,16 @@
 //
 
 #import "MainViewController.h"
-#import "DYMRollingBannerVC.h"
 #import "SDCycleScrollView.h"
-#import "UIImageView+WebCache.h"
+#import "RoundnessProgressView.h"
+
 
 @interface MainViewController ()<SDCycleScrollViewDelegate>
 
+//轮播图
 @property (nonatomic,strong)SDCycleScrollView *cycleScrollView;
-
+//圆形进度条
+@property (nonatomic,strong)RoundnessProgressView *roundnessProgressView;
 
 @property (assign, nonatomic)int controlHeight;
 
@@ -41,9 +43,10 @@
     _imagesURLStrings = imagesURLStrings;
     // 模拟加载延迟
     @weakify(self)
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         @strongify(self)
         self.cycleScrollView.imageURLStringsGroup = imagesURLStrings;
+        self.roundnessProgressView.progressSections =98.0;
     });
     
     /*
@@ -54,6 +57,8 @@
      };
      
      */
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -106,6 +111,23 @@
         [self.view addSubview:_cycleScrollView];
     }
     return _cycleScrollView;
+}
+
+
+- (RoundnessProgressView *)roundnessProgressView
+{
+    if (!_roundnessProgressView) {
+        _roundnessProgressView = [[RoundnessProgressView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT + self.controlHeight + 10, 200, 200)];
+        _roundnessProgressView.thicknessWidth = 4;
+        _roundnessProgressView.completedColor = [UIColor UIColorFromRGB:0xE0DBDB alpha:1];
+        _roundnessProgressView.labelColor = [UIColor UIColorFromRGB:COLOR_APP_MAIN alpha:1];
+        _roundnessProgressView.incompletedColor = [UIColor UIColorFromRGB:COLOR_APP_MAIN alpha:1];
+        
+        _roundnessProgressView.backgroundColor = [UIColor yellowColor];
+        [self.view addSubview:_roundnessProgressView];
+        _roundnessProgressView.progressTotal = 100;
+    }
+    return _roundnessProgressView;
 }
 
 /*

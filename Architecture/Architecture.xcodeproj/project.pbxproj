@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3A95ACEE1D17D4BA0026EAFE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95ACED1D17D4BA0026EAFE /* main.m */; };
 		3A95ACF11D17D4BA0026EAFE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95ACF01D17D4BA0026EAFE /* AppDelegate.m */; };
-		3A95ACF41D17D4BA0026EAFE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95ACF31D17D4BA0026EAFE /* ViewController.m */; };
 		3A95ACF91D17D4BA0026EAFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A95ACF81D17D4BA0026EAFE /* Assets.xcassets */; };
 		3A95AD071D17D4BA0026EAFE /* ArchitectureTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95AD061D17D4BA0026EAFE /* ArchitectureTests.m */; };
 		3A95AD121D17D4BA0026EAFE /* ArchitectureUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95AD111D17D4BA0026EAFE /* ArchitectureUITests.m */; };
@@ -17,10 +16,6 @@
 		3A95AD2E1D17E4E60026EAFE /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95AD2D1D17E4E60026EAFE /* BaseViewController.m */; };
 		3A95AD351D17E9B50026EAFE /* UIView+Positioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95AD341D17E9B50026EAFE /* UIView+Positioning.m */; };
 		3A95AD381D17EA410026EAFE /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95AD371D17EA410026EAFE /* TabBarViewController.m */; };
-		3A95AD3F1D17EBA30026EAFE /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95AD3E1D17EBA30026EAFE /* MainViewController.m */; };
-		3A95AD421D17EBC40026EAFE /* InvestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95AD411D17EBC40026EAFE /* InvestViewController.m */; };
-		3A95AD451D17EBDC0026EAFE /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95AD441D17EBDC0026EAFE /* AccountViewController.m */; };
-		3A95AD481D17EBEB0026EAFE /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95AD471D17EBEB0026EAFE /* MoreViewController.m */; };
 		3AA1C8561F4A6F44004A52EF /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C84C1F4A6F44004A52EF /* TAAbstractDotView.m */; };
 		3AA1C8571F4A6F44004A52EF /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C84E1F4A6F44004A52EF /* TAAnimatedDotView.m */; };
 		3AA1C8581F4A6F44004A52EF /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8501F4A6F44004A52EF /* TADotView.m */; };
@@ -28,12 +23,15 @@
 		3AA1C8621F4A6FD3004A52EF /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C85D1F4A6FD3004A52EF /* SDCollectionViewCell.m */; };
 		3AA1C8631F4A6FD3004A52EF /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C85F1F4A6FD3004A52EF /* SDCycleScrollView.m */; };
 		3AA1C8641F4A6FD3004A52EF /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8611F4A6FD3004A52EF /* UIView+SDExtension.m */; };
+		3AA1C8851F4AA962004A52EF /* RoundnessProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8841F4AA962004A52EF /* RoundnessProgressView.m */; };
+		3AA1C8881F4AA9F1004A52EF /* CMUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8871F4AA9F1004A52EF /* CMUtility.m */; };
+		3AA1C88E1F4AADB1004A52EF /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C88B1F4AADB1004A52EF /* MainViewController.m */; };
+		3AA1C8941F4AAE27004A52EF /* InvestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8911F4AAE27004A52EF /* InvestViewController.m */; };
+		3AA1C89A1F4AAE2F004A52EF /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8971F4AAE2F004A52EF /* AccountViewController.m */; };
+		3AA1C8A01F4AAE3A004A52EF /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C89D1F4AAE3A004A52EF /* MoreViewController.m */; };
 		3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EEC1F46D586005B600D /* NSString+Utils.m */; };
 		3AD29EF01F46D586005B600D /* UIColor+RGBColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EEE1F46D586005B600D /* UIColor+RGBColor.m */; };
 		3AD29EFE1F46D69F005B600D /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EF31F46D69F005B600D /* DDPageControl.m */; };
-		3AD29EFF1F46D69F005B600D /* DYMBannerPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EF61F46D69F005B600D /* DYMBannerPool.m */; };
-		3AD29F001F46D69F005B600D /* DYMBannerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EF81F46D69F005B600D /* DYMBannerVC.m */; };
-		3AD29F011F46D69F005B600D /* DYMRollingBannerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EFA1F46D69F005B600D /* DYMRollingBannerVC.m */; };
 		3AD29F021F46D69F005B600D /* PageImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EFD1F46D69F005B600D /* PageImageScrollView.m */; };
 		E5D1C59FDE21FC2EBA413E7B /* libPods-Architecture.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D3D9AEA390253ACF03A0E6 /* libPods-Architecture.a */; };
 /* End PBXBuildFile section */
@@ -63,8 +61,6 @@
 		3A95ACED1D17D4BA0026EAFE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A95ACEF1D17D4BA0026EAFE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3A95ACF01D17D4BA0026EAFE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3A95ACF21D17D4BA0026EAFE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3A95ACF31D17D4BA0026EAFE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		3A95ACF81D17D4BA0026EAFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		3A95ACFD1D17D4BA0026EAFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A95AD021D17D4BA0026EAFE /* Architecture.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Architecture.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,14 +81,6 @@
 		3A95AD341D17E9B50026EAFE /* UIView+Positioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Positioning.m"; sourceTree = "<group>"; };
 		3A95AD361D17EA410026EAFE /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
 		3A95AD371D17EA410026EAFE /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
-		3A95AD3D1D17EBA30026EAFE /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		3A95AD3E1D17EBA30026EAFE /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		3A95AD401D17EBC40026EAFE /* InvestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvestViewController.h; sourceTree = "<group>"; };
-		3A95AD411D17EBC40026EAFE /* InvestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvestViewController.m; sourceTree = "<group>"; };
-		3A95AD431D17EBDC0026EAFE /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
-		3A95AD441D17EBDC0026EAFE /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
-		3A95AD461D17EBEB0026EAFE /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
-		3A95AD471D17EBEB0026EAFE /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		3AA1C84B1F4A6F44004A52EF /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
 		3AA1C84C1F4A6F44004A52EF /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
 		3AA1C84D1F4A6F44004A52EF /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
@@ -107,6 +95,18 @@
 		3AA1C85F1F4A6FD3004A52EF /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
 		3AA1C8601F4A6FD3004A52EF /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		3AA1C8611F4A6FD3004A52EF /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
+		3AA1C8831F4AA962004A52EF /* RoundnessProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundnessProgressView.h; sourceTree = "<group>"; };
+		3AA1C8841F4AA962004A52EF /* RoundnessProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundnessProgressView.m; sourceTree = "<group>"; };
+		3AA1C8861F4AA9F1004A52EF /* CMUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMUtility.h; sourceTree = "<group>"; };
+		3AA1C8871F4AA9F1004A52EF /* CMUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMUtility.m; sourceTree = "<group>"; };
+		3AA1C88A1F4AADB1004A52EF /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		3AA1C88B1F4AADB1004A52EF /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		3AA1C8901F4AAE27004A52EF /* InvestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvestViewController.h; sourceTree = "<group>"; };
+		3AA1C8911F4AAE27004A52EF /* InvestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvestViewController.m; sourceTree = "<group>"; };
+		3AA1C8961F4AAE2F004A52EF /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
+		3AA1C8971F4AAE2F004A52EF /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
+		3AA1C89C1F4AAE3A004A52EF /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
+		3AA1C89D1F4AAE3A004A52EF /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		3AD29EEA1F46D3EB005B600D /* ConfigDefineHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigDefineHeader.h; sourceTree = "<group>"; };
 		3AD29EEB1F46D586005B600D /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		3AD29EEC1F46D586005B600D /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
@@ -114,12 +114,6 @@
 		3AD29EEE1F46D586005B600D /* UIColor+RGBColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RGBColor.m"; sourceTree = "<group>"; };
 		3AD29EF21F46D69F005B600D /* DDPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPageControl.h; sourceTree = "<group>"; };
 		3AD29EF31F46D69F005B600D /* DDPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDPageControl.m; sourceTree = "<group>"; };
-		3AD29EF51F46D69F005B600D /* DYMBannerPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYMBannerPool.h; sourceTree = "<group>"; };
-		3AD29EF61F46D69F005B600D /* DYMBannerPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYMBannerPool.m; sourceTree = "<group>"; };
-		3AD29EF71F46D69F005B600D /* DYMBannerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYMBannerVC.h; sourceTree = "<group>"; };
-		3AD29EF81F46D69F005B600D /* DYMBannerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYMBannerVC.m; sourceTree = "<group>"; };
-		3AD29EF91F46D69F005B600D /* DYMRollingBannerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYMRollingBannerVC.h; sourceTree = "<group>"; };
-		3AD29EFA1F46D69F005B600D /* DYMRollingBannerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYMRollingBannerVC.m; sourceTree = "<group>"; };
 		3AD29EFC1F46D69F005B600D /* PageImageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageImageScrollView.h; sourceTree = "<group>"; };
 		3AD29EFD1F46D69F005B600D /* PageImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageImageScrollView.m; sourceTree = "<group>"; };
 		3AD29F041F46D87B005B600D /* AppCommonSkin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppCommonSkin.h; sourceTree = "<group>"; };
@@ -197,8 +191,6 @@
 				3A95AD271D17E0490026EAFE /* General */,
 				3A95AD201D17E0340026EAFE /* ThirdParty */,
 				3A95AD1F1D17E0270026EAFE /* Resource */,
-				3A95ACF21D17D4BA0026EAFE /* ViewController.h */,
-				3A95ACF31D17D4BA0026EAFE /* ViewController.m */,
 				3A95ACEC1D17D4BA0026EAFE /* Supporting Files */,
 			);
 			path = Architecture;
@@ -289,10 +281,10 @@
 		3A95AD241D17E0490026EAFE /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				3AA1C8821F4AA962004A52EF /* RoundnessProgressView */,
 				3AA1C85B1F4A6FD3004A52EF /* SDCycleScrollView */,
 				3AA1C84A1F4A6F44004A52EF /* PageControl */,
 				3AD29EF11F46D69F005B600D /* DDPageControl */,
-				3AD29EF41F46D69F005B600D /* DYMRollingBanner */,
 				3AD29EFB1F46D69F005B600D /* PageImageScrollView */,
 			);
 			path = Custom;
@@ -312,6 +304,8 @@
 		3A95AD261D17E0490026EAFE /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				3AA1C8861F4AA9F1004A52EF /* CMUtility.h */,
+				3AA1C8871F4AA9F1004A52EF /* CMUtility.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -337,8 +331,9 @@
 		3A95AD391D17EB8C0026EAFE /* account */ = {
 			isa = PBXGroup;
 			children = (
-				3A95AD431D17EBDC0026EAFE /* AccountViewController.h */,
-				3A95AD441D17EBDC0026EAFE /* AccountViewController.m */,
+				3AA1C8951F4AAE2F004A52EF /* control */,
+				3AA1C8981F4AAE2F004A52EF /* model */,
+				3AA1C8991F4AAE2F004A52EF /* view */,
 			);
 			path = account;
 			sourceTree = "<group>";
@@ -346,8 +341,9 @@
 		3A95AD3A1D17EB8C0026EAFE /* invest */ = {
 			isa = PBXGroup;
 			children = (
-				3A95AD401D17EBC40026EAFE /* InvestViewController.h */,
-				3A95AD411D17EBC40026EAFE /* InvestViewController.m */,
+				3AA1C88F1F4AAE27004A52EF /* control */,
+				3AA1C8921F4AAE27004A52EF /* model */,
+				3AA1C8931F4AAE27004A52EF /* view */,
 			);
 			path = invest;
 			sourceTree = "<group>";
@@ -355,8 +351,9 @@
 		3A95AD3B1D17EB8C0026EAFE /* main */ = {
 			isa = PBXGroup;
 			children = (
-				3A95AD3D1D17EBA30026EAFE /* MainViewController.h */,
-				3A95AD3E1D17EBA30026EAFE /* MainViewController.m */,
+				3AA1C8891F4AADB1004A52EF /* control */,
+				3AA1C88C1F4AADB1004A52EF /* model */,
+				3AA1C88D1F4AADB1004A52EF /* view */,
 			);
 			path = main;
 			sourceTree = "<group>";
@@ -364,8 +361,9 @@
 		3A95AD3C1D17EB8C0026EAFE /* more */ = {
 			isa = PBXGroup;
 			children = (
-				3A95AD461D17EBEB0026EAFE /* MoreViewController.h */,
-				3A95AD471D17EBEB0026EAFE /* MoreViewController.m */,
+				3AA1C89B1F4AAE3A004A52EF /* control */,
+				3AA1C89E1F4AAE3A004A52EF /* model */,
+				3AA1C89F1F4AAE3A004A52EF /* view */,
 			);
 			path = more;
 			sourceTree = "<group>";
@@ -398,6 +396,107 @@
 			path = SDCycleScrollView;
 			sourceTree = "<group>";
 		};
+		3AA1C8821F4AA962004A52EF /* RoundnessProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				3AA1C8831F4AA962004A52EF /* RoundnessProgressView.h */,
+				3AA1C8841F4AA962004A52EF /* RoundnessProgressView.m */,
+			);
+			path = RoundnessProgressView;
+			sourceTree = "<group>";
+		};
+		3AA1C8891F4AADB1004A52EF /* control */ = {
+			isa = PBXGroup;
+			children = (
+				3AA1C88A1F4AADB1004A52EF /* MainViewController.h */,
+				3AA1C88B1F4AADB1004A52EF /* MainViewController.m */,
+			);
+			path = control;
+			sourceTree = "<group>";
+		};
+		3AA1C88C1F4AADB1004A52EF /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		3AA1C88D1F4AADB1004A52EF /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		3AA1C88F1F4AAE27004A52EF /* control */ = {
+			isa = PBXGroup;
+			children = (
+				3AA1C8901F4AAE27004A52EF /* InvestViewController.h */,
+				3AA1C8911F4AAE27004A52EF /* InvestViewController.m */,
+			);
+			path = control;
+			sourceTree = "<group>";
+		};
+		3AA1C8921F4AAE27004A52EF /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		3AA1C8931F4AAE27004A52EF /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		3AA1C8951F4AAE2F004A52EF /* control */ = {
+			isa = PBXGroup;
+			children = (
+				3AA1C8961F4AAE2F004A52EF /* AccountViewController.h */,
+				3AA1C8971F4AAE2F004A52EF /* AccountViewController.m */,
+			);
+			path = control;
+			sourceTree = "<group>";
+		};
+		3AA1C8981F4AAE2F004A52EF /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		3AA1C8991F4AAE2F004A52EF /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		3AA1C89B1F4AAE3A004A52EF /* control */ = {
+			isa = PBXGroup;
+			children = (
+				3AA1C89C1F4AAE3A004A52EF /* MoreViewController.h */,
+				3AA1C89D1F4AAE3A004A52EF /* MoreViewController.m */,
+			);
+			path = control;
+			sourceTree = "<group>";
+		};
+		3AA1C89E1F4AAE3A004A52EF /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		3AA1C89F1F4AAE3A004A52EF /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		3AD29EF11F46D69F005B600D /* DDPageControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,19 +504,6 @@
 				3AD29EF31F46D69F005B600D /* DDPageControl.m */,
 			);
 			path = DDPageControl;
-			sourceTree = "<group>";
-		};
-		3AD29EF41F46D69F005B600D /* DYMRollingBanner */ = {
-			isa = PBXGroup;
-			children = (
-				3AD29EF51F46D69F005B600D /* DYMBannerPool.h */,
-				3AD29EF61F46D69F005B600D /* DYMBannerPool.m */,
-				3AD29EF71F46D69F005B600D /* DYMBannerVC.h */,
-				3AD29EF81F46D69F005B600D /* DYMBannerVC.m */,
-				3AD29EF91F46D69F005B600D /* DYMRollingBannerVC.h */,
-				3AD29EFA1F46D69F005B600D /* DYMRollingBannerVC.m */,
-			);
-			path = DYMRollingBanner;
 			sourceTree = "<group>";
 		};
 		3AD29EFB1F46D69F005B600D /* PageImageScrollView */ = {
@@ -629,30 +715,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A95ACF41D17D4BA0026EAFE /* ViewController.m in Sources */,
 				3AA1C8581F4A6F44004A52EF /* TADotView.m in Sources */,
-				3AD29F001F46D69F005B600D /* DYMBannerVC.m in Sources */,
-				3A95AD421D17EBC40026EAFE /* InvestViewController.m in Sources */,
 				3A95ACF11D17D4BA0026EAFE /* AppDelegate.m in Sources */,
+				3AA1C8A01F4AAE3A004A52EF /* MoreViewController.m in Sources */,
 				3AA1C8561F4A6F44004A52EF /* TAAbstractDotView.m in Sources */,
 				3AD29EF01F46D586005B600D /* UIColor+RGBColor.m in Sources */,
 				3AA1C8631F4A6FD3004A52EF /* SDCycleScrollView.m in Sources */,
 				3A95AD2B1D17E3E70026EAFE /* BaseNavigationController.m in Sources */,
-				3AD29EFF1F46D69F005B600D /* DYMBannerPool.m in Sources */,
 				3AA1C8571F4A6F44004A52EF /* TAAnimatedDotView.m in Sources */,
-				3A95AD451D17EBDC0026EAFE /* AccountViewController.m in Sources */,
 				3AD29F021F46D69F005B600D /* PageImageScrollView.m in Sources */,
 				3AD29EFE1F46D69F005B600D /* DDPageControl.m in Sources */,
-				3A95AD3F1D17EBA30026EAFE /* MainViewController.m in Sources */,
-				3AD29F011F46D69F005B600D /* DYMRollingBannerVC.m in Sources */,
+				3AA1C88E1F4AADB1004A52EF /* MainViewController.m in Sources */,
 				3A95AD381D17EA410026EAFE /* TabBarViewController.m in Sources */,
 				3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */,
 				3AA1C8591F4A6F44004A52EF /* TAPageControl.m in Sources */,
 				3AA1C8621F4A6FD3004A52EF /* SDCollectionViewCell.m in Sources */,
 				3A95ACEE1D17D4BA0026EAFE /* main.m in Sources */,
 				3A95AD351D17E9B50026EAFE /* UIView+Positioning.m in Sources */,
-				3A95AD481D17EBEB0026EAFE /* MoreViewController.m in Sources */,
+				3AA1C89A1F4AAE2F004A52EF /* AccountViewController.m in Sources */,
+				3AA1C8851F4AA962004A52EF /* RoundnessProgressView.m in Sources */,
 				3AA1C8641F4A6FD3004A52EF /* UIView+SDExtension.m in Sources */,
+				3AA1C8881F4AA9F1004A52EF /* CMUtility.m in Sources */,
+				3AA1C8941F4AAE27004A52EF /* InvestViewController.m in Sources */,
 				3A95AD2E1D17E4E60026EAFE /* BaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
