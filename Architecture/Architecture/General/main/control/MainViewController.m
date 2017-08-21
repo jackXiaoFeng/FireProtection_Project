@@ -8,7 +8,6 @@
 
 #import "MainViewController.h"
 #import "SDCycleScrollView.h"
-#import "RoundnessProgressView.h"
 #import "MainTableViewCell.h"
 #include "MainModel.h"
 
@@ -16,8 +15,6 @@
 
 //轮播图
 @property (nonatomic,strong)SDCycleScrollView *cycleScrollView;
-//圆形进度条
-@property (nonatomic,strong)RoundnessProgressView *roundnessProgressView;
 
 @property (nonatomic, strong)UITableView *tableView;
 
@@ -58,7 +55,7 @@
     
     self.tableView.backgroundColor = DEF_COLOR_RGB(248, 248, 248);
     
-    //self.roundnessProgressView.progressSections =98.0;
+    
     
     /*
      block监听点击方式
@@ -92,10 +89,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentify = @"GroupCellIdentify";
+    static NSString *cellIdentify = @"MainCellIdentify";
     MainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentify];
     if (!cell) {
-        cell = [[MainTableViewCell alloc]initWithStyle:UITableViewCellxiugStyleDefault reuseIdentifier:cellIdentify];
+        cell = [[MainTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentify];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -151,21 +148,6 @@
 }
 
 
-- (RoundnessProgressView *)roundnessProgressView
-{
-    if (!_roundnessProgressView) {
-        _roundnessProgressView = [[RoundnessProgressView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT + self.controlHeight, 100, 100)];
-        _roundnessProgressView.thicknessWidth = 4;
-        _roundnessProgressView.completedColor = [UIColor UIColorFromRGB:0xE0DBDB alpha:1];
-        _roundnessProgressView.labelColor = [UIColor UIColorFromRGB:COLOR_APP_MAIN alpha:1];
-        _roundnessProgressView.incompletedColor = [UIColor UIColorFromRGB:COLOR_APP_MAIN alpha:1];
-        
-        _roundnessProgressView.backgroundColor = [UIColor yellowColor];
-        [self.view addSubview:_roundnessProgressView];
-        _roundnessProgressView.progressTotal = 100;
-    }
-    return _roundnessProgressView;
-}
 
 #pragma mark - get
 - (UITableView *)tableView

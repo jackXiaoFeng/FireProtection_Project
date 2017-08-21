@@ -43,6 +43,8 @@
 #import "UIView+Positioning.h"
 #import "UIColor+RGBColor.h"
 #import "UIImageView+WebCache.h"
+#import "UIButton+LXMImagePosition.h"
+
 /*
  Util
  */

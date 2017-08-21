@@ -31,6 +31,7 @@
 		3AA1C8A01F4AAE3A004A52EF /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C89D1F4AAE3A004A52EF /* MoreViewController.m */; };
 		3AA1C8A31F4AB0F7004A52EF /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8A21F4AB0F7004A52EF /* MainTableViewCell.m */; };
 		3AA1C8A81F4AC186004A52EF /* MainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8A71F4AC186004A52EF /* MainModel.m */; };
+		3AA1C8AB1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8AA1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m */; };
 		3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EEC1F46D586005B600D /* NSString+Utils.m */; };
 		3AD29EF01F46D586005B600D /* UIColor+RGBColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EEE1F46D586005B600D /* UIColor+RGBColor.m */; };
 		3AD29EFE1F46D69F005B600D /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EF31F46D69F005B600D /* DDPageControl.m */; };
@@ -113,6 +114,8 @@
 		3AA1C8A21F4AB0F7004A52EF /* MainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewCell.m; sourceTree = "<group>"; };
 		3AA1C8A61F4AC186004A52EF /* MainModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainModel.h; sourceTree = "<group>"; };
 		3AA1C8A71F4AC186004A52EF /* MainModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainModel.m; sourceTree = "<group>"; };
+		3AA1C8A91F4ACE7A004A52EF /* UIButton+LXMImagePosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+LXMImagePosition.h"; sourceTree = "<group>"; };
+		3AA1C8AA1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LXMImagePosition.m"; sourceTree = "<group>"; };
 		3AD29EEA1F46D3EB005B600D /* ConfigDefineHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigDefineHeader.h; sourceTree = "<group>"; };
 		3AD29EEB1F46D586005B600D /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		3AD29EEC1F46D586005B600D /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
@@ -280,6 +283,8 @@
 				3AD29EEE1F46D586005B600D /* UIColor+RGBColor.m */,
 				3A95AD331D17E9B50026EAFE /* UIView+Positioning.h */,
 				3A95AD341D17E9B50026EAFE /* UIView+Positioning.m */,
+				3AA1C8A91F4ACE7A004A52EF /* UIButton+LXMImagePosition.h */,
+				3AA1C8AA1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -729,6 +734,7 @@
 				3A95ACF11D17D4BA0026EAFE /* AppDelegate.m in Sources */,
 				3AA1C8A81F4AC186004A52EF /* MainModel.m in Sources */,
 				3AA1C8A01F4AAE3A004A52EF /* MoreViewController.m in Sources */,
+				3AA1C8AB1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m in Sources */,
 				3AA1C8561F4A6F44004A52EF /* TAAbstractDotView.m in Sources */,
 				3AD29EF01F46D586005B600D /* UIColor+RGBColor.m in Sources */,
 				3AA1C8631F4A6FD3004A52EF /* SDCycleScrollView.m in Sources */,

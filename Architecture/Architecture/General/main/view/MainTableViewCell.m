@@ -6,19 +6,33 @@
 //  Copyright © 2016年 xiaofeng. All rights reserved.
 //
 
-#import "MainTableViewCell.h"
-
 #define BannerHeight (DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT - DEF_TABBAR_HEIGHT)/3
 
 #define CellHeight (DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT - DEF_TABBAR_HEIGHT - BannerHeight)/3
 
 
+#import "MainTableViewCell.h"
+#import "RoundnessProgressView.h"
 @interface MainTableViewCell()
+
 @property (nonatomic, strong)UIImageView *groupIV;
+
+@property (nonatomic, strong)UIButton *warningBtn;
+@property (nonatomic, strong)UIButton *fixBtn;
+@property (nonatomic, strong)UIButton *noneBtn;
+
+@property (nonatomic, strong)UIImageView *pressIV;
+
+
 @property (nonatomic, strong)UILabel *nameLab;
 @property (nonatomic, strong)UILabel *messageNumLab;
 @property (nonatomic, strong)UILabel *timeLab;
 @property (nonatomic, strong)UILabel *descriptionLab;
+
+//圆形进度条
+@property (nonatomic,strong)RoundnessProgressView *roundnessProgressView;
+
+
 @end
 @implementation MainTableViewCell
 + (CGFloat)mainCellHeight
@@ -42,7 +56,7 @@
 
     UIImageView *groupIV = [[UIImageView alloc]init];
     groupIV.frame = CGRectMake(10, 5, self.width-20, CellHeight - 15);
-    groupIV.backgroundColor = [UIColor yellowColor];
+    groupIV.backgroundColor = [UIColor clearColor];
     //groupIV.image = DEF_IMAGENAME(@"group_login_head");
     groupIV.userInteractionEnabled = YES;
 //    groupIV.contentMode =UIViewContentModeScaleAspectFill;
@@ -54,6 +68,59 @@
     self.groupIV.layer.shadowOffset = CGSizeMake(0, 10);
     self.groupIV.layer.shadowOpacity = 0.3;
     self.groupIV.clipsToBounds = false; //这句最重要了，不然就显示不出来
+    
+    
+    
+    
+    
+    UIButton *warningBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    warningBtn.frame = CGRectMake(0, 0, (self.width-30)/2, self.groupIV.height);
+    warningBtn.backgroundColor = [UIColor whiteColor];
+    [warningBtn setImage:DEF_IMAGENAME(@"deviceWarning") forState:UIControlStateNormal];
+    [warningBtn setTitle:@"设备告警信息" forState:UIControlStateNormal];
+    [warningBtn setTitleColor:DEF_COLOR_RGB(67, 67, 67)forState:UIControlStateNormal];
+    warningBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+
+    warningBtn.titleLabel.font = [UIFont systemFontOfSize: 16.0];
+    //warningBtn.titleLabel.backgroundColor = [UIColor redColor];
+
+    //warningBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    //warningBtn.titleLabel.textColor = DEF_COLOR_RGB(67, 67, 67);
+    //    groupIV.contentMode =UIViewContentModeScaleAspectFill;
+    [self.groupIV addSubview:warningBtn];
+    self.warningBtn = warningBtn;
+
+    //图片是60*60的2x的图
+    CGFloat imageWidth = 50;
+    CGFloat imageHeight = 50;
+    CGFloat labelWidth = [self.warningBtn.titleLabel.text sizeWithFont:self.warningBtn.titleLabel.font].width;
+    CGFloat labelHeight = [self.warningBtn.titleLabel.text sizeWithFont:self.warningBtn.titleLabel.font].height;
+    
+    CGFloat spacing = 0;
+    
+    //image在上，文字在下
+    CGFloat imageOffsetX = (imageWidth + labelWidth) / 2 - imageWidth / 2;//image中心移动的x距离
+    CGFloat imageOffsetY = imageHeight / 2 + spacing / 2 - 15;//image中心移动的y距离
+    //CGFloat labelOffsetX = (imageWidth + labelWidth / 2) - (imageWidth + labelWidth) / 2 - 10;//label中心移动的x距离
+    CGFloat labelOffsetX = (imageWidth + labelWidth / 2) - (imageWidth + labelWidth) / 2 - 10;//label中心移动的x距离
+
+    CGFloat labelOffsetY = labelHeight / 2 + spacing / 2 +15;//label中心移动的y距离
+    self.warningBtn.imageEdgeInsets = UIEdgeInsetsMake(-imageOffsetY, imageOffsetX, imageOffsetY, -imageOffsetX);
+    self.warningBtn.titleEdgeInsets = UIEdgeInsetsMake(labelOffsetY, -labelOffsetX, -labelOffsetY, labelOffsetX);
+    
+    
+    UIImageView *pressIV = [[UIImageView alloc]init];
+    pressIV.frame = CGRectMake((self.width-30)/2 + 10, 0, (self.width-30)/2, self.groupIV.height);
+    pressIV.backgroundColor = [UIColor yellowColor];
+    //groupIV.image = DEF_IMAGENAME(@"group_login_head");
+    pressIV.userInteractionEnabled = YES;
+    //    groupIV.contentMode =UIViewContentModeScaleAspectFill;
+    pressIV.backgroundColor = [UIColor redColor];
+    [self.groupIV addSubview:pressIV];
+    self.pressIV = pressIV;
+    
+    [self.pressIV addSubview:self.roundnessProgressView];
+
     
     return;
     
@@ -105,9 +172,8 @@
 - (void)setMainModel:(MainModel *)mainModel
 {
     NSLog(@"index--%d--",mainModel.row);
-    
+    self.roundnessProgressView.progressSections =98.0;
     if (mainModel.row == 0) {
-        self.groupIV.backgroundColor = [UIColor greenColor];
     }
 }
 
@@ -134,6 +200,22 @@
     CGContextRelease(context);
     return grayImage;
 }
+
+- (RoundnessProgressView *)roundnessProgressView
+{
+    if (!_roundnessProgressView) {
+        _roundnessProgressView = [[RoundnessProgressView alloc]initWithFrame:CGRectMake((self.pressIV.width)/2 -50, (self.pressIV.height)/2 -50, 50, 50)];
+        _roundnessProgressView.thicknessWidth = 4;
+        _roundnessProgressView.completedColor = [UIColor UIColorFromRGB:0xE0DBDB alpha:1];
+        _roundnessProgressView.labelColor = [UIColor UIColorFromRGB:COLOR_APP_MAIN alpha:1];
+        _roundnessProgressView.incompletedColor = [UIColor UIColorFromRGB:COLOR_APP_MAIN alpha:1];
+        
+        _roundnessProgressView.backgroundColor = [UIColor yellowColor];
+        _roundnessProgressView.progressTotal = 100;
+    }
+    return _roundnessProgressView;
+}
+
 
 - (void)prepareForReuse {
     [super prepareForReuse];
