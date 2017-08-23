@@ -10,6 +10,7 @@
 #import "SDCycleScrollView.h"
 #import "MainTableViewCell.h"
 #include "MainModel.h"
+#import "EquipmentWarningViewController.h"
 
 @interface MainViewController ()<SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -21,6 +22,8 @@
 
 @property (assign, nonatomic)int controlHeight;
 
+@property (assign, nonatomic) NSInteger progressSections;
+
 @end
 
 @implementation MainViewController
@@ -29,6 +32,9 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.progressSections = 20;
+    
     self.titleLb.text = @"巡检操作";
     self.view.backgroundColor = DEF_COLOR_RGB(248, 248, 248);
     
@@ -97,8 +103,25 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     MainModel *model = [[MainModel alloc]init];
+    model.progressSections = self.progressSections;
     model.row = indexPath.row;
     cell.mainModel = model;
+    
+    @weakify(self)
+    cell.mainTablecellclick = ^(int index){
+        @strongify(self)
+        NSLog(@"index----%d-----",index);
+        [self.tableView reloadData];
+        
+        UIViewController *controller;
+        if (index == 1) {
+            controller = [[EquipmentWarningViewController alloc]init];
+        }else if (index == 2)
+        {
+            //controller = [[WarningHistoryViewController alloc]init];
+        }
+        [self.navigationController pushViewController:controller animated:YES];
+    };
     return cell;
 }
 
@@ -154,7 +177,7 @@
 {
     if (!_tableView) {
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT + self.controlHeight, DEF_DEVICE_WIDTH, DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT - DEF_TABBAR_HEIGHT- self.controlHeight) style:UITableViewStylePlain];
-        _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+        //_tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
         _tableView.delegate =self;
         _tableView.dataSource = self;
         [self.view addSubview:_tableView];

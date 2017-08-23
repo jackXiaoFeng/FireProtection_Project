@@ -6,14 +6,10 @@
 //  Copyright © 2016年 xiaofeng. All rights reserved.
 //
 
-#define BannerHeight (DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT - DEF_TABBAR_HEIGHT)/3
+#define CellHeight (DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT - DEF_TABBAR_HEIGHT)/4
 
-#define CellHeight (DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT - DEF_TABBAR_HEIGHT - BannerHeight)/3
-
-
-#import "MainTableViewCell.h"
-#import "RoundnessProgressView.h"
-@interface MainTableViewCell()
+#import "InvestTableViewCell.h"
+@interface InvestTableViewCell()
 
 @property (nonatomic, strong)UIImageView *groupIV;
 
@@ -21,21 +17,14 @@
 
 
 @property (nonatomic, strong)UIButton *warningBtn;
+@property (nonatomic, strong)UIButton *historyBtn;
+
 @property (nonatomic, strong)UIButton *fixBtn;
 @property (nonatomic, strong)UIButton *noneBtn;
 
-@property (nonatomic, strong)UIImageView *pressIV;
-@property (nonatomic, assign)CGFloat pressWidth;
-
-@property (nonatomic, strong)UILabel *pressLab;
-
-//圆形进度条
-@property (nonatomic,strong)RoundnessProgressView *roundnessProgressView;
-
-
 @end
-@implementation MainTableViewCell
-+ (CGFloat)mainCellHeight
+@implementation InvestTableViewCell
++ (CGFloat)investCellHeight
 {
     return CellHeight;
 }
@@ -51,50 +40,35 @@
 
 - (void)initSubViews
 {
-    
-    CGFloat groupIVWidth = 50.0f;
-
     UIImageView *groupIV = [[UIImageView alloc]init];
     groupIV.frame = CGRectMake(10, 5, DEF_DEVICE_WIDTH-20, CellHeight - 15);
     groupIV.backgroundColor = [UIColor clearColor];
     groupIV.image = DEF_IMAGENAME(@"group_login_head");
     groupIV.userInteractionEnabled = YES;
-//    groupIV.contentMode =UIViewContentModeScaleAspectFill;
+    //    groupIV.contentMode =UIViewContentModeScaleAspectFill;
     [self.contentView addSubview:groupIV];
     self.groupIV = groupIV;
     
     //给bgView边框设置阴影 self.bgView.layer.shadowOffset = CGSizeMake(1,1);
-//    self.groupIV.layer.shadowColor = [UIColor blackColor].CGColor;
-//    self.groupIV.layer.shadowOffset = CGSizeMake(0, 10);
-//    self.groupIV.layer.shadowOpacity = 0.3;
-//    self.groupIV.clipsToBounds = false; //这句最重要了，不然就显示不出来
+    //    self.groupIV.layer.shadowColor = [UIColor blackColor].CGColor;
+    //    self.groupIV.layer.shadowOffset = CGSizeMake(0, 10);
+    //    self.groupIV.layer.shadowOpacity = 0.3;
+    //    self.groupIV.clipsToBounds = false; //这句最重要了，不然就显示不出来
     
-   [self.groupIV addSubview:self.warningBtn];
+    [self.groupIV addSubview:self.warningBtn];
     
     self.warningBtn.layer.shadowColor = [UIColor blackColor].CGColor;
     self.warningBtn.layer.shadowOffset = CGSizeMake(0, 10);
     self.warningBtn.layer.shadowOpacity = 0.3;
     self.warningBtn.clipsToBounds = false; //这句最重要了，不然就显示不出来
     
+    [self.groupIV addSubview:self.historyBtn];
     
-    UIImageView *pressIV = [[UIImageView alloc]init];
-    pressIV.frame = CGRectMake((DEF_DEVICE_WIDTH-30)/2 + 10, 0, (DEF_DEVICE_WIDTH-30)/2, self.groupIV.height);
-    pressIV.backgroundColor = [UIColor yellowColor];
-    //groupIV.image = DEF_IMAGENAME(@"group_login_head");
-    pressIV.userInteractionEnabled = YES;
-    //    groupIV.contentMode =UIViewContentModeScaleAspectFill;
-    pressIV.backgroundColor = [UIColor whiteColor];
-    [self.groupIV addSubview:pressIV];
-    self.pressIV = pressIV;
+    self.historyBtn.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.historyBtn.layer.shadowOffset = CGSizeMake(0, 10);
+    self.historyBtn.layer.shadowOpacity = 0.3;
+    self.historyBtn.clipsToBounds = false; //这句最重要了，不然就显示不出来
     
-    self.pressIV.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.pressIV.layer.shadowOffset = CGSizeMake(0, 10);
-    self.pressIV.layer.shadowOpacity = 0.3;
-    self.pressIV.clipsToBounds = false; //这句最重要了，不然就显示不出来
-    
-    //圆形进度条
-    
-    [self.pressIV addSubview:self.pressLab];
     
     
     UIImageView *groupIV1 = [[UIImageView alloc]init];
@@ -117,58 +91,31 @@
     self.fixBtn.layer.shadowOffset = CGSizeMake(0, 10);
     self.fixBtn.layer.shadowOpacity = 0.3;
     self.fixBtn.clipsToBounds = false; //这句最重要了，不然就显示不出来
-
+    
     self.groupIV.hidden = YES;
     
     self.groupIV1.hidden = YES;
     
     
-    UITapGestureRecognizer* singleRecognizer;
-    singleRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTapFrom:)];
-    singleRecognizer.numberOfTapsRequired = 1; // 单击
-    [self.pressIV addGestureRecognizer:singleRecognizer];
-    
     @weakify(self);
     self.warningBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
         @strongify(self);
-        self.mainTablecellclick(1);
+        self.InvestTableCellclick(1);
         return [RACSignal empty];
     }];
     
-    self.fixBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+    self.historyBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
         @strongify(self);
-        self.mainTablecellclick(3);
+        self.InvestTableCellclick(2);
         return [RACSignal empty];
-    }];
-    
-    
+    }];    
 }
 
-- (void)setMainModel:(MainModel *)mainModel
+- (void)setInvestModel:(InvestModel *)investModel
 {
-    NSLog(@"index--%ld--%ld",(long)mainModel.row,(long)mainModel.progressSections);
- 
+    NSLog(@"index--%ld--",(long)investModel.row);
     
-#pragma mark - 圆绘制进度
-    
-    if (_roundnessProgressView) {
-        [self.roundnessProgressView removeFromSuperview];
-    }
-    
-    _roundnessProgressView = [[RoundnessProgressView alloc]initWithFrame:CGRectMake((self.pressIV.width-self.pressWidth)/2 , (self.pressIV.height-self.pressWidth)/2 - 15, self.pressWidth, self.pressWidth)];
-    _roundnessProgressView.thicknessWidth = 4;
-    _roundnessProgressView.completedColor = [UIColor UIColorFromRGB:0xE0DBDB alpha:1];
-    _roundnessProgressView.labelColor = [UIColor UIColorFromRGB:COLOR_APP_MAIN alpha:1];
-    _roundnessProgressView.incompletedColor = [UIColor UIColorFromRGB:COLOR_APP_MAIN alpha:1];
-    
-    _roundnessProgressView.backgroundColor = [UIColor clearColor];
-    [self.pressIV addSubview:_roundnessProgressView];
-    
-    _roundnessProgressView.progressTotal = 100;
-    _roundnessProgressView.progressSections =mainModel.progressSections + 0.5;
-    
-    
-    if (mainModel.row == 0) {
+    if (investModel.row == 0) {
         self.groupIV.hidden = NO;
         self.groupIV1.hidden = YES;
     }else
@@ -181,51 +128,9 @@
 #pragma mark - 单击双击 -
 
 - (void)handleSingleTapFrom:(UIGestureRecognizer *)gestureRecognizer {
-    self.mainTablecellclick(2);
+    self.InvestTableCellclick(2);
 }
 
--(UIImage *)grayImage:(UIImage *)sourceImage
-{
-    int bitmapInfo = kCGImageAlphaNone;
-    int width = sourceImage.size.width;
-    int height = sourceImage.size.height;
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
-    CGContextRef context = CGBitmapContextCreate (nil,
-                                                  width,
-                                                  height,
-                                                  8,      // bits per component
-                                                  0,
-                                                  colorSpace,
-                                                  bitmapInfo);
-    CGColorSpaceRelease(colorSpace);
-    if (context == NULL) {
-        return nil;
-    }
-    CGContextDrawImage(context,
-                       CGRectMake(0, 0, width, height), sourceImage.CGImage);
-    UIImage *grayImage = [UIImage imageWithCGImage:CGBitmapContextCreateImage(context)];
-    CGContextRelease(context);
-    return grayImage;
-}
-
-
-- (UILabel *)pressLab
-{
-    if (!_pressLab) {
-        
-        NSString *pressStr = @"当前巡检完成度";
-        CGSize contentSize = [CMUtility boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) font:DEF_MyFont(15) string:pressStr withSpacing:0];
-        
-        _pressLab = [[UILabel alloc] initWithFrame:CGRectMake((self.pressIV.width-contentSize.width)/2 , (self.pressIV.height-contentSize.height)/2 + 28, contentSize.width, contentSize.height)];
-        _pressLab.font = DEF_MyFont(15);
-        _pressLab.text = pressStr;
-        _pressLab.userInteractionEnabled = YES;
-        _pressLab.backgroundColor = [UIColor clearColor];
-        _pressLab.textAlignment = NSTextAlignmentCenter;
-        _pressLab.textColor = DEF_COLOR_RGB(67, 67, 67);
-    }
-    return _pressLab;
-}
 
 -(UIButton *)warningBtn
 {
@@ -249,8 +154,6 @@
         CGFloat imageWidth = warningImage.size.width;
         CGFloat imageHeight = warningImage.size.height;
         
-        self.pressWidth = imageWidth;
-        
         CGSize contentSize = [CMUtility boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) font:DEF_MyFont(15) string:warningStr withSpacing:0];
         CGFloat labelWidth = contentSize.width;
         
@@ -271,6 +174,53 @@
     }
     return _warningBtn;
 }
+
+
+
+-(UIButton *)historyBtn
+{
+    if (!_historyBtn) {
+        NSString *historyStr = @"告警历史记录";
+        UIButton *historyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        historyBtn.frame = CGRectMake((DEF_DEVICE_WIDTH-30)/2 + 10, 0, (DEF_DEVICE_WIDTH-30)/2, self.groupIV.height);
+        historyBtn.backgroundColor = [UIColor whiteColor];
+        [historyBtn setImage:DEF_IMAGENAME(@"deviceWarning") forState:UIControlStateNormal];
+        [historyBtn setTitle:historyStr forState:UIControlStateNormal];
+        [historyBtn setTitleColor:DEF_COLOR_RGB(67, 67, 67)forState:UIControlStateNormal];
+        historyBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        
+        historyBtn.titleLabel.font = DEF_MyFont(15);
+        historyBtn.titleLabel.backgroundColor = [UIColor clearColor];
+        
+        _historyBtn = historyBtn;
+        
+        //图片是60*60的2x的图
+        UIImage *warningImage = DEF_IMAGENAME(@"deviceWarning");
+        CGFloat imageWidth = warningImage.size.width;
+        CGFloat imageHeight = warningImage.size.height;
+        
+        
+        CGSize contentSize = [CMUtility boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) font:DEF_MyFont(15) string:historyStr withSpacing:0];
+        CGFloat labelWidth = contentSize.width;
+        
+        CGFloat labelHeight= contentSize.height;
+        
+        CGFloat spacing = 10;
+        CGFloat changeFloat = 15;
+        
+        //image在上，文字在下
+        CGFloat imageOffsetX = (imageWidth + labelWidth) / 2 - imageWidth / 2;//image中心移动的x距离
+        CGFloat imageOffsetY = imageHeight / 2 + spacing / 2 -changeFloat;//image中心移动的y距离
+        //CGFloat labelOffsetX = (imageWidth + labelWidth / 2) - (imageWidth + labelWidth) / 2 - 10;//label中心移动的x距离
+        CGFloat labelOffsetX = (imageWidth + labelWidth / 2) - (imageWidth + labelWidth) / 2;//label中心移动的x距离
+        
+        CGFloat labelOffsetY = labelHeight / 2 + spacing / 2 + changeFloat;//label中心移动的y距离
+        _historyBtn.imageEdgeInsets = UIEdgeInsetsMake(-imageOffsetY, imageOffsetX, imageOffsetY, -imageOffsetX);
+        _historyBtn.titleEdgeInsets = UIEdgeInsetsMake(labelOffsetY, -labelOffsetX, -labelOffsetY, labelOffsetX);
+    }
+    return _historyBtn;
+}
+
 
 -(UIButton *)fixBtn
 {
@@ -321,10 +271,10 @@
     _groupIV.image = nil;
     
     //_nameLab.text = @"";
-//    _messageNumLab.text = @"";
-//    _timeLab.text = @"";
-//    _descriptionLab.text = @"";
-
+    //    _messageNumLab.text = @"";
+    //    _timeLab.text = @"";
+    //    _descriptionLab.text = @"";
+    
 }
 
 @end

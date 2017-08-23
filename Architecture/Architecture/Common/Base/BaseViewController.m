@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = DEF_COLOR_RGB(248, 248, 248);
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tabBarController.automaticallyAdjustsScrollViewInsets = NO;
@@ -46,7 +46,7 @@
     [self.navBar addSubview:self.titleLb];
     
     self.leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 25, 52, 36)];
-    [self.leftBtn setImage:[UIImage imageNamed:@"icon_register_back"] forState:UIControlStateNormal];
+    [self.leftBtn setImage:[UIImage imageNamed:@"icon_Back"] forState:UIControlStateNormal];
     [self.leftBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
     self.leftBtn.imageView.contentMode = UIViewContentModeCenter;
     [self.leftBtn addTarget:self action:@selector(leftBtnClick) forControlEvents:UIControlEventTouchUpInside];

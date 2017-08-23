@@ -11,6 +11,8 @@
 
 @interface MainTableViewCell : UITableViewCell
 + (CGFloat)mainCellHeight;
+
+@property (nonatomic, copy) void(^mainTablecellclick)(int);
 @property (nonatomic ,strong)MainModel *mainModel;
 
 @end
