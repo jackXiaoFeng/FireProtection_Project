@@ -51,9 +51,6 @@
 
 - (void)initSubViews
 {
-    
-    CGFloat groupIVWidth = 50.0f;
-
     UIImageView *groupIV = [[UIImageView alloc]init];
     groupIV.frame = CGRectMake(10, 5, DEF_DEVICE_WIDTH-20, CellHeight - 15);
     groupIV.backgroundColor = [UIColor clearColor];

@@ -44,33 +44,30 @@
         
         //设置 title 区域
         UILabel *titleLabel = [[UILabel alloc] init];
-        
         CGFloat lab_x = (tableView.contentSize.width/4)*idx;
         CGFloat width = tableView.contentSize.width/4;
         if (idx == 0) {
             width -= 20;
             titleLabel.textAlignment =  NSTextAlignmentCenter;
+            titleLabel.backgroundColor = [UIColor yellowColor];
 
         }else if (idx == 3)
         {
             lab_x -= 20;
             width += 20;
             titleLabel.textAlignment =  NSTextAlignmentLeft;
-
+            titleLabel.backgroundColor = [UIColor orangeColor];
         }else
         {
             lab_x -= 20;
         }
-        
         titleLabel.frame = CGRectMake(lab_x, 10,width, 20);
-        
         //设置 title 文字内容
         titleLabel.text =nameArray[idx];
         //设置 title 颜色
         titleLabel.textColor =  [UIColor blackColor];
         titleLabel.font = DEF_MyFont(15);
-        
-        view.backgroundColor = [UIColor redColor];
+        view.backgroundColor = [UIColor whiteColor];
         [view addSubview:titleLabel];
 
     }];
