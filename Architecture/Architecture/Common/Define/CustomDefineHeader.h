@@ -86,6 +86,12 @@
 #define DEF_CONTENT_INTABBAR_HEIGHT     (DEF_IOS7 ? ([UIScreen mainScreen].bounds.size.height - 49):([UIScreen mainScreen].bounds.size.height - 69))
 #define DEF_NAVIGATIONBAR_HEIGHT        64
 #define DEF_TABBAR_HEIGHT               49
+
+//比例 根据标注图尺寸计算
+#define DEF_DEVICE_SCLE_WIDTH(width) DEF_DEVICE_WIDTH*width/750
+
+#define DEF_DEVICE_SCLE_HEIGHT(height) DEF_DEVICE_HEIGHT*height/1334
+
 /**
  *获取iphone
  */

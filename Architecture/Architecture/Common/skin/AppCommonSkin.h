@@ -18,7 +18,7 @@
 
 //----------------appkin------------------------
 //app品牌色 色值
-#define COLOR_APP_MAIN 0xc30d22
+#define COLOR_APP_MAIN 0xE85753
 
 //app品牌色 RGB色值
 #define COLOR_APP_MAINRGB  DEF_COLOR_RGB(195,14,34)

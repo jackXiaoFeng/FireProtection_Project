@@ -6,9 +6,6 @@
 //  Copyright © 2016年 xiaofeng. All rights reserved.
 //
 
-#define BannerHeight (DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT - DEF_TABBAR_HEIGHT)/3
-
-#define CellHeight (DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT - DEF_TABBAR_HEIGHT - BannerHeight)/3
 
 
 #import "MainTableViewCell.h"
@@ -29,6 +26,7 @@
 
 @property (nonatomic, strong)UILabel *pressLab;
 
+@property (nonatomic, assign)CGFloat cellHeight;
 //圆形进度条
 @property (nonatomic,strong)RoundnessProgressView *roundnessProgressView;
 
@@ -37,7 +35,7 @@
 @implementation MainTableViewCell
 + (CGFloat)mainCellHeight
 {
-    return CellHeight;
+    return DEF_DEVICE_SCLE_HEIGHT(260);
 }
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -51,10 +49,11 @@
 
 - (void)initSubViews
 {
+    self.cellHeight = DEF_DEVICE_SCLE_HEIGHT(260);
+    
     UIImageView *groupIV = [[UIImageView alloc]init];
-    groupIV.frame = CGRectMake(10, 5, DEF_DEVICE_WIDTH-20, CellHeight - 15);
+    groupIV.frame = CGRectMake(10, 5, DEF_DEVICE_WIDTH-20, self.cellHeight - 15);
     groupIV.backgroundColor = [UIColor clearColor];
-    groupIV.image = DEF_IMAGENAME(@"group_login_head");
     groupIV.userInteractionEnabled = YES;
 //    groupIV.contentMode =UIViewContentModeScaleAspectFill;
     [self.contentView addSubview:groupIV];
@@ -73,31 +72,19 @@
     self.warningBtn.layer.shadowOpacity = 0.3;
     self.warningBtn.clipsToBounds = false; //这句最重要了，不然就显示不出来
     
+    [self.groupIV addSubview:self.fixBtn];
+    self.fixBtn.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.fixBtn.layer.shadowOffset = CGSizeMake(0, 10);
+    self.fixBtn.layer.shadowOpacity = 0.3;
+    self.fixBtn.clipsToBounds = false; //这句最重要了，不然就显示不出来
+
     
-    UIImageView *pressIV = [[UIImageView alloc]init];
-    pressIV.frame = CGRectMake((DEF_DEVICE_WIDTH-30)/2 + 10, 0, (DEF_DEVICE_WIDTH-30)/2, self.groupIV.height);
-    pressIV.backgroundColor = [UIColor yellowColor];
-    //groupIV.image = DEF_IMAGENAME(@"group_login_head");
-    pressIV.userInteractionEnabled = YES;
-    //    groupIV.contentMode =UIViewContentModeScaleAspectFill;
-    pressIV.backgroundColor = [UIColor whiteColor];
-    [self.groupIV addSubview:pressIV];
-    self.pressIV = pressIV;
     
-    self.pressIV.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.pressIV.layer.shadowOffset = CGSizeMake(0, 10);
-    self.pressIV.layer.shadowOpacity = 0.3;
-    self.pressIV.clipsToBounds = false; //这句最重要了，不然就显示不出来
-    
-    //圆形进度条
-    
-    [self.pressIV addSubview:self.pressLab];
     
     
     UIImageView *groupIV1 = [[UIImageView alloc]init];
-    groupIV1.frame = CGRectMake(10, 5, DEF_DEVICE_WIDTH-20, CellHeight - 15);
-    groupIV1.backgroundColor = [UIColor redColor];
-    groupIV1.image = DEF_IMAGENAME(@"group_login_head");
+    groupIV1.frame = CGRectMake(10, 5, DEF_DEVICE_WIDTH-20, self.cellHeight - 15);
+    groupIV1.backgroundColor = [UIColor clearColor];
     groupIV1.userInteractionEnabled = YES;
     //    groupIV.contentMode =UIViewContentModeScaleAspectFill;
     [self.contentView addSubview:groupIV1];
@@ -109,16 +96,29 @@
     self.groupIV1.layer.shadowOpacity = 0.3;
     self.groupIV1.clipsToBounds = false; //这句最重要了，不然就显示不出来
     
-    [self.groupIV1 addSubview:self.fixBtn];
-    self.fixBtn.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.fixBtn.layer.shadowOffset = CGSizeMake(0, 10);
-    self.fixBtn.layer.shadowOpacity = 0.3;
-    self.fixBtn.clipsToBounds = false; //这句最重要了，不然就显示不出来
+    
+    UIImageView *pressIV = [[UIImageView alloc]init];
+    pressIV.frame = CGRectMake(0, 0, self.groupIV1.width, self.groupIV1.height);
+    //groupIV.image = DEF_IMAGENAME(@"group_login_head");
+    pressIV.userInteractionEnabled = YES;
+    //    groupIV.contentMode =UIViewContentModeScaleAspectFill;
+    pressIV.backgroundColor = [UIColor whiteColor];
+    [self.groupIV1 addSubview:pressIV];
+    self.pressIV = pressIV;
+    
+    self.pressIV.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.pressIV.layer.shadowOffset = CGSizeMake(0, 10);
+    self.pressIV.layer.shadowOpacity = 0.3;
+    self.pressIV.clipsToBounds = false; //这句最重要了，不然就显示不出来
+    
+    //圆形进度条
+    
+    [self.pressIV addSubview:self.pressLab];
+
 
     self.groupIV.hidden = YES;
     
     self.groupIV1.hidden = YES;
-    
     
     UITapGestureRecognizer* singleRecognizer;
     singleRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTapFrom:)];
@@ -134,10 +134,9 @@
     
     self.fixBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
         @strongify(self);
-        self.mainTablecellclick(3);
+        self.mainTablecellclick(2);
         return [RACSignal empty];
     }];
-    
     
 }
 
@@ -168,10 +167,17 @@
     if (mainModel.row == 0) {
         self.groupIV.hidden = NO;
         self.groupIV1.hidden = YES;
+    }else if(mainModel.row == 1)
+    {
+        self.groupIV.hidden = YES;
+        self.groupIV1.hidden = NO;
     }else
     {
         self.groupIV.hidden = YES;
         self.groupIV1.hidden = NO;
+        //self.pressIV.hidden = YES;
+        self.pressLab.hidden = YES;
+        _roundnessProgressView.hidden = YES;
     }
 }
 
@@ -274,7 +280,7 @@
     if (!_fixBtn) {
         NSString *fixStr = @"当前设备检修记录";
         UIButton *fixBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        fixBtn.frame = CGRectMake(0, 0, self.groupIV.width, self.groupIV.height);
+        fixBtn.frame = CGRectMake((DEF_DEVICE_WIDTH-30)/2 + 10, 0, (DEF_DEVICE_WIDTH-30)/2, self.groupIV.height);
         fixBtn.backgroundColor = [UIColor whiteColor];
         [fixBtn setImage:DEF_IMAGENAME(@"deviceWarning") forState:UIControlStateNormal];
         [fixBtn setTitle:fixStr forState:UIControlStateNormal];

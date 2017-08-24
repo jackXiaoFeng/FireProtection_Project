@@ -18,7 +18,7 @@
 #define DEF_CONTENT_VIEW_COLOR                  DEF_COLOR_RGB(240,240,240)          //viewController_view 背景色
 #define DEF_CUSTOM_NAVIGATION_TITLECOLOER       [UIColor blackColor]                //navigation title color 颜色
 #define DEF_DOWN_NAVIGATION_TITLECOLOER         [UIColor blackColor]                //navigation Down 字体颜色
-#define DEF_APP_MAIN_COLOR DEF_UICOLORFROMRGB(0xeb7276)
+#define DEF_APP_MAIN_COLOR DEF_UICOLORFROMRGB(0xF4866A)
 #define DEF_COLOR_1 DEF_COLOR_RGB(51,149,250)
 #define DEF_COLOR_2 DEF_COLOR_RGB(229,77,40)
 #define DEF_COLOR_FF6704                        DEF_UICOLORFROMRGB(0xff6704)        //首页navigation title 字体颜色

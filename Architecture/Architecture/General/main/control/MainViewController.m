@@ -38,11 +38,9 @@
     self.titleLb.text = @"巡检操作";
     self.view.backgroundColor = DEF_COLOR_RGB(248, 248, 248);
     
-    self.controlHeight = (self.view.height-DEF_NAVIGATIONBAR_HEIGHT-DEF_TABBAR_HEIGHT)/3;
+    self.controlHeight = DEF_DEVICE_SCLE_HEIGHT(222);
     
-    NSLog(@"--%f----%f",DEF_DEVICE_HEIGHT,self.view.height);
-    
-    
+    /*
     // 情景二：采用网络图片实现
     NSArray *imagesURLStrings = @[
                                   @"http://img.zcool.cn/community/012913577243b50000018c1bc29917.jpg",
@@ -58,9 +56,11 @@
         self.cycleScrollView.imageURLStringsGroup = imagesURLStrings;
         
     });
+    */
+    
+   [self.view addSubview:self.cycleScrollView];
     
     self.tableView.backgroundColor = DEF_COLOR_RGB(248, 248, 248);
-    
     
     
     /*
@@ -86,7 +86,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (DEF_DEVICE_WIDTH, DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT - DEF_TABBAR_HEIGHT- self.controlHeight)/3;
+    return [MainTableViewCell mainCellHeight];
 }
 
 -(NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -157,15 +157,22 @@
 -(SDCycleScrollView *)cycleScrollView
 {
     if (!_cycleScrollView) {
+        // 情景一：采用本地图片实现
+        NSArray *imageNames = @[@"banner_image"];
+
+        
         // 网络加载 --- 创建带标题的图片轮播器
-        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, self.view.width, self.controlHeight) delegate:self placeholderImage:[UIImage imageNamed:@"bannerPlacehoder"]];
+       // _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, self.view.width, self.controlHeight) delegate:self placeholderImage:[UIImage imageNamed:@"bannerPlacehoder"]];
+        
+        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, self.view.width, self.controlHeight) shouldInfiniteLoop:YES imageNamesGroup:imageNames];
+
         _cycleScrollView.autoScrollTimeInterval = 4.0;
         
         _cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
         _cycleScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
         //cycleScrollView2.titlesGroup = titles;
         _cycleScrollView.currentPageDotColor = [UIColor whiteColor]; // 自定义分页控件小圆标颜色
-        [self.view addSubview:_cycleScrollView];
+        
     }
     return _cycleScrollView;
 }
@@ -177,7 +184,7 @@
 {
     if (!_tableView) {
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT + self.controlHeight, DEF_DEVICE_WIDTH, DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT - DEF_TABBAR_HEIGHT- self.controlHeight) style:UITableViewStylePlain];
-        //_tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+        _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
         _tableView.delegate =self;
         _tableView.dataSource = self;
         [self.view addSubview:_tableView];

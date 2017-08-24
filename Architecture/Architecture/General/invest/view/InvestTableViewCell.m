@@ -128,7 +128,7 @@
 #pragma mark - 单击双击 -
 
 - (void)handleSingleTapFrom:(UIGestureRecognizer *)gestureRecognizer {
-    self.InvestTableCellclick(2);
+    self.InvestTableCellclick(3);
 }
 
 

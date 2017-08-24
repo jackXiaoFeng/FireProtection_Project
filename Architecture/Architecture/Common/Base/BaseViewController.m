@@ -32,11 +32,16 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tabBarController.automaticallyAdjustsScrollViewInsets = NO;
-    
+
+   
     self.navBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEF_DEVICE_WIDTH, DEF_NAVIGATIONBAR_HEIGHT)];
     self.navBar.backgroundColor = DEF_APP_MAIN_COLOR;
     self.navBar.alpha = 1;
     [self.view addSubview:self.navBar];
+    
+    UIImageView *navImageView = [[UIImageView alloc]initWithImage:DEF_IMAGENAME(@"nav_image")];
+    navImageView.frame = CGRectMake(0, 0, self.navBar.width, self.navBar.height);
+    [self.navBar addSubview:navImageView];
     
     self.titleLb = [[UILabel alloc] initWithFrame:CGRectMake(60, 20, DEF_DEVICE_WIDTH - 60*2, 44)];
     self.titleLb.textColor = [UIColor whiteColor];//DEF_COLOR_FF6704;
