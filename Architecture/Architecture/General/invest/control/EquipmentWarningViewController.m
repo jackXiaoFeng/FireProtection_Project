@@ -63,14 +63,7 @@
         //CGFloat lab_x = (tableView.contentSize.width/4)*idx;
         NSNumber *numberWidth = widthArray[idx];
         CGFloat width = numberWidth.floatValue;
-        if (idx == 0) {
-            titleLabel.textAlignment =  NSTextAlignmentCenter;
-
-        }else if (idx == 3)
-        {
-            titleLabel.textAlignment =  NSTextAlignmentCenter;
-        }
-        titleLabel.frame = CGRectMake(lab_x, 0,width, DEF_DEVICE_SCLE_HEIGHT(76));
+        titleLabel.frame = CGRectMake(lab_x, 0,width, DEF_DEVICE_SCLE_HEIGHT(75));
         //设置 title 文字内容
         titleLabel.text =nameArray[idx];
         //设置 title 颜色
@@ -78,9 +71,8 @@
         titleLabel.backgroundColor =  [UIColor whiteColor];
         //titleLabel.font = DEF_MyFont(15);
         titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
-
-        view.backgroundColor = [UIColor lightGrayColor];
-        
+        titleLabel.textAlignment =  NSTextAlignmentCenter;
+        view.backgroundColor = COLOR_APP_CELL_LINE;
         [view addSubview:titleLabel];
 
     }];
@@ -124,9 +116,11 @@
 {
     if (!_tableView) {
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, DEF_DEVICE_WIDTH, DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT) style:UITableViewStylePlain];
-        //_tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+        _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
         _tableView.delegate =self;
         _tableView.dataSource = self;
+        
+        /*
         //cell 线左对齐
         if ([_tableView respondsToSelector:@selector(setSeparatorInset:)]) {
             
@@ -137,6 +131,7 @@
             
             [_tableView setLayoutMargins:UIEdgeInsetsZero];
         }
+         */
         [self.view addSubview:_tableView];
         
         _tableView.tableFooterView = [UIView new];

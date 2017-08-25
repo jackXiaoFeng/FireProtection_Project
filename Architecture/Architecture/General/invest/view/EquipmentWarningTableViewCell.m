@@ -10,7 +10,7 @@
 #import "EquipmentWarningTableViewCell.h"
 @interface EquipmentWarningTableViewCell()
 
-@property (nonatomic, strong)UIImageView *groupIV;
+@property (nonatomic, strong)UIImageView *lineIV;
 
 @property (nonatomic, strong)UILabel *timeLab;
 @property (nonatomic, strong)UILabel *deviceLab;
@@ -35,22 +35,6 @@
 
 - (void)initSubViews
 {
-    
-    UIImageView *groupIV = [[UIImageView alloc]init];
-    groupIV.frame = CGRectMake(0, 0, DEF_DEVICE_WIDTH, CellHeight);
-    //groupIV.image = DEF_IMAGENAME(@"group_login_head");
-    //    groupIV.contentMode =UIViewContentModeScaleAspectFill;
-    groupIV.userInteractionEnabled = YES;
-    groupIV.backgroundColor = [UIColor whiteColor];
-    [self.contentView addSubview:groupIV];
-    self.groupIV = groupIV;
-    
-    NSArray *widthArray = @[
-                            @(DEF_DEVICE_SCLE_WIDTH(134)),
-                            @(DEF_DEVICE_SCLE_WIDTH(214)),
-                            @(DEF_DEVICE_SCLE_WIDTH(164)),
-                            @(DEF_DEVICE_SCLE_WIDTH(241))];
-    
     UILabel *timeLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, DEF_DEVICE_SCLE_WIDTH(134), CellHeight)];
     timeLab.font = DEF_MyFont(14.0f);
     timeLab.text = @"--：--";
@@ -93,8 +77,14 @@
     [self.contentView addSubview:restorationLab];
     self.restorationLab = restorationLab;
     
+    UIImageView *lineIV = [[UIImageView alloc]init];
+    lineIV.frame = CGRectMake(0, CellHeight -1, DEF_DEVICE_WIDTH, 1);
+    lineIV.backgroundColor = COLOR_APP_CELL_LINE;
+    [self.contentView addSubview:lineIV];
+    self.lineIV = lineIV;
+
     
-    }
+}
 
 - (void)setEquipmentWarningModel:(EquipmentWarningModel *)equipmentWarningModel
 {
@@ -156,7 +146,7 @@
 - (void)prepareForReuse {
     [super prepareForReuse];
     
-    _groupIV.image = nil;
+    //_groupIV.image = nil;
     
     _timeLab.text = @"";
     _deviceLab.text = @"";
