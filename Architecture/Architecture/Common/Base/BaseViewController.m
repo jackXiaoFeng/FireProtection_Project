@@ -59,6 +59,9 @@
     self.leftBtn.titleLabel.font = DEF_MyFont(14.0f);
     [self.navBar addSubview:self.leftBtn];
     
+    self.leftBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
+    
+    
     self.rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.navBar.width - 47, 25, 52, 36)];
     [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.rightBtn.imageView.contentMode = UIViewContentModeCenter;

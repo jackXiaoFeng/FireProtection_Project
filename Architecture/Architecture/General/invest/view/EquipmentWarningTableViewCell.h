@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EquipmentWarningModel.h"
 
 @interface EquipmentWarningTableViewCell : UITableViewCell
 + (CGFloat)equipmentWarningCellHeight;
+@property (nonatomic ,strong)EquipmentWarningModel *equipmentWarningModel;
+
 @end

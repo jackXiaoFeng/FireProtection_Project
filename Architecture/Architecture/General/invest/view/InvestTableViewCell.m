@@ -6,7 +6,6 @@
 //  Copyright © 2016年 xiaofeng. All rights reserved.
 //
 
-#define CellHeight (DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT - DEF_TABBAR_HEIGHT)/4
 
 #import "InvestTableViewCell.h"
 @interface InvestTableViewCell()
@@ -22,11 +21,13 @@
 @property (nonatomic, strong)UIButton *fixBtn;
 @property (nonatomic, strong)UIButton *noneBtn;
 
+@property (nonatomic, assign)CGFloat cellHeight;
+
 @end
 @implementation InvestTableViewCell
 + (CGFloat)investCellHeight
 {
-    return CellHeight;
+    return DEF_DEVICE_SCLE_HEIGHT(260);
 }
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -40,8 +41,11 @@
 
 - (void)initSubViews
 {
+    
+    self.cellHeight = DEF_DEVICE_SCLE_HEIGHT(260);
+
     UIImageView *groupIV = [[UIImageView alloc]init];
-    groupIV.frame = CGRectMake(10, 5, DEF_DEVICE_WIDTH-20, CellHeight - 15);
+    groupIV.frame = CGRectMake(10, 5, DEF_DEVICE_WIDTH-20, self.cellHeight - 15);
     groupIV.backgroundColor = [UIColor clearColor];
     groupIV.image = DEF_IMAGENAME(@"group_login_head");
     groupIV.userInteractionEnabled = YES;
@@ -72,8 +76,8 @@
     
     
     UIImageView *groupIV1 = [[UIImageView alloc]init];
-    groupIV1.frame = CGRectMake(10, 5, DEF_DEVICE_WIDTH-20, CellHeight - 15);
-    groupIV1.backgroundColor = [UIColor redColor];
+    groupIV1.frame = CGRectMake(10, 5, DEF_DEVICE_WIDTH-20, self.cellHeight - 15);
+    groupIV1.backgroundColor = [UIColor whiteColor];
     groupIV1.image = DEF_IMAGENAME(@"group_login_head");
     groupIV1.userInteractionEnabled = YES;
     //    groupIV.contentMode =UIViewContentModeScaleAspectFill;
@@ -81,17 +85,22 @@
     self.groupIV1 = groupIV1;
     
     //给bgView边框设置阴影 self.bgView.layer.shadowOffset = CGSizeMake(1,1);
-    self.groupIV1.layer.shadowColor = [UIColor whiteColor].CGColor;
+    self.groupIV1.layer.shadowColor = [UIColor blackColor].CGColor;
     self.groupIV1.layer.shadowOffset = CGSizeMake(0, 10);
     self.groupIV1.layer.shadowOpacity = 0.3;
     self.groupIV1.clipsToBounds = false; //这句最重要了，不然就显示不出来
     
-    [self.groupIV1 addSubview:self.fixBtn];
-    self.fixBtn.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.fixBtn.layer.shadowOffset = CGSizeMake(0, 10);
-    self.fixBtn.layer.shadowOpacity = 0.3;
-    self.fixBtn.clipsToBounds = false; //这句最重要了，不然就显示不出来
+//    UIView *bgView= [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.groupIV1.width, self.groupIV1.height)];
+//    bgView.backgroundColor = [UIColor whiteColor];
+//    [self.groupIV1 addSubview:bgView];
+//    
+//    bgView.layer.shadowColor = [UIColor whiteColor].CGColor;
+//    bgView.layer.shadowOffset = CGSizeMake(0, 10);
+//    bgView.layer.shadowOpacity = 0.3;
+//    bgView.clipsToBounds = false; //这句最重要了，不然就显示不出来
     
+    [self.groupIV1 addSubview:self.fixBtn];
+        
     self.groupIV.hidden = YES;
     
     self.groupIV1.hidden = YES;
@@ -118,10 +127,15 @@
     if (investModel.row == 0) {
         self.groupIV.hidden = NO;
         self.groupIV1.hidden = YES;
+    }else if (investModel.row == 1)
+    {
+        self.groupIV.hidden = YES;
+        self.groupIV1.hidden = NO;
     }else
     {
         self.groupIV.hidden = YES;
         self.groupIV1.hidden = NO;
+        self.fixBtn.hidden = YES;
     }
 }
 
@@ -135,11 +149,13 @@
 -(UIButton *)warningBtn
 {
     if (!_warningBtn) {
+        UIImage *warningImage = DEF_IMAGENAME(@"device_warning_info");
+
         NSString *warningStr = @"设备告警信息";
         UIButton *warningBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         warningBtn.frame = CGRectMake(0, 0, (DEF_DEVICE_WIDTH-30)/2, self.groupIV.height);
         warningBtn.backgroundColor = [UIColor whiteColor];
-        [warningBtn setImage:DEF_IMAGENAME(@"deviceWarning") forState:UIControlStateNormal];
+        [warningBtn setImage:warningImage forState:UIControlStateNormal];
         [warningBtn setTitle:warningStr forState:UIControlStateNormal];
         [warningBtn setTitleColor:DEF_COLOR_RGB(67, 67, 67)forState:UIControlStateNormal];
         warningBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -150,7 +166,6 @@
         _warningBtn = warningBtn;
         
         //图片是60*60的2x的图
-        UIImage *warningImage = DEF_IMAGENAME(@"deviceWarning");
         CGFloat imageWidth = warningImage.size.width;
         CGFloat imageHeight = warningImage.size.height;
         
@@ -159,7 +174,7 @@
         
         CGFloat labelHeight= contentSize.height;
         
-        CGFloat spacing = 10;
+        CGFloat spacing = 15;
         CGFloat changeFloat = 15;
         
         //image在上，文字在下
@@ -180,11 +195,14 @@
 -(UIButton *)historyBtn
 {
     if (!_historyBtn) {
+        
+        UIImage *warningImage = DEF_IMAGENAME(@"warning_history");
+
         NSString *historyStr = @"告警历史记录";
         UIButton *historyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         historyBtn.frame = CGRectMake((DEF_DEVICE_WIDTH-30)/2 + 10, 0, (DEF_DEVICE_WIDTH-30)/2, self.groupIV.height);
         historyBtn.backgroundColor = [UIColor whiteColor];
-        [historyBtn setImage:DEF_IMAGENAME(@"deviceWarning") forState:UIControlStateNormal];
+        [historyBtn setImage:warningImage forState:UIControlStateNormal];
         [historyBtn setTitle:historyStr forState:UIControlStateNormal];
         [historyBtn setTitleColor:DEF_COLOR_RGB(67, 67, 67)forState:UIControlStateNormal];
         historyBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -195,7 +213,6 @@
         _historyBtn = historyBtn;
         
         //图片是60*60的2x的图
-        UIImage *warningImage = DEF_IMAGENAME(@"deviceWarning");
         CGFloat imageWidth = warningImage.size.width;
         CGFloat imageHeight = warningImage.size.height;
         
@@ -205,7 +222,7 @@
         
         CGFloat labelHeight= contentSize.height;
         
-        CGFloat spacing = 10;
+        CGFloat spacing = 15;
         CGFloat changeFloat = 15;
         
         //image在上，文字在下
@@ -225,11 +242,13 @@
 -(UIButton *)fixBtn
 {
     if (!_fixBtn) {
+        
+        UIImage *warningImage = DEF_IMAGENAME(@"device_ restoration");
         NSString *fixStr = @"当前设备检修记录";
         UIButton *fixBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         fixBtn.frame = CGRectMake(0, 0, self.groupIV.width, self.groupIV.height);
         fixBtn.backgroundColor = [UIColor whiteColor];
-        [fixBtn setImage:DEF_IMAGENAME(@"deviceWarning") forState:UIControlStateNormal];
+        [fixBtn setImage:warningImage forState:UIControlStateNormal];
         [fixBtn setTitle:fixStr forState:UIControlStateNormal];
         [fixBtn setTitleColor:DEF_COLOR_RGB(67, 67, 67)forState:UIControlStateNormal];
         fixBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -240,7 +259,6 @@
         _fixBtn = fixBtn;
         
         //图片是60*60的2x的图
-        UIImage *warningImage = DEF_IMAGENAME(@"deviceWarning");
         CGFloat imageWidth = warningImage.size.width;
         CGFloat imageHeight = warningImage.size.height;
         
@@ -249,7 +267,7 @@
         
         CGFloat labelHeight= contentSize.height;
         
-        CGFloat spacing = 10;
+        CGFloat spacing = 15;
         CGFloat changeFloat = 15;
         
         //image在上，文字在下

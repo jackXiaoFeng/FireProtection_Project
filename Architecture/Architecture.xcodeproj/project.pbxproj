@@ -13,6 +13,7 @@
 		3A06DB311F4C1FDB003FD9CD /* WarningHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06DB301F4C1FDB003FD9CD /* WarningHistoryViewController.m */; };
 		3A06DB341F4C202A003FD9CD /* MalfunctionEquipmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06DB331F4C202A003FD9CD /* MalfunctionEquipmentViewController.m */; };
 		3A06DB371F4C2493003FD9CD /* EquipmentWarningTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06DB361F4C2493003FD9CD /* EquipmentWarningTableViewCell.m */; };
+		3A8E6EBF1F4ECAD100C9B51E /* EquipmentWarningModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E6EBE1F4ECAD100C9B51E /* EquipmentWarningModel.m */; };
 		3A95ACEE1D17D4BA0026EAFE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95ACED1D17D4BA0026EAFE /* main.m */; };
 		3A95ACF11D17D4BA0026EAFE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95ACF01D17D4BA0026EAFE /* AppDelegate.m */; };
 		3A95ACF91D17D4BA0026EAFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A95ACF81D17D4BA0026EAFE /* Assets.xcassets */; };
@@ -78,6 +79,8 @@
 		3A06DB331F4C202A003FD9CD /* MalfunctionEquipmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MalfunctionEquipmentViewController.m; sourceTree = "<group>"; };
 		3A06DB351F4C2493003FD9CD /* EquipmentWarningTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentWarningTableViewCell.h; sourceTree = "<group>"; };
 		3A06DB361F4C2493003FD9CD /* EquipmentWarningTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentWarningTableViewCell.m; sourceTree = "<group>"; };
+		3A8E6EBD1F4ECAD100C9B51E /* EquipmentWarningModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentWarningModel.h; sourceTree = "<group>"; };
+		3A8E6EBE1F4ECAD100C9B51E /* EquipmentWarningModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentWarningModel.m; sourceTree = "<group>"; };
 		3A95ACE91D17D4BA0026EAFE /* Architecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Architecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A95ACED1D17D4BA0026EAFE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A95ACEF1D17D4BA0026EAFE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -481,6 +484,8 @@
 			children = (
 				3A06DB291F4C1A50003FD9CD /* InvestModel.h */,
 				3A06DB2A1F4C1A50003FD9CD /* InvestModel.m */,
+				3A8E6EBD1F4ECAD100C9B51E /* EquipmentWarningModel.h */,
+				3A8E6EBE1F4ECAD100C9B51E /* EquipmentWarningModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -781,6 +786,7 @@
 				3AA1C8591F4A6F44004A52EF /* TAPageControl.m in Sources */,
 				3AA1C8621F4A6FD3004A52EF /* SDCollectionViewCell.m in Sources */,
 				3AA1C8A31F4AB0F7004A52EF /* MainTableViewCell.m in Sources */,
+				3A8E6EBF1F4ECAD100C9B51E /* EquipmentWarningModel.m in Sources */,
 				3A95ACEE1D17D4BA0026EAFE /* main.m in Sources */,
 				3A95AD351D17E9B50026EAFE /* UIView+Positioning.m in Sources */,
 				3AA1C89A1F4AAE2F004A52EF /* AccountViewController.m in Sources */,

@@ -144,7 +144,8 @@
 {
     NSLog(@"index--%ld--%ld",(long)mainModel.row,(long)mainModel.progressSections);
  
-    
+    self.pressWidth = 60;
+
 #pragma mark - 圆绘制进度
     
     if (_roundnessProgressView) {
@@ -219,7 +220,7 @@
         NSString *pressStr = @"当前巡检完成度";
         CGSize contentSize = [CMUtility boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) font:DEF_MyFont(15) string:pressStr withSpacing:0];
         
-        _pressLab = [[UILabel alloc] initWithFrame:CGRectMake((self.pressIV.width-contentSize.width)/2 , (self.pressIV.height-contentSize.height)/2 + 28, contentSize.width, contentSize.height)];
+        _pressLab = [[UILabel alloc] initWithFrame:CGRectMake((self.pressIV.width-contentSize.width)/2 , (self.pressIV.height-contentSize.height)/2 + 33, contentSize.width, contentSize.height)];
         _pressLab.font = DEF_MyFont(15);
         _pressLab.text = pressStr;
         _pressLab.userInteractionEnabled = YES;
@@ -233,11 +234,13 @@
 -(UIButton *)warningBtn
 {
     if (!_warningBtn) {
+        UIImage *warningImage = DEF_IMAGENAME(@"device_warning_info");
+        
         NSString *warningStr = @"设备告警信息";
         UIButton *warningBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         warningBtn.frame = CGRectMake(0, 0, (DEF_DEVICE_WIDTH-30)/2, self.groupIV.height);
         warningBtn.backgroundColor = [UIColor whiteColor];
-        [warningBtn setImage:DEF_IMAGENAME(@"deviceWarning") forState:UIControlStateNormal];
+        [warningBtn setImage:warningImage forState:UIControlStateNormal];
         [warningBtn setTitle:warningStr forState:UIControlStateNormal];
         [warningBtn setTitleColor:DEF_COLOR_RGB(67, 67, 67)forState:UIControlStateNormal];
         warningBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -248,18 +251,16 @@
         _warningBtn = warningBtn;
         
         //图片是60*60的2x的图
-        UIImage *warningImage = DEF_IMAGENAME(@"deviceWarning");
         CGFloat imageWidth = warningImage.size.width;
         CGFloat imageHeight = warningImage.size.height;
         
-        self.pressWidth = imageWidth;
         
         CGSize contentSize = [CMUtility boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) font:DEF_MyFont(15) string:warningStr withSpacing:0];
         CGFloat labelWidth = contentSize.width;
         
         CGFloat labelHeight= contentSize.height;
         
-        CGFloat spacing = 10;
+        CGFloat spacing = 15;
         CGFloat changeFloat = 15;
         
         //image在上，文字在下
@@ -278,11 +279,13 @@
 -(UIButton *)fixBtn
 {
     if (!_fixBtn) {
+        UIImage *warningImage = DEF_IMAGENAME(@"device_service");
+
         NSString *fixStr = @"当前设备检修记录";
         UIButton *fixBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         fixBtn.frame = CGRectMake((DEF_DEVICE_WIDTH-30)/2 + 10, 0, (DEF_DEVICE_WIDTH-30)/2, self.groupIV.height);
         fixBtn.backgroundColor = [UIColor whiteColor];
-        [fixBtn setImage:DEF_IMAGENAME(@"deviceWarning") forState:UIControlStateNormal];
+        [fixBtn setImage:warningImage forState:UIControlStateNormal];
         [fixBtn setTitle:fixStr forState:UIControlStateNormal];
         [fixBtn setTitleColor:DEF_COLOR_RGB(67, 67, 67)forState:UIControlStateNormal];
         fixBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -293,7 +296,6 @@
         _fixBtn = fixBtn;
         
         //图片是60*60的2x的图
-        UIImage *warningImage = DEF_IMAGENAME(@"deviceWarning");
         CGFloat imageWidth = warningImage.size.width;
         CGFloat imageHeight = warningImage.size.height;
         
@@ -302,7 +304,7 @@
         
         CGFloat labelHeight= contentSize.height;
         
-        CGFloat spacing = 10;
+        CGFloat spacing = 15;
         CGFloat changeFloat = 15;
         
         //image在上，文字在下

@@ -38,6 +38,9 @@
     self.titleLb.text = @"巡检操作";
     self.view.backgroundColor = DEF_COLOR_RGB(248, 248, 248);
     
+    [self.rightBtn setImage:DEF_IMAGENAME(@"scan") forState:UIControlStateNormal];
+    self.rightBtn.hidden = NO;
+    
     self.controlHeight = DEF_DEVICE_SCLE_HEIGHT(222);
     
     /*
@@ -81,6 +84,10 @@
     //    [你的CycleScrollview adjustWhenControllerViewWillAppera];
 }
 
+- (void)rightBtnClick
+{
+    NSLog(@"二维码btn点击");
+}
 
 #pragma mark - delegate  dataSource -
 
@@ -158,7 +165,7 @@
 {
     if (!_cycleScrollView) {
         // 情景一：采用本地图片实现
-        NSArray *imageNames = @[@"banner_image"];
+        NSArray *imageNames = @[@"banner_image",@"banner_image",@"banner_image"];
 
         
         // 网络加载 --- 创建带标题的图片轮播器
@@ -170,6 +177,8 @@
         
         _cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
         _cycleScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+//        _cycleScrollView.currentPageDotImage = [UIImage imageNamed:@"pageControlCurrentDot"];
+//        _cycleScrollView.pageDotImage = [UIImage imageNamed:@"pageControlDot"];
         //cycleScrollView2.titlesGroup = titles;
         _cycleScrollView.currentPageDotColor = [UIColor whiteColor]; // 自定义分页控件小圆标颜色
         

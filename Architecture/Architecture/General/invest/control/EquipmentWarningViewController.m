@@ -40,34 +40,47 @@
 {
     UIView *view = [[UIView alloc] init];
     NSArray *nameArray = @[@"时间",@"设备+地点",@"告警状态",@"复检申请检修"];
+    
+    NSArray *widthArray = @[
+                            @(DEF_DEVICE_SCLE_WIDTH(134)),
+                            @(DEF_DEVICE_SCLE_WIDTH(214)),
+                            @(DEF_DEVICE_SCLE_WIDTH(164)),
+                            @(DEF_DEVICE_SCLE_WIDTH(241))];
+    NSArray *xArray = @[@0,
+                            @(DEF_DEVICE_SCLE_WIDTH(134)),
+                            @(DEF_DEVICE_SCLE_WIDTH(134)+DEF_DEVICE_SCLE_WIDTH(214)),
+                            @(DEF_DEVICE_SCLE_WIDTH(134)+DEF_DEVICE_SCLE_WIDTH(214)+DEF_DEVICE_SCLE_WIDTH(164)),
+                            ];
+    
     [nameArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        
+        NSNumber *xNumber = xArray[idx];
+        CGFloat lab_x = xNumber.floatValue;
         
         //设置 title 区域
         UILabel *titleLabel = [[UILabel alloc] init];
-        CGFloat lab_x = (tableView.contentSize.width/4)*idx;
-        CGFloat width = tableView.contentSize.width/4;
+        //CGFloat lab_x = (tableView.contentSize.width/4)*idx;
+        NSNumber *numberWidth = widthArray[idx];
+        CGFloat width = numberWidth.floatValue;
         if (idx == 0) {
-            width -= 20;
             titleLabel.textAlignment =  NSTextAlignmentCenter;
-            titleLabel.backgroundColor = [UIColor yellowColor];
 
         }else if (idx == 3)
         {
-            lab_x -= 20;
-            width += 20;
-            titleLabel.textAlignment =  NSTextAlignmentLeft;
-            titleLabel.backgroundColor = [UIColor orangeColor];
-        }else
-        {
-            lab_x -= 20;
+            titleLabel.textAlignment =  NSTextAlignmentCenter;
         }
-        titleLabel.frame = CGRectMake(lab_x, 10,width, 20);
+        titleLabel.frame = CGRectMake(lab_x, 0,width, DEF_DEVICE_SCLE_HEIGHT(76));
         //设置 title 文字内容
         titleLabel.text =nameArray[idx];
         //设置 title 颜色
-        titleLabel.textColor =  [UIColor blackColor];
-        titleLabel.font = DEF_MyFont(15);
-        view.backgroundColor = [UIColor whiteColor];
+        titleLabel.textColor =  DEF_COLOR_RGB(67, 67, 67);
+        titleLabel.backgroundColor =  [UIColor whiteColor];
+        //titleLabel.font = DEF_MyFont(15);
+        titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
+
+        view.backgroundColor = [UIColor lightGrayColor];
+        
         [view addSubview:titleLabel];
 
     }];
@@ -76,7 +89,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     //设置 title 区域高度
-    return 40.f;
+    return DEF_DEVICE_SCLE_HEIGHT(78);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -85,7 +98,7 @@
 }
 
 -(NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 100;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -110,10 +123,20 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(10, DEF_NAVIGATIONBAR_HEIGHT + 10, DEF_DEVICE_WIDTH-20, DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT - 20) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, DEF_DEVICE_WIDTH, DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT) style:UITableViewStylePlain];
         //_tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
         _tableView.delegate =self;
         _tableView.dataSource = self;
+        //cell 线左对齐
+        if ([_tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+            
+            [_tableView setSeparatorInset:UIEdgeInsetsZero];
+        }
+        
+        if ([_tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+            
+            [_tableView setLayoutMargins:UIEdgeInsetsZero];
+        }
         [self.view addSubview:_tableView];
         
         _tableView.tableFooterView = [UIView new];
