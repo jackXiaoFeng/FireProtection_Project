@@ -17,7 +17,7 @@
 #import <JSONKit.h>
 #import <Masonry.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
-//#import "MJRefresh.h"
+#import "MJRefresh.h"
 //#import "JPUSHService.h"
 //#import "WXApi.h"
 

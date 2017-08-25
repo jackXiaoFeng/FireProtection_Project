@@ -23,11 +23,14 @@
 
 @property (nonatomic, assign)CGFloat cellHeight;
 
+@property (nonatomic, assign)CGFloat spaceWidth;
+@property (nonatomic, assign)CGFloat spaceHeight;
+
 @end
 @implementation InvestTableViewCell
 + (CGFloat)investCellHeight
 {
-    return DEF_DEVICE_SCLE_HEIGHT(260);
+    return DEF_DEVICE_SCLE_HEIGHT(270);
 }
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -42,10 +45,12 @@
 - (void)initSubViews
 {
     
-    self.cellHeight = DEF_DEVICE_SCLE_HEIGHT(260);
+    self.cellHeight = DEF_DEVICE_SCLE_HEIGHT(270);
+    self.spaceWidth = DEF_DEVICE_SCLE_WIDTH(20);
+    self.spaceHeight = DEF_DEVICE_SCLE_HEIGHT(10);
 
     UIImageView *groupIV = [[UIImageView alloc]init];
-    groupIV.frame = CGRectMake(10, 5, DEF_DEVICE_WIDTH-20, self.cellHeight - 15);
+    groupIV.frame = CGRectMake(self.spaceWidth, 0, DEF_DEVICE_WIDTH-self.spaceWidth*2, self.cellHeight - self.spaceHeight);
     groupIV.backgroundColor = [UIColor clearColor];
     groupIV.image = DEF_IMAGENAME(@"group_login_head");
     groupIV.userInteractionEnabled = YES;
@@ -60,44 +65,18 @@
     //    self.groupIV.clipsToBounds = false; //这句最重要了，不然就显示不出来
     
     [self.groupIV addSubview:self.warningBtn];
-    
-    self.warningBtn.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.warningBtn.layer.shadowOffset = CGSizeMake(0, 10);
-    self.warningBtn.layer.shadowOpacity = 0.3;
-    self.warningBtn.clipsToBounds = false; //这句最重要了，不然就显示不出来
-    
     [self.groupIV addSubview:self.historyBtn];
-    
-    self.historyBtn.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.historyBtn.layer.shadowOffset = CGSizeMake(0, 10);
-    self.historyBtn.layer.shadowOpacity = 0.3;
-    self.historyBtn.clipsToBounds = false; //这句最重要了，不然就显示不出来
-    
     
     
     UIImageView *groupIV1 = [[UIImageView alloc]init];
-    groupIV1.frame = CGRectMake(10, 5, DEF_DEVICE_WIDTH-20, self.cellHeight - 15);
+    groupIV1.frame = CGRectMake(self.spaceWidth, 0, DEF_DEVICE_WIDTH-self.spaceWidth*2, self.cellHeight - self.spaceHeight);
     groupIV1.backgroundColor = [UIColor whiteColor];
-    groupIV1.image = DEF_IMAGENAME(@"group_login_head");
+    //groupIV1.image = DEF_IMAGENAME(@"group_login_head");
     groupIV1.userInteractionEnabled = YES;
     //    groupIV.contentMode =UIViewContentModeScaleAspectFill;
     [self.contentView addSubview:groupIV1];
     self.groupIV1 = groupIV1;
     
-    //给bgView边框设置阴影 self.bgView.layer.shadowOffset = CGSizeMake(1,1);
-    self.groupIV1.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.groupIV1.layer.shadowOffset = CGSizeMake(0, 10);
-    self.groupIV1.layer.shadowOpacity = 0.3;
-    self.groupIV1.clipsToBounds = false; //这句最重要了，不然就显示不出来
-    
-//    UIView *bgView= [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.groupIV1.width, self.groupIV1.height)];
-//    bgView.backgroundColor = [UIColor whiteColor];
-//    [self.groupIV1 addSubview:bgView];
-//    
-//    bgView.layer.shadowColor = [UIColor whiteColor].CGColor;
-//    bgView.layer.shadowOffset = CGSizeMake(0, 10);
-//    bgView.layer.shadowOpacity = 0.3;
-//    bgView.clipsToBounds = false; //这句最重要了，不然就显示不出来
     
     [self.groupIV1 addSubview:self.fixBtn];
         
@@ -117,7 +96,13 @@
         @strongify(self);
         self.InvestTableCellclick(2);
         return [RACSignal empty];
-    }];    
+    }];
+    
+    self.fixBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+        @strongify(self);
+        self.InvestTableCellclick(3);
+        return [RACSignal empty];
+    }];
 }
 
 - (void)setInvestModel:(InvestModel *)investModel
@@ -153,7 +138,8 @@
 
         NSString *warningStr = @"设备告警信息";
         UIButton *warningBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        warningBtn.frame = CGRectMake(0, 0, (DEF_DEVICE_WIDTH-30)/2, self.groupIV.height);
+        warningBtn.frame = CGRectMake(0, 0, (self.groupIV.width-self.spaceWidth/2)/2, self.groupIV.height);
+
         warningBtn.backgroundColor = [UIColor whiteColor];
         [warningBtn setImage:warningImage forState:UIControlStateNormal];
         [warningBtn setTitle:warningStr forState:UIControlStateNormal];
@@ -200,7 +186,7 @@
 
         NSString *historyStr = @"告警历史记录";
         UIButton *historyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        historyBtn.frame = CGRectMake((DEF_DEVICE_WIDTH-30)/2 + 10, 0, (DEF_DEVICE_WIDTH-30)/2, self.groupIV.height);
+        historyBtn.frame = CGRectMake((self.groupIV.width+self.spaceWidth)/2  , 0, (self.groupIV.width-self.spaceWidth/2)/2, self.groupIV.height);
         historyBtn.backgroundColor = [UIColor whiteColor];
         [historyBtn setImage:warningImage forState:UIControlStateNormal];
         [historyBtn setTitle:historyStr forState:UIControlStateNormal];
@@ -244,15 +230,16 @@
     if (!_fixBtn) {
         
         UIImage *warningImage = DEF_IMAGENAME(@"device_ restoration");
-        NSString *fixStr = @"当前设备检修记录";
+        NSString *fixStr = @"故障设备复归";
         UIButton *fixBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        fixBtn.frame = CGRectMake(0, 0, self.groupIV.width, self.groupIV.height);
+        fixBtn.frame = CGRectMake(0, 0, self.groupIV1.width, self.groupIV1.height);
+
         fixBtn.backgroundColor = [UIColor whiteColor];
         [fixBtn setImage:warningImage forState:UIControlStateNormal];
         [fixBtn setTitle:fixStr forState:UIControlStateNormal];
         [fixBtn setTitleColor:DEF_COLOR_RGB(67, 67, 67)forState:UIControlStateNormal];
         fixBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-        
+        fixBtn.userInteractionEnabled = YES;
         fixBtn.titleLabel.font = DEF_MyFont(15);
         fixBtn.titleLabel.backgroundColor = [UIColor clearColor];
         
@@ -282,6 +269,7 @@
     }
     return _fixBtn;
 }
+    
 
 - (void)prepareForReuse {
     [super prepareForReuse];

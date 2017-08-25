@@ -28,7 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = DEF_COLOR_RGB(248, 248, 248);
+    self.view.backgroundColor = DEF_COLOR_RGB(237, 237, 237);
+    
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tabBarController.automaticallyAdjustsScrollViewInsets = NO;

@@ -30,12 +30,14 @@
 //圆形进度条
 @property (nonatomic,strong)RoundnessProgressView *roundnessProgressView;
 
+@property (nonatomic, assign)CGFloat spaceWidth;
+@property (nonatomic, assign)CGFloat spaceHeight;
 
 @end
 @implementation MainTableViewCell
 + (CGFloat)mainCellHeight
 {
-    return DEF_DEVICE_SCLE_HEIGHT(260);
+    return DEF_DEVICE_SCLE_HEIGHT(270);
 }
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -49,13 +51,16 @@
 
 - (void)initSubViews
 {
-    self.cellHeight = DEF_DEVICE_SCLE_HEIGHT(260);
+    self.cellHeight = DEF_DEVICE_SCLE_HEIGHT(270);
+    
+    self.spaceWidth = DEF_DEVICE_SCLE_WIDTH(20);
+    self.spaceHeight = DEF_DEVICE_SCLE_HEIGHT(10);
+
     
     UIImageView *groupIV = [[UIImageView alloc]init];
-    groupIV.frame = CGRectMake(10, 5, DEF_DEVICE_WIDTH-20, self.cellHeight - 15);
+    groupIV.frame = CGRectMake(self.spaceWidth, 0, DEF_DEVICE_WIDTH-self.spaceWidth*2, self.cellHeight - self.spaceHeight);
     groupIV.backgroundColor = [UIColor clearColor];
     groupIV.userInteractionEnabled = YES;
-//    groupIV.contentMode =UIViewContentModeScaleAspectFill;
     [self.contentView addSubview:groupIV];
     self.groupIV = groupIV;
     
@@ -65,36 +70,17 @@
 //    self.groupIV.layer.shadowOpacity = 0.3;
 //    self.groupIV.clipsToBounds = false; //这句最重要了，不然就显示不出来
     
-   [self.groupIV addSubview:self.warningBtn];
-    
-    self.warningBtn.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.warningBtn.layer.shadowOffset = CGSizeMake(0, 10);
-    self.warningBtn.layer.shadowOpacity = 0.3;
-    self.warningBtn.clipsToBounds = false; //这句最重要了，不然就显示不出来
-    
+    [self.groupIV addSubview:self.warningBtn];
     [self.groupIV addSubview:self.fixBtn];
-    self.fixBtn.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.fixBtn.layer.shadowOffset = CGSizeMake(0, 10);
-    self.fixBtn.layer.shadowOpacity = 0.3;
-    self.fixBtn.clipsToBounds = false; //这句最重要了，不然就显示不出来
-
-    
-    
     
     
     UIImageView *groupIV1 = [[UIImageView alloc]init];
-    groupIV1.frame = CGRectMake(10, 5, DEF_DEVICE_WIDTH-20, self.cellHeight - 15);
+    groupIV1.frame = CGRectMake(self.spaceWidth, 0, DEF_DEVICE_WIDTH-self.spaceWidth*2, self.cellHeight - self.spaceHeight);
     groupIV1.backgroundColor = [UIColor clearColor];
     groupIV1.userInteractionEnabled = YES;
     //    groupIV.contentMode =UIViewContentModeScaleAspectFill;
     [self.contentView addSubview:groupIV1];
     self.groupIV1 = groupIV1;
-    
-    //给bgView边框设置阴影 self.bgView.layer.shadowOffset = CGSizeMake(1,1);
-    self.groupIV1.layer.shadowColor = [UIColor whiteColor].CGColor;
-    self.groupIV1.layer.shadowOffset = CGSizeMake(0, 10);
-    self.groupIV1.layer.shadowOpacity = 0.3;
-    self.groupIV1.clipsToBounds = false; //这句最重要了，不然就显示不出来
     
     
     UIImageView *pressIV = [[UIImageView alloc]init];
@@ -106,10 +92,6 @@
     [self.groupIV1 addSubview:pressIV];
     self.pressIV = pressIV;
     
-    self.pressIV.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.pressIV.layer.shadowOffset = CGSizeMake(0, 10);
-    self.pressIV.layer.shadowOpacity = 0.3;
-    self.pressIV.clipsToBounds = false; //这句最重要了，不然就显示不出来
     
     //圆形进度条
     
@@ -238,7 +220,7 @@
         
         NSString *warningStr = @"设备告警信息";
         UIButton *warningBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        warningBtn.frame = CGRectMake(0, 0, (DEF_DEVICE_WIDTH-30)/2, self.groupIV.height);
+        warningBtn.frame = CGRectMake(0, 0, (self.groupIV.width-self.spaceWidth/2)/2, self.groupIV.height);
         warningBtn.backgroundColor = [UIColor whiteColor];
         [warningBtn setImage:warningImage forState:UIControlStateNormal];
         [warningBtn setTitle:warningStr forState:UIControlStateNormal];
@@ -283,7 +265,7 @@
 
         NSString *fixStr = @"当前设备检修记录";
         UIButton *fixBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        fixBtn.frame = CGRectMake((DEF_DEVICE_WIDTH-30)/2 + 10, 0, (DEF_DEVICE_WIDTH-30)/2, self.groupIV.height);
+        fixBtn.frame = CGRectMake((self.groupIV.width+self.spaceWidth)/2  , 0, (self.groupIV.width-self.spaceWidth/2)/2, self.groupIV.height);
         fixBtn.backgroundColor = [UIColor whiteColor];
         [fixBtn setImage:warningImage forState:UIControlStateNormal];
         [fixBtn setTitle:fixStr forState:UIControlStateNormal];

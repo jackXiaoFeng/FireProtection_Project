@@ -12,5 +12,5 @@
 @interface EquipmentWarningTableViewCell : UITableViewCell
 + (CGFloat)equipmentWarningCellHeight;
 @property (nonatomic ,strong)EquipmentWarningModel *equipmentWarningModel;
-
+@property(assign,nonatomic)BOOL hidenLine;
 @end

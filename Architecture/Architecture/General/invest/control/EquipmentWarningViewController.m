@@ -7,9 +7,9 @@
 //
 #define HeadView_height 100
 
-
 #import "EquipmentWarningViewController.h"
 #import "EquipmentWarningTableViewCell.h"
+#import "EquipmentWarningModel.h"
 
 @interface EquipmentWarningViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
@@ -24,7 +24,7 @@
     // Do any additional setup after loading the view.
     self.titleLb.text = @"设备告警信息";
     
-    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.backgroundColor = [UIColor clearColor];
 //    self.headView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, DEF_DEVICE_WIDTH, HeadView_height)];
 //    self.headView.backgroundColor = [UIColor yellowColor];
 //    
@@ -32,8 +32,29 @@
 //
 //    [self.view addSubview:self.headView];
     
+    
+    //添加刷新
+    [self addRefresh];
 }
 
+-(void)addRefresh
+{
+    @weakify(self)
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        @strongify(self)
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        //block();
+    }];
+    
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        @strongify(self)
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+    }];
+
+}
+    
 #pragma mark - delegate  dataSource -
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -99,9 +120,12 @@
     EquipmentWarningTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentify];
     if (!cell) {
         cell = [[EquipmentWarningTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentify];
-        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = [UIColor whiteColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    
+    //cell.hidenLine= (indexPath.row== group.items.count-1); //通过组模型数组来拿到每组最后一行
+    cell.hidenLine= (indexPath.row== 5-1); //通过组模型数组来拿到每组最后一行
     return cell;
 }
 
@@ -135,13 +159,6 @@
         [self.view addSubview:_tableView];
         
         _tableView.tableFooterView = [UIView new];
-        
-        _tableView.backgroundColor = [UIColor whiteColor];
-        
-        _tableView.layer.shadowColor = [UIColor blackColor].CGColor;
-        _tableView.layer.shadowOffset = CGSizeMake(0, 10);
-        _tableView.layer.shadowOpacity = 0.3;
-        _tableView.clipsToBounds = false; //这句最重要了，不然就显示不出来
 
     }
     return _tableView;

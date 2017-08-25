@@ -36,7 +36,6 @@
     self.progressSections = 20;
     
     self.titleLb.text = @"巡检操作";
-    self.view.backgroundColor = DEF_COLOR_RGB(248, 248, 248);
     
     [self.rightBtn setImage:DEF_IMAGENAME(@"scan") forState:UIControlStateNormal];
     self.rightBtn.hidden = NO;
@@ -63,9 +62,14 @@
     
    [self.view addSubview:self.cycleScrollView];
     
-    self.tableView.backgroundColor = DEF_COLOR_RGB(248, 248, 248);
+    self.tableView.backgroundColor = [UIColor clearColor];
     
+    CGFloat headviewHeight = DEF_DEVICE_SCLE_HEIGHT(16);
+    UIView *headView= [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEF_DEVICE_WIDTH, headviewHeight)];
+    headView.backgroundColor = DEF_COLOR_RGB(237, 237, 237);
+    self.tableView.tableHeaderView = headView;
     
+
     /*
      block监听点击方式
      

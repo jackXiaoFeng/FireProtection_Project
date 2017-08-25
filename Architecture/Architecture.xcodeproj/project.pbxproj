@@ -13,6 +13,10 @@
 		3A06DB311F4C1FDB003FD9CD /* WarningHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06DB301F4C1FDB003FD9CD /* WarningHistoryViewController.m */; };
 		3A06DB341F4C202A003FD9CD /* MalfunctionEquipmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06DB331F4C202A003FD9CD /* MalfunctionEquipmentViewController.m */; };
 		3A06DB371F4C2493003FD9CD /* EquipmentWarningTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06DB361F4C2493003FD9CD /* EquipmentWarningTableViewCell.m */; };
+		3A0A1B1F1F4FCF3F00837947 /* WarningHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A1B1E1F4FCF3F00837947 /* WarningHistoryModel.m */; };
+		3A0A1B221F4FCF5500837947 /* WarningHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A1B211F4FCF5500837947 /* WarningHistoryTableViewCell.m */; };
+		3A0A1B251F4FEC8400837947 /* MalfunctionEquipmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A1B241F4FEC8400837947 /* MalfunctionEquipmentTableViewCell.m */; };
+		3A0A1B281F4FEC9500837947 /* MalfunctionEquipmentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A1B271F4FEC9500837947 /* MalfunctionEquipmentModel.m */; };
 		3A8E6EBF1F4ECAD100C9B51E /* EquipmentWarningModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E6EBE1F4ECAD100C9B51E /* EquipmentWarningModel.m */; };
 		3A95ACEE1D17D4BA0026EAFE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95ACED1D17D4BA0026EAFE /* main.m */; };
 		3A95ACF11D17D4BA0026EAFE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95ACF01D17D4BA0026EAFE /* AppDelegate.m */; };
@@ -39,6 +43,8 @@
 		3AA1C8A31F4AB0F7004A52EF /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8A21F4AB0F7004A52EF /* MainTableViewCell.m */; };
 		3AA1C8A81F4AC186004A52EF /* MainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8A71F4AC186004A52EF /* MainModel.m */; };
 		3AA1C8AB1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8AA1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m */; };
+		3AC5CC791F500A0100B3E024 /* EquipmentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5CC781F500A0100B3E024 /* EquipmentModel.m */; };
+		3AC5CC7C1F500A1E00B3E024 /* EquipmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5CC7B1F500A1E00B3E024 /* EquipmentTableViewCell.m */; };
 		3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EEC1F46D586005B600D /* NSString+Utils.m */; };
 		3AD29EF01F46D586005B600D /* UIColor+RGBColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EEE1F46D586005B600D /* UIColor+RGBColor.m */; };
 		3AD29EFE1F46D69F005B600D /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EF31F46D69F005B600D /* DDPageControl.m */; };
@@ -79,6 +85,14 @@
 		3A06DB331F4C202A003FD9CD /* MalfunctionEquipmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MalfunctionEquipmentViewController.m; sourceTree = "<group>"; };
 		3A06DB351F4C2493003FD9CD /* EquipmentWarningTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentWarningTableViewCell.h; sourceTree = "<group>"; };
 		3A06DB361F4C2493003FD9CD /* EquipmentWarningTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentWarningTableViewCell.m; sourceTree = "<group>"; };
+		3A0A1B1D1F4FCF3F00837947 /* WarningHistoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarningHistoryModel.h; sourceTree = "<group>"; };
+		3A0A1B1E1F4FCF3F00837947 /* WarningHistoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarningHistoryModel.m; sourceTree = "<group>"; };
+		3A0A1B201F4FCF5500837947 /* WarningHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarningHistoryTableViewCell.h; sourceTree = "<group>"; };
+		3A0A1B211F4FCF5500837947 /* WarningHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarningHistoryTableViewCell.m; sourceTree = "<group>"; };
+		3A0A1B231F4FEC8400837947 /* MalfunctionEquipmentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MalfunctionEquipmentTableViewCell.h; sourceTree = "<group>"; };
+		3A0A1B241F4FEC8400837947 /* MalfunctionEquipmentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MalfunctionEquipmentTableViewCell.m; sourceTree = "<group>"; };
+		3A0A1B261F4FEC9500837947 /* MalfunctionEquipmentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MalfunctionEquipmentModel.h; sourceTree = "<group>"; };
+		3A0A1B271F4FEC9500837947 /* MalfunctionEquipmentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MalfunctionEquipmentModel.m; sourceTree = "<group>"; };
 		3A8E6EBD1F4ECAD100C9B51E /* EquipmentWarningModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentWarningModel.h; sourceTree = "<group>"; };
 		3A8E6EBE1F4ECAD100C9B51E /* EquipmentWarningModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentWarningModel.m; sourceTree = "<group>"; };
 		3A95ACE91D17D4BA0026EAFE /* Architecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Architecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +151,10 @@
 		3AA1C8A71F4AC186004A52EF /* MainModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainModel.m; sourceTree = "<group>"; };
 		3AA1C8A91F4ACE7A004A52EF /* UIButton+LXMImagePosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+LXMImagePosition.h"; sourceTree = "<group>"; };
 		3AA1C8AA1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LXMImagePosition.m"; sourceTree = "<group>"; };
+		3AC5CC771F500A0100B3E024 /* EquipmentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentModel.h; sourceTree = "<group>"; };
+		3AC5CC781F500A0100B3E024 /* EquipmentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentModel.m; sourceTree = "<group>"; };
+		3AC5CC7A1F500A1E00B3E024 /* EquipmentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentTableViewCell.h; sourceTree = "<group>"; };
+		3AC5CC7B1F500A1E00B3E024 /* EquipmentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentTableViewCell.m; sourceTree = "<group>"; };
 		3AD29EEA1F46D3EB005B600D /* ConfigDefineHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigDefineHeader.h; sourceTree = "<group>"; };
 		3AD29EEB1F46D586005B600D /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		3AD29EEC1F46D586005B600D /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
@@ -486,6 +504,10 @@
 				3A06DB2A1F4C1A50003FD9CD /* InvestModel.m */,
 				3A8E6EBD1F4ECAD100C9B51E /* EquipmentWarningModel.h */,
 				3A8E6EBE1F4ECAD100C9B51E /* EquipmentWarningModel.m */,
+				3A0A1B1D1F4FCF3F00837947 /* WarningHistoryModel.h */,
+				3A0A1B1E1F4FCF3F00837947 /* WarningHistoryModel.m */,
+				3A0A1B261F4FEC9500837947 /* MalfunctionEquipmentModel.h */,
+				3A0A1B271F4FEC9500837947 /* MalfunctionEquipmentModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -497,6 +519,10 @@
 				3A06DB271F4C1A0E003FD9CD /* InvestTableViewCell.m */,
 				3A06DB351F4C2493003FD9CD /* EquipmentWarningTableViewCell.h */,
 				3A06DB361F4C2493003FD9CD /* EquipmentWarningTableViewCell.m */,
+				3A0A1B201F4FCF5500837947 /* WarningHistoryTableViewCell.h */,
+				3A0A1B211F4FCF5500837947 /* WarningHistoryTableViewCell.m */,
+				3A0A1B231F4FEC8400837947 /* MalfunctionEquipmentTableViewCell.h */,
+				3A0A1B241F4FEC8400837947 /* MalfunctionEquipmentTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -536,6 +562,8 @@
 		3AA1C89E1F4AAE3A004A52EF /* model */ = {
 			isa = PBXGroup;
 			children = (
+				3AC5CC771F500A0100B3E024 /* EquipmentModel.h */,
+				3AC5CC781F500A0100B3E024 /* EquipmentModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -543,6 +571,8 @@
 		3AA1C89F1F4AAE3A004A52EF /* view */ = {
 			isa = PBXGroup;
 			children = (
+				3AC5CC7A1F500A1E00B3E024 /* EquipmentTableViewCell.h */,
+				3AC5CC7B1F500A1E00B3E024 /* EquipmentTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -768,6 +798,7 @@
 				3AA1C8581F4A6F44004A52EF /* TADotView.m in Sources */,
 				3A95ACF11D17D4BA0026EAFE /* AppDelegate.m in Sources */,
 				3AA1C8A81F4AC186004A52EF /* MainModel.m in Sources */,
+				3A0A1B1F1F4FCF3F00837947 /* WarningHistoryModel.m in Sources */,
 				3AA1C8A01F4AAE3A004A52EF /* MoreViewController.m in Sources */,
 				3AA1C8AB1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m in Sources */,
 				3AA1C8561F4A6F44004A52EF /* TAAbstractDotView.m in Sources */,
@@ -785,14 +816,19 @@
 				3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */,
 				3AA1C8591F4A6F44004A52EF /* TAPageControl.m in Sources */,
 				3AA1C8621F4A6FD3004A52EF /* SDCollectionViewCell.m in Sources */,
+				3A0A1B281F4FEC9500837947 /* MalfunctionEquipmentModel.m in Sources */,
+				3A0A1B251F4FEC8400837947 /* MalfunctionEquipmentTableViewCell.m in Sources */,
 				3AA1C8A31F4AB0F7004A52EF /* MainTableViewCell.m in Sources */,
 				3A8E6EBF1F4ECAD100C9B51E /* EquipmentWarningModel.m in Sources */,
 				3A95ACEE1D17D4BA0026EAFE /* main.m in Sources */,
 				3A95AD351D17E9B50026EAFE /* UIView+Positioning.m in Sources */,
 				3AA1C89A1F4AAE2F004A52EF /* AccountViewController.m in Sources */,
+				3A0A1B221F4FCF5500837947 /* WarningHistoryTableViewCell.m in Sources */,
 				3AA1C8851F4AA962004A52EF /* RoundnessProgressView.m in Sources */,
 				3A06DB341F4C202A003FD9CD /* MalfunctionEquipmentViewController.m in Sources */,
+				3AC5CC7C1F500A1E00B3E024 /* EquipmentTableViewCell.m in Sources */,
 				3AA1C8641F4A6FD3004A52EF /* UIView+SDExtension.m in Sources */,
+				3AC5CC791F500A0100B3E024 /* EquipmentModel.m in Sources */,
 				3AA1C8881F4AA9F1004A52EF /* CMUtility.m in Sources */,
 				3AA1C8941F4AAE27004A52EF /* InvestViewController.m in Sources */,
 				3A06DB281F4C1A0E003FD9CD /* InvestTableViewCell.m in Sources */,

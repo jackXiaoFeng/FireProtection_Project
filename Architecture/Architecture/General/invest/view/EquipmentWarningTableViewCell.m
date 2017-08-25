@@ -85,6 +85,14 @@
 
     
 }
+    
+- (void)setHidenLine:(BOOL)hidenLine{
+        
+    _hidenLine= hidenLine;
+    
+    self.lineIV.hidden= hidenLine;
+        
+}
 
 - (void)setEquipmentWarningModel:(EquipmentWarningModel *)equipmentWarningModel
 {

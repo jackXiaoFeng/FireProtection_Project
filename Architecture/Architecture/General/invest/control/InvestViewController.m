@@ -23,10 +23,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
     self.titleLb.text = @"告警";
 
-    self.tableView.backgroundColor = DEF_COLOR_RGB(248, 248, 248);
+    self.tableView.backgroundColor = [UIColor clearColor];
+    CGFloat headviewHeight = DEF_DEVICE_SCLE_HEIGHT(16);
+    UIView *headView= [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEF_DEVICE_WIDTH, headviewHeight)];
+    headView.backgroundColor = DEF_COLOR_RGB(237, 237, 237);
+    self.tableView.tableHeaderView = headView;
 }
 
 #pragma mark - delegate  dataSource -
@@ -65,6 +68,9 @@
         }else if (index == 2)
         {
             controller = [[WarningHistoryViewController alloc]init];
+        }else if (index == 3)
+        {
+            controller = [[MalfunctionEquipmentViewController alloc]init];
         }
         [self.navigationController pushViewController:controller animated:YES];
 
@@ -75,9 +81,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UIViewController *controller;
-    controller = [[MalfunctionEquipmentViewController alloc]init];
-    [self.navigationController pushViewController:controller animated:YES];
+//    UIViewController *controller;
+//    controller = [[MalfunctionEquipmentViewController alloc]init];
+//    [self.navigationController pushViewController:controller animated:YES];
 }
 
 
