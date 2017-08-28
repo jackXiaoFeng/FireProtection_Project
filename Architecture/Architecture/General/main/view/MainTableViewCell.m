@@ -167,7 +167,7 @@
 #pragma mark - 单击双击 -
 
 - (void)handleSingleTapFrom:(UIGestureRecognizer *)gestureRecognizer {
-    self.mainTablecellclick(2);
+    //self.mainTablecellclick(2);
 }
 
 -(UIImage *)grayImage:(UIImage *)sourceImage

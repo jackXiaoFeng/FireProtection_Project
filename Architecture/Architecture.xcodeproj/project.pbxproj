@@ -49,6 +49,19 @@
 		3AD29EF01F46D586005B600D /* UIColor+RGBColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EEE1F46D586005B600D /* UIColor+RGBColor.m */; };
 		3AD29EFE1F46D69F005B600D /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EF31F46D69F005B600D /* DDPageControl.m */; };
 		3AD29F021F46D69F005B600D /* PageImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EFD1F46D69F005B600D /* PageImageScrollView.m */; };
+		3AFBC9991F53A0E200DAD7EA /* PlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBC9981F53A0E200DAD7EA /* PlanViewController.m */; };
+		3AFBC99C1F53A0F600DAD7EA /* UploadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBC99B1F53A0F600DAD7EA /* UploadingViewController.m */; };
+		3AFBC99F1F53A10900DAD7EA /* StatementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBC99E1F53A10900DAD7EA /* StatementViewController.m */; };
+		3AFBC9A21F53A11B00DAD7EA /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBC9A11F53A11B00DAD7EA /* RecordViewController.m */; };
+		3AFBC9A51F53A12C00DAD7EA /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBC9A41F53A12C00DAD7EA /* InfoViewController.m */; };
+		3AFBC9A81F53DBAC00DAD7EA /* FixRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBC9A71F53DBAC00DAD7EA /* FixRecordViewController.m */; };
+		3AFBC9AB1F53DBBD00DAD7EA /* FixRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBC9AA1F53DBBD00DAD7EA /* FixRecordModel.m */; };
+		3AFBC9AE1F53DBD000DAD7EA /* FixRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBC9AD1F53DBD000DAD7EA /* FixRecordTableViewCell.m */; };
+		3AFBC9B21F53EECC00DAD7EA /* DrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBC9B11F53EECC00DAD7EA /* DrawView.m */; };
+		3AFBC9B51F54095C00DAD7EA /* PlanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBC9B41F54095C00DAD7EA /* PlanModel.m */; };
+		3AFBC9B81F54097000DAD7EA /* PlanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBC9B71F54097000DAD7EA /* PlanTableViewCell.m */; };
+		3AFBC9BB1F54113500DAD7EA /* UploadingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBC9BA1F54113500DAD7EA /* UploadingTableViewCell.m */; };
+		3AFBC9BE1F54127700DAD7EA /* UploadingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBC9BD1F54127700DAD7EA /* UploadingModel.m */; };
 		E5D1C59FDE21FC2EBA413E7B /* libPods-Architecture.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D3D9AEA390253ACF03A0E6 /* libPods-Architecture.a */; };
 /* End PBXBuildFile section */
 
@@ -170,6 +183,32 @@
 		3AD29F071F46D87B005B600D /* IndexPageSkin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexPageSkin.h; sourceTree = "<group>"; };
 		3AD29F081F46D87B005B600D /* MineSkin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineSkin.h; sourceTree = "<group>"; };
 		3AD29F091F46D87B005B600D /* TicketSkin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketSkin.h; sourceTree = "<group>"; };
+		3AFBC9971F53A0E200DAD7EA /* PlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanViewController.h; sourceTree = "<group>"; };
+		3AFBC9981F53A0E200DAD7EA /* PlanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanViewController.m; sourceTree = "<group>"; };
+		3AFBC99A1F53A0F600DAD7EA /* UploadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadingViewController.h; sourceTree = "<group>"; };
+		3AFBC99B1F53A0F600DAD7EA /* UploadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadingViewController.m; sourceTree = "<group>"; };
+		3AFBC99D1F53A10900DAD7EA /* StatementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementViewController.h; sourceTree = "<group>"; };
+		3AFBC99E1F53A10900DAD7EA /* StatementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementViewController.m; sourceTree = "<group>"; };
+		3AFBC9A01F53A11B00DAD7EA /* RecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordViewController.h; sourceTree = "<group>"; };
+		3AFBC9A11F53A11B00DAD7EA /* RecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordViewController.m; sourceTree = "<group>"; };
+		3AFBC9A31F53A12C00DAD7EA /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		3AFBC9A41F53A12C00DAD7EA /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
+		3AFBC9A61F53DBAC00DAD7EA /* FixRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixRecordViewController.h; sourceTree = "<group>"; };
+		3AFBC9A71F53DBAC00DAD7EA /* FixRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixRecordViewController.m; sourceTree = "<group>"; };
+		3AFBC9A91F53DBBD00DAD7EA /* FixRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixRecordModel.h; sourceTree = "<group>"; };
+		3AFBC9AA1F53DBBD00DAD7EA /* FixRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixRecordModel.m; sourceTree = "<group>"; };
+		3AFBC9AC1F53DBD000DAD7EA /* FixRecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixRecordTableViewCell.h; sourceTree = "<group>"; };
+		3AFBC9AD1F53DBD000DAD7EA /* FixRecordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixRecordTableViewCell.m; sourceTree = "<group>"; };
+		3AFBC9B01F53EECC00DAD7EA /* DrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawView.h; sourceTree = "<group>"; };
+		3AFBC9B11F53EECC00DAD7EA /* DrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawView.m; sourceTree = "<group>"; };
+		3AFBC9B31F54095C00DAD7EA /* PlanModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanModel.h; sourceTree = "<group>"; };
+		3AFBC9B41F54095C00DAD7EA /* PlanModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanModel.m; sourceTree = "<group>"; };
+		3AFBC9B61F54097000DAD7EA /* PlanTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanTableViewCell.h; sourceTree = "<group>"; };
+		3AFBC9B71F54097000DAD7EA /* PlanTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanTableViewCell.m; sourceTree = "<group>"; };
+		3AFBC9B91F54113500DAD7EA /* UploadingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadingTableViewCell.h; sourceTree = "<group>"; };
+		3AFBC9BA1F54113500DAD7EA /* UploadingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadingTableViewCell.m; sourceTree = "<group>"; };
+		3AFBC9BC1F54127700DAD7EA /* UploadingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadingModel.h; sourceTree = "<group>"; };
+		3AFBC9BD1F54127700DAD7EA /* UploadingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadingModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,6 +370,7 @@
 		3A95AD241D17E0490026EAFE /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				3AFBC9AF1F53EEB900DAD7EA /* DrawView */,
 				3AA1C8821F4AA962004A52EF /* RoundnessProgressView */,
 				3AA1C85B1F4A6FD3004A52EF /* SDCycleScrollView */,
 				3AA1C84A1F4A6F44004A52EF /* PageControl */,
@@ -460,6 +500,8 @@
 			children = (
 				3AA1C88A1F4AADB1004A52EF /* MainViewController.h */,
 				3AA1C88B1F4AADB1004A52EF /* MainViewController.m */,
+				3AFBC9A61F53DBAC00DAD7EA /* FixRecordViewController.h */,
+				3AFBC9A71F53DBAC00DAD7EA /* FixRecordViewController.m */,
 			);
 			path = control;
 			sourceTree = "<group>";
@@ -469,6 +511,8 @@
 			children = (
 				3AA1C8A61F4AC186004A52EF /* MainModel.h */,
 				3AA1C8A71F4AC186004A52EF /* MainModel.m */,
+				3AFBC9A91F53DBBD00DAD7EA /* FixRecordModel.h */,
+				3AFBC9AA1F53DBBD00DAD7EA /* FixRecordModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -478,6 +522,8 @@
 			children = (
 				3AA1C8A11F4AB0F7004A52EF /* MainTableViewCell.h */,
 				3AA1C8A21F4AB0F7004A52EF /* MainTableViewCell.m */,
+				3AFBC9AC1F53DBD000DAD7EA /* FixRecordTableViewCell.h */,
+				3AFBC9AD1F53DBD000DAD7EA /* FixRecordTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -532,6 +578,16 @@
 			children = (
 				3AA1C8961F4AAE2F004A52EF /* AccountViewController.h */,
 				3AA1C8971F4AAE2F004A52EF /* AccountViewController.m */,
+				3AFBC9971F53A0E200DAD7EA /* PlanViewController.h */,
+				3AFBC9981F53A0E200DAD7EA /* PlanViewController.m */,
+				3AFBC99A1F53A0F600DAD7EA /* UploadingViewController.h */,
+				3AFBC99B1F53A0F600DAD7EA /* UploadingViewController.m */,
+				3AFBC99D1F53A10900DAD7EA /* StatementViewController.h */,
+				3AFBC99E1F53A10900DAD7EA /* StatementViewController.m */,
+				3AFBC9A01F53A11B00DAD7EA /* RecordViewController.h */,
+				3AFBC9A11F53A11B00DAD7EA /* RecordViewController.m */,
+				3AFBC9A31F53A12C00DAD7EA /* InfoViewController.h */,
+				3AFBC9A41F53A12C00DAD7EA /* InfoViewController.m */,
 			);
 			path = control;
 			sourceTree = "<group>";
@@ -539,6 +595,10 @@
 		3AA1C8981F4AAE2F004A52EF /* model */ = {
 			isa = PBXGroup;
 			children = (
+				3AFBC9B31F54095C00DAD7EA /* PlanModel.h */,
+				3AFBC9B41F54095C00DAD7EA /* PlanModel.m */,
+				3AFBC9BC1F54127700DAD7EA /* UploadingModel.h */,
+				3AFBC9BD1F54127700DAD7EA /* UploadingModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -546,6 +606,10 @@
 		3AA1C8991F4AAE2F004A52EF /* view */ = {
 			isa = PBXGroup;
 			children = (
+				3AFBC9B61F54097000DAD7EA /* PlanTableViewCell.h */,
+				3AFBC9B71F54097000DAD7EA /* PlanTableViewCell.m */,
+				3AFBC9B91F54113500DAD7EA /* UploadingTableViewCell.h */,
+				3AFBC9BA1F54113500DAD7EA /* UploadingTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -606,6 +670,15 @@
 				3AD29F091F46D87B005B600D /* TicketSkin.h */,
 			);
 			path = skin;
+			sourceTree = "<group>";
+		};
+		3AFBC9AF1F53EEB900DAD7EA /* DrawView */ = {
+			isa = PBXGroup;
+			children = (
+				3AFBC9B01F53EECC00DAD7EA /* DrawView.h */,
+				3AFBC9B11F53EECC00DAD7EA /* DrawView.m */,
+			);
+			path = DrawView;
 			sourceTree = "<group>";
 		};
 		ECA1C6FC628E76CC31629BD4 /* Frameworks */ = {
@@ -797,20 +870,28 @@
 			files = (
 				3AA1C8581F4A6F44004A52EF /* TADotView.m in Sources */,
 				3A95ACF11D17D4BA0026EAFE /* AppDelegate.m in Sources */,
+				3AFBC9A51F53A12C00DAD7EA /* InfoViewController.m in Sources */,
 				3AA1C8A81F4AC186004A52EF /* MainModel.m in Sources */,
 				3A0A1B1F1F4FCF3F00837947 /* WarningHistoryModel.m in Sources */,
 				3AA1C8A01F4AAE3A004A52EF /* MoreViewController.m in Sources */,
 				3AA1C8AB1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m in Sources */,
 				3AA1C8561F4A6F44004A52EF /* TAAbstractDotView.m in Sources */,
+				3AFBC9B81F54097000DAD7EA /* PlanTableViewCell.m in Sources */,
+				3AFBC9AB1F53DBBD00DAD7EA /* FixRecordModel.m in Sources */,
 				3A06DB311F4C1FDB003FD9CD /* WarningHistoryViewController.m in Sources */,
 				3A06DB2B1F4C1A50003FD9CD /* InvestModel.m in Sources */,
 				3AD29EF01F46D586005B600D /* UIColor+RGBColor.m in Sources */,
+				3AFBC9AE1F53DBD000DAD7EA /* FixRecordTableViewCell.m in Sources */,
 				3AA1C8631F4A6FD3004A52EF /* SDCycleScrollView.m in Sources */,
+				3AFBC9B21F53EECC00DAD7EA /* DrawView.m in Sources */,
 				3A95AD2B1D17E3E70026EAFE /* BaseNavigationController.m in Sources */,
+				3AFBC9A81F53DBAC00DAD7EA /* FixRecordViewController.m in Sources */,
+				3AFBC99F1F53A10900DAD7EA /* StatementViewController.m in Sources */,
 				3A06DB371F4C2493003FD9CD /* EquipmentWarningTableViewCell.m in Sources */,
 				3AA1C8571F4A6F44004A52EF /* TAAnimatedDotView.m in Sources */,
 				3AD29F021F46D69F005B600D /* PageImageScrollView.m in Sources */,
 				3AD29EFE1F46D69F005B600D /* DDPageControl.m in Sources */,
+				3AFBC9BE1F54127700DAD7EA /* UploadingModel.m in Sources */,
 				3AA1C88E1F4AADB1004A52EF /* MainViewController.m in Sources */,
 				3A95AD381D17EA410026EAFE /* TabBarViewController.m in Sources */,
 				3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */,
@@ -824,15 +905,20 @@
 				3A95AD351D17E9B50026EAFE /* UIView+Positioning.m in Sources */,
 				3AA1C89A1F4AAE2F004A52EF /* AccountViewController.m in Sources */,
 				3A0A1B221F4FCF5500837947 /* WarningHistoryTableViewCell.m in Sources */,
+				3AFBC99C1F53A0F600DAD7EA /* UploadingViewController.m in Sources */,
 				3AA1C8851F4AA962004A52EF /* RoundnessProgressView.m in Sources */,
+				3AFBC9B51F54095C00DAD7EA /* PlanModel.m in Sources */,
 				3A06DB341F4C202A003FD9CD /* MalfunctionEquipmentViewController.m in Sources */,
 				3AC5CC7C1F500A1E00B3E024 /* EquipmentTableViewCell.m in Sources */,
+				3AFBC9BB1F54113500DAD7EA /* UploadingTableViewCell.m in Sources */,
 				3AA1C8641F4A6FD3004A52EF /* UIView+SDExtension.m in Sources */,
+				3AFBC9991F53A0E200DAD7EA /* PlanViewController.m in Sources */,
 				3AC5CC791F500A0100B3E024 /* EquipmentModel.m in Sources */,
 				3AA1C8881F4AA9F1004A52EF /* CMUtility.m in Sources */,
 				3AA1C8941F4AAE27004A52EF /* InvestViewController.m in Sources */,
 				3A06DB281F4C1A0E003FD9CD /* InvestTableViewCell.m in Sources */,
 				3A06DB2E1F4C1F8B003FD9CD /* EquipmentWarningViewController.m in Sources */,
+				3AFBC9A21F53A11B00DAD7EA /* RecordViewController.m in Sources */,
 				3A95AD2E1D17E4E60026EAFE /* BaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

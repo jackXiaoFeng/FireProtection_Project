@@ -11,6 +11,7 @@
 #import "MainTableViewCell.h"
 #include "MainModel.h"
 #import "EquipmentWarningViewController.h"
+#import "FixRecordViewController.h"
 
 @interface MainViewController ()<SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -129,7 +130,7 @@
             controller = [[EquipmentWarningViewController alloc]init];
         }else if (index == 2)
         {
-            //controller = [[WarningHistoryViewController alloc]init];
+            controller = [[FixRecordViewController alloc]init];
         }
         [self.navigationController pushViewController:controller animated:YES];
     };

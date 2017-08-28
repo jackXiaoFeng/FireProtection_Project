@@ -75,6 +75,7 @@
                                                                 endAngle:(CGFloat)(1.5 * M_PI)
                                                                clockwise:YES];
         [self.completedColor setStroke];
+        backCircle.lineCapStyle = kCGLineCapRound;//指定线的边缘是圆的
         backCircle.lineWidth = self.thicknessWidth;
         [backCircle stroke];
     }
@@ -86,6 +87,7 @@
                                                                     endAngle:(CGFloat)(- M_PI_2 + progress* 2 * M_PI)
                                                                    clockwise:YES];
         [self.incompletedColor setStroke];
+        progressCircle.lineCapStyle = kCGLineCapRound;//指定线的边缘是圆的
         progressCircle.lineWidth = self.thicknessWidth;
         [progressCircle stroke];
         
