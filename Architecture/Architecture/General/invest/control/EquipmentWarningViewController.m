@@ -60,7 +60,7 @@
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] init];
-    NSArray *nameArray = @[@"时间",@"设备+地点",@"告警状态",@"复检申请检修"];
+    NSArray *nameArray = @[@"时间",@"设备+地点",@"告警状态",@"操作"];
     
     NSArray *widthArray = @[
                             @(DEF_DEVICE_SCLE_WIDTH(134)),

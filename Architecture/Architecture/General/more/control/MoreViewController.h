@@ -10,4 +10,6 @@
 
 @interface MoreViewController : BaseViewController
 
+@property(nonatomic,assign) BOOL isNoneTabber;
+
 @end

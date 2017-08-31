@@ -25,7 +25,68 @@
     self.titleLb.text = @"上传巡检记录";
     self.tableView.backgroundColor = [UIColor clearColor];
     
+    
+    NSArray *nameArray = @[
+                           @"上传选中信息",
+                           @"上传全部记录"
+                           ];
+    NSArray *normalArray = @[
+                             @"uploading_bottom_one_normal",
+                             @"uploading_bottom_all_normal"
+                             ];
+    
+    NSArray *selectedArray = @[
+                               @"uploading_bottom_one_selected",
+                               @"uploading_bottom_all_selected"
+                               ];
+    
+    CGFloat btnSpace = DEF_DEVICE_SCLE_WIDTH(42);
+    
+    CGFloat btnLineSpace = DEF_DEVICE_SCLE_WIDTH(62);
+
+    
+    CGFloat btnWidth = (DEF_DEVICE_WIDTH -btnSpace - btnLineSpace*nameArray.count)/nameArray.count;
+
+    CGFloat btnHeight = DEF_DEVICE_SCLE_HEIGHT(83);
+
+    @weakify(self)
+    [nameArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        @strongify(self)
+        
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        CGFloat btnX = idx == 0? btnLineSpace : btnLineSpace +btnWidth +btnSpace;
+        btn.frame = CGRectMake(btnX, DEF_DEVICE_HEIGHT - DEF_DEVICE_SCLE_HEIGHT(57) - btnHeight, btnWidth, btnHeight);
+        
+        [btn setTitle:nameArray[idx] forState:UIControlStateNormal];
+        
+        [btn setBackgroundImage:DEF_IMAGENAME(normalArray[idx]) forState:UIControlStateNormal];
+        [btn setBackgroundImage:DEF_IMAGENAME(selectedArray[idx]) forState:UIControlStateSelected];
+        
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        
+        btn.titleLabel.font = DEF_MyFont(15);
+        btn.titleLabel.backgroundColor = [UIColor clearColor];
+        btn.titleLabel.textAlignment=NSTextAlignmentCenter;
+        btn.titleLabel.lineBreakMode = 0;//这句话很重要，不加这句话加上换行符也没用
+        
+        btn.tag  = 100 + idx;
+        [btn addTarget:self action:@selector(xunjianBtnclick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.view addSubview:btn];
+    }];
+
+    
 }
+- (void)xunjianBtnclick:(UIButton *)btn
+{
+    NSUInteger BtnTag = btn.tag;
+    NSLog(@"BtnTag----%lu",(unsigned long)BtnTag);
+  
+    
+}
+
 
 #pragma mark - delegate  dataSource -
 

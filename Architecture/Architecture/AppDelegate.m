@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "LoginViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -20,16 +22,43 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
 
+    [self load];
+    
+    
+    [self.window makeKeyAndVisible];
+
+    return YES;
+}
+
+- (void)load
+{
+    
+//    if ([[CMUserInformation standardUserInformation] isFirstTimeOpen]) {
+        LoginViewController *loginViewController = [LoginViewController new];
+        @weakify(self);
+        loginViewController.completion = ^(){
+            @strongify(self);
+            [self createTabBars];
+        };
+        self.window.rootViewController = loginViewController;
+//    } else {
+//        [self createTabBars];
+//    }
+}
+
+//创建 tab bar
+- (void) createTabBars {
+    
     self.tabBar = [[TabBarViewController alloc]init];
     BaseNavigationController *Nav = [[BaseNavigationController alloc]initWithRootViewController:self.tabBar];
     
     self.window.rootViewController = Nav;
     //    self.tabBar.BuyBtn.userInteractionEnabled = YES;
     self.mainNav = Nav;
-    [self.window makeKeyAndVisible];
 
-    return YES;
+
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -17,7 +17,7 @@
 #import "RoundnessProgressView.h"
 #import "DrawView.h"
 
-
+#import "MoreViewController.h"
 @interface AccountViewController ()
 
 @end
@@ -60,7 +60,7 @@
     [nameArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         @strongify(self)
 
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         
         CGFloat btnX = (BTN_SPACE + btnWidth)*idx + BTN_SPACE;
         btn.frame = CGRectMake(btnX, DEF_DEVICE_SCLE_HEIGHT(20) + DEF_NAVIGATIONBAR_HEIGHT, btnWidth, btnWidth);
@@ -120,6 +120,7 @@
                                ];
     
 
+    
     
     [diameterArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSNumber *num = (NSNumber *)obj;
@@ -241,7 +242,9 @@
         
     }else if (BtnTag == 104)
     {
-        controller = [[InfoViewController alloc]init];
+        MoreViewController *mv = [[MoreViewController alloc]init];
+        mv.isNoneTabber = YES;
+        controller = mv;
         
     }
     [self.navigationController pushViewController:controller animated:YES];

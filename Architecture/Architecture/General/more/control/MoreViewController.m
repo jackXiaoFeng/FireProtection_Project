@@ -136,7 +136,9 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, DEF_DEVICE_WIDTH, DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT) style:UITableViewStylePlain];
+        
+        CGFloat tableHeight = self.isNoneTabber?DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT :DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT- DEF_TABBAR_HEIGHT;
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, DEF_DEVICE_WIDTH, tableHeight) style:UITableViewStylePlain];
         _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
         _tableView.delegate =self;
         _tableView.dataSource = self;

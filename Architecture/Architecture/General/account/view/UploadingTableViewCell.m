@@ -51,7 +51,7 @@
     timeLab.text = @"13:00";
     timeLab.userInteractionEnabled = YES;
     timeLab.backgroundColor = [UIColor clearColor];
-    timeLab.textAlignment = NSTextAlignmentCenter;
+    timeLab.textAlignment = NSTextAlignmentLeft;
     timeLab.textColor = DEF_COLOR_RGB(87, 87, 87);
     [self.contentView addSubview:timeLab];
     self.timeLab = timeLab;
@@ -139,19 +139,15 @@
         CGFloat selectBtnHeight = DEF_DEVICE_SCLE_HEIGHT(33);
         
         
-        UIImage *selectBtnImage = DEF_IMAGENAME(@"involution_ affirm");
+        UIImage *selectBtnImage = DEF_IMAGENAME(@"uploading_btn_normal");
         
-        NSString *involutionStr = @"申请复归";
         UIButton *selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         selectBtn.frame = CGRectMake(self.timeLab.x+self.timeLab.width , (CellHeight - selectBtnHeight)/2 , selectBtnHeight, selectBtnHeight);
         selectBtn.backgroundColor = [UIColor whiteColor];
-        [selectBtn setBackgroundImage:selectBtnImage forState:UIControlStateNormal];
-        [selectBtn setTitle:involutionStr forState:UIControlStateNormal];
+        [selectBtn setImage:selectBtnImage forState:UIControlStateNormal];
         [selectBtn setTitleColor:DEF_COLOR_RGB(254, 254, 254)forState:UIControlStateNormal];
         selectBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         
-        selectBtn.titleLabel.font = DEF_MyFont(15);
-        selectBtn.titleLabel.backgroundColor = [UIColor clearColor];
         
         _selectBtn = selectBtn;
         

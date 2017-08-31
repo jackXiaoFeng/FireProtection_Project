@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A03525D1F5660F4009075C8 /* RecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A03525C1F5660F4009075C8 /* RecordModel.m */; };
+		3A0352601F566339009075C8 /* RecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A03525F1F566339009075C8 /* RecordTableViewCell.m */; };
+		3A0352631F568B55009075C8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0352621F568B55009075C8 /* LoginViewController.m */; };
 		3A06DB281F4C1A0E003FD9CD /* InvestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06DB271F4C1A0E003FD9CD /* InvestTableViewCell.m */; };
 		3A06DB2B1F4C1A50003FD9CD /* InvestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06DB2A1F4C1A50003FD9CD /* InvestModel.m */; };
 		3A06DB2E1F4C1F8B003FD9CD /* EquipmentWarningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06DB2D1F4C1F8B003FD9CD /* EquipmentWarningViewController.m */; };
@@ -86,6 +89,12 @@
 		15D3D9AEA390253ACF03A0E6 /* libPods-Architecture.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Architecture.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23614C5A189CF08E81BA7FC6 /* Pods-Architecture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Architecture.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Architecture/Pods-Architecture.debug.xcconfig"; sourceTree = "<group>"; };
 		2BBF6594A4C10AB977BCA1E9 /* Pods-Architecture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Architecture.release.xcconfig"; path = "Pods/Target Support Files/Pods-Architecture/Pods-Architecture.release.xcconfig"; sourceTree = "<group>"; };
+		3A03525B1F5660F4009075C8 /* RecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordModel.h; sourceTree = "<group>"; };
+		3A03525C1F5660F4009075C8 /* RecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordModel.m; sourceTree = "<group>"; };
+		3A03525E1F566339009075C8 /* RecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordTableViewCell.h; sourceTree = "<group>"; };
+		3A03525F1F566339009075C8 /* RecordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordTableViewCell.m; sourceTree = "<group>"; };
+		3A0352611F568B55009075C8 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		3A0352621F568B55009075C8 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		3A06DB261F4C1A0E003FD9CD /* InvestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvestTableViewCell.h; sourceTree = "<group>"; };
 		3A06DB271F4C1A0E003FD9CD /* InvestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvestTableViewCell.m; sourceTree = "<group>"; };
 		3A06DB291F4C1A50003FD9CD /* InvestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvestModel.h; sourceTree = "<group>"; };
@@ -599,6 +608,8 @@
 				3AFBC9B41F54095C00DAD7EA /* PlanModel.m */,
 				3AFBC9BC1F54127700DAD7EA /* UploadingModel.h */,
 				3AFBC9BD1F54127700DAD7EA /* UploadingModel.m */,
+				3A03525B1F5660F4009075C8 /* RecordModel.h */,
+				3A03525C1F5660F4009075C8 /* RecordModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -610,6 +621,8 @@
 				3AFBC9B71F54097000DAD7EA /* PlanTableViewCell.m */,
 				3AFBC9B91F54113500DAD7EA /* UploadingTableViewCell.h */,
 				3AFBC9BA1F54113500DAD7EA /* UploadingTableViewCell.m */,
+				3A03525E1F566339009075C8 /* RecordTableViewCell.h */,
+				3A03525F1F566339009075C8 /* RecordTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -619,6 +632,8 @@
 			children = (
 				3AA1C89C1F4AAE3A004A52EF /* MoreViewController.h */,
 				3AA1C89D1F4AAE3A004A52EF /* MoreViewController.m */,
+				3A0352611F568B55009075C8 /* LoginViewController.h */,
+				3A0352621F568B55009075C8 /* LoginViewController.m */,
 			);
 			path = control;
 			sourceTree = "<group>";
@@ -877,6 +892,7 @@
 				3AA1C8AB1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m in Sources */,
 				3AA1C8561F4A6F44004A52EF /* TAAbstractDotView.m in Sources */,
 				3AFBC9B81F54097000DAD7EA /* PlanTableViewCell.m in Sources */,
+				3A0352631F568B55009075C8 /* LoginViewController.m in Sources */,
 				3AFBC9AB1F53DBBD00DAD7EA /* FixRecordModel.m in Sources */,
 				3A06DB311F4C1FDB003FD9CD /* WarningHistoryViewController.m in Sources */,
 				3A06DB2B1F4C1A50003FD9CD /* InvestModel.m in Sources */,
@@ -885,6 +901,7 @@
 				3AA1C8631F4A6FD3004A52EF /* SDCycleScrollView.m in Sources */,
 				3AFBC9B21F53EECC00DAD7EA /* DrawView.m in Sources */,
 				3A95AD2B1D17E3E70026EAFE /* BaseNavigationController.m in Sources */,
+				3A03525D1F5660F4009075C8 /* RecordModel.m in Sources */,
 				3AFBC9A81F53DBAC00DAD7EA /* FixRecordViewController.m in Sources */,
 				3AFBC99F1F53A10900DAD7EA /* StatementViewController.m in Sources */,
 				3A06DB371F4C2493003FD9CD /* EquipmentWarningTableViewCell.m in Sources */,
@@ -897,6 +914,7 @@
 				3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */,
 				3AA1C8591F4A6F44004A52EF /* TAPageControl.m in Sources */,
 				3AA1C8621F4A6FD3004A52EF /* SDCollectionViewCell.m in Sources */,
+				3A0352601F566339009075C8 /* RecordTableViewCell.m in Sources */,
 				3A0A1B281F4FEC9500837947 /* MalfunctionEquipmentModel.m in Sources */,
 				3A0A1B251F4FEC8400837947 /* MalfunctionEquipmentTableViewCell.m in Sources */,
 				3AA1C8A31F4AB0F7004A52EF /* MainTableViewCell.m in Sources */,
