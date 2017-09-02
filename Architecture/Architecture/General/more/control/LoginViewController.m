@@ -7,7 +7,7 @@
 //
 
 #import "LoginViewController.h"
-
+#import "UserProtocolViewController.h"
 @interface LoginViewController ()<UITextFieldDelegate>
 //注册页面
 
@@ -22,6 +22,9 @@
 @property (nonatomic,strong)NSTimer                 *timer;                //计时器
 
 @property (nonatomic,strong)UIButton                *btnNext;              //下一步按钮
+
+@property (nonatomic,strong)UILabel                *companyLab;
+
 
 @property (nonatomic,assign)NSInteger               timeNum;               //时间值
 @property (nonatomic,strong)NSString                *sessionid;            //验证码操作Id
@@ -42,6 +45,15 @@
     
     self.navBar.hidden = YES;
     
+    //    @weakify(self)
+    //    SocketIO_Singleton.connectSuccess = ^{
+    //        @strongify(self)
+    //
+    //        NSLog(@"-------");
+    //        [SocketIO_Singleton sendInitMessage];
+    //    };
+    //
+    
     UIImageView *headIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEF_DEVICE_WIDTH, DEF_DEVICE_SCLE_HEIGHT(560))];
     headIV.image = DEF_IMAGENAME(@"login_head_bg");
     [self.view addSubview:headIV];
@@ -55,7 +67,7 @@
     
     CGFloat user_x =DEF_DEVICE_SCLE_WIDTH(65);
     CGFloat user_y =logoIV.y+logoIV.height+ DEF_DEVICE_SCLE_WIDTH(94);
-
+    
     
     self.userView = [[UIView alloc]initWithFrame:CGRectMake(user_x, user_y, DEF_DEVICE_WIDTH - user_x*2, DEF_DEVICE_SCLE_HEIGHT(476))];
     self.userView.backgroundColor =[UIColor whiteColor];
@@ -67,46 +79,50 @@
     [self.userView addSubview:self.tfPhoneNum];
     
     [self.userView addSubview:self.tfVericode];
-
-    [view addSubview:[self createBtnGetVeriCode]];
     
+    [self.userView addSubview:self.btnVericode];
     
-    
-    //    self.regViewModel = [[CMRegAndPsdViewModel alloc]init];
-//    self.regViewModel.WeakVC = self;
-    self.timeNum = 60;//倒计时时间初始化为60秒
-    
-    self.padding = 20;
-    
-    self.textField_view_height = 60;
-    
-    // Do any additional setup after loading the view.
-    NSArray *textFieldArray = @[self.userName,self.tfPassword];
-    [textFieldArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 500 +DEF_NAVIGATIONBAR_HEIGHT +  (self.padding + self.textField_view_height)*idx + self.padding, DEF_DEVICE_WIDTH, self.textField_view_height)];
-        view.backgroundColor = DEF_UICOLORFROMRGB(0xffffff);
-        [self.view addSubview:view];
-        
-        [view addSubview:textFieldArray[idx]];
-        
-        if (idx == 1) {
-            [view addSubview:[self createBtnGetVeriCode]];
-        }
-        
-        for (int i = 0; i < 2; i ++) {
-            UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, i * (view.height - 0.5), view.width, 0.5)];
-            lineView.backgroundColor = DEF_UICOLORFROMRGB(0xd2d2d2);
-            lineView.alpha = 0.7;
-            [view addSubview:lineView];
-            
-        }
-        
-    }];
-    
-    self.btnNext.multipleTouchEnabled = NO;
+    [self.userView addSubview:self.btnNext];
     
     [self addProtocolView];
     
+    [self.view addSubview:self.companyLab];
+    
+    //    self.regViewModel = [[CMRegAndPsdViewModel alloc]init];
+    //    self.regViewModel.WeakVC = self;
+    self.timeNum = 60;//倒计时时间初始化为60秒
+    
+    //    self.padding = 20;
+    //
+    //    self.textField_view_height = 60;
+    
+    //    // Do any additional setup after loading the view.
+    //    NSArray *textFieldArray = @[self.userName,self.tfPassword];
+    //    [textFieldArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    //        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 500 +DEF_NAVIGATIONBAR_HEIGHT +  (self.padding + self.textField_view_height)*idx + self.padding, DEF_DEVICE_WIDTH, self.textField_view_height)];
+    //        view.backgroundColor = DEF_UICOLORFROMRGB(0xffffff);
+    //        [self.view addSubview:view];
+    //
+    //        [view addSubview:textFieldArray[idx]];
+    //
+    ////        if (idx == 1) {
+    ////            [view addSubview:[self createBtnGetVeriCode]];
+    ////        }
+    //
+    //        for (int i = 0; i < 2; i ++) {
+    //            UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, i * (view.height - 0.5), view.width, 0.5)];
+    //            lineView.backgroundColor = DEF_UICOLORFROMRGB(0xd2d2d2);
+    //            lineView.alpha = 0.7;
+    //            [view addSubview:lineView];
+    //
+    //        }
+    //
+    //    }];
+    //
+    //    self.btnNext.multipleTouchEnabled = NO;
+    //
+    
+    //
     [self addRAC];
     
 }
@@ -119,6 +135,7 @@
       flattenMap:^id(id value) {
           @strongify(self);
           //self.btnNext.enabled = YES;
+          self.completion();
           return [self regSignal];
       }]
      subscribeNext:^(NSString *str) {
@@ -149,39 +166,38 @@
 - (UIButton *)btnNext
 {
     if (!_btnNext) {
-        //注册按钮
-        _btnNext = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btnNext.frame = CGRectMake(10, DEF_NAVIGATIONBAR_HEIGHT +  (self.padding + self.textField_view_height)*4 + self.padding + 50, DEF_DEVICE_WIDTH - 20, self.textField_view_height - 10);
-        _btnNext.centerX = self.view.centerX;
-        [_btnNext setTitle:@"注册" forState:UIControlStateNormal];
-        _btnNext.layer.cornerRadius = 5;
-        _btnNext.clipsToBounds = YES;
-        [_btnNext setBackgroundImage:DEF_IMAGENAME(@"Button-Background") forState:UIControlStateNormal];
-        [_btnNext setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.view addSubview:self.btnNext];
         
+        //登录按钮
+        _btnNext = [UIButton buttonWithType:UIButtonTypeCustom];
+        _btnNext.frame = CGRectMake(self.tfVericode.x, self.tfVericode.y + self.tfVericode.height + DEF_DEVICE_SCLE_HEIGHT(74), self.tfPhoneNum.width, self.tfPhoneNum.height);
+        [_btnNext setTitle:@"登  录" forState:UIControlStateNormal];
+        [_btnNext setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_btnNext setBackgroundImage:DEF_IMAGENAME(@"login_btn_normal") forState:UIControlStateNormal];
+        [_btnNext setBackgroundImage:DEF_IMAGENAME(@"login_btn_selected") forState:UIControlStateSelected];
     }
     return _btnNext;
 }
 
 //创建获取验证码按钮
-- (UIButton *)createBtnGetVeriCode
+- (UIButton *)btnVericode
 {
-    if (!self.btnVericode) {
+    if (!_btnVericode) {
+        
+        CGFloat width = DEF_DEVICE_SCLE_WIDTH(225);
+        CGFloat height = DEF_DEVICE_SCLE_HEIGHT(72);
         
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(DEF_DEVICE_WIDTH - 85, (self.textField_view_height - 30)/2, 75, 30);
-        [btn setTitleColor:DEF_UICOLORFROMRGB(0xff6050) forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont systemFontOfSize:12];
-        [btn setTitle:@"获取验证码" forState:UIControlStateNormal];
-        btn.layer.cornerRadius = 15;
-        btn.layer.borderWidth = 1.0f;
-        btn.layer.borderColor = DEF_UICOLORFROMRGB(0xff6050).CGColor;
+        btn.frame = CGRectMake(self.tfVericode.x+self.tfVericode.width + DEF_DEVICE_SCLE_WIDTH(13), self.tfVericode.y, width, height);
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [btn setTitle:@"验证码" forState:UIControlStateNormal];
+        [btn setBackgroundImage:DEF_IMAGENAME(@"login_codeBtn_normal") forState:UIControlStateNormal];
+        [btn setBackgroundImage:DEF_IMAGENAME(@"login_codeBtn_selected") forState:UIControlStateSelected];
         [btn addTarget:self action:@selector(sendRequestAndstartTimer) forControlEvents:UIControlEventTouchUpInside];
         
-        self.btnVericode = btn;
+        _btnVericode = btn;
     }
-    return self.btnVericode;
+    return _btnVericode;
 }
 
 #pragma mark - 计时器
@@ -203,23 +219,23 @@
         self.btnVericode.enabled = NO;
         [self.btnVericode setTitle:@"获取中..." forState:UIControlStateDisabled];
         
-//        [self.regViewModel fetchVericode:self.tfPhoneNum.text Type:GetPhoneVerify_Login  withCompleteBlock:^(NSString *str) {
-//            @strongify(self);
-//            if (![str isEqualToString:FailToCheckNum]) {
-//                self.sessionid = str;
-//                [self startTimer];
-//                self.tfPhoneNum.userInteractionEnabled = NO;
-//            }else{
-//                //暂停计时器
-//                [_timer setFireDate:[NSDate distantFuture]];
-//                [_timer invalidate];
-//                _timer = nil;
-//                self.btnVericode.enabled = YES;
-//                self.tfPhoneNum.userInteractionEnabled = YES;
-//                self.timeNum = 60;
-//                
-//            }
-//        }];
+        //        [self.regViewModel fetchVericode:self.tfPhoneNum.text Type:GetPhoneVerify_Login  withCompleteBlock:^(NSString *str) {
+        //            @strongify(self);
+        //            if (![str isEqualToString:FailToCheckNum]) {
+        //                self.sessionid = str;
+        //                [self startTimer];
+        //                self.tfPhoneNum.userInteractionEnabled = NO;
+        //            }else{
+        //                //暂停计时器
+        //                [_timer setFireDate:[NSDate distantFuture]];
+        //                [_timer invalidate];
+        //                _timer = nil;
+        //                self.btnVericode.enabled = YES;
+        //                self.tfPhoneNum.userInteractionEnabled = YES;
+        //                self.timeNum = 60;
+        //
+        //            }
+        //        }];
     }
 }
 
@@ -259,17 +275,17 @@
         if (!self.sessionid) {
             self.sessionid = @"";//1469166550
         }
-//        [self.regViewModel regWithUserName:self.userName.text
-//                                  PhoneNum:self.tfPhoneNum.text Vericode:self.tfVericode.text Password:self.tfPassword.text
-//                                 sessionid:self.sessionid
-//                           isAgreeProtocol:self.isAgreeProtocol
-//                                  complete:^(NSString *str) {
-//                                      [subscriber sendNext:str];
-//                                      [subscriber sendCompleted];
-//                                  } fail:^(NSError *err) {
-//                                      @strongify(self);
-//                                      self.btnNext.enabled = YES;
-//                                  }];
+        //        [self.regViewModel regWithUserName:self.userName.text
+        //                                  PhoneNum:self.tfPhoneNum.text Vericode:self.tfVericode.text Password:self.tfPassword.text
+        //                                 sessionid:self.sessionid
+        //                           isAgreeProtocol:self.isAgreeProtocol
+        //                                  complete:^(NSString *str) {
+        //                                      [subscriber sendNext:str];
+        //                                      [subscriber sendCompleted];
+        //                                  } fail:^(NSError *err) {
+        //                                      @strongify(self);
+        //                                      self.btnNext.enabled = YES;
+        //                                  }];
         return nil;
     }];
 }
@@ -279,27 +295,27 @@
     self.isAgreeProtocol = YES;
     
     UIFont *font = DEF_MyFont(13);
-    NSString * protocolString = @"黄金甲相关协议";
+    NSString * protocolString = @"槃古科技相关协议";
     CGSize protocolSize = [CMUtility boundingRectWithSize:CGSizeMake(MAXFLOAT, 25) font:font string:protocolString withSpacing:0];
     UILabel *lab = [[UILabel alloc]init];
-    lab.frame = CGRectMake(DEF_DEVICE_WIDTH - protocolSize.width - 10, 200+ DEF_NAVIGATIONBAR_HEIGHT +  (self.padding + self.textField_view_height)*4 + self.padding, protocolSize.width,25);
+    lab.frame = CGRectMake(self.userView.width - protocolSize.width - 10, self.userView.height - 25, protocolSize.width,25);
     
     NSMutableAttributedString * aAttributedString = [[NSMutableAttributedString alloc] initWithString:protocolString];
     [aAttributedString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, 7)];
     lab.attributedText = aAttributedString;
     lab.font = font;
     lab.userInteractionEnabled = YES;
-    [self.view addSubview:lab];
+    [self.userView addSubview:lab];
     
     //协议按钮
     UIButton *btnProtocol = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnProtocol setTitleColor:DEF_COLOR_RGB(141, 141, 142) forState:UIControlStateNormal];
     btnProtocol.titleLabel.font = font;
     btnProtocol.titleLabel.textAlignment = NSTextAlignmentCenter;
-    btnProtocol.frame = CGRectMake(lab.x - 80, 200+DEF_NAVIGATIONBAR_HEIGHT +  (self.padding + self.textField_view_height)*4 + self.padding, 80,25);
+    btnProtocol.frame = CGRectMake(lab.x - 80, self.userView.height - 25, 80,25);
     [btnProtocol setImage:DEF_IMAGENAME(@"protocol_select") forState:UIControlStateNormal];
     [btnProtocol setTitle:@"您已经同意" forState:UIControlStateNormal];
-    [self.view addSubview:btnProtocol];
+    [self.userView addSubview:btnProtocol];
     self.btnProtocol = btnProtocol;
     
     @weakify(self);
@@ -316,8 +332,8 @@
 
 - (void)protocolLabTap:(UITapGestureRecognizer *)tap
 {
-//    UserProtocolViewController *userProtocolVC = [[UserProtocolViewController alloc]init];
-//    [self.navigationController pushViewController:userProtocolVC animated:YES];
+    UserProtocolViewController *userProtocolVC = [[UserProtocolViewController alloc]init];
+    [self.navigationController pushViewController:userProtocolVC animated:YES];
 }
 
 #pragma mark - getter
@@ -350,7 +366,7 @@
         field.leftView = [self createLeftViewWithName:@"login_user"];
         field.leftViewMode = UITextFieldViewModeAlways;
         field.delegate = self;
-        field.layer.borderColor= [UIColor redColor].CGColor;
+        field.layer.borderColor= [UIColor lightGrayColor].CGColor;
         field.layer.borderWidth= 1.0f;
         field.layer.cornerRadius = 5;
         field.layer.masksToBounds = YES;
@@ -372,7 +388,7 @@
         tf.leftViewMode = UITextFieldViewModeAlways;
         tf.leftView = [self createLeftViewWithName:@"login_code"];
         tf.delegate = self;
-        tf.layer.borderColor= [UIColor redColor].CGColor;
+        tf.layer.borderColor= [UIColor lightGrayColor].CGColor;
         tf.layer.borderWidth= 1.0f;
         tf.layer.cornerRadius = 5;
         tf.layer.masksToBounds = YES;
@@ -407,6 +423,17 @@
     return _timer;
 }
 
+
+- (UILabel *)companyLab
+{
+    if (!_companyLab) {
+        _companyLab = [[UILabel alloc]initWithFrame:CGRectMake(0, DEF_DEVICE_HEIGHT - DEF_DEVICE_SCLE_HEIGHT(72)-DEF_DEVICE_SCLE_HEIGHT(30), DEF_DEVICE_WIDTH, DEF_DEVICE_SCLE_HEIGHT(30))];
+        _companyLab.text = @"@上海槃古科技有限公司";
+        _companyLab.textColor = DEF_COLOR_RGB(204, 204, 204);
+        _companyLab.textAlignment = NSTextAlignmentCenter;
+    }
+    return _companyLab;
+}
 
 //创建textfield
 - (UITextField *)createTF:(NSString *)str withFrame:(CGRect)rect

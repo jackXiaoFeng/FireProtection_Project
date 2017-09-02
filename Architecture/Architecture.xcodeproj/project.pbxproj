@@ -20,6 +20,7 @@
 		3A0A1B221F4FCF5500837947 /* WarningHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A1B211F4FCF5500837947 /* WarningHistoryTableViewCell.m */; };
 		3A0A1B251F4FEC8400837947 /* MalfunctionEquipmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A1B241F4FEC8400837947 /* MalfunctionEquipmentTableViewCell.m */; };
 		3A0A1B281F4FEC9500837947 /* MalfunctionEquipmentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0A1B271F4FEC9500837947 /* MalfunctionEquipmentModel.m */; };
+		3A26E9EF1F5A4D010086C553 /* UserProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A26E9EE1F5A4D010086C553 /* UserProtocolViewController.m */; };
 		3A8E6EBF1F4ECAD100C9B51E /* EquipmentWarningModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E6EBE1F4ECAD100C9B51E /* EquipmentWarningModel.m */; };
 		3A95ACEE1D17D4BA0026EAFE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95ACED1D17D4BA0026EAFE /* main.m */; };
 		3A95ACF11D17D4BA0026EAFE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95ACF01D17D4BA0026EAFE /* AppDelegate.m */; };
@@ -115,6 +116,8 @@
 		3A0A1B241F4FEC8400837947 /* MalfunctionEquipmentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MalfunctionEquipmentTableViewCell.m; sourceTree = "<group>"; };
 		3A0A1B261F4FEC9500837947 /* MalfunctionEquipmentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MalfunctionEquipmentModel.h; sourceTree = "<group>"; };
 		3A0A1B271F4FEC9500837947 /* MalfunctionEquipmentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MalfunctionEquipmentModel.m; sourceTree = "<group>"; };
+		3A26E9ED1F5A4D010086C553 /* UserProtocolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProtocolViewController.h; sourceTree = "<group>"; };
+		3A26E9EE1F5A4D010086C553 /* UserProtocolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProtocolViewController.m; sourceTree = "<group>"; };
 		3A8E6EBD1F4ECAD100C9B51E /* EquipmentWarningModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentWarningModel.h; sourceTree = "<group>"; };
 		3A8E6EBE1F4ECAD100C9B51E /* EquipmentWarningModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentWarningModel.m; sourceTree = "<group>"; };
 		3A95ACE91D17D4BA0026EAFE /* Architecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Architecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -634,6 +637,8 @@
 				3AA1C89D1F4AAE3A004A52EF /* MoreViewController.m */,
 				3A0352611F568B55009075C8 /* LoginViewController.h */,
 				3A0352621F568B55009075C8 /* LoginViewController.m */,
+				3A26E9ED1F5A4D010086C553 /* UserProtocolViewController.h */,
+				3A26E9EE1F5A4D010086C553 /* UserProtocolViewController.m */,
 			);
 			path = control;
 			sourceTree = "<group>";
@@ -914,6 +919,7 @@
 				3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */,
 				3AA1C8591F4A6F44004A52EF /* TAPageControl.m in Sources */,
 				3AA1C8621F4A6FD3004A52EF /* SDCollectionViewCell.m in Sources */,
+				3A26E9EF1F5A4D010086C553 /* UserProtocolViewController.m in Sources */,
 				3A0352601F566339009075C8 /* RecordTableViewCell.m in Sources */,
 				3A0A1B281F4FEC9500837947 /* MalfunctionEquipmentModel.m in Sources */,
 				3A0A1B251F4FEC8400837947 /* MalfunctionEquipmentTableViewCell.m in Sources */,

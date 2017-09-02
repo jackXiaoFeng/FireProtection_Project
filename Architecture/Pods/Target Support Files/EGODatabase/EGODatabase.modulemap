@@ -1,0 +1,6 @@
+framework module EGODatabase {
+  umbrella header "EGODatabase-umbrella.h"
+
+  export *
+  module * { export * }
+}
