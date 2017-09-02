@@ -45,14 +45,14 @@
     
     self.navBar.hidden = YES;
     
-    //    @weakify(self)
-    //    SocketIO_Singleton.connectSuccess = ^{
-    //        @strongify(self)
-    //
-    //        NSLog(@"-------");
-    //        [SocketIO_Singleton sendInitMessage];
-    //    };
-    //
+//        @weakify(self)
+//        SocketIO_Singleton.connectSuccess = ^{
+//            @strongify(self)
+//    
+//            NSLog(@"-------");
+//            [SocketIO_Singleton sendInitMessage];
+//        };
+    
     
     UIImageView *headIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEF_DEVICE_WIDTH, DEF_DEVICE_SCLE_HEIGHT(560))];
     headIV.image = DEF_IMAGENAME(@"login_head_bg");

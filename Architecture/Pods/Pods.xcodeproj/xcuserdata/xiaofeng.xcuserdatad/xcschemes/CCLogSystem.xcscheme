@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '302100093BC087409A01EC8D1FF8D053'
+               BlueprintIdentifier = '91FDC524DCC5382D439B68B8B9B0A10E'
                BlueprintName = 'CCLogSystem'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libCCLogSystem.a'>
+               BuildableName = 'CCLogSystem.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -48,6 +48,7 @@ PODS:
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
+  - Socket.IO-Client-Swift (8.3.3)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.0)
@@ -65,6 +66,7 @@ DEPENDENCIES:
   - Reachability (~> 3.2)
   - ReactiveCocoa (~> 2.4.7)
   - SDWebImage (~> 3.7.2)
+  - Socket.IO-Client-Swift (~> 8.3.3)
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
@@ -82,7 +84,8 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   ReactiveCocoa: eb38dee0a0e698f73a9b25e5c1faea2bb4c79240
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
+  Socket.IO-Client-Swift: a2faffdbde89c63aebc5d631041530c1068b02b8
 
-PODFILE CHECKSUM: 4806bb13de8acab0b40ab07d608f1a1b51bfbfff
+PODFILE CHECKSUM: 2763c3c1f4dfd881bde6be4c7737f03226ea3a54
 
 COCOAPODS: 1.0.1
