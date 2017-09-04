@@ -333,7 +333,7 @@
 - (void)protocolLabTap:(UITapGestureRecognizer *)tap
 {
     UserProtocolViewController *userProtocolVC = [[UserProtocolViewController alloc]init];
-    [self.navigationController pushViewController:userProtocolVC animated:YES];
+    [self presentViewController:userProtocolVC animated:YES completion:nil];
 }
 
 #pragma mark - getter

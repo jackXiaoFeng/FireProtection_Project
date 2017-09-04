@@ -22,8 +22,15 @@
     self.titleLb.text = @"用户服务协议";
     [self loadHtmlWithUrl];
     [self.activityIndicatorView startAnimating];
+    
+    self.leftBtn.hidden = NO;
 
     // Do any additional setup after loading the view.
+}
+
+- (void)leftBtnClick
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)loadHtmlWithUrl
 {
