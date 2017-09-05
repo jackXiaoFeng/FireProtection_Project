@@ -23,7 +23,7 @@
 //#import "JPUSHService.h"
 //#import "WXApi.h"
 
-//#import "GJCFUitils.h"
+#import "GJCFUitils.h"
 
 /*
  Base
