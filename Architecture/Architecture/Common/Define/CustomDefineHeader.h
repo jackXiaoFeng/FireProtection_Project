@@ -58,6 +58,9 @@
  */
 #define DEF_MyAppDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
+#define BLOCK_SAFE(block)           if(block)block
+
+
 /**
  *获取APP当前版本号
  */

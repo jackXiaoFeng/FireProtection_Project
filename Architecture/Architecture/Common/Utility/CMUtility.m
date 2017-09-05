@@ -1034,4 +1034,20 @@
 //    return [CMUserInformation standardUserInformation].kefuPhone;
 //}
 
+
+/**
+ *提示框,Tim添加
+ */
++ (void)showTips:(NSString *)tips
+{
+    if (!tips)return;
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    hud.mode=MBProgressHUDModeText;
+    hud.labelText=tips;
+    hud.removeFromSuperViewOnHide=YES;
+    [hud show:YES];
+    [hud hide:YES afterDelay:1.2];
+}
+
+
 @end

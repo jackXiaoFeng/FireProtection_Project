@@ -36,6 +36,11 @@ typedef enum {
 
 typedef void (^ConnectSuccess) (void);
 
+typedef void (^Xr001CallBackResult) (NSDictionary *);
+typedef void (^Xr002CallBackResult) (NSDictionary *);
+typedef void (^Xr003CallBackResult) (NSDictionary *);
+
+
 @interface SocketIO : NSObject<SRWebSocketDelegate>
 @property (nonatomic, copy)NSString *initializeStr;
 
@@ -45,6 +50,13 @@ typedef void (^ConnectSuccess) (void);
 @property (nonatomic, copy)NSString *toUid;
 
 @property (nonatomic, copy) ConnectSuccess connectSuccess;
+
+@property (nonatomic, copy) Xr001CallBackResult xr001CallBackResult;
+@property (nonatomic, copy) Xr002CallBackResult xr002CallBackResult;
+@property (nonatomic, copy) Xr003CallBackResult xr003CallBackResult;
+
+
+
 //@property (nonatomic, strong) ChatMessageModel *chatMessageModel;
 //
 //@property (nonatomic, strong) OtherChatMessageModel *otherChatMessageModel;
@@ -63,7 +75,7 @@ typedef void (^ConnectSuccess) (void);
  *  @param initMessage 初始化消息
  */
 //- (void)sendInitMessageWithGid:(NSString *)gid ReceiveType:(Receive_Type)receive_Type;
-- (void)sendInitMessage;
+- (void)sendEmit:(NSString *)emit withMessage:(NSString *)message;
 
 //- (void)sendMessage:(ChatMessageModel *)messageModel;
 //- (void)quitMessage:(ChatMessageModel *)messageModel;

@@ -9,6 +9,7 @@
 #ifndef ImportDefineHeader_h
 #define ImportDefineHeader_h
 
+
 /*
  ThirdParty
  */
@@ -42,6 +43,7 @@
  */
 #import "CustomDefineHeader.h"
 #import "UIDefineHeader.h"
+#import "ConfigDefineHeader.h"
 
 /*
  Category

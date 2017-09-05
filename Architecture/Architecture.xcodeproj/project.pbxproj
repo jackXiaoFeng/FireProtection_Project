@@ -71,6 +71,7 @@
 		3AA1C8A81F4AC186004A52EF /* MainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8A71F4AC186004A52EF /* MainModel.m */; };
 		3AA1C8AB1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8AA1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m */; };
 		3AAC63201F5D30790038E7DA /* agreement.html in Resources */ = {isa = PBXBuildFile; fileRef = 3AAC631F1F5D30790038E7DA /* agreement.html */; };
+		3AAC63231F5D4E380038E7DA /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAC63221F5D4E380038E7DA /* LoginModel.m */; };
 		3AC5CC791F500A0100B3E024 /* EquipmentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5CC781F500A0100B3E024 /* EquipmentModel.m */; };
 		3AC5CC7C1F500A1E00B3E024 /* EquipmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5CC7B1F500A1E00B3E024 /* EquipmentTableViewCell.m */; };
 		3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EEC1F46D586005B600D /* NSString+Utils.m */; };
@@ -240,6 +241,8 @@
 		3AA1C8A91F4ACE7A004A52EF /* UIButton+LXMImagePosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+LXMImagePosition.h"; sourceTree = "<group>"; };
 		3AA1C8AA1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LXMImagePosition.m"; sourceTree = "<group>"; };
 		3AAC631F1F5D30790038E7DA /* agreement.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = agreement.html; sourceTree = "<group>"; };
+		3AAC63211F5D4E380038E7DA /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModel.h; sourceTree = "<group>"; };
+		3AAC63221F5D4E380038E7DA /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
 		3AC5CC771F500A0100B3E024 /* EquipmentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentModel.h; sourceTree = "<group>"; };
 		3AC5CC781F500A0100B3E024 /* EquipmentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentModel.m; sourceTree = "<group>"; };
 		3AC5CC7A1F500A1E00B3E024 /* EquipmentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentTableViewCell.h; sourceTree = "<group>"; };
@@ -819,6 +822,8 @@
 			children = (
 				3AC5CC771F500A0100B3E024 /* EquipmentModel.h */,
 				3AC5CC781F500A0100B3E024 /* EquipmentModel.m */,
+				3AAC63211F5D4E380038E7DA /* LoginModel.h */,
+				3AAC63221F5D4E380038E7DA /* LoginModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1139,6 +1144,7 @@
 				3A06DB2E1F4C1F8B003FD9CD /* EquipmentWarningViewController.m in Sources */,
 				3AFBC9A21F53A11B00DAD7EA /* RecordViewController.m in Sources */,
 				3A95AD2E1D17E4E60026EAFE /* BaseViewController.m in Sources */,
+				3AAC63231F5D4E380038E7DA /* LoginModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

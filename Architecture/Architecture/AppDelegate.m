@@ -22,6 +22,16 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
 
+    //socketio 连接
+    @weakify(self)
+    SocketIO_Singleton.connectSuccess = ^{
+        @strongify(self)
+        
+        NSLog(@"---socketio 连接成功----");
+        //[SocketIO_Singleton sendInitMessage];
+        //[SocketIO_Singleton sendEmit:@"xs001" withMessage:@"{\"code\":\"xs001\",\"serial_no\":\"\",\"token\":\"2hACkIzVnNqCjEciwCaZ2flveBGv\",\"errorcode\":\"0\",\"errormsg\":\"success\",\"dat\":[{\"Oper_flag\":\"1\",\"Username\":\"123456\",\"Vcode\":\"123456\"}]}"];
+    };
+    
     [self load];
     
     

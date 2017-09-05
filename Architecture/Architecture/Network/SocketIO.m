@@ -37,44 +37,66 @@
 - (void)connectSocket
 {
     if (_webSocket ==nil) {
-        [self.client on:@"connect" callback:^(NSArray* data, SocketAckEmitter* ack) {
-            NSLog(@"*************\n\niOS客户端上线\n\n*************");
-            // [self.client emit:@"login" with:@[@"30342"]];
-            self.connectSuccess();
-            
-        }];
-        [self.client on:@"xr001" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
-            NSLog(@"*xr001\n\n*************%@",event);
-            //        if (event[0] && ![event[0] isEqualToString:@""]) {
-            //            //[self.messageArray insertObject:event[0] atIndex:0];
-            //            //[self.messageTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
-            //        }
-        }];
         
-        [self.client on:@"chat message" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
-            if (event[0] && ![event[0] isEqualToString:@""]) {
-            }
-        }];
-        [self.client on:@"privateMessage" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
-            if (event[0] && ![event[0] isEqualToString:@""]) {
-            }
-        }];
-        [self.client on:@"disconnect" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
-            NSLog(@"*************\n\niOS客户端下线\n\n*************%@",event?event[0]:@"");
-        }];
-        [self.client on:@"error" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
-            NSLog(@"*************\n\n%@\n\n*************",event?event[0]:@"");
-        }];
-        
+        //监听事件回调
+        [self onCallback];
         
         [self.client connect];
     }
 
 }
 
+- (void)onCallback
+{
+    [self.client on:@"connect" callback:^(NSArray* data, SocketAckEmitter* ack) {
+        NSLog(@"*************\n\niOS客户端上线\n\n*************");
+        // [self.client emit:@"login" with:@[@"30342"]];
+        self.connectSuccess();
+        
+    }];
+    
+    //登录
+    [self.client on:XR001 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        NSLog(@"*************\n\nXR001\n\n*************%@",event?event[0]:@"");
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr001CallBackResult(dic);
+        }else
+        {
+            //self.xr001CallBackResult(@"登录失败");
+        }
+    }];
+    
+    //获取短信验证码
+    [self.client on:XR002 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr002CallBackResult(dic);
+        }else
+        {
+            //self.xr001CallBackResult(@"获取短信验证码失败");
+        }
+    }];
+    
+    [self.client on:@"chat message" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0] && ![event[0] isEqualToString:@""]) {
+        }
+    }];
+    [self.client on:@"privateMessage" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0] && ![event[0] isEqualToString:@""]) {
+        }
+    }];
+    [self.client on:@"disconnect" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        NSLog(@"*************\n\niOS客户端下线\n\n*************%@",event?event[0]:@"");
+    }];
+    [self.client on:@"error" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        NSLog(@"*************\n\n%@\n\n*************",event?event[0]:@"");
+    }];
+}
+
 - (SocketIOClient *)client{
     if (!_client) {
-        NSURL* url = [[NSURL alloc] initWithString:@"http://10.12.66.46:22223"];
+        NSURL* url = [[NSURL alloc] initWithString:SOCKETIO_ADDRESS];
         
         _client = [[SocketIOClient alloc] initWithSocketURL:url config:@{@"log": @YES, @"forcePolling": @YES}];
     }
@@ -84,9 +106,10 @@
 
 #pragma mark - webSocket -
 
-- (void)sendInitMessage;
+- (void)sendEmit:(NSString *)emit withMessage:(NSString *)message
 {
-    [self.client emit:@"xs001" with:@[@"{\"code\":\"xs001\",\"serial_no\":\"\",\"token\":\"2hACkIzVnNqCjEciwCaZ2flveBGv\",\"errorcode\":\"0\",\"errormsg\":\"success\",\"dat\":[{\"Oper_flag\":\"1\",\"Username\":\"123456\",\"Vcode\":\"123456\",\"Areas_sn\":\"12345\"}]}"]];
+    [self.client emit:emit with:@[message]];
+    //[self.client emit:@"xs001" with:@[@"{\"code\":\"xs001\",\"serial_no\":\"\",\"token\":\"2hACkIzVnNqCjEciwCaZ2flveBGv\",\"errorcode\":\"0\",\"errormsg\":\"success\",\"dat\":[{\"Oper_flag\":\"1\",\"Username\":\"123456\",\"Vcode\":\"123456\",\"Areas_sn\":\"12345\"}]}"]];
 }
 
 /*
@@ -165,7 +188,7 @@
     BOOL sendState =[self.webSocket sendString:strJson error:nil];
     if (!sendState) {
 //        Receive_Type reType =[messageModel.toType isEqualToString:@"2"]?Receive_Group:Receive_Person;
-        [self sendInitMessage];
+        //[self sendInitMessage];
         [self.webSocket sendString:strJson error:nil];
     }
 }

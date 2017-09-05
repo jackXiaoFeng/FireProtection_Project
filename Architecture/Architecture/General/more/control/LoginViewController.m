@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 #import "UserProtocolViewController.h"
+#import "LoginModel.h"
+
 @interface LoginViewController ()<UITextFieldDelegate>
 //注册页面
 
@@ -35,7 +37,7 @@
 
 @property (nonatomic,assign)CGFloat               padding;               //时间值
 @property (nonatomic,assign)CGFloat               textField_view_height;               //时间值
-
+@property (nonatomic, strong)LoginModel *loginModel;
 @end
 
 @implementation LoginViewController
@@ -44,14 +46,6 @@
     [super viewDidLoad];
     
     self.navBar.hidden = YES;
-    
-//        @weakify(self)
-//        SocketIO_Singleton.connectSuccess = ^{
-//            @strongify(self)
-//    
-//            NSLog(@"-------");
-//            [SocketIO_Singleton sendInitMessage];
-//        };
     
     
     UIImageView *headIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEF_DEVICE_WIDTH, DEF_DEVICE_SCLE_HEIGHT(560))];
@@ -88,8 +82,8 @@
     
     [self.view addSubview:self.companyLab];
     
-    //    self.regViewModel = [[CMRegAndPsdViewModel alloc]init];
-    //    self.regViewModel.WeakVC = self;
+    self.loginModel = [[LoginModel alloc]init];
+    //self.loginModel.WeakVC = self;
     self.timeNum = 60;//倒计时时间初始化为60秒
     
     //    self.padding = 20;
@@ -125,6 +119,12 @@
     //
     [self addRAC];
     
+    
+    //添加通知中心
+    //添加文本框通知中心
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gosave:) name:UITextFieldTextDidBeginEditingNotification object:nil];
+    //selector是选择器，Observer是观察者，name是检测的类型 object填nil就行 //这里检测的是文本框text值改变的时候，另外还可以检测： UITextFieldTextDidBeginEditingNotification;开始编辑时 UITextFieldTextDidEndEditingNotification;结束编辑时 UITextFieldTextDidChangeNotification;值改变时
+    
 }
 
 
@@ -135,17 +135,17 @@
       flattenMap:^id(id value) {
           @strongify(self);
           //self.btnNext.enabled = YES;
-          self.completion();
-          return [self regSignal];
+          
+          return [self loginSignal];
       }]
      subscribeNext:^(NSString *str) {
          @strongify(self)
-         if ([str isEqualToString:@"注册成功"]) {
-             //[CMUtility showTips:@"注册成功"];
-             [self.navigationController popViewControllerAnimated:YES];
-             
+         if ([str isEqualToString:@"登录成功"]) {
+             [CMUtility showTips:@"登录成功"];
+             //[self.navigationController popViewControllerAnimated:YES];
+             self.completion();
          }else{
-             //[CMUtility showTips:str];
+             [CMUtility showTips:str];
          }
      }];
     
@@ -210,20 +210,24 @@
     //检查出不符合要求的手机号
     @weakify(self);
     if(self.tfPhoneNum.text.length == 0){
-        //[CMUtility showTips:@"请输入手机号码"];
+        [CMUtility showTips:@"请输入手机号码"];
         return;
     }else if(![CMUtility validateMobile:self.tfPhoneNum.text]) {
-        //[CMUtility showTips:@"请输入有效的手机号码"];
+        [CMUtility showTips:@"请输入有效的手机号码"];
         return;
     }else{
         self.btnVericode.enabled = NO;
         [self.btnVericode setTitle:@"获取中..." forState:UIControlStateDisabled];
+        [self.loginModel fetchVericode:self.tfPhoneNum.text withCompleteBlock:^(NSString *str) {
+            NSLog(@"--------%@",str);
+
+        }];
         
         //        [self.regViewModel fetchVericode:self.tfPhoneNum.text Type:GetPhoneVerify_Login  withCompleteBlock:^(NSString *str) {
         //            @strongify(self);
         //            if (![str isEqualToString:FailToCheckNum]) {
         //                self.sessionid = str;
-        //                [self startTimer];
+                        [self startTimer];
         //                self.tfPhoneNum.userInteractionEnabled = NO;
         //            }else{
         //                //暂停计时器
@@ -267,25 +271,18 @@
 /**
  *  创建注册信号
  */
-- (RACSignal *)regSignal
+- (RACSignal *)loginSignal
 {
     @weakify(self)
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self);
-        if (!self.sessionid) {
-            self.sessionid = @"";//1469166550
-        }
-        //        [self.regViewModel regWithUserName:self.userName.text
-        //                                  PhoneNum:self.tfPhoneNum.text Vericode:self.tfVericode.text Password:self.tfPassword.text
-        //                                 sessionid:self.sessionid
-        //                           isAgreeProtocol:self.isAgreeProtocol
-        //                                  complete:^(NSString *str) {
-        //                                      [subscriber sendNext:str];
-        //                                      [subscriber sendCompleted];
-        //                                  } fail:^(NSError *err) {
-        //                                      @strongify(self);
-        //                                      self.btnNext.enabled = YES;
-        //                                  }];
+        [self.loginModel loginWithPhoneNum:self.tfPhoneNum.text Vericode:self.tfVericode.text isAgreeProtocol:self.isAgreeProtocol complete:^(NSString * str) {
+            [subscriber sendNext:str];
+            [subscriber sendCompleted];
+        } fail:^(NSError *error) {
+            @strongify(self);
+            self.btnNext.enabled = YES;
+        }];
         return nil;
     }];
 }
@@ -295,7 +292,7 @@
     self.isAgreeProtocol = YES;
     
     UIFont *font = DEF_MyFont(13);
-    NSString * protocolString = @"槃古科技相关协议";
+    NSString * protocolString = @"槃古物联相关协议";
     CGSize protocolSize = [CMUtility boundingRectWithSize:CGSizeMake(MAXFLOAT, 25) font:font string:protocolString withSpacing:0];
     UILabel *lab = [[UILabel alloc]init];
     lab.frame = CGRectMake(self.userView.width - protocolSize.width - 10, self.userView.height - 25, protocolSize.width,25);
@@ -366,7 +363,7 @@
         field.leftView = [self createLeftViewWithName:@"login_user"];
         field.leftViewMode = UITextFieldViewModeAlways;
         field.delegate = self;
-        field.layer.borderColor= [UIColor lightGrayColor].CGColor;
+        field.layer.borderColor= [UIColor UIColorFromRGB:0xEEEEEE alpha:1].CGColor;
         field.layer.borderWidth= 1.0f;
         field.layer.cornerRadius = 5;
         field.layer.masksToBounds = YES;
@@ -388,7 +385,7 @@
         tf.leftViewMode = UITextFieldViewModeAlways;
         tf.leftView = [self createLeftViewWithName:@"login_code"];
         tf.delegate = self;
-        tf.layer.borderColor= [UIColor lightGrayColor].CGColor;
+        tf.layer.borderColor= [UIColor UIColorFromRGB:0xEEEEEE alpha:1].CGColor;
         tf.layer.borderWidth= 1.0f;
         tf.layer.cornerRadius = 5;
         tf.layer.masksToBounds = YES;
@@ -464,8 +461,31 @@
 //点击return 按钮 去掉
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    NSLog(@"----%@",textField);
     [textField resignFirstResponder];
     return YES;
+}
+- (void)gosave:(NSNotification *) Notification{ UITextField * textField = Notification.object;
+    UIColor *tfPhoneColor;
+    UIColor *tfVericodeColor;
+    if (textField == self.tfPhoneNum) {
+        tfPhoneColor = [UIColor UIColorFromRGB:0xF2C3C2 alpha:1];
+        tfVericodeColor = [UIColor UIColorFromRGB:0xEEEEEE alpha:1];
+
+    }else
+    {
+        tfPhoneColor = [UIColor UIColorFromRGB:0xEEEEEE alpha:1];
+        tfVericodeColor = [UIColor UIColorFromRGB:0xF2C3C2 alpha:1];
+
+
+    }
+    
+    self.tfPhoneNum.layer.borderColor= tfPhoneColor.CGColor;
+    self.tfVericode.layer.borderColor= tfVericodeColor.CGColor;
+
+
+    NSLog(@"---------------------%@",textField);
+    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -476,6 +496,13 @@
 - (void)keyBoardHide
 {
     [self.view endEditing:YES];
+}
+        
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    //移除通知中心
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidBeginEditingNotification object:nil];
 }
 
 @end

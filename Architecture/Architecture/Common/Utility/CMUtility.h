@@ -117,6 +117,8 @@
 //隐藏风火轮没动画
 + (void)hideMBProgressNOAnimation:(UIView*)_targetView;
 
+//提示框,Tim添加
++ (void)showTips:(NSString *)tips;
 
 //图片的颜色和尺寸
 + (UIImage *)imageWithColor:(UIColor *)color andSize:(CGSize)size;

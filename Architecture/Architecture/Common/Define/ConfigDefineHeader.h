@@ -16,9 +16,17 @@
 //#define DEF_IPAddress      @"http://121.40.82.243:9701/api3/ios" //测试环境
 //#define ACT_URL      @"http://121.40.82.243:83/appwap/activity/index?agent=ios" //测试环境 活动页面地址
 
+#define DEBUG_SOCKETIO
+
+#ifdef  DEBUG_SOCKETIO
+  #define SOCKETIO_ADDRESS        @"http://192.168.1.62:22223" //socketIO 环境
+#else
+  #define SOCKETIO_ADDRESS        @"http://apit.freshcn.cn:22223" //socketIO 环境
+#endif
+
+
 #define DEF_IPAddress        @"http://apptest.tv183.net/Api" //正式环境
 #define ACT_URL      @"http://piao.huo.com/appwap/activity/index?agent=ios" //正式环境 活动页面地址
-
 
 
  //**********************第三方*************************
@@ -628,5 +636,33 @@
  *   当前用户是否可以参加该活动
  */
 #define DEF_API_ISJOINACTIVITY @"isJoinActivity"
+
+
+
+
+/**
+ *   3.1	[xs001]登陆
+ *   3.1.1	请求报文体
+ */
+#define XS001 @"xs001"
+
+/**
+ *   3.1.2	响应报文体
+ */
+#define XR001 @"xr001"
+
+
+/**
+ *   3.2	[xs002]短信
+ ＊  3.2.1	请求报文体
+ */
+#define XS002 @"xs002"
+
+/**
+ *   3.1.2	响应报文体
+ */
+#define XR002 @"xr002"
+
+
 
 #endif
