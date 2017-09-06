@@ -145,7 +145,7 @@
              //[self.navigationController popViewControllerAnimated:YES];
              self.completion();
          }else{
-             self.completion();
+             //self.completion();
              [CMUtility showTips:str];
          }
      }];
@@ -220,6 +220,7 @@
         self.btnVericode.enabled = NO;
         [self.btnVericode setTitle:@"获取中..." forState:UIControlStateDisabled];
         [self.loginModel fetchVericode:self.tfPhoneNum.text withCompleteBlock:^(NSString *str) {
+            @strongify(self)
             NSLog(@"--------%@",str);
             if (![str isEqualToString:@"验证手机号码出错"]) {
                 [self startTimer];
@@ -232,29 +233,8 @@
                 self.btnVericode.enabled = YES;
                 self.tfPhoneNum.userInteractionEnabled = YES;
                 self.timeNum = 60;
-
             }
-
-
         }];
-        
-        //        [self.regViewModel fetchVericode:self.tfPhoneNum.text Type:GetPhoneVerify_Login  withCompleteBlock:^(NSString *str) {
-        //            @strongify(self);
-        //            if (![str isEqualToString:FailToCheckNum]) {
-        //                self.sessionid = str;
-                        [self startTimer];
-        //                self.tfPhoneNum.userInteractionEnabled = NO;
-        //            }else{
-        //                //暂停计时器
-        //                [_timer setFireDate:[NSDate distantFuture]];
-        //                [_timer invalidate];
-        //                _timer = nil;
-        //                self.btnVericode.enabled = YES;
-        //                self.tfPhoneNum.userInteractionEnabled = YES;
-        //                self.timeNum = 60;
-        //
-        //            }
-        //        }];
     }
 }
 
@@ -476,7 +456,6 @@
 //点击return 按钮 去掉
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    NSLog(@"----%@",textField);
     [textField resignFirstResponder];
     return YES;
 }
@@ -496,11 +475,7 @@
     }
     
     self.tfPhoneNum.layer.borderColor= tfPhoneColor.CGColor;
-    self.tfVericode.layer.borderColor= tfVericodeColor.CGColor;
-
-
-    NSLog(@"---------------------%@",textField);
-    
+    self.tfVericode.layer.borderColor= tfVericodeColor.CGColor;    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

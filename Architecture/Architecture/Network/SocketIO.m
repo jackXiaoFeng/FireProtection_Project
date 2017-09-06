@@ -48,15 +48,94 @@
 
 - (void)onCallback
 {
+    /*
+     http://cnodejs.org/topic/53911fd9c3ee0b5820f0b9ef
+    客户端事件：
+    
+    connect：连接成功
+    connecting：正在连接
+    disconnect：断开连接
+    connect_failed：连接失败
+    error：错误发生，并且无法被其他事件类型所处理
+    message：同服务器端message事件
+    anything：同服务器端anything事件
+    reconnect_failed：重连失败
+    reconnect：成功重连
+    reconnecting：正在重连
+    在这里要提下客户端socket发起连接时的顺序。当第一次连接时，事件触发顺序为：connecting->connect；当失去连接时，事件触发顺序为：disconnect->reconnecting（可能进行多次）->connecting->reconnect->connect。
+    */
+    
     [self.client on:@"connect" callback:^(NSArray* data, SocketAckEmitter* ack) {
         self.isConnectSuccess = YES;
-        NSLog(@"*************\n\niOS客户端上线\n\n*************");
-        // [self.client emit:@"login" with:@[@"30342"]];
-        self.connectSuccess();
-        
+        NSLog(@"*************\n\n连接成功 iOS客户端上线\n\n*************");
     }];
     
-    //登录
+    [self.client on:@"connecting" callback:^(NSArray* data, SocketAckEmitter* ack) {
+        NSLog(@"*************\n\n正在连接\n\n*************");
+    }];
+    
+
+    [self.client on:@"disconnect" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        NSLog(@"*************\n\n断开连接 iOS客户端下线\n\n*************%@",event?event[0]:@"");
+        self.isConnectSuccess = NO;
+    }];
+    
+    [self.client on:@"connect_failed" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        NSLog(@"*************\n\n连接失败 %@\n\n*************",event?event[0]:@"");
+        self.isConnectSuccess = NO;
+    }];
+    [self.client on:@"error" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        NSLog(@"*************\n\nerror：%@\n\n*************",event?event[0]:@"");
+        self.isConnectSuccess = NO;
+    }];
+    
+    /*
+    [self.client on:@"message" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        NSLog(@"*************\n\n同服务器端message事件\n\n*************%@",event?event[0]:@"");
+    }];
+    
+    [self.client on:@"anything" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        NSLog(@"*************\n\n同服务器端anything事件\n\n*************%@",event?event[0]:@"");
+    }];
+    */
+    
+    [self.client on:@"disconnect" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        NSLog(@"*************\n\n断开连接 iOS客户端下线\n\n*************%@",event?event[0]:@"");
+    }];
+    
+    [self.client on:@"reconnect_failed" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        NSLog(@"*************\n\n重连失败 %@\n\n*************",event?event[0]:@"");
+    }];
+    
+    [self.client on:@"reconnect" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        NSLog(@"*************\n\n成功重连 %@\n\n*************",event?event[0]:@"");
+    }];
+    
+    [self.client on:@"reconnecting" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        NSLog(@"*************\n\n正在重连 %@\n\n*************",event?event[0]:@"");
+    }];
+    
+    
+    /**
+     *   3.1	[xs001]登陆
+     *   3.2	[xs002]短信
+     *   3.3	[xs003]当前区域设备
+     *   3.4	[xs004]设备告警信息
+     *   3.5	[xs005] 巡检完成度(当、周、月)
+     *   3.6	[xs006]查看巡检计划
+     *   3.7	[xs007]上传巡检
+     *   3.8	[xs008]查看巡检记录
+     *   3.9	[xs009]告警历史记录
+     *   3.10	[xs010]故障设备复归
+     *   3.11	[xs011]设备检修记录
+     *   3.12	[xs012]设备列表
+     *   3.13	[xs013]监控设备列表
+     *   3.14	[xs014]故障设备复归确认或申请
+     *   3.15	[xs015]告警设备复归或维修
+     *   3.16	[xs016]数据图
+     */
+
+    //[xs001]登陆
     [self.client on:XR001 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
         NSLog(@"*************\n\nXR001\n\n*************%@",event?event[0]:@"");
         if (event[0]) {
@@ -68,34 +147,158 @@
         }
     }];
     
-    //获取短信验证码
+    //[xs002]短信
     [self.client on:XR002 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
         if (event[0]) {
             NSDictionary *dic = event[0];
             self.xr002CallBackResult(dic);
         }else
         {
-            self.xr001CallBackResult(@{@"errormsg":@"获取短信验证码失败"});
+            self.xr002CallBackResult(@{@"errormsg":@"获取短信验证码失败"});
         }
     }];
     
-    [self.client on:@"chat message" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
-        if (event[0] && ![event[0] isEqualToString:@""]) {
+//    *   3.3	[xs003]当前区域设备
+    [self.client on:XR003 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr003CallBackResult(dic);
+        }else
+        {
+            self.xr003CallBackResult(@{@"errormsg":@"获取当前区域设备失败"});
         }
     }];
-    [self.client on:@"privateMessage" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
-        if (event[0] && ![event[0] isEqualToString:@""]) {
+//    *   3.4	[xs004]设备告警信息
+    [self.client on:XR004 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr004CallBackResult(dic);
+        }else
+        {
+            self.xr004CallBackResult(@{@"errormsg":@"获取设备告警信息失败"});
         }
     }];
-    
-    [self.client on:@"disconnect" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
-        NSLog(@"*************\n\niOS客户端下线\n\n*************%@",event?event[0]:@"");
+//    *   3.5	[xs005] 巡检完成度(当、周、月)
+    [self.client on:XR005 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr005CallBackResult(dic);
+        }else
+        {
+            self.xr005CallBackResult(@{@"errormsg":@"获取巡检完成度失败"});
+        }
     }];
-    [self.client on:@"error" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
-        self.isConnectSuccess = NO;
-        NSLog(@"*************\n\n%@\n\n*************",event?event[0]:@"");
+//    *   3.6	[xs006]查看巡检计划
+    [self.client on:XR006 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr006CallBackResult(dic);
+        }else
+        {
+            self.xr006CallBackResult(@{@"errormsg":@"获取巡检计划失败"});
+        }
     }];
-}
+//    *   3.7	[xs007]上传巡检
+    [self.client on:XR007 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr007CallBackResult(dic);
+        }else
+        {
+            self.xr007CallBackResult(@{@"errormsg":@"上传巡检失败"});
+        }
+    }];
+//    *   3.8	[xs008]查看巡检记录
+    [self.client on:XR008 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr008CallBackResult(dic);
+        }else
+        {
+            self.xr008CallBackResult(@{@"errormsg":@"获取巡检记录失败"});
+        }
+    }];
+//    *   3.9	[xs009]告警历史记录
+    [self.client on:XR009 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr009CallBackResult(dic);
+        }else
+        {
+            self.xr009CallBackResult(@{@"errormsg":@"获取告警历史记录失败"});
+        }
+    }];
+//    *   3.10	[xs010]故障设备复归
+    [self.client on:XR010 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr010CallBackResult(dic);
+        }else
+        {
+            self.xr010CallBackResult(@{@"errormsg":@"故障设备复归失败"});
+        }
+    }];
+//    *   3.11	[xs011]设备检修记录
+    [self.client on:XR011 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr011CallBackResult(dic);
+        }else
+        {
+            self.xr011CallBackResult(@{@"errormsg":@"故障设备复归失败"});
+        }
+    }];
+//    *   3.12	[xs012]设备列表
+    [self.client on:XR012 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr012CallBackResult(dic);
+        }else
+        {
+            self.xr012CallBackResult(@{@"errormsg":@"获取设备列表失败"});
+        }
+    }];
+//    *   3.13	[xs013]监控设备列表
+    [self.client on:XR013 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr013CallBackResult(dic);
+        }else
+        {
+            self.xr013CallBackResult(@{@"errormsg":@"获取监控设备列表失败"});
+        }
+    }];
+//    *   3.14	[xs014]故障设备复归确认或申请
+    [self.client on:XR014 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr014CallBackResult(dic);
+        }else
+        {
+            self.xr014CallBackResult(@{@"errormsg":@"故障设备复归确认失败"});
+        }
+    }];
+//    *   3.15	[xs015]告警设备复归或维修
+    [self.client on:XR015 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr015CallBackResult(dic);
+        }else
+        {
+            self.xr015CallBackResult(@{@"errormsg":@"告警设备复归失败"});
+        }
+    }];
+//    *   3.16	[xs016]数据图
+    [self.client on:XR016 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr016CallBackResult(dic);
+        }else
+        {
+            self.xr016CallBackResult(@{@"errormsg":@"获取数据图失败"});
+        }
+    }];
+ }
 
 - (SocketIOClient *)client{
     if (!_client) {
@@ -105,7 +308,6 @@
     }
     return _client;
 }
-
 
 #pragma mark - webSocket -
 

@@ -220,13 +220,13 @@
  *   3.10	[xs010]故障设备复归
  ＊  3.10.1
  */
-#define XS0010 @"xs0010"
-#define XS0010_serial_no @"000010"
+#define XS010 @"xs010"
+#define XS010_serial_no @"00010"
 
 /**
  *   3.10.2	响应报文体
  */
-#define XR0010 @"xr0010"
+#define XR010 @"xr010"
 
 
 /**
@@ -234,12 +234,84 @@
  
  ＊  3.11.1
  */
-#define XS0011 @"xs0011"
-#define XS0011_serial_no @"000011"
+#define XS011 @"xs011"
+#define XS011_serial_no @"00011"
 
 /**
- *   3.10.2	响应报文体
+ *   3.11.2	响应报文体
  */
-#define XR0010 @"xr001122"
+#define XR011 @"xr011"
+
+
+/**
+ *   3.12	[xs012]设备列表
+ 
+ ＊  3.12.1
+ */
+#define XS012 @"xs012"
+#define XS012_serial_no @"00012"
+
+/**
+ *   3.12.2	响应报文体
+ */
+#define XR012 @"xr012"
+
+
+/**
+ *   3.13	[xs013]监控设备列表
+ 
+ ＊  3.13.1
+ */
+#define XS013 @"xs013"
+#define XS013_serial_no @"00013"
+
+/**
+ *   3.13.2	响应报文体
+ */
+#define XR013 @"xr013"
+
+
+
+/**
+ *   3.14	[xs014]故障设备复归确认或申请
+ 
+ ＊  3.14.1
+ */
+#define XS014 @"xs014"
+#define XS014_serial_no @"00014"
+
+/**
+ *   3.14.2	响应报文体
+ */
+#define XR014 @"xr014"
+
+
+/**
+ *   3.15	[xs015]告警设备复归或维修
+ 
+ ＊  3.15.1
+ */
+#define XS015 @"xs015"
+#define XS015_serial_no @"00015"
+
+/**
+ *   3.15.2	响应报文体
+ */
+#define XR015 @"xr015"
+
+
+/**
+ *   3.16	[xs016]数据图
+ 
+ ＊  3.16.1
+ */
+#define XS016 @"xs016"
+#define XS016_serial_no @"00016"
+
+/**
+ *   3.16.2	响应报文体
+ */
+#define XR016 @"xr016"
+
 
 #endif

@@ -37,7 +37,6 @@
         
         //@"{\"code\":\"xs001\",\"serial_no\":\"\",\"token\":\"2hACkIzVnNqCjEciwCaZ2flveBGv\",\"errorcode\":\"0\",\"errormsg\":\"success\",\"dat\":[{\"Oper_flag\":\"1\",\"Username\":\"123456\",\"Vcode\":\"123456\",\"Areas_sn\":\"12345\"}]}"
         
-        
         NSString *jsonStr = [tempDic JSONString];
         NSLog(@"jsonStr---%@",jsonStr);
         
@@ -130,7 +129,6 @@
         SocketIO_Singleton.xr001CallBackResult = ^(NSDictionary *resultDict){
             NSString *code = DEF_OBJECT_TO_STIRNG([resultDict objectForKey:@"code"]);
             NSString *errormsg = DEF_OBJECT_TO_STIRNG([resultDict objectForKey:@"errormsg"]);
-
             NSLog(@"code is :%@",code);
             NSLog(@"errormsg is :%@",errormsg);
             NSArray *list = [resultDict objectForKey:@"datas"];
@@ -142,4 +140,6 @@
 
     }
 }
+
+
 @end

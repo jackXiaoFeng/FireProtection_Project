@@ -36,9 +36,41 @@ typedef enum {
 
 typedef void (^ConnectSuccess) (void);
 
+/**
+ *   3.1	[xs001]登陆
+ *   3.2	[xs002]短信
+ *   3.3	[xs003]当前区域设备
+ *   3.4	[xs004]设备告警信息
+ *   3.5	[xs005] 巡检完成度(当、周、月)
+ *   3.6	[xs006]查看巡检计划
+ *   3.7	[xs007]上传巡检
+ *   3.8	[xs008]查看巡检记录
+ *   3.9	[xs009]告警历史记录
+ *   3.10	[xs010]故障设备复归
+ *   3.11	[xs011]设备检修记录
+ *   3.12	[xs012]设备列表
+ *   3.13	[xs013]监控设备列表
+ *   3.14	[xs014]故障设备复归确认或申请
+ *   3.15	[xs015]告警设备复归或维修
+ *   3.16	[xs016]数据图
+ */
+
 typedef void (^Xr001CallBackResult) (NSDictionary *);
 typedef void (^Xr002CallBackResult) (NSDictionary *);
 typedef void (^Xr003CallBackResult) (NSDictionary *);
+typedef void (^Xr004CallBackResult) (NSDictionary *);
+typedef void (^Xr005CallBackResult) (NSDictionary *);
+typedef void (^Xr006CallBackResult) (NSDictionary *);
+typedef void (^Xr007CallBackResult) (NSDictionary *);
+typedef void (^Xr008CallBackResult) (NSDictionary *);
+typedef void (^Xr009CallBackResult) (NSDictionary *);
+typedef void (^Xr010CallBackResult) (NSDictionary *);
+typedef void (^Xr011CallBackResult) (NSDictionary *);
+typedef void (^Xr012CallBackResult) (NSDictionary *);
+typedef void (^Xr013CallBackResult) (NSDictionary *);
+typedef void (^Xr014CallBackResult) (NSDictionary *);
+typedef void (^Xr015CallBackResult) (NSDictionary *);
+typedef void (^Xr016CallBackResult) (NSDictionary *);
 
 
 @interface SocketIO : NSObject<SRWebSocketDelegate>
@@ -57,7 +89,19 @@ typedef void (^Xr003CallBackResult) (NSDictionary *);
 @property (nonatomic, copy) Xr001CallBackResult xr001CallBackResult;
 @property (nonatomic, copy) Xr002CallBackResult xr002CallBackResult;
 @property (nonatomic, copy) Xr003CallBackResult xr003CallBackResult;
-
+@property (nonatomic, copy) Xr004CallBackResult xr004CallBackResult;
+@property (nonatomic, copy) Xr005CallBackResult xr005CallBackResult;
+@property (nonatomic, copy) Xr006CallBackResult xr006CallBackResult;
+@property (nonatomic, copy) Xr007CallBackResult xr007CallBackResult;
+@property (nonatomic, copy) Xr008CallBackResult xr008CallBackResult;
+@property (nonatomic, copy) Xr009CallBackResult xr009CallBackResult;
+@property (nonatomic, copy) Xr010CallBackResult xr010CallBackResult;
+@property (nonatomic, copy) Xr011CallBackResult xr011CallBackResult;
+@property (nonatomic, copy) Xr012CallBackResult xr012CallBackResult;
+@property (nonatomic, copy) Xr013CallBackResult xr013CallBackResult;
+@property (nonatomic, copy) Xr014CallBackResult xr014CallBackResult;
+@property (nonatomic, copy) Xr015CallBackResult xr015CallBackResult;
+@property (nonatomic, copy) Xr016CallBackResult xr016CallBackResult;
 
 
 //@property (nonatomic, strong) ChatMessageModel *chatMessageModel;
