@@ -7,12 +7,7 @@
 //
 
 #import "CMUtility.h"
-#import "Reachability.h"
-#import "MBProgressHUD.h"
-#import "AppDelegate.h"
-#import "JSONKit.h"
-#import "GJCFDateUitilMacrocDefine.h"
-#import "GJCFDispatchMacrocDefine.h"
+
 
 /**
  *  检查一个对象是否为空
@@ -390,8 +385,9 @@
 + (NSString *)currentTimestamp
 {
     NSDate *senddate = [NSDate date];
-//    NSLog(@"date1时间戳 = %ld",time(NULL));
-    NSString *dateStr = [NSString stringWithFormat:@"%ld", (long)[senddate timeIntervalSince1970]];
+    //NSLog(@"date1时间戳 = %ld",time(NULL));
+    // *1000 是精确到毫秒，不乘就是精确到秒
+    NSString *dateStr = [NSString stringWithFormat:@"%ld", (long)([senddate timeIntervalSince1970]*1000)];
    return dateStr;
 
 }

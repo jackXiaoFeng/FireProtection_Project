@@ -51,6 +51,9 @@ typedef void (^Xr003CallBackResult) (NSDictionary *);
 
 @property (nonatomic, copy) ConnectSuccess connectSuccess;
 
+@property (nonatomic, assign) BOOL isConnectSuccess;
+
+
 @property (nonatomic, copy) Xr001CallBackResult xr001CallBackResult;
 @property (nonatomic, copy) Xr002CallBackResult xr002CallBackResult;
 @property (nonatomic, copy) Xr003CallBackResult xr003CallBackResult;

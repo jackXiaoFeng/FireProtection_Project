@@ -16,8 +16,7 @@
 //#define DEF_IPAddress      @"http://121.40.82.243:9701/api3/ios" //测试环境
 //#define ACT_URL      @"http://121.40.82.243:83/appwap/activity/index?agent=ios" //测试环境 活动页面地址
 
-#define DEBUG_SOCKETIO
-
+//#define DEBUG_SOCKETIO
 #ifdef  DEBUG_SOCKETIO
   #define SOCKETIO_ADDRESS        @"http://192.168.1.62:22223" //socketIO 环境
 #else
@@ -101,550 +100,11 @@
 #pragma mark - connect
 
 /**
- *  获取最新版本
- */
-#define DEF_API_version               @"/Customer/version"
-
-/**
- *  在线直播接口
- */
-#define DEF_API_liveVideo              @"/Live/liveVideo"
-
-
-/**
- *  登陆
- */
-#define DEF_API_loginIn                @"/Login/loginIn"
-
-/**
- *  获取验证码
- */
-#define DEF_API_phoneVerify            @"/Register/phoneVerify"
-
-/**
- *  注册
- */
-#define DEF_API_register               @"/Register/register"
-
-/**
- *  验证验证码是否正确
- */
-#define DEF_API_checkVerify            @"/Customer/checkVerify"
-
-/**
- *  忘记密码->重置密码
- */
-#define DEF_API_getBackPass            @"/Customer/getBackPass"
-
-/**
- *  重置密码
- */
-#define DEF_API_modefyPass             @"/Customer/modefyPass"
-
-/**
- *  用户反馈信息
- */
-#define DEF_API_feedback               @"/Customer/feedback"
-
-/**
- *  更新头像
- */
-#define DEF_API_modefyHeadUrl          @"/Customer/modefyHeadUrl"
-
-/**
- *  更新用户名
- */
-#define DEF_API_modefyNickname         @"/Customer/modefyNickname"
-
-/**
- *  获取用户信息
- */
-#define DEF_API_getUserInfo            @"/Customer/getUserInfo"
-
-
-/**
- *  我参与的群组
- */
-#define DEF_API_groupEntry             @"/Group/groupEntry"
-
-/**
- * 退出群组
- */
-#define DEF_API_groupQuit              @"/Group/groupQuit"
-
-/**
- *  群组
- */
-#define DEF_API_myGroup                @"/Group/myGroup"
-
-/**
- *  登录 历史聊天记录接口
- */
-#define DEF_API_history                @"/Message/history"
-
-/**
- *  未登录 历史聊天记录接口
- */
-#define DEF_API_hallHistory             @"/Message/hallHistory"
-
-
-
-
-
-/**
- *  获取直播室信息
- */
-#define DEF_API_getRoompath                 @"/api/getRoompath"
-
-/**
- *  插入聊天信息
- */
-#define DEF_API_chating                     @"/app/chating"
-
-
-
-
-
-
-/**
- *  获取sessionid3
- */
-#define DEF_API_CONNECT           @"connect"
-
-#pragma mark - LoginAndRegister
-
-/**
- *  验证手机号码是否已经注册过（重置密码和设置支付密码时用，修改用户手机号码时不用）
- */
-#define DEF_API_CHECKPHONE              @"checkPhone"
-
-
-/**
- *  验证验证码是否正确
- */
-#define DEF_API_CHECKCAPTCHA            @"checkCaptcha"
-
-/**
- *  重置密码
- */
-#define DEF_API_RESETPASSWORD           @"resetPassword"
-
-/**
- *  重置手机号码
- */
-#define DEF_API_RESETPHONE              @"resetPhone"
-
-
-
-/**
- *  支付密码
- */
-#define DEF_API_PAYPASSWORD             @"payPassword"
-
-/**
- *  修改用户信息
- */
-#define DEF_API_SETUSERINFO             @"setUserInfo"
-
-/**
- *  用户反馈信息
- */
-#define DEF_API_FEEDBACK                @"feedback"
-
-/**
- *  app版本信息
- */
-#define DEF_API_VERSION                 @"version"
-
-
-
-/**
- *  第三方登录
- */
-#define DEF_API_USERTHIRDLOGIN          @"userthirdlogin"
-
-/**
- *  退出登录
- */
-#define DEF_API_LOGOUT                  @"logout"
-
-
-/**
- *  自动登录
- */
-#define DEF_API_RELOGIN                 @"relogin"
-
-/**
- *  获取用户信息
- */
-#define DEF_API_USERINFO                @"userinfo"
-
-/**********************Tim  修改***********************/
-#pragma mark - 我的
-/**
- *  获取消息
- */
-#define DEF_API_MYMESSAGE                @"myMessage"
-
-/**
- *  获取我的订单
- */
-#define DEF_API_ORDER                    @"order"
-
-/**
- *  取消订单
- */
-#define DEF_API_ORDERUNDO                @"orderUndo"
-
-
-
-/**
- *  获取用户的卡券
- */
-#define DEF_API_MYCOUPON                 @"myCoupon"
-
-/**
- *  获取用户未领取的卡券
- */
-#define DEF_API_GETCANGETCOUPON          @"getCanGetCoupon"
-
-/**
- *  绑定卡券
- */
-#define DEF_API_BINGINGCOUPON            @"bindingCoupon"
-
-/**
- *  通过优惠卷组编号领取优惠卷并绑定到个人
- */
-#define DEF_API_USERBINDCOUPON           @"userBindCoupon"
-
-/**
- *  获取预购票
- */
-#define DEF_API_ORDERPERVIOUS            @"orderPrevious"
-
-
-/**
- *  获取我参加的活动
- */
-#define DEF_API_MYACTIVITY               @"myActivity"
-
-/**
- *  我关注的电影
- */
-#define DEF_API_ATTENTION                @"attention"
-
-/**
- *  取消电影关注
- */
-#define DEF_API_CANCELATTENTION          @"cancelAttention"
-
-/**
- *  取消电影院的收藏
- */
-#define DEF_API_CANCELFAVORITE           @"cancelFavorite"
-
-
-/**
- *  我收藏的影院
- */
-#define DEF_API_FAVORITE                 @"favorite"
-
-
-
-#pragma mark - Home
-
-/**
- *  首页正在上映
- */
-#define DEF_API_HOME_SHOW                  @"showing"
-
-/**
- *  首页收藏或附近
- */
-#define DEF_API_HOME_FAVORITE              @"favoriteHome"
-
-/**
- *  首页即将上映
- */
-#define DEF_API_HOME_TOSHOW                @"toShow"
-/**
- *  首页精彩活动
- */
-#define DEF_API_HOME_BANNER                @"bannerIndex"
-
-#define DEF_API_HOME_HOTNEWS               @"cinecism"
-
-#define DEF_API_HOME_PROMOTION             @"promotion"
-
-/**
- *  首页接口
- */
-#define DEF_API_HOME                       @"homePage"
-
-/**
- *预告
- */
-#define DEF_API_FIND_ANNOUNCE    @"announce"
-
-/**
- *关注影片
- */
-#define DEF_API_FIND_ATTENTIONFILM @"attentionFilm"
-
-/**
- *取消关注
- */
-#define DEF_API_FIND_CANCELATTENTION @"cancelAttention"
-
-/**
- * 影片资讯
- */
-#define DEF_API_FIND_NEWS @"news"
-
-/**
- * 资讯详情
- */
-#define DEF_API_FIND_NEWSDETAIL @"newsDetail"
-
-/**
- * 影片影评
- */
-#define DEF_API_FIND_CINECISM @"cinecism"
-
-/**
- * 发现界面H5接口
- */
-#define DEF_API_FIND_h5Url @"h5Url"
-
-/**
- * 演员详情
- */
-#define DEF_API_ACTOR @"actor"
-
-/**
- * 演员影片
- */
-#define DEF_API_ACTORFILM @"actorFilm"
-
-/**
- *评论列表
- */
-#define DEF_API_FIND_COMMENT @"comment"
-
-/**
- *我的评论列表
- */
-#define DEF_API_FIND_MYCOMMENT @"myComment"
-
-/**
- *我的评论列表
- */
-#define DEF_API_MYCOMMENT @"myComment"
-
-
-/**
- *我的最新评论
- */
-#define DEF_API_MYLASTCOMMENT @"myLastComment"
-
-/**
- *提交评论
- */
-#define DEF_API_FIND_COMMENTCOMMON @"commentCommon"
-
-/**
- * 用户顶
- */
-#define DEF_API_FIND_UPDOWN @"upDown"
-
-
-/**
- * 用户取消顶
- */
-#define DEF_API_FIND_CANCELUPDOWN @"cancelUpDown"
-
-
-
-#pragma mark - CINAMA
-
-/**
- *  城市选择
- */
-#define DEF_API_REGION @"regionIOS"
-
-/**
- *  地铁查询
- */
-#define DEF_API_TRAIN @"train"
-
-/**
- *  商圈查询
- */
-#define DEF_API_SHOPAREA @"shopArea"
-
-/**
- *  地区查询
- */
-#define DEF_API_DISTRICT @"district"
-
-/**
- *  影院搜索
- */
-#define DEF_API_CINEMASEARCH @"cinemaSearch"
-
-/**
- *  影院详情
- */
-#define DEF_API_CINEMADETAIL @"cinemaDetail"
-
-/**
- *  收藏影院
- */
-#define DEF_API_FAVORITECINEMA @"favoriteCinema"
-
-/**
- *  取消收藏影院
- */
-#define DEF_API_CANCELFAVORITE @"cancelFavorite"
-/**
- 
-
- *  影院影片
- */
-#define DEF_API_CINEMAFILM @"cinemaFilm"
-/**
- *  影院排期
- */
-#define DEF_API_CINEMASCHEDULE @"filmCinemaSchedule"//@"cinemaSchedule"
-
-/**
- *  快速购票
- */
-#define DEF_API_FASTTICKET @"fastTicket"
-/**
- *  快速购票影片列表
- */
-#define DEF_API_FASTTICKETFILM @"fastTicketFilm"
-/**
- *  快速购票排期
- */
-#define DEF_API_FASTTICKETSCHEDULE @"fastTicketSchedule"
-
-/**
- *  影院座位接口
- */
-#define DEF_API_SEATSCHEDULE @"orderSeat"
-/**
- *  订单提交接口
- */
-#define DEF_API_ORDERADD @"orderAdd"
-/**
- *  订单支付接口
- */
-#define DEF_API_ORDERPAY @"orderPay"
-/**
- *  活动列表接口
- */
-#define DEF_API_GETUSABLEACTIVITYS @"getUsableActivitys"
-/**
- *  卡券列表接口
- */
-#define DEF_API_GETCOUPONLIST @"getCouponList"
-/**
- *  支付信息接口
- */
-#define DEF_API_GETPAYINFO @"getPayInfo"
-/**
- *  根据订单code获取详情接口
- */
-#define DEF_API_ORDERDETAILBYCODE @"orderDetailByCode"
-/**
- *  重发取票码接口
- */
-#define DEF_API_RESENDTICKETCODE @"resendTicketcode"
-/**
- *  影片搜索
- */
-#define DEF_API_FILMSEARCH @"filmSearch"
-/**
- *  影片关键字搜索
- */
-#define DEF_API_FILMSEARCH_NEW @"filmSearch_new"
-/**
- *  影片详情
- */
-#define DEF_API_FILMDETAIL @"filmDetail"
-
-/**
- *  分享
- */
-#define DEF_API_SHARE @"share"
-
-/**
- *  影片演员
- */
-#define DEF_API_FILMACTOR @"filmActor"
-
-/**
- *  影片详情  评分
- */
-#define DEF_API_SCOREFILM @"scoreFilm"
-
-/**
- *  影片评分
- */
-#define DEF_API_SCORECINEMA @"scoreCinema"
-
-/**
- *  影片搜索影院
- */
-#define DEF_API_FILMCINEMA @"filmCinemaByConditions"//@"filmCinemaTrain"//
-
-/**
- *  分享接口 获取分享信息
- */
-#define DEF_API_SHARE @"share"
-
-/**
- *   新增优惠劵根据code
- */
-#define DEF_API_BINDINGORDER @"bindingCouponByOrder"
-
-
-/**
- *   活动购票列表
- */
-#define DEF_API_ACTIVITYSCHEDULE @"activitySchedule"
-
-/**
- *   活动首页列表
- */
-#define DEF_API_ACTIVITYLIST @"activityList"
-
-/**
- *   活动是否上线
- */
-#define DEF_API_VERSIONISOPEN @"versionIsOpen"
-
-/**
- *   活动详情
- */
-#define DEF_API_ACTIVITYDETAIL @"activityDetail"
-
-/**
- *   当前用户是否可以参加该活动
- */
-#define DEF_API_ISJOINACTIVITY @"isJoinActivity"
-
-
-
-
-/**
  *   3.1	[xs001]登陆
  *   3.1.1	请求报文体
  */
 #define XS001 @"xs001"
+#define XS001_serial_no @"00001"
 
 /**
  *   3.1.2	响应报文体
@@ -657,6 +117,7 @@
  ＊  3.2.1	请求报文体
  */
 #define XS002 @"xs002"
+#define XS002_serial_no @"00002"
 
 /**
  *   3.1.2	响应报文体
@@ -664,5 +125,121 @@
 #define XR002 @"xr002"
 
 
+/**
+ *   3.3	[xs003]当前区域设备
+ ＊  3.3.1
+ */
+#define XS003 @"xs003"
+#define XS003_serial_no @"00003"
+
+/**
+ *   3.3.2	响应报文体
+ */
+#define XR003 @"xr003"
+
+
+/**
+ *   3.4	[xs004]设备告警信息
+ ＊  3.4.1
+ */
+#define XS004 @"xs004"
+#define XS004_serial_no @"00004"
+
+/**
+ *   3.4.2	响应报文体
+ */
+#define XR004 @"xr004"
+
+
+/**
+ *   3.5	[xs005] 巡检完成度(当、周、月)
+ ＊  3.5.1
+ */
+#define XS005 @"xs005"
+#define XS005_serial_no @"00005"
+
+/**
+ *   3.5.2	响应报文体
+ */
+#define XR005 @"xr005"
+
+
+/**
+ *   3.6	[xs006]查看巡检计划
+ ＊  3.6.1
+ */
+#define XS006 @"xs006"
+#define XS006_serial_no @"00006"
+
+/**
+ *   3.6.2	响应报文体
+ */
+#define XR006 @"xr006"
+
+
+/**
+ *   3.7	[xs007]上传巡检
+ ＊  3.7.1
+ */
+#define XS007 @"xs007"
+#define XS007_serial_no @"00007"
+
+/**
+ *   3.7.2	响应报文体
+ */
+#define XR007 @"xr007"
+
+
+/**
+ *   3.8	[xs008]查看巡检记录
+ ＊  3.8.1
+ */
+#define XS008 @"xs008"
+#define XS008_serial_no @"00008"
+
+/**
+ *   3.8.2	响应报文体
+ */
+#define XR008 @"xr008"
+
+
+/**
+ *   3.9	[xs009]告警历史记录
+ ＊  3.9.1
+ */
+#define XS009 @"xs009"
+#define XS009_serial_no @"00009"
+
+/**
+ *   3.9.2	响应报文体
+ */
+#define XR009 @"xr009"
+
+
+/**
+ *   3.10	[xs010]故障设备复归
+ ＊  3.10.1
+ */
+#define XS0010 @"xs0010"
+#define XS0010_serial_no @"000010"
+
+/**
+ *   3.10.2	响应报文体
+ */
+#define XR0010 @"xr0010"
+
+
+/**
+ *   3.11	[xs011]设备检修记录
+ 
+ ＊  3.11.1
+ */
+#define XS0011 @"xs0011"
+#define XS0011_serial_no @"000011"
+
+/**
+ *   3.10.2	响应报文体
+ */
+#define XR0010 @"xr001122"
 
 #endif

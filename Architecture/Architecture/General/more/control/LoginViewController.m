@@ -145,6 +145,7 @@
              //[self.navigationController popViewControllerAnimated:YES];
              self.completion();
          }else{
+             self.completion();
              [CMUtility showTips:str];
          }
      }];
@@ -220,6 +221,20 @@
         [self.btnVericode setTitle:@"获取中..." forState:UIControlStateDisabled];
         [self.loginModel fetchVericode:self.tfPhoneNum.text withCompleteBlock:^(NSString *str) {
             NSLog(@"--------%@",str);
+            if (![str isEqualToString:@"验证手机号码出错"]) {
+                [self startTimer];
+                self.tfPhoneNum.userInteractionEnabled = NO;
+            }else{
+                //暂停计时器
+                [_timer setFireDate:[NSDate distantFuture]];
+                [_timer invalidate];
+                _timer = nil;
+                self.btnVericode.enabled = YES;
+                self.tfPhoneNum.userInteractionEnabled = YES;
+                self.timeNum = 60;
+
+            }
+
 
         }];
         

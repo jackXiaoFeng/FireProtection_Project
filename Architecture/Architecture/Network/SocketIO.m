@@ -49,6 +49,7 @@
 - (void)onCallback
 {
     [self.client on:@"connect" callback:^(NSArray* data, SocketAckEmitter* ack) {
+        self.isConnectSuccess = YES;
         NSLog(@"*************\n\niOS客户端上线\n\n*************");
         // [self.client emit:@"login" with:@[@"30342"]];
         self.connectSuccess();
@@ -63,7 +64,7 @@
             self.xr001CallBackResult(dic);
         }else
         {
-            //self.xr001CallBackResult(@"登录失败");
+            self.xr001CallBackResult(@{@"errormsg":@"登录失败"});
         }
     }];
     
@@ -74,7 +75,7 @@
             self.xr002CallBackResult(dic);
         }else
         {
-            //self.xr001CallBackResult(@"获取短信验证码失败");
+            self.xr001CallBackResult(@{@"errormsg":@"获取短信验证码失败"});
         }
     }];
     
@@ -86,10 +87,12 @@
         if (event[0] && ![event[0] isEqualToString:@""]) {
         }
     }];
+    
     [self.client on:@"disconnect" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
         NSLog(@"*************\n\niOS客户端下线\n\n*************%@",event?event[0]:@"");
     }];
     [self.client on:@"error" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        self.isConnectSuccess = NO;
         NSLog(@"*************\n\n%@\n\n*************",event?event[0]:@"");
     }];
 }

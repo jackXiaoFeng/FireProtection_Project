@@ -21,7 +21,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-
     //socketio 连接
     @weakify(self)
     SocketIO_Singleton.connectSuccess = ^{
