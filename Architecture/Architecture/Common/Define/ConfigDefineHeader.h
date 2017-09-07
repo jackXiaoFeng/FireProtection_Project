@@ -16,9 +16,10 @@
 //#define DEF_IPAddress      @"http://121.40.82.243:9701/api3/ios" //测试环境
 //#define ACT_URL      @"http://121.40.82.243:83/appwap/activity/index?agent=ios" //测试环境 活动页面地址
 
-//#define DEBUG_SOCKETIO
+#define DEBUG_SOCKETIO
+
 #ifdef  DEBUG_SOCKETIO
-  #define SOCKETIO_ADDRESS        @"http://192.168.1.62:22223" //socketIO 环境
+#define SOCKETIO_ADDRESS          @"http://192.168.1.62:22223" //socketIO 环境
 #else
   #define SOCKETIO_ADDRESS        @"http://apit.freshcn.cn:22223" //socketIO 环境
 #endif
@@ -98,6 +99,10 @@
 
 
 #pragma mark - connect
+
+#define SUCCESS_CODE @"0"
+#define SUCCESS_MSG  @"success"
+
 
 /**
  *   3.1	[xs001]登陆

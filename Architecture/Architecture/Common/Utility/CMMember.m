@@ -24,6 +24,7 @@
         dispatch_once(&onceToken, ^{
             shareInstance = [[self alloc]init];
             shareInstance.isLogined = NO;
+            shareInstance.userInfo = [[CMMemberData alloc]init];
         });
     }
     

@@ -86,37 +86,7 @@
     //self.loginModel.WeakVC = self;
     self.timeNum = 60;//倒计时时间初始化为60秒
     
-    //    self.padding = 20;
-    //
-    //    self.textField_view_height = 60;
     
-    //    // Do any additional setup after loading the view.
-    //    NSArray *textFieldArray = @[self.userName,self.tfPassword];
-    //    [textFieldArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-    //        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 500 +DEF_NAVIGATIONBAR_HEIGHT +  (self.padding + self.textField_view_height)*idx + self.padding, DEF_DEVICE_WIDTH, self.textField_view_height)];
-    //        view.backgroundColor = DEF_UICOLORFROMRGB(0xffffff);
-    //        [self.view addSubview:view];
-    //
-    //        [view addSubview:textFieldArray[idx]];
-    //
-    ////        if (idx == 1) {
-    ////            [view addSubview:[self createBtnGetVeriCode]];
-    ////        }
-    //
-    //        for (int i = 0; i < 2; i ++) {
-    //            UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, i * (view.height - 0.5), view.width, 0.5)];
-    //            lineView.backgroundColor = DEF_UICOLORFROMRGB(0xd2d2d2);
-    //            lineView.alpha = 0.7;
-    //            [view addSubview:lineView];
-    //
-    //        }
-    //
-    //    }];
-    //
-    //    self.btnNext.multipleTouchEnabled = NO;
-    //
-    
-    //
     [self addRAC];
     
     
@@ -124,7 +94,6 @@
     //添加文本框通知中心
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gosave:) name:UITextFieldTextDidBeginEditingNotification object:nil];
     //selector是选择器，Observer是观察者，name是检测的类型 object填nil就行 //这里检测的是文本框text值改变的时候，另外还可以检测： UITextFieldTextDidBeginEditingNotification;开始编辑时 UITextFieldTextDidEndEditingNotification;结束编辑时 UITextFieldTextDidChangeNotification;值改变时
-    
 }
 
 
@@ -142,10 +111,8 @@
          @strongify(self)
          if ([str isEqualToString:@"登录成功"]) {
              [CMUtility showTips:@"登录成功"];
-             //[self.navigationController popViewControllerAnimated:YES];
              self.completion();
          }else{
-             //self.completion();
              [CMUtility showTips:str];
          }
      }];
@@ -221,10 +188,27 @@
         [self.btnVericode setTitle:@"获取中..." forState:UIControlStateDisabled];
         [self.loginModel fetchVericode:self.tfPhoneNum.text withCompleteBlock:^(NSString *str) {
             @strongify(self)
-            NSLog(@"--------%@",str);
-            if (![str isEqualToString:@"验证手机号码出错"]) {
+            
+            //fix:![str isEqualToString:FailToCheckNum]
+//            if (![str isEqualToString:FailToCheckNum]) {
+//                self.sessionid = str;
+//                [self startTimer];
+//                self.tfPhoneNum.userInteractionEnabled = NO;
+//            }else{
+//                //暂停计时器
+//                [_timer setFireDate:[NSDate distantFuture]];
+//                [_timer invalidate];
+//                _timer = nil;
+//                self.btnVericode.enabled = YES;
+//                self.tfPhoneNum.userInteractionEnabled = YES;
+//                self.timeNum = 60;
+//            }
+            
+            if (![str isEqualToString:FailToCheckNum]) {
+                self.sessionid = str;
                 [self startTimer];
                 self.tfPhoneNum.userInteractionEnabled = NO;
+                [CMUtility showTips:@"验证码获取成功"];
             }else{
                 //暂停计时器
                 [_timer setFireDate:[NSDate distantFuture]];
@@ -234,6 +218,7 @@
                 self.tfPhoneNum.userInteractionEnabled = YES;
                 self.timeNum = 60;
             }
+
         }];
     }
 }
@@ -271,7 +256,10 @@
     @weakify(self)
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self);
-        [self.loginModel loginWithPhoneNum:self.tfPhoneNum.text Vericode:self.tfVericode.text isAgreeProtocol:self.isAgreeProtocol complete:^(NSString * str) {
+        if (!self.sessionid) {
+            self.sessionid = @"";//1469166550
+        }
+        [self.loginModel loginWithPhoneNum:self.tfPhoneNum.text tfVericode:self.tfVericode.text Vericode:self.sessionid isAgreeProtocol:self.isAgreeProtocol complete:^(NSString * str) {
             [subscriber sendNext:str];
             [subscriber sendCompleted];
         } fail:^(NSError *error) {

@@ -6,6 +6,8 @@
 //  Copyright (c) 2015年 xinyu. All rights reserved.
 //
 
+#define SMALL_CHANGE 2
+
 #import "RoundnessProgressView.h"
 
 @interface RoundnessProgressView ()
@@ -70,7 +72,7 @@
     if (self.progressTotal>=0) {
         
         UIBezierPath *backCircle = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.bounds.size.width / 2,self.bounds.size.height / 2)
-                                                                  radius:self.bounds.size.width / 2 - self.thicknessWidth / 2
+                                                                  radius:self.bounds.size.width / 2 - self.thicknessWidth / 2-SMALL_CHANGE
                                                               startAngle:(CGFloat) - M_PI_2
                                                                 endAngle:(CGFloat)(1.5 * M_PI)
                                                                clockwise:YES];
@@ -82,7 +84,7 @@
     
     if (self.progressSections>=0) {
         UIBezierPath *progressCircle = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.bounds.size.width / 2,self.bounds.size.height / 2)
-                                                                      radius:self.bounds.size.width / 2 -  self.thicknessWidth/ 2
+                                                                      radius:self.bounds.size.width / 2 -  self.thicknessWidth/ 2 - SMALL_CHANGE
                                                                   startAngle:(CGFloat) - M_PI_2
                                                                     endAngle:(CGFloat)(- M_PI_2 + progress* 2 * M_PI)
                                                                    clockwise:YES];

@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#define FailToCheckNum       @"获取验证码出错"
+
+
 typedef void(^CompleteBlock)(NSString *);
 typedef void(^FailBlock)(NSError *);
 
@@ -21,6 +24,7 @@ typedef void(^FailBlock)(NSError *);
  * 登录接口
  */
 - (void)loginWithPhoneNum:(NSString *)phoneNum
+               tfVericode:(NSString *)tfVericode
                Vericode:(NSString *)vericode
         isAgreeProtocol:(BOOL)isAgreeProtocol
                complete:(CompleteBlock)complete

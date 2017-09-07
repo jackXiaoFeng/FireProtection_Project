@@ -45,7 +45,7 @@ typedef enum {
 /**
  * 用户信息
  */
-@property (nonatomic,strong)CMMemberData    *user;
+@property (nonatomic,strong)CMMemberData    *userInfo;
 
 /**
  *  用户性别

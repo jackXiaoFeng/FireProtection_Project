@@ -86,6 +86,7 @@
     }];
     [self.client on:@"error" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
         NSLog(@"*************\n\nerror：%@\n\n*************",event?event[0]:@"");
+        [CMUtility showTips:@"网络出错！"];
         self.isConnectSuccess = NO;
     }];
     
@@ -149,6 +150,8 @@
     
     //[xs002]短信
     [self.client on:XR002 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        NSLog(@"*************\n\nXR002\n\n*************%@",event?event[0]:@"");
+
         if (event[0]) {
             NSDictionary *dic = event[0];
             self.xr002CallBackResult(dic);
@@ -160,6 +163,8 @@
     
 //    *   3.3	[xs003]当前区域设备
     [self.client on:XR003 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        NSLog(@"*************\n\nXR003\n\n*************%@",event?event[0]:@"");
+
         if (event[0]) {
             NSDictionary *dic = event[0];
             self.xr003CallBackResult(dic);
@@ -170,6 +175,8 @@
     }];
 //    *   3.4	[xs004]设备告警信息
     [self.client on:XR004 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        NSLog(@"*************\n\nXR004\n\n*************%@",event?event[0]:@"");
+
         if (event[0]) {
             NSDictionary *dic = event[0];
             self.xr004CallBackResult(dic);

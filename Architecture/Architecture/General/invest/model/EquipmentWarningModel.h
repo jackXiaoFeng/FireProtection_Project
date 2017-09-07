@@ -8,6 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
-@interface EquipmentWarningModel : NSObject
+@interface EquipmentWarningModel : MTLModel<MTLJSONSerializing>
+
+@property (nonatomic,strong)NSString *Describe;
+@property (nonatomic,strong)NSString *Oper_flag;
+@property (nonatomic,strong)NSString *Xfnumericals;
+@property (nonatomic,strong)NSString *Xfstates;
+@property (nonatomic,strong)NSString *name;
+@property (nonatomic,strong)NSString *Time;
+
+//{
+//    Describe = "\U6d4b\U8bd5";
+//    "Oper_flag" = 1;
+//    Time = 123;
+//    Xfnumericals = 3;
+//    Xfstates = 1;
+//    name = "\U6c34\U538b";
+//}
+
 
 @end

@@ -41,8 +41,26 @@
 
 - (void)load
 {
-    
-//    if ([[CMUserInformation standardUserInformation] isFirstTimeOpen]) {
+    //判断是否登录
+    if ([DEF_UserDefaults objectForKey:@"token"]) {
+        CMMemberEntity.userInfo.phone = [DEF_UserDefaults objectForKey:@"phone"];
+        CMMemberEntity.userInfo.unitname = [DEF_UserDefaults objectForKey:@"unitname"];
+        CMMemberEntity.userInfo.token = [DEF_UserDefaults objectForKey:@"token"];
+        CMMemberEntity.userInfo.unitsn = [DEF_UserDefaults objectForKey:@"unitsn"];
+        CMMemberEntity.userInfo.username = [DEF_UserDefaults objectForKey:@"username"];
+        
+        CMMemberEntity.token = CMMemberEntity.userInfo.token;
+
+        CMMemberEntity.isLogined = YES;
+        
+        NSLog(@"本地存储用户信息%@--%@--%@--%@--%@",
+              CMMemberEntity.userInfo.phone,
+              CMMemberEntity.userInfo.unitname,CMMemberEntity.userInfo.token,CMMemberEntity.userInfo.unitsn,CMMemberEntity.userInfo.username);
+        
+        [self createTabBars];
+
+    }else
+    {
         LoginViewController *loginViewController = [LoginViewController new];
         @weakify(self);
         loginViewController.completion = ^(){
@@ -50,9 +68,7 @@
             [self createTabBars];
         };
         self.window.rootViewController = loginViewController;
-//    } else {
-//        [self createTabBars];
-//    }
+    }
 }
 
 //创建 tab bar

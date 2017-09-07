@@ -54,6 +54,10 @@
 		3A40D5C31F5E87C700D7E8DF /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40D5B81F5E87C700D7E8DF /* Tools.m */; };
 		3A40D5C41F5E87C700D7E8DF /* UIView+GJCFViewFrameUitil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40D5BB1F5E87C700D7E8DF /* UIView+GJCFViewFrameUitil.m */; };
 		3A40D5C71F5E881F00D7E8DF /* CMMemberData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40D5C61F5E881F00D7E8DF /* CMMemberData.m */; };
+		3A40D5CA1F5FEBBA00D7E8DF /* BaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40D5C91F5FEBBA00D7E8DF /* BaseViewModel.m */; };
+		3A40D5D11F5FED6B00D7E8DF /* EquipmentWarningViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40D5D01F5FED6B00D7E8DF /* EquipmentWarningViewModel.m */; };
+		3A40D5D41F613FAB00D7E8DF /* WarningHistoryViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40D5D31F613FAB00D7E8DF /* WarningHistoryViewModel.m */; };
+		3A40D5D71F61400800D7E8DF /* MalfunctionEquipmentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40D5D61F61400800D7E8DF /* MalfunctionEquipmentViewModel.m */; };
 		3A8E6EBF1F4ECAD100C9B51E /* EquipmentWarningModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8E6EBE1F4ECAD100C9B51E /* EquipmentWarningModel.m */; };
 		3A95ACEE1D17D4BA0026EAFE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95ACED1D17D4BA0026EAFE /* main.m */; };
 		3A95ACF11D17D4BA0026EAFE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A95ACF01D17D4BA0026EAFE /* AppDelegate.m */; };
@@ -219,6 +223,14 @@
 		3A40D5BB1F5E87C700D7E8DF /* UIView+GJCFViewFrameUitil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GJCFViewFrameUitil.m"; sourceTree = "<group>"; };
 		3A40D5C51F5E881F00D7E8DF /* CMMemberData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMemberData.h; sourceTree = "<group>"; };
 		3A40D5C61F5E881F00D7E8DF /* CMMemberData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMemberData.m; sourceTree = "<group>"; };
+		3A40D5C81F5FEBBA00D7E8DF /* BaseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewModel.h; sourceTree = "<group>"; };
+		3A40D5C91F5FEBBA00D7E8DF /* BaseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewModel.m; sourceTree = "<group>"; };
+		3A40D5CF1F5FED6B00D7E8DF /* EquipmentWarningViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentWarningViewModel.h; sourceTree = "<group>"; };
+		3A40D5D01F5FED6B00D7E8DF /* EquipmentWarningViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentWarningViewModel.m; sourceTree = "<group>"; };
+		3A40D5D21F613FAB00D7E8DF /* WarningHistoryViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarningHistoryViewModel.h; sourceTree = "<group>"; };
+		3A40D5D31F613FAB00D7E8DF /* WarningHistoryViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarningHistoryViewModel.m; sourceTree = "<group>"; };
+		3A40D5D51F61400800D7E8DF /* MalfunctionEquipmentViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MalfunctionEquipmentViewModel.h; sourceTree = "<group>"; };
+		3A40D5D61F61400800D7E8DF /* MalfunctionEquipmentViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MalfunctionEquipmentViewModel.m; sourceTree = "<group>"; };
 		3A8E6EBD1F4ECAD100C9B51E /* EquipmentWarningModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentWarningModel.h; sourceTree = "<group>"; };
 		3A8E6EBE1F4ECAD100C9B51E /* EquipmentWarningModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentWarningModel.m; sourceTree = "<group>"; };
 		3A95ACE91D17D4BA0026EAFE /* Architecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Architecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -548,6 +560,40 @@
 			path = UitilCategory;
 			sourceTree = "<group>";
 		};
+		3A40D5CB1F5FECFF00D7E8DF /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = viewModel;
+			sourceTree = "<group>";
+		};
+		3A40D5CC1F5FED0700D7E8DF /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3A40D5CF1F5FED6B00D7E8DF /* EquipmentWarningViewModel.h */,
+				3A40D5D01F5FED6B00D7E8DF /* EquipmentWarningViewModel.m */,
+				3A40D5D21F613FAB00D7E8DF /* WarningHistoryViewModel.h */,
+				3A40D5D31F613FAB00D7E8DF /* WarningHistoryViewModel.m */,
+				3A40D5D51F61400800D7E8DF /* MalfunctionEquipmentViewModel.h */,
+				3A40D5D61F61400800D7E8DF /* MalfunctionEquipmentViewModel.m */,
+			);
+			path = viewModel;
+			sourceTree = "<group>";
+		};
+		3A40D5CD1F5FED0E00D7E8DF /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = viewModel;
+			sourceTree = "<group>";
+		};
+		3A40D5CE1F5FED1500D7E8DF /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = viewModel;
+			sourceTree = "<group>";
+		};
 		3A95ACE01D17D4B90026EAFE = {
 			isa = PBXGroup;
 			children = (
@@ -651,6 +697,8 @@
 				3A95AD2D1D17E4E60026EAFE /* BaseViewController.m */,
 				3A95AD361D17EA410026EAFE /* TabBarViewController.h */,
 				3A95AD371D17EA410026EAFE /* TabBarViewController.m */,
+				3A40D5C81F5FEBBA00D7E8DF /* BaseViewModel.h */,
+				3A40D5C91F5FEBBA00D7E8DF /* BaseViewModel.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -697,8 +745,6 @@
 		3A95AD261D17E0490026EAFE /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				3A40D59A1F5E87C700D7E8DF /* CMMember.h */,
-				3A40D59B1F5E87C700D7E8DF /* CMMember.m */,
 				3A40D59C1F5E87C700D7E8DF /* DateUitil */,
 				3A40D5A01F5E87C700D7E8DF /* DeviceInfoUitil */,
 				3A40D5A11F5E87C700D7E8DF /* DispatchCenterUitil */,
@@ -713,6 +759,8 @@
 				3A40D5B91F5E87C700D7E8DF /* UitilCategory */,
 				3AA1C8861F4AA9F1004A52EF /* CMUtility.h */,
 				3AA1C8871F4AA9F1004A52EF /* CMUtility.m */,
+				3A40D59A1F5E87C700D7E8DF /* CMMember.h */,
+				3A40D59B1F5E87C700D7E8DF /* CMMember.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -740,6 +788,7 @@
 		3A95AD391D17EB8C0026EAFE /* account */ = {
 			isa = PBXGroup;
 			children = (
+				3A40D5CD1F5FED0E00D7E8DF /* viewModel */,
 				3AA1C8951F4AAE2F004A52EF /* control */,
 				3AA1C8981F4AAE2F004A52EF /* model */,
 				3AA1C8991F4AAE2F004A52EF /* view */,
@@ -750,6 +799,7 @@
 		3A95AD3A1D17EB8C0026EAFE /* invest */ = {
 			isa = PBXGroup;
 			children = (
+				3A40D5CC1F5FED0700D7E8DF /* viewModel */,
 				3AA1C88F1F4AAE27004A52EF /* control */,
 				3AA1C8921F4AAE27004A52EF /* model */,
 				3AA1C8931F4AAE27004A52EF /* view */,
@@ -760,6 +810,7 @@
 		3A95AD3B1D17EB8C0026EAFE /* main */ = {
 			isa = PBXGroup;
 			children = (
+				3A40D5CB1F5FECFF00D7E8DF /* viewModel */,
 				3AA1C8891F4AADB1004A52EF /* control */,
 				3AA1C88C1F4AADB1004A52EF /* model */,
 				3AA1C88D1F4AADB1004A52EF /* view */,
@@ -770,6 +821,7 @@
 		3A95AD3C1D17EB8C0026EAFE /* more */ = {
 			isa = PBXGroup;
 			children = (
+				3A40D5CE1F5FED1500D7E8DF /* viewModel */,
 				3AA1C89B1F4AAE3A004A52EF /* control */,
 				3AA1C89E1F4AAE3A004A52EF /* model */,
 				3AA1C89F1F4AAE3A004A52EF /* view */,
@@ -1206,6 +1258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A40D5D41F613FAB00D7E8DF /* WarningHistoryViewModel.m in Sources */,
 				3AA1C8581F4A6F44004A52EF /* TADotView.m in Sources */,
 				3A95ACF11D17D4BA0026EAFE /* AppDelegate.m in Sources */,
 				3AFBC9A51F53A12C00DAD7EA /* InfoViewController.m in Sources */,
@@ -1245,9 +1298,12 @@
 				3AD29F021F46D69F005B600D /* PageImageScrollView.m in Sources */,
 				3AD29EFE1F46D69F005B600D /* DDPageControl.m in Sources */,
 				3A40D5BC1F5E87C700D7E8DF /* CMMember.m in Sources */,
+				3A40D5CA1F5FEBBA00D7E8DF /* BaseViewModel.m in Sources */,
 				3AFBC9BE1F54127700DAD7EA /* UploadingModel.m in Sources */,
 				3AA1C88E1F4AADB1004A52EF /* MainViewController.m in Sources */,
+				3A40D5D11F5FED6B00D7E8DF /* EquipmentWarningViewModel.m in Sources */,
 				3A95AD381D17EA410026EAFE /* TabBarViewController.m in Sources */,
+				3A40D5D71F61400800D7E8DF /* MalfunctionEquipmentViewModel.m in Sources */,
 				3A26EA261F5A4FE50086C553 /* SRHTTPConnectMessage.m in Sources */,
 				3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */,
 				3A40D5C21F5E87C700D7E8DF /* GJCFSystemUitil.m in Sources */,

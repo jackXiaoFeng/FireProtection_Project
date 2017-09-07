@@ -42,6 +42,9 @@
  custom
  */
 #import "SocketIO.h"
+#import "CMMember.h"
+#import "BaseViewModel.h"
+
 
 /*
  Define
