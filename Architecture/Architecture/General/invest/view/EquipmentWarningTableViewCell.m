@@ -15,7 +15,10 @@
 @property (nonatomic, strong)UILabel *timeLab;
 @property (nonatomic, strong)UILabel *deviceLab;
 @property (nonatomic, strong)UILabel *statusLab;
-@property (nonatomic, strong)UILabel *restorationLab;
+
+@property (nonatomic, strong)UIButton *involutionBtn;
+@property (nonatomic,strong) NSIndexPath *indexPath;
+
 @end
 @implementation EquipmentWarningTableViewCell
 
@@ -67,15 +70,7 @@
     self.statusLab = statusLab;
     
     
-    UILabel *restorationLab = [[UILabel alloc] initWithFrame:CGRectMake(statusLab.x+statusLab.width, 0, DEF_DEVICE_SCLE_WIDTH(241), CellHeight)];
-    restorationLab.font = DEF_MyFont(14.0f);
-    restorationLab.text = @"--";
-    restorationLab.userInteractionEnabled = YES;
-    restorationLab.backgroundColor = [UIColor clearColor];
-    restorationLab.textAlignment = NSTextAlignmentCenter;
-    restorationLab.textColor = DEF_COLOR_RGB(87, 87, 87);
-    [self.contentView addSubview:restorationLab];
-    self.restorationLab = restorationLab;
+    [self.contentView addSubview:self.involutionBtn];
     
     UIImageView *lineIV = [[UIImageView alloc]init];
     lineIV.frame = CGRectMake(0, CellHeight -1, DEF_DEVICE_WIDTH, 1);
@@ -90,32 +85,106 @@
     self.lineIV.hidden= hidenLine;
 }
 
-- (void)setEquipmentWarningModel:(EquipmentWarningModel *)equipmentWarningModel
+- (void)setEquipmentWarningModel:(EquipmentWarningModel *)equipmentWarningModel indexPath:(NSIndexPath *)indexPath
 {
     
-    self.timeLab.text = equipmentWarningModel.Time;
+    self.indexPath = indexPath;
     
+    self.temEquipmentWarningModel = equipmentWarningModel;
     //YYYY-MM-dd HH:mm:ss
-    self.timeLab.text = [CMUtility getTimeWithTimestamp:@"1504772308" WithDateFormat:@"MM/dd HH:mm"];
+    if (equipmentWarningModel.Time.length < 10) {
+        self.timeLab.text = @"--:--";
+
+    }else
+    {
+        self.timeLab.text = [CMUtility getTimeWithTimestamp:equipmentWarningModel.Time WithDateFormat:@"HH:mm"];
+    }
     
     self.deviceLab.text = [NSString stringWithFormat:@"%@ %@",equipmentWarningModel.name,equipmentWarningModel.Describe];
     
-    self.statusLab.text = equipmentWarningModel.Xfstates;
-
-    self.restorationLab.text = equipmentWarningModel.Xfnumericals;
+    //0:正常
+    //1:异常
+    NSString *statusStr = @"";
+    if ([equipmentWarningModel.Xfstates isEqualToString:Warning_Fix_Normal]) {
+        statusStr = @"正常";
+    }else
+    {
+        statusStr = @"异常";
+    }
+    self.statusLab.text = statusStr;
 
     
+    //0:正常
+    //1:故障
+    //2:需维修
+    //3:等待复归
+    //4:申请复归
+    NSString *fixStr = @"";
+    UIImage *normalImage;
+    UIImage *highlightedImage;
+    BOOL isU;
+    if ([equipmentWarningModel.AFmaintenance isEqualToString:Warning_Fix_Malfunction])
+    {
+        fixStr = @"故障";
+        normalImage = DEF_IMAGENAME(@"apply_involution");
+        highlightedImage = DEF_IMAGENAME(@"apply_involution");
+        isU = YES;
+    }else if ([equipmentWarningModel.AFmaintenance isEqualToString:Warning_Fix_Maintain])
+    {
+        fixStr = @"等待维修";
+        normalImage = DEF_IMAGENAME(@"wait_involution");
+        highlightedImage = DEF_IMAGENAME(@"wait_involution");
+        isU = NO;
+    }
+    [self.involutionBtn setBackgroundImage:normalImage forState:UIControlStateNormal];
+    [self.involutionBtn setBackgroundImage:highlightedImage forState:UIControlStateSelected];
+
+    [self.involutionBtn setTitle:fixStr forState:UIControlStateNormal];
+    self.involutionBtn.userInteractionEnabled = isU;
+    //self.restorationLab.text = fixStr;
+}
+
+- (void)clickEvent:(UIButton *)btn
+{
+    NSLog(@"clickEvent---%@---%ld",self.temEquipmentWarningModel.Describe,(long)self.indexPath.row);
+    BLOCK_SAFE(self.fixBtnClickBlock)(self.indexPath);
 }
 
 - (void)prepareForReuse {
     [super prepareForReuse];
     
-    //_groupIV.image = nil;
-    
     _timeLab.text = @"";
     _deviceLab.text = @"";
     _statusLab.text = @"";
-    _restorationLab.text = @"";
+    //_restorationLab.text = @"";
+}
+
+-(UIButton *)involutionBtn
+{
+    if (!_involutionBtn) {
+        
+        CGFloat involutionX = 0;
+        
+        CGFloat involutionBtnWidth = DEF_DEVICE_SCLE_WIDTH(218);
+        CGFloat involutionBtnHeight = DEF_DEVICE_SCLE_HEIGHT(45);
+        
+        UIImage *involutionBtnImage = DEF_IMAGENAME(@"apply_involution");
+        
+        NSString *involutionStr = @"－－";
+        UIButton *involutionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        involutionBtn.frame = CGRectMake(self.statusLab.x+self.statusLab.width + involutionX, (CellHeight - involutionBtnHeight)/2 , involutionBtnWidth, involutionBtnHeight);
+        involutionBtn.backgroundColor = [UIColor whiteColor];
+        [involutionBtn setBackgroundImage:involutionBtnImage forState:UIControlStateNormal];
+        [involutionBtn setTitle:involutionStr forState:UIControlStateNormal];
+        [involutionBtn setTitleColor:DEF_COLOR_RGB(254, 254, 254)forState:UIControlStateNormal];
+        involutionBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        
+        involutionBtn.titleLabel.font = DEF_MyFont(15);
+        involutionBtn.titleLabel.backgroundColor = [UIColor clearColor];
+        [involutionBtn addTarget:self action:@selector(clickEvent:) forControlEvents:UIControlEventTouchUpInside];
+        _involutionBtn = involutionBtn;
+    }
+    return _involutionBtn;
 }
 
 

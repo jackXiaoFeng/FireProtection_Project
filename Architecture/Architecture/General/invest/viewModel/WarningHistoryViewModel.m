@@ -14,6 +14,7 @@
  */
 @property int Page;
 
+
 @end
 
 
@@ -27,6 +28,8 @@
         self.warningHistoryList = [[NSMutableArray alloc]init];
         
         self.WarningHistoryModel = [[WarningHistoryModel alloc]init];
+        
+        self.Page = 1;
     }
     return self;
 }
@@ -50,7 +53,7 @@
         
         @strongify(self);
         
-        int page = 0;
+        int page = 1;
         int pageSize = DEF_PAGESIZE;
         
         if (loadType == LoadData) {
@@ -109,5 +112,7 @@
         return nil;
     }];
 }
+
+
 
 @end

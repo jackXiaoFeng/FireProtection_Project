@@ -9,8 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "EquipmentWarningModel.h"
 
+typedef void (^FixBtnClickBlock) (NSIndexPath *indexPath);
+
 @interface EquipmentWarningTableViewCell : UITableViewCell
 + (CGFloat)equipmentWarningCellHeight;
 @property (nonatomic ,strong)EquipmentWarningModel *equipmentWarningModel;
+
+@property (nonatomic ,strong)EquipmentWarningModel *temEquipmentWarningModel;
 @property(assign,nonatomic)BOOL hidenLine;
+
+@property (nonatomic,copy) FixBtnClickBlock fixBtnClickBlock;
+
+- (void)setEquipmentWarningModel:(EquipmentWarningModel *)equipmentWarningModel indexPath:(NSIndexPath *)indexPath;
+
 @end

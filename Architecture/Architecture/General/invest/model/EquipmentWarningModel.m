@@ -18,7 +18,9 @@
              @"Xfnumericals"         : @"Xfnumericals",
              @"Xfstates"             : @"Xfstates",
              @"name"                 : @"name",
-             @"Time"                 : @"Time"
+             @"Time"                 : @"Time",
+             @"AFmaintenance"        : @"AFmaintenance",
+             @"Degree"               : @"Degree"
              };
 }
 

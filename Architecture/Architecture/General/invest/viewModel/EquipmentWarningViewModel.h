@@ -12,12 +12,7 @@
 @interface EquipmentWarningViewModel : BaseViewModel
 
 
-//申请检修状态
-//0:正常
-//1:故障
-//2:需维修
-//3:等待复归
-//4:申请复归
+
 
 /**
  * 设备告警信息数组
@@ -33,7 +28,7 @@
 /**
  * 请求数据内容
  */
--(id)initWithParametersDic:(NSDictionary *)dic;
+//-(id)initWithParametersDic:(NSDictionary *)dic;
 
 
 /**
@@ -46,5 +41,18 @@
  *  @return RACSignal
  */
 -(RACSignal *)feedDataWithType:(LoadType)loadType;
+
+
+
+/**
+ *  3.15	[xs015]告警设备复归或维修
+ *
+ *  @param degree 设备编号
+ *
+ *  @return RACSignal
+ */
+-(RACSignal *)alarmEquipmentMaintenanceWithDegree:(NSString *)degree;
+
+
 
 @end

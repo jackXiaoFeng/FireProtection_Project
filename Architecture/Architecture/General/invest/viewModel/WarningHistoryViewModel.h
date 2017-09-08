@@ -24,18 +24,17 @@
 /**
  * 请求数据内容
  */
--(id)initWithParametersDic:(NSDictionary *)dic;
+//-(id)initWithParametersDic:(NSDictionary *)dic;
 
 
 /**
  *  获取用户下拉刷新或者上提加载更多函数
  *
  *  @param loadType LoadData 下拉刷新 LoadMore 上提加载更多
- *  @param urlType  接口类型
- *  @param filmId   影片ID
  *
  *  @return RACSignal
  */
 -(RACSignal *)feedDataWithType:(LoadType)loadType;
+
 
 @end

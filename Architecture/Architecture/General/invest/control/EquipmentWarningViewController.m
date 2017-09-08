@@ -197,8 +197,15 @@
     
     //cell.hidenLine= (indexPath.row== group.items.count-1); //通过组模型数组来拿到每组最后一行
     if (self.viewModel.equipmentList.count > 0) {
-        cell.equipmentWarningModel  = self.viewModel.equipmentList[indexPath.row];
+        EquipmentWarningModel *model  = self.viewModel.equipmentList[indexPath.row];
+        [cell setEquipmentWarningModel:model indexPath:indexPath];
         cell.hidenLine= (indexPath.row== self.viewModel.equipmentList.count-1); //通过组模型数组来拿到每组最后一行
+        
+        @weakify(self);
+        cell.fixBtnClickBlock = ^(NSIndexPath *indexPath){
+            @strongify(self);
+            [self cellClickIndexPath:indexPath];
+        };
     }
     
     return cell;
@@ -207,6 +214,31 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)cellClickIndexPath:(NSIndexPath *)indexPath
+{
+    @weakify(self);
+    EquipmentWarningModel *model  = self.viewModel.equipmentList[indexPath.row];
+    model.AFmaintenance =@"2";
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    
+    NSLog(@"===============%@",model.Describe);
+    [[self.viewModel alarmEquipmentMaintenanceWithDegree:model.Degree] subscribeNext:^(NSString *str) {
+        
+            @strongify(self);
+//            if ([activityModel.isJoin integerValue] == 1) {
+//                self.isCanJoinActivity = 1;
+//                [self pushToSeatSelectionViewControllerWithIndexPath:indexPath];
+//                
+//            }else {
+//                self.isCanJoinActivity = 2;
+//                [CMUtility showTips:@"当前用户不能参加此次活动"];
+//            }
+        } error:^(NSError *error) {
+            
+    }];
+    
 }
 
 

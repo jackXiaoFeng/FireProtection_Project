@@ -27,6 +27,8 @@
         self.equipmentList = [[NSMutableArray alloc]init];
         
         self.equipmentWarningModel = [[EquipmentWarningModel alloc]init];
+        
+        self.Page = 1;
     }
     return self;
 }
@@ -50,7 +52,7 @@
         
         @strongify(self);
         
-        int page = 0;
+        int page = 1;
         int pageSize = DEF_PAGESIZE;
         
         if (loadType == LoadData) {
@@ -110,5 +112,56 @@
     }];
 }
 
+-(RACSignal *)alarmEquipmentMaintenanceWithDegree:(NSString *)degree
+{
+    @weakify(self);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self);
+        NSDictionary *datDic = @{
+                                 @"unitsn":CMMemberEntity.userInfo.unitsn,
+                                 @"Oper_flag":@1,
+                                 @"Degree":degree
+                                 };
+        NSArray *arr = [NSArray arrayWithObjects:datDic, nil];
+        NSDictionary *tempDic = @{
+                                  @"code":XS015,
+                                  @"serial_no":[NSString stringWithFormat:@"%@%@",[CMUtility currentTimestamp],XS015_serial_no],
+                                  @"errorcode":@"0",
+                                  @"errormsg":@"success",
+                                  @"token":CMMemberEntity.token,
+                                  @"dat":arr                              };
+        
+        
+        NSString *jsonStr = [tempDic JSONString];
+        @weakify(self)
+        [SocketIO_Singleton sendEmit:XS015 withMessage:jsonStr];
+        SocketIO_Singleton.xr015CallBackResult = ^(NSDictionary *resultDict){
+            @strongify(self)
+            NSString *errorcode = DEF_OBJECT_TO_STIRNG([resultDict objectForKey:@"errorcode"]);
+            NSString *errormsg = DEF_OBJECT_TO_STIRNG([resultDict objectForKey:@"errormsg"]);
+            NSLog(@"errorcode is :%@",errorcode);
+            NSLog(@"errormsg is :%@",errormsg);
+            
+            //fixpangu: 暂定200 测试
+            if ([errorcode isEqualToString:SUCCESS_CODE]) {
+                
+//                if (loadType == LoadData) {
+//                    [self.warningHistoryList removeAllObjects];
+//                }
+//                
+//                [self.warningHistoryList addObjectsFromArray:(NSMutableArray *)[MTLJSONAdapter modelsOfClass:[WarningHistoryModel class] fromJSONArray:resultDict[@"datas"] error:nil]];
+//                
+//                [subscriber sendNext: self.warningHistoryList];
+                [subscriber sendCompleted];
+            }else
+            {
+                id obj =resultDict;
+                [subscriber sendError:obj];
+            }
+        };
+        return nil;
+    }];
+    
+}
 
 @end

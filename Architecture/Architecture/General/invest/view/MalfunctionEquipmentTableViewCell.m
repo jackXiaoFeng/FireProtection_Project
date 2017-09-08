@@ -142,7 +142,7 @@
         CGFloat involutionBtnHeight = DEF_DEVICE_SCLE_HEIGHT(50);
 
         
-        UIImage *involutionBtnImage = DEF_IMAGENAME(@"involution_ affirm");
+        UIImage *involutionBtnImage = DEF_IMAGENAME(@"involution_affirm");
         
         NSString *involutionStr = @"申请复归";
         UIButton *involutionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
