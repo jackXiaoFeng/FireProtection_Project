@@ -15,6 +15,8 @@ typedef void (^FixBtnClickBlock) (NSIndexPath *indexPath);
 + (CGFloat)malfunctionEquipmentCellHeight;
     
 @property (nonatomic ,strong)MalfunctionEquipmentModel *malfunctionEquipmentMode;
+@property (nonatomic ,strong)MalfunctionEquipmentModel *temmalfunctionEquipmentMode;
+
 @property(assign,nonatomic)BOOL hidenLine;
 @property (nonatomic,copy) FixBtnClickBlock fixBtnClickBlock;
 

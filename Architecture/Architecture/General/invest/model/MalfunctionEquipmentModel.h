@@ -16,10 +16,13 @@
 //名称	    Name	String
 //状态	    Xfstates	Int
 
+@property (nonatomic,strong)NSString *Time;
 @property (nonatomic,strong)NSString *Oper_flag;
 @property (nonatomic,strong)NSString *Degree;
 @property (nonatomic,strong)NSString *Describe;
 @property (nonatomic,strong)NSString *name;
 @property (nonatomic,strong)NSString *Xfstates;
+@property (nonatomic,strong)NSString *AFmaintenance;
+
 
 @end

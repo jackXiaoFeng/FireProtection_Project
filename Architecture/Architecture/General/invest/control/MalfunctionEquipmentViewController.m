@@ -9,11 +9,15 @@
 #import "MalfunctionEquipmentViewController.h"
 #import "MalfunctionEquipmentTableViewCell.h"
 #import "MalfunctionEquipmentModel.h"
+#import "MalfunctionEquipmentViewModel.h"
+
 
 @interface MalfunctionEquipmentViewController ()<UITableViewDelegate,UITableViewDataSource>
     
     @property (nonatomic, strong)UITableView *tableView;
 
+@property (nonatomic, strong) MalfunctionEquipmentModel *model;
+@property (nonatomic, strong) MalfunctionEquipmentViewModel *viewModel;
 @end
 
 
@@ -25,8 +29,100 @@
     self.titleLb.text = @"故障设备复归";
     self.tableView.backgroundColor = [UIColor clearColor];
     
-}
+    //添加刷新
+    self.viewModel  = [[MalfunctionEquipmentViewModel alloc]init];
+    //首次刷新数据
+    [self headerWithRefreshing];
+    //mj刷新
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self headerWithRefreshing];
+    }];
     
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self footerWithRefreshing];
+    }];
+}
+
+- (void)headerWithRefreshing
+{
+    @weakify(self)
+    [[[[self.viewModel feedDataWithType:LoadData] map:^id(NSDictionary * dic) {
+        @strongify(self);
+        
+        [CMUtility removeFailViewWith:self.view];
+        
+        return self.viewModel.malfunctionList;
+        
+    }] map:^id(NSMutableArray *arr) {
+        if ([arr count] < 10) {
+            return @(YES);
+        }else{
+            return @(NO);
+        }
+    }] subscribeNext:^(id x) {
+        @strongify(self);
+        //            self.footer.hidden = [x boolValue];
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+        BOOL hidden = self.tableView.contentSize.height > self.tableView.height?NO:YES;
+        //数据不超出屏幕不显示foot
+        self.tableView.mj_footer.hidden = hidden;
+        //最后一页加提示语
+        if ([x boolValue]) {
+            //提示没有更多的数据
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        
+    } error:^(NSError *error) {
+        @strongify(self);
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+        [CMUtility createHttpRequestFailViewWithView:self.view].rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+            [self.tableView.mj_header beginRefreshing];
+            return [RACSignal empty];
+        }];
+    }];
+}
+
+- (void)footerWithRefreshing
+{
+    @weakify(self)
+    [[[[self.viewModel feedDataWithType:LoadMore] map:^id(NSDictionary * dic) {
+        
+        [CMUtility removeFailViewWith:self.view];
+        
+        return self.viewModel.malfunctionList;
+    }] map:^id(NSMutableArray * arr) {
+        return @([arr count] % 10 != 0 ? YES : NO);
+    }] subscribeNext:^(id x) {
+        @strongify(self);
+        //            self.footer.hidden = [x boolValue];
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+        BOOL hidden = self.tableView.contentSize.height > self.tableView.height?NO:YES;
+        //数据不超出屏幕不显示foot
+        self.tableView.mj_footer.hidden = hidden;
+        //最后一页加提示语
+        if ([x boolValue]) {
+            //提示没有更多的数据
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+    }error:^(NSError *error) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+        [CMUtility createHttpRequestFailViewWithView:self.view].rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+            [self.tableView.mj_footer beginRefreshing];
+            return [RACSignal empty];
+        }];
+    }];
+}
+
 #pragma mark - delegate  dataSource -
     
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -35,7 +131,7 @@
     }
     
 -(NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return self.viewModel.malfunctionList.count;
 }
     
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -47,7 +143,19 @@
             cell.backgroundColor = [UIColor whiteColor];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.hidenLine= (indexPath.row== 5-1); //通过组模型数组来拿到每组最后一行
+        //cell.hidenLine= (indexPath.row== group.items.count-1); //通过组模型数组来拿到每组最后一行
+        if (self.viewModel.malfunctionList.count > 0) {
+            MalfunctionEquipmentModel *model  = self.viewModel.malfunctionList[indexPath.row];
+            [cell malfunctionEquipmentMode:model indexPath:indexPath];
+            cell.hidenLine= (indexPath.row== self.viewModel.malfunctionList.count-1); //通过组模型数组来拿到每组最后一行
+            
+            @weakify(self);
+            cell.fixBtnClickBlock = ^(NSIndexPath *indexPath){
+                @strongify(self);
+                [self cellClickIndexPath:indexPath];
+            };
+        }
+
         
         return cell;
     }
@@ -56,7 +164,32 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+- (void)cellClickIndexPath:(NSIndexPath *)indexPath
+{
+    @weakify(self);
+    MalfunctionEquipmentModel *model  = self.viewModel.malfunctionList[indexPath.row];
+    model.AFmaintenance =@"2";
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     
+    NSLog(@"===============%@",model.Describe);
+    [[self.viewModel alarmEquipmentMaintenanceWithDegree:model.Degree] subscribeNext:^(NSString *str) {
+        
+        @strongify(self);
+        //            if ([activityModel.isJoin integerValue] == 1) {
+        //                self.isCanJoinActivity = 1;
+        //                [self pushToSeatSelectionViewControllerWithIndexPath:indexPath];
+        //
+        //            }else {
+        //                self.isCanJoinActivity = 2;
+        //                [CMUtility showTips:@"当前用户不能参加此次活动"];
+        //            }
+    } error:^(NSError *error) {
+        
+    }];
+    
+}
+
     
 #pragma mark - get
 - (UITableView *)tableView

@@ -57,6 +57,7 @@
         [self.contentView addSubview:deviceLab];
         self.deviceLab = deviceLab;
         
+        //复归btn
         [self.contentView addSubview:self.involutionBtn];
         
         UIImageView *lineIV = [[UIImageView alloc]init];
@@ -77,59 +78,55 @@
     
 - (void)malfunctionEquipmentMode:(MalfunctionEquipmentModel *)malfunctionEquipmentMode indexPath:(NSIndexPath *)indexPath
 {
-        //    self.nameLab.text = myGroupModel.gname;
-        //
-        //    self.messageNumLab.text = myGroupModel.unreadmsgnum;
-        //    self.descriptionLab.text = myGroupModel.descriptionStr;
-        //
-        //    if ([myGroupModel.unreadmsgnum intValue] >99) {
-        //        self.messageNumLab.text= @"99";
-        //    }
-        //    NSString *timeStr = [CMUtility getTimeWithTimestamp:myGroupModel.latestunreadmsg.pubtime WithDateFormat:@"HH:mm"];
-        //    self.timeLab.text = [timeStr isEqualToString:@""]?@"--:--":timeStr;
-        //
-        //    if (!myGroupModel.unreadmsgnum || [myGroupModel.unreadmsgnum intValue] < 1) {
-        //        self.messageNumLab.hidden = YES;
-        //    }else
-        //    {
-        //        self.messageNumLab.hidden = NO;
-        //    }
-        //    if ([myGroupModel.ismember integerValue] ==1) {
-        //        self.backgroundColor = [UIColor clearColor];
-        //        self.nameLab.textColor = DEF_COLOR_333333;
-        //        self.descriptionLab.textColor = DEF_COLOR_999999;
-        //        self.groupIV.image = DEF_IMAGENAME(@"group_login_head");
-        //        @weakify(self)
-        //        [self.groupIV sd_setImageWithURL:[NSURL URLWithString:myGroupModel.headimg] placeholderImage:DEF_IMAGENAME(@"group_login_head") completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        //            @strongify(self)
-        //            if (error) {
-        //                self.groupIV.image = [self grayImage:DEF_IMAGENAME(@"group_login_head")];
-        //            }else
-        //            {
-        //                self.groupIV.image = image;
-        //            }
-        //        }];
-        //
-        //    }else
-        //    {
-        //        self.backgroundColor = DEF_UICOLORFROMRGB(0xeeeeee);
-        //        self.nameLab.textColor = DEF_UICOLORFROMRGB(0xb8b8b8);
-        //        self.descriptionLab.textColor = DEF_UICOLORFROMRGB(0xd3d3d3);
-        //        @weakify(self)
-        //
-        //        [self.groupIV sd_setImageWithURL:[NSURL URLWithString:myGroupModel.headimg] placeholderImage:DEF_IMAGENAME(@"group_login_head") completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        //            @strongify(self)
-        //            if (error) {
-        //                self.groupIV.image = [self grayImage:DEF_IMAGENAME(@"group_login_head")];
-        //            }else
-        //            {
-        //                self.groupIV.image = [self grayImage:image];
-        //
-        //            }
-        //        }];
-        //    }
+    self.indexPath = indexPath;
+    
+    self.temmalfunctionEquipmentMode = malfunctionEquipmentMode;
+    //YYYY-MM-dd HH:mm:ss
+    if (malfunctionEquipmentMode.Time.length < 10) {
+        self.timeLab.text = @"--:--";
         
-        
+    }else
+    {
+        self.timeLab.text = [CMUtility getTimeWithTimestamp:malfunctionEquipmentMode.Time WithDateFormat:@"HH:mm"];
+    }
+    
+    self.deviceLab.text = [NSString stringWithFormat:@"%@ %@",malfunctionEquipmentMode.name,malfunctionEquipmentMode.Describe];
+    
+    
+    //0:正常
+    //1:故障
+    //2:需维修
+    //3:等待复归
+    //4:申请复归
+    NSString *fixStr = @"";
+    UIImage *normalImage;
+    UIImage *highlightedImage;
+    BOOL isU;
+    if ([malfunctionEquipmentMode.AFmaintenance isEqualToString:Warning_Fix_Apply])
+    {
+        fixStr = @"申请复归";
+        normalImage = DEF_IMAGENAME(@"apply_involution");
+        highlightedImage = DEF_IMAGENAME(@"apply_involution");
+        isU = YES;
+    }else if ([malfunctionEquipmentMode.AFmaintenance isEqualToString:Warning_Fix_Wait])
+    {
+        fixStr = @"等待复归";
+        normalImage = DEF_IMAGENAME(@"wait_involution");
+        highlightedImage = DEF_IMAGENAME(@"wait_involution");
+        isU = NO;
+    }
+    [self.involutionBtn setBackgroundImage:normalImage forState:UIControlStateNormal];
+    [self.involutionBtn setBackgroundImage:highlightedImage forState:UIControlStateSelected];
+    
+    [self.involutionBtn setTitle:fixStr forState:UIControlStateNormal];
+    self.involutionBtn.userInteractionEnabled = isU;
+    //self.restorationLab.text = fixStr;
+}
+
+- (void)clickEvent:(UIButton *)btn
+{
+    NSLog(@"clickEvent---%@---%ld",self.temmalfunctionEquipmentMode.Describe,(long)self.indexPath.row);
+    BLOCK_SAFE(self.fixBtnClickBlock)(self.indexPath);
 }
     
 
@@ -156,6 +153,8 @@
         
         involutionBtn.titleLabel.font = DEF_MyFont(15);
         involutionBtn.titleLabel.backgroundColor = [UIColor clearColor];
+        
+        [involutionBtn addTarget:self action:@selector(clickEvent:) forControlEvents:UIControlEventTouchUpInside];
         
         _involutionBtn = involutionBtn;
         
