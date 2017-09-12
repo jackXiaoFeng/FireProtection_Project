@@ -799,10 +799,10 @@
 		3A95AD3A1D17EB8C0026EAFE /* invest */ = {
 			isa = PBXGroup;
 			children = (
-				3A40D5CC1F5FED0700D7E8DF /* viewModel */,
 				3AA1C88F1F4AAE27004A52EF /* control */,
-				3AA1C8921F4AAE27004A52EF /* model */,
+				3A40D5CC1F5FED0700D7E8DF /* viewModel */,
 				3AA1C8931F4AAE27004A52EF /* view */,
+				3AA1C8921F4AAE27004A52EF /* model */,
 			);
 			path = invest;
 			sourceTree = "<group>";

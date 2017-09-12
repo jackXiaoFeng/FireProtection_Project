@@ -84,6 +84,8 @@
         NSLog(@"*************\n\n连接失败 %@\n\n*************",event?event[0]:@"");
         self.isConnectSuccess = NO;
     }];
+    
+    
     [self.client on:@"error" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
         NSLog(@"*************\n\nerror：%@\n\n*************",event?event[0]:@"");
         [CMUtility showTips:@"网络出错！"];

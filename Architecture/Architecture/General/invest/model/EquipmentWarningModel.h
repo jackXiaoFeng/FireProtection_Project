@@ -8,24 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-//告警状态
-//0:正常
-//1:异常
-#define Warning_Status_Normal      @"0"
-#define Warning_Status_Malfunction @"1"
-
-//申请检修状态
-//0:正常
-//1:故障
-//2:等待维修
-//3:等待复归
-//4:申请复归
-#define Warning_Fix_Normal      @"0"
-#define Warning_Fix_Malfunction @"1"
-#define Warning_Fix_Maintain    @"2"
-#define Warning_Fix_Wait        @"3"
-#define Warning_Fix_Apply       @"4"
-
 
 @interface EquipmentWarningModel : MTLModel<MTLJSONSerializing>
 

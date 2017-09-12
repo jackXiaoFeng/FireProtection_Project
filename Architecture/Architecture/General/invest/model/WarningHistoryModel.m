@@ -13,14 +13,16 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
     return @{
-             @"Describe"             : @"Describe",
-             @"Oper_flag"            : @"Oper_flag",
-             @"Xfnumericals"         : @"Xfnumericals",
-             @"Xfstates"             : @"Xfstates",
-             @"name"                 : @"name",
-             @"Time"                 : @"Time"
+             @"Degree"                : @"Degree",
+             @"Describe"              : @"Describe",
+             @"Oper_flag"             : @"Oper_flag",
+             @"Name"                  : @"Name",
+             @"Stime"                 : @"Stime",
+             @"Uname"                 : @"Uname",
+             @"Utime"                 : @"Utime"
              };
 }
+
 
 + (NSValueTransformer *)JSONTransformerForKey:(NSString *)key
 {

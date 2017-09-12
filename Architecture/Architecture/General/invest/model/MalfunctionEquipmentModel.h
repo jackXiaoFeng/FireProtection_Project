@@ -10,11 +10,16 @@
 
 @interface MalfunctionEquipmentModel : MTLModel<MTLJSONSerializing>
 
-@property (nonatomic,strong)NSString *Describe;
+//操作标志	Oper_flag	Int	1
+//设备编号	Degree	String
+//描述	    Describe	String
+//名称	    Name	String
+//状态	    Xfstates	Int
+
 @property (nonatomic,strong)NSString *Oper_flag;
-@property (nonatomic,strong)NSString *Xfnumericals;
-@property (nonatomic,strong)NSString *Xfstates;
+@property (nonatomic,strong)NSString *Degree;
+@property (nonatomic,strong)NSString *Describe;
 @property (nonatomic,strong)NSString *name;
-@property (nonatomic,strong)NSString *Time;
+@property (nonatomic,strong)NSString *Xfstates;
 
 @end

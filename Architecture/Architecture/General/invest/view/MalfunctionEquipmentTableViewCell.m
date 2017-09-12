@@ -15,8 +15,9 @@
     @property (nonatomic, strong)UIButton *involutionBtn;
 
     @property (nonatomic, strong)UIImageView *lineIV;
-    
-    @end
+    @property (nonatomic,strong) NSIndexPath *indexPath;
+@end
+
 @implementation MalfunctionEquipmentTableViewCell
 
 + (CGFloat)malfunctionEquipmentCellHeight
@@ -74,8 +75,8 @@
     
 }
     
-- (void)setMalfunctionEquipmentMode:(MalfunctionEquipmentModel *)malfunctionEquipmentMode
-    {
+- (void)malfunctionEquipmentMode:(MalfunctionEquipmentModel *)malfunctionEquipmentMode indexPath:(NSIndexPath *)indexPath
+{
         //    self.nameLab.text = myGroupModel.gname;
         //
         //    self.messageNumLab.text = myGroupModel.unreadmsgnum;

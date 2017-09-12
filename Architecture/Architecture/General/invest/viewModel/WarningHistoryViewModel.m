@@ -79,7 +79,8 @@
                                   @"errorcode":@"0",
                                   @"errormsg":@"success",
                                   @"token":CMMemberEntity.token,
-                                  @"dat":arr                              };
+                                  @"dat":arr
+                                  };
         
         
         NSString *jsonStr = [tempDic JSONString];
