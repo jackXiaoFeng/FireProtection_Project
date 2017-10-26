@@ -169,7 +169,7 @@
     //_groupIV.image = nil;
     
     _timeLab.text = @"";
-    
+    _deviceLab.text = @"";
 }
     
     

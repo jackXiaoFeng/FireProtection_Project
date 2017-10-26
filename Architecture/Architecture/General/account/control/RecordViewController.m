@@ -9,13 +9,14 @@
 #import "RecordViewController.h"
 #import "RecordTableViewCell.h"
 #import "RecordModel.h"
+#import "RecordViewModel.h"
 
 @interface RecordViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong)UITableView *tableView;
-
+@property (nonatomic, strong) RecordModel *model;
+@property (nonatomic, strong) RecordViewModel *viewModel;
 @end
-
 
 @implementation RecordViewController
 
@@ -25,8 +26,100 @@
     self.titleLb.text = @"巡检计划";
     self.tableView.backgroundColor = [UIColor clearColor];
     
+    //添加刷新
+    self.viewModel  = [[RecordViewModel alloc]init];
+    //首次刷新数据
+    [self headerWithRefreshing];
+    //mj刷新
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self headerWithRefreshing];
+    }];
+    
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self footerWithRefreshing];
+    }];
     
     
+}
+
+- (void)headerWithRefreshing
+{
+    @weakify(self)
+    [[[[self.viewModel feedDataWithType:LoadData] map:^id(NSDictionary * dic) {
+        @strongify(self);
+        
+        [CMUtility removeFailViewWith:self.view];
+        
+        return self.viewModel.recordList;
+        
+    }] map:^id(NSMutableArray *arr) {
+        if ([arr count] < 10) {
+            return @(YES);
+        }else{
+            return @(NO);
+        }
+    }] subscribeNext:^(id x) {
+        @strongify(self);
+        //            self.footer.hidden = [x boolValue];
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+        BOOL hidden = self.tableView.contentSize.height > self.tableView.height?NO:YES;
+        //数据不超出屏幕不显示foot
+        self.tableView.mj_footer.hidden = hidden;
+        //最后一页加提示语
+        if ([x boolValue]) {
+            //提示没有更多的数据
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        
+    } error:^(NSError *error) {
+        @strongify(self);
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+        [CMUtility createHttpRequestFailViewWithView:self.view].rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+            [self.tableView.mj_header beginRefreshing];
+            return [RACSignal empty];
+        }];
+    }];
+}
+
+- (void)footerWithRefreshing
+{
+    @weakify(self)
+    [[[[self.viewModel feedDataWithType:LoadMore] map:^id(NSDictionary * dic) {
+        
+        [CMUtility removeFailViewWith:self.view];
+        
+        return self.viewModel.recordList;
+    }] map:^id(NSMutableArray * arr) {
+        return @([arr count] % 10 != 0 ? YES : NO);
+    }] subscribeNext:^(id x) {
+        @strongify(self);
+        //            self.footer.hidden = [x boolValue];
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+        BOOL hidden = self.tableView.contentSize.height > self.tableView.height?NO:YES;
+        //数据不超出屏幕不显示foot
+        self.tableView.mj_footer.hidden = hidden;
+        //最后一页加提示语
+        if ([x boolValue]) {
+            //提示没有更多的数据
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+    }error:^(NSError *error) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+        [CMUtility createHttpRequestFailViewWithView:self.view].rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+            [self.tableView.mj_footer beginRefreshing];
+            return [RACSignal empty];
+        }];
+    }];
 }
 
 
@@ -38,7 +131,7 @@
 }
 
 -(NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return self.viewModel.recordList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -50,7 +143,11 @@
         cell.backgroundColor = [UIColor whiteColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.hidenLine= (indexPath.row== 5-1); //通过组模型数组来拿到每组最后一行
+    if (self.viewModel.recordList.count > 0) {
+        cell.RecordMode  = self.viewModel.recordList[indexPath.row];
+        cell.hidenLine= (indexPath.row== self.viewModel.recordList.count-1); //通过组模型数组来拿到每组最后一行
+    }
+
     
     return cell;
 }

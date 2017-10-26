@@ -11,6 +11,6 @@
 
 @interface PlanTableViewCell : UITableViewCell
 + (CGFloat)PlanCellHeight;
-@property (nonatomic ,strong)PlanModel *PlanModel;
+@property (nonatomic ,strong)PlanModel *planModel;
 @property(assign,nonatomic)BOOL hidenLine;
 @end

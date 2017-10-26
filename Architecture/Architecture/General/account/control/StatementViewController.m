@@ -8,6 +8,7 @@
 
 #import "StatementViewController.h"
 #import "RoundnessProgressView.h"
+#import "RecordViewController.h"
 
 @interface StatementViewController ()
 
@@ -103,8 +104,14 @@
         {
             UIImageView *recordIV = [[UIImageView alloc]initWithFrame:CGRectMake((bgView.width-recordImage.size.width)/2 , (bgView.height-recordImage.size.height)/2 - 15, recordImage.size.width, recordImage.size.height)];
             recordIV.image = recordImage;
+            recordIV.userInteractionEnabled = YES;
             [bgView addSubview:recordIV];
             
+            UITapGestureRecognizer* singleRecognizer;
+            singleRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTapFrom:)];
+            singleRecognizer.numberOfTapsRequired = 1; // 单击
+            [bgView addGestureRecognizer:singleRecognizer];
+
             
             NSString *pressStr = nameArray[idx];
             CGSize contentSize = [CMUtility boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) font:DEF_MyFont(15) string:pressStr withSpacing:0];
@@ -125,6 +132,14 @@
     }];
     
     // Do any additional setup after loading the view.
+}
+
+#pragma mark - 单击双击 -
+
+- (void)handleSingleTapFrom:(UIGestureRecognizer *)gestureRecognizer {
+    RecordViewController *controller = [[RecordViewController alloc]init];
+    [self.navigationController pushViewController:controller animated:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {

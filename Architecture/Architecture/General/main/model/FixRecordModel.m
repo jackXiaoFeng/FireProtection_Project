@@ -10,4 +10,25 @@
 
 @implementation FixRecordModel
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey
+{
+    return @{
+             @"Oper_flag"        : @"Oper_flag",
+             @"Describe"         : @"Describe",
+             @"Degree"           : @"Degree",
+             @"Name"             : @"Name",
+             @"Stime"            : @"Stime",
+             @"Uname"            : @"Uname",
+             @"Utime"            : @"Utime"
+             };
+}
+
++ (NSValueTransformer *)JSONTransformerForKey:(NSString *)key
+{
+    return [MTLValueTransformer reversibleTransformerWithBlock:^id(id value) {
+        return DEF_OBJECT_TO_STIRNG(value);
+    }];
+}
+
+
 @end

@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UploadingModel : NSObject
+@interface UploadingModel : MTLModel <MTLJSONSerializing>
 
 @end

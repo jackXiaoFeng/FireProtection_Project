@@ -44,14 +44,14 @@
     navImageView.frame = CGRectMake(0, 0, self.navBar.width, self.navBar.height);
     [self.navBar addSubview:navImageView];
     
-    self.titleLb = [[UILabel alloc] initWithFrame:CGRectMake(60, 20, DEF_DEVICE_WIDTH - 60*2, 44)];
+    self.titleLb = [[UILabel alloc] initWithFrame:CGRectMake(60, DEF_NAVIGATIONBAR_HEIGHT - 44, DEF_DEVICE_WIDTH - 60*2, 44)];
     self.titleLb.textColor = [UIColor whiteColor];//DEF_COLOR_FF6704;
     self.titleLb.backgroundColor = [UIColor clearColor];
     self.titleLb.textAlignment = NSTextAlignmentCenter;
     self.titleLb.font = DEF_MyBoldFont(18.0);
     [self.navBar addSubview:self.titleLb];
     
-    self.leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 25, 52, 36)];
+    self.leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, DEF_STATUS_HEIGHT + 5, 52, 36)];
     [self.leftBtn setImage:[UIImage imageNamed:@"icon_Back"] forState:UIControlStateNormal];
     [self.leftBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
     self.leftBtn.imageView.contentMode = UIViewContentModeCenter;
@@ -63,7 +63,7 @@
     self.leftBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
     
     
-    self.rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.navBar.width - 47, 25, 52, 36)];
+    self.rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.navBar.width - 47, DEF_STATUS_HEIGHT + 5, 52, 36)];
     [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.rightBtn.imageView.contentMode = UIViewContentModeCenter;
     self.rightBtn.titleLabel.font = self.leftBtn.titleLabel.font;

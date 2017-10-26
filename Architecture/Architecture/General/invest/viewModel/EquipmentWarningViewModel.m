@@ -57,6 +57,7 @@
         
         if (loadType == LoadData) {
             page = 1;
+            self.Page = 1;
         }
         //预告
         if (loadType == LoadMore) {

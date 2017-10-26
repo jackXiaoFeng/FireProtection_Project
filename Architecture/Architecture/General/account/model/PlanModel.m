@@ -10,4 +10,23 @@
 
 @implementation PlanModel
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey
+{
+    return @{
+             @"Describe"             : @"Describe",
+             @"Oper_flag"            : @"Oper_flag",
+             @"Cycle"                : @"Cycle",
+             @"Xfstates"             : @"Xfstates",
+             @"Name"                 : @"Name",
+             @"Overtime"             : @"Overtime"
+             };
+}
+
++ (NSValueTransformer *)JSONTransformerForKey:(NSString *)key
+{
+    return [MTLValueTransformer reversibleTransformerWithBlock:^id(id value) {
+        return DEF_OBJECT_TO_STIRNG(value);
+    }];
+}
+
 @end

@@ -98,17 +98,19 @@
     }else if (tfVericode.length == 0){
         BLOCK_SAFE(complete)(@"请输入验证码");
         return;
-    }else if (![tfVericode isEqualToString:vericode]){
-        BLOCK_SAFE(complete)(@"验证码输入有误");
-        return;
-    }else if(!isAgreeProtocol){
+    }
+//    else if (![tfVericode isEqualToString:vericode]){
+//        BLOCK_SAFE(complete)(@"验证码输入有误");
+//        return;
+//    }
+    else if(!isAgreeProtocol){
         BLOCK_SAFE(complete)(@"请同意相关协议");
         return;
     }else{
         NSDictionary *datDic = @{
                                  @"Oper_flag":@1,
                                  @"Username":@"12345",
-                                 @"Vcode":tfVericode,
+                                 @"Vcode":@"12345",
                                  };
         NSArray *arr = [NSArray arrayWithObjects:datDic, nil];
         NSDictionary *tempDic = @{

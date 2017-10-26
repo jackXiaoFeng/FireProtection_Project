@@ -84,59 +84,9 @@
 
 - (void)setPlanModel:(PlanModel *)PlanModel
 {
-    //    self.nameLab.text = myGroupModel.gname;
-    //
-    //    self.messageNumLab.text = myGroupModel.unreadmsgnum;
-    //    self.descriptionLab.text = myGroupModel.descriptionStr;
-    //
-    //    if ([myGroupModel.unreadmsgnum intValue] >99) {
-    //        self.messageNumLab.text= @"99";
-    //    }
-    //    NSString *timeStr = [CMUtility getTimeWithTimestamp:myGroupModel.latestunreadmsg.pubtime WithDateFormat:@"HH:mm"];
-    //    self.nameLab.text = [timeStr isEqualToString:@""]?@"--:--":timeStr;
-    //
-    //    if (!myGroupModel.unreadmsgnum || [myGroupModel.unreadmsgnum intValue] < 1) {
-    //        self.messageNumLab.hidden = YES;
-    //    }else
-    //    {
-    //        self.messageNumLab.hidden = NO;
-    //    }
-    //    if ([myGroupModel.ismember integerValue] ==1) {
-    //        self.backgroundColor = [UIColor clearColor];
-    //        self.nameLab.textColor = DEF_COLOR_333333;
-    //        self.descriptionLab.textColor = DEF_COLOR_999999;
-    //        self.groupIV.image = DEF_IMAGENAME(@"group_login_head");
-    //        @weakify(self)
-    //        [self.groupIV sd_setImageWithURL:[NSURL URLWithString:myGroupModel.headimg] placeholderImage:DEF_IMAGENAME(@"group_login_head") completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    //            @strongify(self)
-    //            if (error) {
-    //                self.groupIV.image = [self grayImage:DEF_IMAGENAME(@"group_login_head")];
-    //            }else
-    //            {
-    //                self.groupIV.image = image;
-    //            }
-    //        }];
-    //
-    //    }else
-    //    {
-    //        self.backgroundColor = DEF_UICOLORFROMRGB(0xeeeeee);
-    //        self.nameLab.textColor = DEF_UICOLORFROMRGB(0xb8b8b8);
-    //        self.descriptionLab.textColor = DEF_UICOLORFROMRGB(0xd3d3d3);
-    //        @weakify(self)
-    //
-    //        [self.groupIV sd_setImageWithURL:[NSURL URLWithString:myGroupModel.headimg] placeholderImage:DEF_IMAGENAME(@"group_login_head") completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    //            @strongify(self)
-    //            if (error) {
-    //                self.groupIV.image = [self grayImage:DEF_IMAGENAME(@"group_login_head")];
-    //            }else
-    //            {
-    //                self.groupIV.image = [self grayImage:image];
-    //
-    //            }
-    //        }];
-    //    }
-    
-    
+    self.nameLab.text = PlanModel.Name;
+    self.addressLab.text  = PlanModel.Describe;
+    self.cycleLab.text  = PlanModel.Cycle;
 }
 
 - (void)prepareForReuse {

@@ -87,8 +87,12 @@
 #define DEF_DEVICE_WIDTH                [UIScreen mainScreen].bounds.size.width
 #define DEF_DEVICE_HEIGHT               (DEF_IOS7 ? [UIScreen mainScreen].bounds.size.height:[UIScreen mainScreen].bounds.size.height - 20)
 #define DEF_CONTENT_INTABBAR_HEIGHT     (DEF_IOS7 ? ([UIScreen mainScreen].bounds.size.height - 49):([UIScreen mainScreen].bounds.size.height - 69))
-#define DEF_NAVIGATIONBAR_HEIGHT        64
-#define DEF_TABBAR_HEIGHT               49
+
+#define DEF_STATUS_HEIGHT        [[UIApplication sharedApplication] statusBarFrame].size.height
+
+
+#define DEF_NAVIGATIONBAR_HEIGHT        ([[UIApplication sharedApplication] statusBarFrame].size.height>20?88:64)
+#define DEF_TABBAR_HEIGHT               ([[UIApplication sharedApplication] statusBarFrame].size.height>20?83:49)
 
 //比例 根据标注图尺寸计算
 #define DEF_DEVICE_SCLE_WIDTH(width) DEF_DEVICE_WIDTH*width/750

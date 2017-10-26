@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PlanModel.h"
 
 @interface PlanViewController : BaseViewController
+
 
 @end

@@ -10,10 +10,13 @@
 #import "PlanViewController.h"
 #import "PlanTableViewCell.h"
 #import "PlanModel.h"
+#import "PlanViewModel.h"
 
 @interface PlanViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong) UIView *headView;
+@property (nonatomic, strong) PlanModel *model;
+@property (nonatomic, strong) PlanViewModel *viewModel;
 
 @end
 
@@ -25,34 +28,101 @@
     self.titleLb.text = @"巡检计划";
     
     self.tableView.backgroundColor = [UIColor clearColor];
-    //    self.headView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, DEF_DEVICE_WIDTH, HeadView_height)];
-    //    self.headView.backgroundColor = [UIColor yellowColor];
-    //
-    //    self.tableView.tableHeaderView = self.headView;
-    //
-    //    [self.view addSubview:self.headView];
-    
     
     //添加刷新
-    [self addRefresh];
-}
-
--(void)addRefresh
-{
-    @weakify(self)
+    self.viewModel  = [[PlanViewModel alloc]init];
+    //首次刷新数据
+    [self headerWithRefreshing];
+    //mj刷新
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        @strongify(self)
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
-        //block();
+        [self headerWithRefreshing];
     }];
     
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        @strongify(self)
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
+        [self footerWithRefreshing];
     }];
     
+    
+}
+
+- (void)headerWithRefreshing
+{
+    @weakify(self)
+    [[[[self.viewModel feedDataWithType:LoadData] map:^id(NSDictionary * dic) {
+        @strongify(self);
+        
+        [CMUtility removeFailViewWith:self.view];
+        
+        return self.viewModel.planList;
+        
+    }] map:^id(NSMutableArray *arr) {
+        if ([arr count] < 10) {
+            return @(YES);
+        }else{
+            return @(NO);
+        }
+    }] subscribeNext:^(id x) {
+        @strongify(self);
+        //            self.footer.hidden = [x boolValue];
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+        BOOL hidden = self.tableView.contentSize.height > self.tableView.height?NO:YES;
+        //数据不超出屏幕不显示foot
+        self.tableView.mj_footer.hidden = hidden;
+        //最后一页加提示语
+        if ([x boolValue]) {
+            //提示没有更多的数据
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        
+    } error:^(NSError *error) {
+        @strongify(self);
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+        [CMUtility createHttpRequestFailViewWithView:self.view].rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+            [self.tableView.mj_header beginRefreshing];
+            return [RACSignal empty];
+        }];
+    }];
+}
+
+- (void)footerWithRefreshing
+{
+    @weakify(self)
+    [[[[self.viewModel feedDataWithType:LoadMore] map:^id(NSDictionary * dic) {
+        
+        [CMUtility removeFailViewWith:self.view];
+        
+        return self.viewModel.planList;
+    }] map:^id(NSMutableArray * arr) {
+        return @([arr count] % 10 != 0 ? YES : NO);
+    }] subscribeNext:^(id x) {
+        @strongify(self);
+        //            self.footer.hidden = [x boolValue];
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+        BOOL hidden = self.tableView.contentSize.height > self.tableView.height?NO:YES;
+        //数据不超出屏幕不显示foot
+        self.tableView.mj_footer.hidden = hidden;
+        //最后一页加提示语
+        if ([x boolValue]) {
+            //提示没有更多的数据
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+    }error:^(NSError *error) {
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+        [CMUtility createHttpRequestFailViewWithView:self.view].rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+            [self.tableView.mj_footer beginRefreshing];
+            return [RACSignal empty];
+        }];
+    }];
 }
 
 #pragma mark - delegate  dataSource -
@@ -109,7 +179,7 @@
 }
 
 -(NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return self.viewModel.planList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -122,8 +192,11 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    //cell.hidenLine= (indexPath.row== group.items.count-1); //通过组模型数组来拿到每组最后一行
-    cell.hidenLine= (indexPath.row== 5-1); //通过组模型数组来拿到每组最后一行
+    if (self.viewModel.planList.count > 0) {
+        cell.planModel  = self.viewModel.planList[indexPath.row];
+        cell.hidenLine= (indexPath.row== self.viewModel.planList.count-1); //通过组模型数组来拿到每组最后一行
+    }
+
     return cell;
 }
 

@@ -109,59 +109,39 @@
 
 - (void)setFixRecordModel:(FixRecordModel *)FixRecordModel
 {
-    //    self.nameLab.text = myGroupModel.gname;
-    //
-    //    self.messageNumLab.text = myGroupModel.unreadmsgnum;
-    //    self.descriptionLab.text = myGroupModel.descriptionStr;
-    //
-    //    if ([myGroupModel.unreadmsgnum intValue] >99) {
-    //        self.messageNumLab.text= @"99";
-    //    }
-    //    NSString *timeStr = [CMUtility getTimeWithTimestamp:myGroupModel.latestunreadmsg.pubtime WithDateFormat:@"HH:mm"];
-    //    self.timeLab.text = [timeStr isEqualToString:@""]?@"--:--":timeStr;
-    //
-    //    if (!myGroupModel.unreadmsgnum || [myGroupModel.unreadmsgnum intValue] < 1) {
-    //        self.messageNumLab.hidden = YES;
-    //    }else
-    //    {
-    //        self.messageNumLab.hidden = NO;
-    //    }
-    //    if ([myGroupModel.ismember integerValue] ==1) {
-    //        self.backgroundColor = [UIColor clearColor];
-    //        self.nameLab.textColor = DEF_COLOR_333333;
-    //        self.descriptionLab.textColor = DEF_COLOR_999999;
-    //        self.groupIV.image = DEF_IMAGENAME(@"group_login_head");
-    //        @weakify(self)
-    //        [self.groupIV sd_setImageWithURL:[NSURL URLWithString:myGroupModel.headimg] placeholderImage:DEF_IMAGENAME(@"group_login_head") completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    //            @strongify(self)
-    //            if (error) {
-    //                self.groupIV.image = [self grayImage:DEF_IMAGENAME(@"group_login_head")];
-    //            }else
-    //            {
-    //                self.groupIV.image = image;
-    //            }
-    //        }];
-    //
-    //    }else
-    //    {
-    //        self.backgroundColor = DEF_UICOLORFROMRGB(0xeeeeee);
-    //        self.nameLab.textColor = DEF_UICOLORFROMRGB(0xb8b8b8);
-    //        self.descriptionLab.textColor = DEF_UICOLORFROMRGB(0xd3d3d3);
-    //        @weakify(self)
-    //
-    //        [self.groupIV sd_setImageWithURL:[NSURL URLWithString:myGroupModel.headimg] placeholderImage:DEF_IMAGENAME(@"group_login_head") completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    //            @strongify(self)
-    //            if (error) {
-    //                self.groupIV.image = [self grayImage:DEF_IMAGENAME(@"group_login_head")];
-    //            }else
-    //            {
-    //                self.groupIV.image = [self grayImage:image];
-    //
-    //            }
-    //        }];
-    //    }
+    //YYYY-MM-dd HH:mm:ss
+    if (FixRecordModel.Stime.length < 10) {
+        self.timeLab.text = @"--:--";
+        
+    }else
+    {
+        self.timeLab.text = [CMUtility getTimeWithTimestamp:FixRecordModel.Stime WithDateFormat:@"HH:mm"];
+    }
+    
+    self.deviceLab.text = [NSString stringWithFormat:@"%@ %@",FixRecordModel.Name,FixRecordModel.Describe];
+    
+    //0:正常
+    //1:异常
+    NSString *statusStr = @"";
+    //        if ([WarningHistoryModel.Xfstates isEqualToString:Warning_Fix_Normal]) {
+    //            statusStr = @"正常";
+    //        }else
+    //        {
+    //            statusStr = @"异常";
+    //        }
+    self.statusLab.text = statusStr;
+    
+    //复归时间
+    if (FixRecordModel.Utime.length < 10) {
+        self.restorationTimeLab.text = @"--:--";
+        
+    }else
+    {
+        self.restorationTimeLab.text = [CMUtility getTimeWithTimestamp:FixRecordModel.Utime WithDateFormat:@"HH:mm"];
+    }
     
     
+    self.restorationLab.text = DEF_OBJECT_TO_STIRNG(FixRecordModel.Uname);
 }
 
 - (void)prepareForReuse {

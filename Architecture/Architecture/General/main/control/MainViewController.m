@@ -33,7 +33,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+        
     self.progressSections = 20;
     
     self.titleLb.text = @"巡检操作";
