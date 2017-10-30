@@ -19,7 +19,7 @@ target 'Architecture' do
     pod 'MJRefresh', '~> 3.1.10'
     pod 'pop','~> 1.0.8'
     pod 'Socket.IO-Client-Swift', '~> 8.3.3'
-    
+    pod 'JPush', '3.0.6'
 end
 
 post_install do |installer|

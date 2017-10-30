@@ -332,6 +332,8 @@
 		3AA1C8871F4AA9F1004A52EF /* CMUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMUtility.m; sourceTree = "<group>"; };
 		3AA1C8A91F4ACE7A004A52EF /* UIButton+LXMImagePosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+LXMImagePosition.h"; sourceTree = "<group>"; };
 		3AA1C8AA1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LXMImagePosition.m"; sourceTree = "<group>"; };
+		3AC1A3C81FA70F4300BE4035 /* Architecture.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Architecture.entitlements; sourceTree = "<group>"; };
+		3AC1A3C91FA70F6000BE4035 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		3AD29EEA1F46D3EB005B600D /* ConfigDefineHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigDefineHeader.h; sourceTree = "<group>"; };
 		3AD29EEB1F46D586005B600D /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		3AD29EEC1F46D586005B600D /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
@@ -597,6 +599,7 @@
 		3A95ACEB1D17D4BA0026EAFE /* Architecture */ = {
 			isa = PBXGroup;
 			children = (
+				3AC1A3C81FA70F4300BE4035 /* Architecture.entitlements */,
 				3A95ACEF1D17D4BA0026EAFE /* AppDelegate.h */,
 				3A95ACF01D17D4BA0026EAFE /* AppDelegate.m */,
 				3A95AD211D17E0490026EAFE /* Common */,
@@ -1088,6 +1091,7 @@
 		ECA1C6FC628E76CC31629BD4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3AC1A3C91FA70F6000BE4035 /* UserNotifications.framework */,
 				3A26EA351F5A50540086C553 /* libicucore.tbd */,
 				3A26EA331F5A50290086C553 /* Foundation.framework */,
 				3A26EA311F5A50050086C553 /* CFNetwork.framework */,
@@ -1167,7 +1171,16 @@
 				TargetAttributes = {
 					3A95ACE81D17D4BA0026EAFE = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 4WEV3XJ3P3;
 						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					3A95AD011D17D4BA0026EAFE = {
 						CreatedOnToolsVersion = 7.2;
@@ -1492,11 +1505,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Architecture/Architecture.entitlements;
+				DEVELOPMENT_TEAM = 4WEV3XJ3P3;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Architecture/Architecture.pch";
 				INFOPLIST_FILE = Architecture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kaifeng.com.Architecture;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.wuziqi;
 				PRODUCT_NAME = Architecture;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1508,11 +1523,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Architecture/Architecture.entitlements;
+				DEVELOPMENT_TEAM = 4WEV3XJ3P3;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Architecture/Architecture.pch";
 				INFOPLIST_FILE = Architecture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kaifeng.com.Architecture;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.wuziqi;
 				PRODUCT_NAME = Architecture;
 				SWIFT_VERSION = 3.0;
 			};

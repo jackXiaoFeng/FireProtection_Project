@@ -31,7 +31,7 @@
 
  //**********************第三方*************************
 //JPush 极光推送
-#define APPKEY_JPush      @"e59ef0a17b43c6b890127537"
+#define APPKEY_JPush      @"91a56667871b8d0ec465372b"
 #define CHANNEL_JPush     @"AppStore"
 
 //ShareSDK appKey

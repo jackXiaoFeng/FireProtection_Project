@@ -20,6 +20,11 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <SocketIO/SocketIO-Swift.h>
 #import "MJRefresh.h"
+
+// 引入JPush功能所需头文件
+#import "JPUSHService.h"
+
+
 //#import "JPUSHService.h"
 //#import "WXApi.h"
 
@@ -77,3 +82,4 @@
 
 
 #endif /* ImportDefineHeader_h */
+

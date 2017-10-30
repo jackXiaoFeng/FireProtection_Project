@@ -24,6 +24,9 @@ PODS:
   - EGODatabase (2.0)
   - INTULocationManager (3.0.3)
   - iToast (0.0.1)
+  - JCore (1.1.5)
+  - JPush (3.0.6):
+    - JCore (~> 1.1.1)
   - JSONKit (1.5pre)
   - Mantle (1.5.8):
     - Mantle/extobjc (= 1.5.8)
@@ -56,6 +59,7 @@ DEPENDENCIES:
   - EGODatabase (~> 2.0)
   - INTULocationManager (~> 3.0.0)
   - iToast (~> 0.0.1)
+  - JPush (= 3.0.6)
   - JSONKit (~> 1.5pre)
   - Mantle (~> 1.5.1)
   - Masonry (~> 0.6.1)
@@ -74,6 +78,8 @@ SPEC CHECKSUMS:
   EGODatabase: 8192f4d2bb9f05e38fe8be07a87dcd8066325ee3
   INTULocationManager: e79327803a163f5fec28eb042bb124ed0c6e4876
   iToast: df147188215cc3293bd4366822833f2862fec451
+  JCore: 9bd9c770c877c583d98b90a68792b8361974c231
+  JPush: c41be50eb1a574a66aeb68d237f00a4ec6ec3a82
   JSONKit: bae313ce6a6c444f40489a6c0b023f399888871f
   Mantle: f03b2b606c3f0cabd80214ad8a2fed6b464a7359
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
@@ -86,6 +92,6 @@ SPEC CHECKSUMS:
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   Socket.IO-Client-Swift: a2faffdbde89c63aebc5d631041530c1068b02b8
 
-PODFILE CHECKSUM: 2763c3c1f4dfd881bde6be4c7737f03226ea3a54
+PODFILE CHECKSUM: 00898bf8516aec06ac488bdf9c46c5dd8c0b395e
 
 COCOAPODS: 1.0.1
