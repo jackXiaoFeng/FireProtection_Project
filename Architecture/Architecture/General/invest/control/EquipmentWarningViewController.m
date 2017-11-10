@@ -34,7 +34,7 @@
     //添加刷新
     self.viewModel  = [[EquipmentWarningViewModel alloc]init];
     //首次刷新数据
-    //[self headerWithRefreshing];
+    [self headerWithRefreshing];
     //mj刷新
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self headerWithRefreshing];
@@ -223,7 +223,7 @@
     model.AFmaintenance =@"2";
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     
-    NSLog(@"===============%@",model.Describe);
+    NSLog(@"===============%@",model.Degree);
     [[self.viewModel alarmEquipmentMaintenanceWithDegree:model.Degree] subscribeNext:^(NSString *str) {
         
             @strongify(self);

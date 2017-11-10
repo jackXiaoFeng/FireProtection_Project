@@ -100,7 +100,7 @@
         self.timeLab.text = [CMUtility getTimeWithTimestamp:equipmentWarningModel.Time WithDateFormat:@"HH:mm"];
     }
     
-    self.deviceLab.text = [NSString stringWithFormat:@"%@ %@",equipmentWarningModel.name,equipmentWarningModel.Describe];
+    self.deviceLab.text = [NSString stringWithFormat:@"%@ %@",DEF_OBJECT_TO_STIRNG(equipmentWarningModel.name),DEF_OBJECT_TO_STIRNG(equipmentWarningModel.Describe)];
     
     //0:正常
     //1:异常

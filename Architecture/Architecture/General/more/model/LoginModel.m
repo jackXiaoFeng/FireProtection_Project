@@ -23,7 +23,7 @@
     {
         NSDictionary *datDic = @{
                                  @"Oper_flag":@1,
-                                 @"Username":@"12345",
+                                 @"Username":phoneNum,
                                  @"Sms_template":@1,
                                  };
         NSArray *arr = [NSArray arrayWithObjects:datDic, nil];
@@ -109,8 +109,8 @@
     }else{
         NSDictionary *datDic = @{
                                  @"Oper_flag":@1,
-                                 @"Username":@"12345",
-                                 @"Vcode":@"12345",
+                                 @"Username":phoneNum,
+                                 @"Vcode":vericode,
                                  };
         NSArray *arr = [NSArray arrayWithObjects:datDic, nil];
         NSDictionary *tempDic = @{

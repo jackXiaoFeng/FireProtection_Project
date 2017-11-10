@@ -96,4 +96,11 @@
  */
 - (BOOL) isFloat;
 
+//Unicode转UTF-8
++ (NSString*) replaceUnicode:(NSString*)aUnicodeString;
+//UTF-8转Unicode
++ (NSString *) utf8ToUnicode:(NSString *)string;
++(NSString *) allUtf8ToUnicode:(NSString *)string;
+//去除json中多余的反斜杠
++ (NSString*) deleteCharactersInJsonStr:(NSString*)jsonStrTem;
 @end

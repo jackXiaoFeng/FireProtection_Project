@@ -36,6 +36,7 @@ static BOOL isProduction = NO;
     NSLog(@"-----------socketio--------");
     
     //socketio 连接
+    /**/
     @weakify(self)
     SocketIO_Singleton.connectSuccess = ^{
         @strongify(self)
@@ -45,14 +46,15 @@ static BOOL isProduction = NO;
         //[SocketIO_Singleton sendEmit:@"xs001" withMessage:@"{\"code\":\"xs001\",\"serial_no\":\"\",\"token\":\"2hACkIzVnNqCjEciwCaZ2flveBGv\",\"errorcode\":\"0\",\"errormsg\":\"success\",\"dat\":[{\"Oper_flag\":\"1\",\"Username\":\"123456\",\"Vcode\":\"123456\"}]}"];
     };
     
-    [self createTabBars];
-    //[self load];
+    //[self createTabBars];
+    [self load];
     
     
     [self.window makeKeyAndVisible];
     
     return YES;
 }
+
 
 - (void)load
 {
@@ -68,10 +70,14 @@ static BOOL isProduction = NO;
         
         CMMemberEntity.isLogined = YES;
         
+        NSString *str1= CMMemberEntity.userInfo.unitsn;
+        NSString *unicodeStr1 = [NSString utf8ToUnicode:CMMemberEntity.userInfo.unitsn];
+        NSLog(@"***%@***",unicodeStr1);
+        
         NSLog(@"本地存储用户信息%@--%@--%@--%@--%@",
               CMMemberEntity.userInfo.phone,
               CMMemberEntity.userInfo.unitname,CMMemberEntity.userInfo.token,CMMemberEntity.userInfo.unitsn,CMMemberEntity.userInfo.username);
-        
+
         [self createTabBars];
         
     }else
@@ -203,6 +209,8 @@ static BOOL isProduction = NO;
                                                                dateStyle:NSDateFormatterNoStyle
                                                                timeStyle:NSDateFormatterMediumStyle],
                                 title, content, [self logDic:extra]];
+    
+    [CMUtility showAlertWithMessage:currentContent delegate:self];
     NSLog(@"%@", currentContent);
     
     

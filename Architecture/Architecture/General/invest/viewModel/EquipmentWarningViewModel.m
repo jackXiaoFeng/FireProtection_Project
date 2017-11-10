@@ -66,8 +66,10 @@
             
             page = self.Page;
         }
+        NSString *utf8Str = [NSString utf8ToUnicode:CMMemberEntity.userInfo.unitsn];
+        
         NSDictionary *datDic = @{
-                                 @"unitsn":CMMemberEntity.userInfo.unitsn,
+                                 @"Unitsn":utf8Str,
                                  @"Oper_flag":@1,
                                  @"Nrow":[NSNumber numberWithInt:pageSize],
                                  @"Page":[NSNumber numberWithInt:page],
@@ -82,7 +84,7 @@
                                   @"dat":arr                              };
         
         
-        NSString *jsonStr = [tempDic JSONString];
+        NSString *jsonStr = [NSString deleteCharactersInJsonStr:[tempDic JSONString]];
         @weakify(self)
         [SocketIO_Singleton sendEmit:XS004 withMessage:jsonStr];
         SocketIO_Singleton.xr004CallBackResult = ^(NSDictionary *resultDict){
@@ -118,10 +120,14 @@
     @weakify(self);
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         @strongify(self);
+        NSString *utf8Str = [NSString utf8ToUnicode:CMMemberEntity.userInfo.unitsn];
+        
+        NSString *utf8Degree = [NSString allUtf8ToUnicode:degree];
+
         NSDictionary *datDic = @{
-                                 @"unitsn":CMMemberEntity.userInfo.unitsn,
+                                 @"Unitsn":utf8Str,
                                  @"Oper_flag":@1,
-                                 @"Degree":degree
+                                 @"Degree":utf8Degree
                                  };
         NSArray *arr = [NSArray arrayWithObjects:datDic, nil];
         NSDictionary *tempDic = @{
@@ -132,8 +138,9 @@
                                   @"token":CMMemberEntity.token,
                                   @"dat":arr                              };
         
-        
-        NSString *jsonStr = [tempDic JSONString];
+        NSString *jsonStrTmp = [tempDic JSONString];
+
+        NSString *jsonStr = [NSString deleteCharactersInJsonStr:jsonStrTmp];
         @weakify(self)
         [SocketIO_Singleton sendEmit:XS015 withMessage:jsonStr];
         SocketIO_Singleton.xr015CallBackResult = ^(NSDictionary *resultDict){

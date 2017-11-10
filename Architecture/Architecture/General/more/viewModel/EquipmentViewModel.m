@@ -67,8 +67,13 @@
             
             page = self.Page;
         }
+        
+//        NSString *utf8Str = [CMMemberEntity.userInfo.unitsn stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        NSString *unicodeStr = [NSString stringWithCString:[utf8Str UTF8String] encoding:NSUnicodeStringEncoding];
+        
+        NSString *utf8Str = [NSString utf8ToUnicode:CMMemberEntity.userInfo.unitsn];
         NSDictionary *datDic = @{
-                                 @"unitsn":CMMemberEntity.userInfo.unitsn,
+                                 @"Unitsn":utf8Str,
                                  @"Oper_flag":@1,
                                  @"Nrow":[NSNumber numberWithInt:pageSize],
                                  @"Page":[NSNumber numberWithInt:page],
@@ -84,7 +89,8 @@
                                   };
         
         
-        NSString *jsonStr = [tempDic JSONString];
+        NSString *jsonStr = [NSString deleteCharactersInJsonStr:[tempDic JSONString]];
+        
         @weakify(self)
         [SocketIO_Singleton sendEmit:XS012 withMessage:jsonStr];
         SocketIO_Singleton.xr012CallBackResult = ^(NSDictionary *resultDict){

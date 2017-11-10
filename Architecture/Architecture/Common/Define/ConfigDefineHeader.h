@@ -16,12 +16,14 @@
 //#define DEF_IPAddress      @"http://121.40.82.243:9701/api3/ios" //测试环境
 //#define ACT_URL      @"http://121.40.82.243:83/appwap/activity/index?agent=ios" //测试环境 活动页面地址
 
-#define DEBUG_SOCKETIO
+//#define DEBUG_SOCKETIO
 
 #ifdef  DEBUG_SOCKETIO
-#define SOCKETIO_ADDRESS          @"http://192.168.1.62:22223" //socketIO 环境
+#define SOCKETIO_ADDRESS          @"http://192.168.1.123:22223" //socketIO 环境
+//行情@"https://yshjhqapi.yishouhuangjin.com/socket.io/socket.io.js" 
 #else
-  #define SOCKETIO_ADDRESS        @"http://apit.freshcn.cn:22223" //socketIO 环境
+//  #define SOCKETIO_ADDRESS        @"http://apit.freshcn.cn:22223" //socketIO 环境
+   #define SOCKETIO_ADDRESS        @"http://wwwt.freshera.cn:22223"
 #endif
 
 
@@ -31,7 +33,7 @@
 
  //**********************第三方*************************
 //JPush 极光推送
-#define APPKEY_JPush      @"91a56667871b8d0ec465372b"
+#define APPKEY_JPush      @"5f15ee535b2c83f9738d20b8"
 #define CHANNEL_JPush     @"AppStore"
 
 //ShareSDK appKey

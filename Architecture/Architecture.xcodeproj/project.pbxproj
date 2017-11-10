@@ -104,6 +104,8 @@
 		3AA1C8851F4AA962004A52EF /* RoundnessProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8841F4AA962004A52EF /* RoundnessProgressView.m */; };
 		3AA1C8881F4AA9F1004A52EF /* CMUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8871F4AA9F1004A52EF /* CMUtility.m */; };
 		3AA1C8AB1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1C8AA1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m */; };
+		3AC1A40A1FA8524300BE4035 /* DetectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC1A4091FA8524300BE4035 /* DetectionViewController.m */; };
+		3AC1A40C1FA8546500BE4035 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC1A40B1FA8545700BE4035 /* CoreBluetooth.framework */; };
 		3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EEC1F46D586005B600D /* NSString+Utils.m */; };
 		3AD29EF01F46D586005B600D /* UIColor+RGBColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EEE1F46D586005B600D /* UIColor+RGBColor.m */; };
 		3AD29EFE1F46D69F005B600D /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EF31F46D69F005B600D /* DDPageControl.m */; };
@@ -334,6 +336,9 @@
 		3AA1C8AA1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LXMImagePosition.m"; sourceTree = "<group>"; };
 		3AC1A3C81FA70F4300BE4035 /* Architecture.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Architecture.entitlements; sourceTree = "<group>"; };
 		3AC1A3C91FA70F6000BE4035 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		3AC1A4081FA8524300BE4035 /* DetectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetectionViewController.h; sourceTree = "<group>"; };
+		3AC1A4091FA8524300BE4035 /* DetectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetectionViewController.m; sourceTree = "<group>"; };
+		3AC1A40B1FA8545700BE4035 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		3AD29EEA1F46D3EB005B600D /* ConfigDefineHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigDefineHeader.h; sourceTree = "<group>"; };
 		3AD29EEB1F46D586005B600D /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		3AD29EEC1F46D586005B600D /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
@@ -359,6 +364,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AC1A40C1FA8546500BE4035 /* CoreBluetooth.framework in Frameworks */,
 				3A26EA361F5A50540086C553 /* libicucore.tbd in Frameworks */,
 				3A26EA341F5A50290086C553 /* Foundation.framework in Frameworks */,
 				3A26EA321F5A50050086C553 /* CFNetwork.framework in Frameworks */,
@@ -758,9 +764,9 @@
 		3A96814D1FA1CC9E00A6F7A3 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				3A9681921FA1CC9F00A6F7A3 /* main */,
 				3A96814E1FA1CC9E00A6F7A3 /* account */,
 				3A96816F1FA1CC9F00A6F7A3 /* invest */,
-				3A9681921FA1CC9F00A6F7A3 /* main */,
 				3A9681A51FA1CC9F00A6F7A3 /* more */,
 			);
 			path = General;
@@ -920,6 +926,8 @@
 				3A9681951FA1CC9F00A6F7A3 /* FixRecordViewController.m */,
 				3A9681961FA1CC9F00A6F7A3 /* MainViewController.h */,
 				3A9681971FA1CC9F00A6F7A3 /* MainViewController.m */,
+				3AC1A4081FA8524300BE4035 /* DetectionViewController.h */,
+				3AC1A4091FA8524300BE4035 /* DetectionViewController.m */,
 			);
 			path = control;
 			sourceTree = "<group>";
@@ -1091,6 +1099,7 @@
 		ECA1C6FC628E76CC31629BD4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3AC1A40B1FA8545700BE4035 /* CoreBluetooth.framework */,
 				3AC1A3C91FA70F6000BE4035 /* UserNotifications.framework */,
 				3A26EA351F5A50540086C553 /* libicucore.tbd */,
 				3A26EA331F5A50290086C553 /* Foundation.framework */,
@@ -1341,6 +1350,7 @@
 				3A40D5BC1F5E87C700D7E8DF /* CMMember.m in Sources */,
 				3A40D5CA1F5FEBBA00D7E8DF /* BaseViewModel.m in Sources */,
 				3A9681DA1FA1CC9F00A6F7A3 /* FixRecordModel.m in Sources */,
+				3AC1A40A1FA8524300BE4035 /* DetectionViewController.m in Sources */,
 				3A95AD381D17EA410026EAFE /* TabBarViewController.m in Sources */,
 				3A9681E71FA1CC9F00A6F7A3 /* EquipmentViewModel.m in Sources */,
 				3A26EA261F5A4FE50086C553 /* SRHTTPConnectMessage.m in Sources */,

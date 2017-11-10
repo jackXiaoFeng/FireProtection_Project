@@ -118,7 +118,7 @@
 /**
  *所有类型转化成String(防止出现nill值显示在UI)
  */
-#define DEF_OBJECT_TO_STIRNG(object) ((object && object != (id)[NSNull null])?([object isKindOfClass:[NSString class]]?object:[NSString stringWithFormat:@"%@",object]):@"")
+#define DEF_OBJECT_TO_STIRNG(object) ((object && (object != (id)[NSNull null]) && (![object isEqualToString:@"null"]) && (![object isEqualToString:@"Null"]) && (![object isEqualToString:@"NULL"]))?([object isKindOfClass:[NSString class]]?object:[NSString stringWithFormat:@"%@",object]):@"")
 
 /* *
  *iOS版本

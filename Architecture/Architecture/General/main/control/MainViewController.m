@@ -12,6 +12,7 @@
 #include "MainModel.h"
 #import "EquipmentWarningViewController.h"
 #import "FixRecordViewController.h"
+#import "DetectionViewController.h"
 
 @interface MainViewController ()<SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -92,6 +93,9 @@
 - (void)rightBtnClick
 {
     NSLog(@"二维码btn点击");
+    DetectionViewController *controller = [[DetectionViewController alloc]init];
+    [self.navigationController pushViewController:controller animated:YES];
+
 }
 
 #pragma mark - delegate  dataSource -

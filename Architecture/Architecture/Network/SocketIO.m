@@ -6,6 +6,9 @@
 //  Copyright © 2016年 xiaofeng. All rights reserved.
 //
 
+
+//oc版socketio https://github.com/pkyeck/socket.IO-objc
+//
 #import "SocketIO.h"
 
 @interface SocketIO()
@@ -313,7 +316,7 @@
     if (!_client) {
         NSURL* url = [[NSURL alloc] initWithString:SOCKETIO_ADDRESS];
         
-        _client = [[SocketIOClient alloc] initWithSocketURL:url config:@{@"log": @YES, @"forcePolling": @YES}];
+        _client = [[SocketIOClient alloc] initWithSocketURL:url config:@{@"log": @YES, @"forcePolling": @NO}];
     }
     return _client;
 }

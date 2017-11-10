@@ -65,6 +65,7 @@
 #import "UIColor+RGBColor.h"
 #import "UIImageView+WebCache.h"
 #import "UIButton+LXMImagePosition.h"
+#import "NSString+Utils.h"
 
 /*
  Util
