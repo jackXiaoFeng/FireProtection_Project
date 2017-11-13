@@ -37,10 +37,10 @@
     }
     
 - (void)initSubViews
-    {
-        UILabel *timeLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, DEF_DEVICE_SCLE_WIDTH(112), CellHeight)];
+{
+        UILabel *timeLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, DEF_DEVICE_SCLE_WIDTH((134)), CellHeight)];
         timeLab.font = DEF_MyFont(14.0f);
-        timeLab.text = @"--：--";
+        timeLab.text = @"--:--";
         timeLab.userInteractionEnabled = YES;
         timeLab.backgroundColor = [UIColor clearColor];
         timeLab.textAlignment = NSTextAlignmentCenter;
@@ -49,9 +49,9 @@
         self.timeLab = timeLab;
         
         
-        UILabel *deviceLab = [[UILabel alloc] initWithFrame:CGRectMake(timeLab.x+timeLab.width, 0, DEF_DEVICE_SCLE_WIDTH(192), CellHeight)];
+        UILabel *deviceLab = [[UILabel alloc] initWithFrame:CGRectMake(timeLab.x+timeLab.width, 0, DEF_DEVICE_SCLE_WIDTH(174), CellHeight)];
         deviceLab.font = DEF_MyFont(14.0f);
-        deviceLab.text = @"设备＋地点";
+        deviceLab.text = @"----";
         deviceLab.userInteractionEnabled = YES;
         deviceLab.backgroundColor = [UIColor clearColor];
         deviceLab.textAlignment = NSTextAlignmentCenter;
@@ -59,9 +59,9 @@
         [self.contentView addSubview:deviceLab];
         self.deviceLab = deviceLab;
         
-        UILabel *statusLab = [[UILabel alloc] initWithFrame:CGRectMake(deviceLab.x+deviceLab.width, 0, DEF_DEVICE_SCLE_WIDTH(112), CellHeight)];
+        UILabel *statusLab = [[UILabel alloc] initWithFrame:CGRectMake(deviceLab.x+deviceLab.width, 0, DEF_DEVICE_SCLE_WIDTH(134), CellHeight)];
         statusLab.font = DEF_MyFont(14.0f);
-        statusLab.text = @"正常";
+        statusLab.text = @"--";
         statusLab.userInteractionEnabled = YES;
         statusLab.backgroundColor = [UIColor clearColor];
         statusLab.textAlignment = NSTextAlignmentCenter;
@@ -69,9 +69,9 @@
         [self.contentView addSubview:statusLab];
         self.statusLab = statusLab;
         
-        UILabel *restorationTimeLab = [[UILabel alloc] initWithFrame:CGRectMake(statusLab.x+statusLab.width, 0, DEF_DEVICE_SCLE_WIDTH(128), CellHeight)];
+        UILabel *restorationTimeLab = [[UILabel alloc] initWithFrame:CGRectMake(statusLab.x+statusLab.width, 0, DEF_DEVICE_SCLE_WIDTH(171), CellHeight)];
         restorationTimeLab.font = DEF_MyFont(14.0f);
-        restorationTimeLab.text = @"12:00";
+    restorationTimeLab.text = @"--:--";
         restorationTimeLab.userInteractionEnabled = YES;
         restorationTimeLab.backgroundColor = [UIColor clearColor];
         restorationTimeLab.textAlignment = NSTextAlignmentCenter;
@@ -80,9 +80,9 @@
         self.restorationTimeLab = restorationTimeLab;
         
         
-        UILabel *restorationLab = [[UILabel alloc] initWithFrame:CGRectMake(restorationTimeLab.x+restorationTimeLab.width, 0, DEF_DEVICE_SCLE_WIDTH(210), CellHeight)];
+        UILabel *restorationLab = [[UILabel alloc] initWithFrame:CGRectMake(restorationTimeLab.x+restorationTimeLab.width, 0, DEF_DEVICE_SCLE_WIDTH(140), CellHeight)];
         restorationLab.font = DEF_MyFont(14.0f);
-        restorationLab.text = @"已申请";
+        restorationLab.text = @"---";
         restorationLab.userInteractionEnabled = YES;
         restorationLab.backgroundColor = [UIColor clearColor];
         restorationLab.textAlignment = NSTextAlignmentCenter;
@@ -118,7 +118,7 @@
             self.timeLab.text = [CMUtility getTimeWithTimestamp:WarningHistoryModel.Stime WithDateFormat:@"HH:mm"];
         }
         
-        self.deviceLab.text = [NSString stringWithFormat:@"%@ %@",WarningHistoryModel.Name,WarningHistoryModel.Describe];
+        self.deviceLab.text = [NSString stringWithFormat:@"%@ ",WarningHistoryModel.Name];
         
         //0:正常
         //1:异常
@@ -141,7 +141,7 @@
         }
         
         
-        self.restorationLab.text = DEF_OBJECT_TO_STIRNG(WarningHistoryModel.Uname);
+        self.restorationLab.text = DEF_OBJECT_TO_STIRNG(WarningHistoryModel.Username);
     }
     
 - (void)prepareForReuse {

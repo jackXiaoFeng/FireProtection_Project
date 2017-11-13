@@ -13,14 +13,21 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
     return @{
-             @"Degree"                : @"Degree",
-             @"Describe"              : @"Describe",
-             @"Oper_flag"             : @"Oper_flag",
-             @"Name"                  : @"Name",
+             @"Count"                : @"Count",
+             @"Degree"              : @"Degree",
+             @"Detailed"             : @"Detailed",
+             @"Mdetailed"                  : @"Mdetailed",
+             @"Mtime"                 : @"Mtime",
+             @"Musername"                 : @"Musername",
+             @"Name"                 : @"Name",
+             @"Oper_flag"                 : @"Oper_flag",
              @"Stime"                 : @"Stime",
-             @"Uname"                 : @"Uname",
-             @"Utime"                 : @"Utime"
+             @"Udetailed"                 : @"Udetailed",
+             @"Username"                 : @"Username",
+             @"Utime"                 : @"Utime",
+             @"Uusername"                 : @"Uusername"
              };
+
 }
 
 

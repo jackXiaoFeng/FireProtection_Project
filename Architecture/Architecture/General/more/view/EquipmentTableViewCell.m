@@ -38,7 +38,7 @@
     
     UILabel *equipmentLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, DEF_DEVICE_SCLE_WIDTH(212), CellHeight)];
     equipmentLab.font = DEF_MyFont(14.0f);
-    equipmentLab.text = @"消防泵1";
+    equipmentLab.text = @"----";
     equipmentLab.userInteractionEnabled = YES;
     equipmentLab.backgroundColor = [UIColor clearColor];
     equipmentLab.textAlignment = NSTextAlignmentCenter;
@@ -49,7 +49,7 @@
     
     UILabel *numLab = [[UILabel alloc] initWithFrame:CGRectMake(equipmentLab.x+equipmentLab.width, 0, DEF_DEVICE_SCLE_WIDTH(320), CellHeight)];
     numLab.font = DEF_MyFont(14.0f);
-    numLab.text = @"3.5Mpa";
+    numLab.text = @"----";
     numLab.userInteractionEnabled = YES;
     numLab.backgroundColor = [UIColor clearColor];
     numLab.textAlignment = NSTextAlignmentCenter;
@@ -59,7 +59,7 @@
     
     UILabel *statusLab = [[UILabel alloc] initWithFrame:CGRectMake(numLab.x+numLab.width, 0, DEF_DEVICE_SCLE_WIDTH(220), CellHeight)];
     statusLab.font = DEF_MyFont(14.0f);
-    statusLab.text = @"正常";
+    statusLab.text = @"----";
     statusLab.userInteractionEnabled = YES;
     statusLab.backgroundColor = [UIColor clearColor];
     statusLab.textAlignment = NSTextAlignmentCenter;
@@ -88,8 +88,8 @@
 
 - (void)setEquipmentModel:(EquipmentModel *)equipmentModel
 {
-    self.equipmentLab.text = equipmentModel.Name;
-    //self.numLab.text = equipmentModel.Xfnumericals;
+    self.equipmentLab.text = DEF_OBJECT_TO_STIRNG(equipmentModel.Name) ;
+    self.numLab.text = equipmentModel.XY;
     
     //0:正常
     //1:异常

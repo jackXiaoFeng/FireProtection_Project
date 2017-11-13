@@ -13,6 +13,7 @@
 #import "EquipmentWarningViewController.h"
 #import "WarningHistoryViewController.h"
 #import "MalfunctionEquipmentViewController.h"
+#import "DetectionViewController.h"
 
 @interface InvestViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
@@ -24,6 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.titleLb.text = @"告警";
+    
+    [self.rightBtn setImage:DEF_IMAGENAME(@"scan") forState:UIControlStateNormal];
+    self.rightBtn.hidden = NO;
 
     self.tableView.backgroundColor = [UIColor clearColor];
     CGFloat headviewHeight = DEF_DEVICE_SCLE_HEIGHT(16);
@@ -31,7 +35,13 @@
     headView.backgroundColor = DEF_COLOR_RGB(237, 237, 237);
     self.tableView.tableHeaderView = headView;
 }
-
+- (void)rightBtnClick
+{
+    NSLog(@"二维码btn点击");
+    DetectionViewController *controller = [[DetectionViewController alloc]init];
+    [self.navigationController pushViewController:controller animated:YES];
+    
+}
 #pragma mark - delegate  dataSource -
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

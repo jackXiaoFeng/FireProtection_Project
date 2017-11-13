@@ -18,6 +18,8 @@
 #import "DrawView.h"
 
 #import "MoreViewController.h"
+#import "DetectionViewController.h"
+
 @interface AccountViewController ()
 
 @end
@@ -27,6 +29,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.titleLb.text = @"巡检";
+    
+    [self.rightBtn setImage:DEF_IMAGENAME(@"scan") forState:UIControlStateNormal];
+    self.rightBtn.hidden = NO;
     
     NSArray *nameArray = @[
                            @"巡检\n计划",
@@ -220,7 +225,13 @@
     // Do any additional setup after loading the view.
 }
 
-
+- (void)rightBtnClick
+{
+    NSLog(@"二维码btn点击");
+    DetectionViewController *controller = [[DetectionViewController alloc]init];
+    [self.navigationController pushViewController:controller animated:YES];
+    
+}
 - (void)xunjianBtnclick:(UIButton *)btn
 {
     NSUInteger BtnTag = btn.tag;

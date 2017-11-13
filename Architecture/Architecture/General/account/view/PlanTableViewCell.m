@@ -36,7 +36,7 @@
 {
     UILabel *nameLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, DEF_DEVICE_SCLE_WIDTH(272), CellHeight)];
     nameLab.font = DEF_MyFont(14.0f);
-    nameLab.text = @"未知";
+    nameLab.text = @"----";
     nameLab.userInteractionEnabled = YES;
     nameLab.backgroundColor = [UIColor clearColor];
     nameLab.textAlignment = NSTextAlignmentCenter;
@@ -47,7 +47,7 @@
     
     UILabel *addressLab = [[UILabel alloc] initWithFrame:CGRectMake(nameLab.x+nameLab.width, 0, DEF_DEVICE_SCLE_WIDTH(198), CellHeight)];
     addressLab.font = DEF_MyFont(14.0f);
-    addressLab.text = @"地点";
+    addressLab.text = @"----";
     addressLab.userInteractionEnabled = YES;
     addressLab.backgroundColor = [UIColor clearColor];
     addressLab.textAlignment = NSTextAlignmentCenter;
@@ -57,7 +57,7 @@
     
     UILabel *cycleLab = [[UILabel alloc] initWithFrame:CGRectMake(addressLab.x+addressLab.width, 0, DEF_DEVICE_SCLE_WIDTH(282), CellHeight)];
     cycleLab.font = DEF_MyFont(14.0f);
-    cycleLab.text = @"7天";
+    cycleLab.text = @"----";
     cycleLab.userInteractionEnabled = YES;
     cycleLab.backgroundColor = [UIColor clearColor];
     cycleLab.textAlignment = NSTextAlignmentCenter;
@@ -84,9 +84,20 @@
 
 - (void)setPlanModel:(PlanModel *)PlanModel
 {
-    self.nameLab.text = PlanModel.Name;
-    self.addressLab.text  = PlanModel.Describe;
-    self.cycleLab.text  = PlanModel.Cycle;
+//    self.nameLab.text = PlanModel.Name;
+//    self.addressLab.text  = PlanModel.Describe;
+//    self.cycleLab.text  = PlanModel.Cycle;
+    
+    self.nameLab.text = PlanModel.Eqname;
+    self.addressLab.text  = PlanModel.Floorsn;
+    self.cycleLab.text  = [NSString stringWithFormat:@"%@天",PlanModel.Number];
+    
+    //Count = 27;
+    //Eqname = "\U5de1\U68c0\U70b94F";
+    //Floorsn = 4F;
+    //Number = 2;
+    //"Oper_flag" = 1;
+    //page = 1;
 }
 
 - (void)prepareForReuse {

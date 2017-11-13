@@ -78,7 +78,7 @@
     self.groupIV1 = groupIV1;
     
     
-    [self.groupIV1 addSubview:self.fixBtn];
+    //[self.groupIV1 addSubview:self.fixBtn];
         
     self.groupIV.hidden = YES;
     

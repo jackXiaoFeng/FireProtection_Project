@@ -71,7 +71,9 @@
 //    self.groupIV.clipsToBounds = false; //这句最重要了，不然就显示不出来
     
     [self.groupIV addSubview:self.warningBtn];
-    [self.groupIV addSubview:self.fixBtn];
+    
+    //版本不用
+    //[self.groupIV addSubview:self.fixBtn];
     
     
     UIImageView *groupIV1 = [[UIImageView alloc]init];
@@ -220,7 +222,7 @@
         
         NSString *warningStr = @"设备告警信息";
         UIButton *warningBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        warningBtn.frame = CGRectMake(0, 0, (self.groupIV.width-self.spaceWidth/2)/2, self.groupIV.height);
+        warningBtn.frame = CGRectMake(0, 0, self.groupIV.width, self.groupIV.height);
         warningBtn.backgroundColor = [UIColor whiteColor];
         [warningBtn setImage:warningImage forState:UIControlStateNormal];
         [warningBtn setTitle:warningStr forState:UIControlStateNormal];
@@ -235,7 +237,6 @@
         //图片是60*60的2x的图
         CGFloat imageWidth = warningImage.size.width;
         CGFloat imageHeight = warningImage.size.height;
-        
         
         CGSize contentSize = [CMUtility boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) font:DEF_MyFont(15) string:warningStr withSpacing:0];
         CGFloat labelWidth = contentSize.width;

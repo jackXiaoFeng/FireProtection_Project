@@ -10,6 +10,7 @@
 #import "EquipmentModel.h"
 #import "EquipmentTableViewCell.h"
 #import "EquipmentViewModel.h"
+#import "DetectionViewController.h"
 
 @interface MoreViewController ()
 <UITableViewDelegate,UITableViewDataSource>
@@ -23,6 +24,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.titleLb.text = @"设备";
+    
+    [self.rightBtn setImage:DEF_IMAGENAME(@"scan") forState:UIControlStateNormal];
+    self.rightBtn.hidden = NO;
 
     self.tableView.backgroundColor = [UIColor clearColor];
     
@@ -41,7 +45,13 @@
     
     
 }
-
+- (void)rightBtnClick
+{
+    NSLog(@"二维码btn点击");
+    DetectionViewController *controller = [[DetectionViewController alloc]init];
+    [self.navigationController pushViewController:controller animated:YES];
+    
+}
 - (void)headerWithRefreshing
 {
     @weakify(self)

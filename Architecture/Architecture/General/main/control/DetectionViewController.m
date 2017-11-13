@@ -9,13 +9,27 @@
 #import "DetectionViewController.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 
-@interface DetectionViewController (){
+@interface DetectionViewController ()
+{
     //系统蓝牙设备管理对象，可以把他理解为主设备，通过他，可以去扫描和链接外设
     CBCentralManager *manager;
     UILabel *info;
     //用于保存被发现设备
     NSMutableArray *discoverPeripherals;
 }
+
+@property (nonatomic, strong)UIImageView *device_scan;
+@property (nonatomic, strong)UIImageView *device_rotate;
+@property (nonatomic,strong)CALayer * layertime;
+@property (nonatomic,strong)UIImage *rotateImage;
+
+@property (nonatomic,assign)BOOL isPause;
+
+@property (nonatomic,strong)UILabel *nfcLab;
+
+@property (nonatomic,strong)UILabel *scanLab;
+
+@property (nonatomic,strong)UILabel *companyLab;
 
 @end
 
@@ -24,6 +38,79 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.isPause = NO;
+    self.navImageView.image = [UIImage imageNamed:@""];
+    
+    UIColor *startColor = DEF_COLOR_RGB(238, 122, 92);
+    UIColor *endColor = DEF_COLOR_RGB(232, 83, 82);
+
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.colors = @[(__bridge id)startColor.CGColor,  (__bridge id)endColor.CGColor];
+    gradientLayer.locations = @[@0.0,  @1.0];
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(0.0, 1.0);
+    gradientLayer.frame = CGRectMake(0, 0, DEF_DEVICE_WIDTH, DEF_DEVICE_HEIGHT);
+    [self.view.layer addSublayer:gradientLayer];
+    
+    
+    UIImage *scanImage = DEF_IMAGENAME(@"device_scan");
+    self.device_scan = [[UIImageView alloc]initWithImage:scanImage];
+    self.device_scan.frame = CGRectMake((DEF_DEVICE_WIDTH - scanImage.size.width)/2, DEF_STATUS_HEIGHT+DEF_DEVICE_SCLE_HEIGHT(256), scanImage.size.width, scanImage.size.height);
+    [self.view addSubview:self.device_scan];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
+    [self.device_scan addGestureRecognizer:tap];
+    [self.device_scan setUserInteractionEnabled:YES];
+    
+    
+    self.rotateImage= DEF_IMAGENAME(@"device_rotate");
+    
+ 
+    
+    
+//
+//    self.layertime = [CALayer layer];
+//    self.layertime.frame = CGRectMake((DEF_DEVICE_WIDTH - self.rotateImage.size.width)/2, DEF_STATUS_HEIGHT+DEF_DEVICE_SCLE_HEIGHT(256) + (scanImage.size.height/2) - self.rotateImage.size.height, self.rotateImage.size.width , self.rotateImage.size.height);
+//    //self.layertime.backgroundColor = [UIColor blackColor].CGColor;
+//    self.layertime.position = CGPointMake(self.device_scan.centerX, self.device_scan.centerY);
+//    [self.view.layer addSublayer:self.layertime];
+//    [self.layertime setNeedsDisplay];
+//    //动画运动时的锚点
+//    self.layertime.anchorPoint = CGPointMake(0.5, 0);
+//    self.layertime.delegate = self;
+//    self.animation3 = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+//    self.animation3.duration = 3;
+//    self.animation3.fromValue = [NSNumber numberWithFloat:0];
+//    self.animation3.toValue = [NSNumber numberWithFloat:((360*M_PI)/180)];
+//    self.animation3.fillMode = kCAFillModeForwards;
+//    self.animation3.repeatCount = HUGE_VALF;
+//    [self.layertime addAnimation:self.animation3 forKey:@"rotation.x"];
+   
+    
+    
+    self.device_rotate = [[UIImageView alloc]initWithImage:self.rotateImage];
+    //self.device_rotate.frame = CGRectMake((DEF_DEVICE_WIDTH - self.rotateImage.size.width)/2, DEF_STATUS_HEIGHT+DEF_DEVICE_SCLE_HEIGHT(256) + (scanImage.size.height/2) - self.rotateImage.size.height- 20, self.rotateImage.size.width , self.rotateImage.size.height);
+    [self.view addSubview:self.device_rotate];
+    
+    self.device_rotate.layer.frame = CGRectMake((DEF_DEVICE_WIDTH - self.rotateImage.size.width)/2, DEF_STATUS_HEIGHT+DEF_DEVICE_SCLE_HEIGHT(256) + (scanImage.size.height/2) - self.rotateImage.size.height, self.rotateImage.size.width , self.rotateImage.size.height);
+    self.device_rotate.layer.position = CGPointMake(self.device_scan.centerX, self.device_scan.centerY);
+    self.device_rotate.layer.anchorPoint = CGPointMake(0.5, 1);
+
+    //动画
+    CABasicAnimation* rotationAnimation;
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat:((360*M_PI)/180)];
+    rotationAnimation.duration = 2;
+    rotationAnimation.cumulative = YES;
+    rotationAnimation.repeatCount = ULLONG_MAX;
+    rotationAnimation.removedOnCompletion = NO;
+    [self.device_rotate.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    
+    [self.view addSubview:self.nfcLab];
+    [self.view addSubview:self.scanLab];
+    [self.view addSubview:self.companyLab];
+    
+    //以下是蓝牙代码
     /*
      设置主设备的委托,CBCentralManagerDelegate
      必须实现的：
@@ -36,6 +123,9 @@
      */
     
     //初始化并设置委托和线程队列，最好一个线程的参数可以为nil，默认会就main线程
+    
+    
+    /*
     manager = [[CBCentralManager alloc]initWithDelegate:self queue:dispatch_get_main_queue()];
     
     //持有发现的设备,如果不持有设备会导致CBPeripheralDelegate方法不能正确回调
@@ -46,6 +136,55 @@
     [info setText:@"正在执行程序，请观察NSLog信息"];
     [info setTextAlignment:NSTextAlignmentCenter];
     [self.view addSubview:info];
+    */
+}
+
+-(void)handleTap:(id)sender{
+    self.isPause = self.isPause;
+    if (self.isPause) {
+        [self pauseLayer:self.device_rotate.layer];
+    }else
+    {
+        [self resumeLayer:self.device_rotate.layer];
+    }
+}
+
+-(void)dealloc
+{
+    NSLog(@"---");
+}
+
+
+//暂停layer上面的动画
+- (void)pauseLayer:(CALayer*)layer
+{
+    CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
+    layer.speed = 0.0;
+    layer.timeOffset = pausedTime;
+}
+
+//继续layer上面的动画
+- (void)resumeLayer:(CALayer*)layer
+{
+    CFTimeInterval pausedTime = [layer timeOffset];
+    layer.speed = 1.0;
+    layer.timeOffset = 0.0;
+    layer.beginTime = 0.0;
+    CFTimeInterval timeSincePause = [layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+    layer.beginTime = timeSincePause;
+}
+
+//实现代理方法
+-(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx{
+    CGContextSaveGState(ctx);
+
+    if (layer == self.layertime) {
+        CGContextDrawImage(ctx, CGRectMake(0, 0, self.rotateImage.size.width, self.rotateImage.size.height), self.rotateImage.CGImage);
+    }
+    
+    
+    CGContextRestoreGState(ctx);
+    
     
 }
 
@@ -261,7 +400,39 @@
     [centralManager cancelPeripheralConnection:peripheral];
 }
 
+- (UILabel *)nfcLab
+{
+    if (!_nfcLab) {
+        _nfcLab = [[UILabel alloc]initWithFrame:CGRectMake((DEF_DEVICE_WIDTH - 200)/2, self.device_scan.y+self.device_scan.height +DEF_DEVICE_SCLE_HEIGHT(94), 200, DEF_DEVICE_SCLE_HEIGHT(30))];
+        _nfcLab.text = @"NFC";
+        _nfcLab.font = DEF_MyFont(28);
+        _nfcLab.textColor = DEF_COLOR_RGB(246, 156, 153);
+        _nfcLab.textAlignment = NSTextAlignmentCenter;
+    }
+    return _nfcLab;
+}
 
+- (UILabel *)scanLab
+{
+    if (!_scanLab) {
+        _scanLab = [[UILabel alloc]initWithFrame:CGRectMake((DEF_DEVICE_WIDTH - 200)/2, self.nfcLab.y+self.nfcLab.height +DEF_DEVICE_SCLE_HEIGHT(30), 200, DEF_DEVICE_SCLE_HEIGHT(30))];
+        _scanLab.text = @"扫  一  扫";
+        _scanLab.font = DEF_MyFont(22);
+        _scanLab.textColor = DEF_COLOR_RGB(246, 156, 153);
+        _scanLab.textAlignment = NSTextAlignmentCenter;
+    }
+    return _scanLab;
+}
+- (UILabel *)companyLab
+{
+    if (!_companyLab) {
+        _companyLab = [[UILabel alloc]initWithFrame:CGRectMake(0, DEF_DEVICE_HEIGHT - DEF_DEVICE_SCLE_HEIGHT(72)-DEF_DEVICE_SCLE_HEIGHT(30), DEF_DEVICE_WIDTH, DEF_DEVICE_SCLE_HEIGHT(30))];
+        _companyLab.text = @"@上海槃古科技有限公司";
+        _companyLab.textColor = DEF_COLOR_RGB(246, 156, 153);
+        _companyLab.textAlignment = NSTextAlignmentCenter;
+    }
+    return _companyLab;
+}
 
 
 - (void)didReceiveMemoryWarning {

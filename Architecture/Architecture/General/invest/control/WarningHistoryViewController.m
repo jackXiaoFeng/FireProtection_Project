@@ -124,6 +124,56 @@
     }];
 }
 
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] init];
+    NSArray *nameArray = @[@"时间",@"设备信息",@"状态",@"处理时间",@"处理人"];
+    
+    NSArray *widthArray = @[
+                            @(DEF_DEVICE_SCLE_WIDTH(134)),
+                            @(DEF_DEVICE_SCLE_WIDTH(174)),
+                            @(DEF_DEVICE_SCLE_WIDTH(134)),
+                            @(DEF_DEVICE_SCLE_WIDTH(171)),
+                            @(DEF_DEVICE_SCLE_WIDTH(140))];
+    NSArray *xArray = @[@0,
+                        @(DEF_DEVICE_SCLE_WIDTH(134)),
+                        @(DEF_DEVICE_SCLE_WIDTH(134)+DEF_DEVICE_SCLE_WIDTH(174)),
+                        @(DEF_DEVICE_SCLE_WIDTH(134)+DEF_DEVICE_SCLE_WIDTH(174)+DEF_DEVICE_SCLE_WIDTH(134)),
+                        @(DEF_DEVICE_SCLE_WIDTH(134)+DEF_DEVICE_SCLE_WIDTH(174)+DEF_DEVICE_SCLE_WIDTH(134)+DEF_DEVICE_SCLE_WIDTH(171))
+                        ];
+    
+    [nameArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        
+        NSNumber *xNumber = xArray[idx];
+        CGFloat lab_x = xNumber.floatValue;
+        
+        //设置 title 区域
+        UILabel *titleLabel = [[UILabel alloc] init];
+        //CGFloat lab_x = (tableView.contentSize.width/4)*idx;
+        NSNumber *numberWidth = widthArray[idx];
+        CGFloat width = numberWidth.floatValue;
+        titleLabel.frame = CGRectMake(lab_x, 0,width, DEF_DEVICE_SCLE_HEIGHT(75));
+        //设置 title 文字内容
+        titleLabel.text =nameArray[idx];
+        //设置 title 颜色
+        titleLabel.textColor =  DEF_COLOR_RGB(67, 67, 67);
+        titleLabel.backgroundColor =  [UIColor whiteColor];
+        //titleLabel.font = DEF_MyFont(15);
+        titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
+        titleLabel.textAlignment =  NSTextAlignmentCenter;
+        view.backgroundColor = COLOR_APP_CELL_LINE;
+        [view addSubview:titleLabel];
+        
+    }];
+    return view;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    //设置 title 区域高度
+    return DEF_DEVICE_SCLE_HEIGHT(78);
+}
+
 #pragma mark - delegate  dataSource -
         
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

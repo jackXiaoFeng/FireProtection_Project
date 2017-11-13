@@ -14,7 +14,7 @@
  *  nav背景视图
  */
 @property (nonatomic, strong)UIView *navBar;
-
+@property (nonatomic, strong)UIImageView *navImageView;
 /**
  *  nav 左边按钮
  */

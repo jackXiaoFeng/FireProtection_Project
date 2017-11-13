@@ -16,19 +16,30 @@
 //状态	    Xfstates	Sting
 //设备编号	Degree	String
 
-//{
-//    Degree = f10035;
-//    Describe = undefined;
-//    Name = "\U5377\U5e18\U95e8";
-//    "Oper_flag" = 1;
-//    Xfstates = 3;
-//}
+//AFmaintenance = 1;
+//Count = 686;
+//Degree = "\U6caaA010\U00b7F01\U00b701";
+//Describe = undefined;
+//Name = "\U70df\U611f";
+//"Oper_flag" = 1;
+//XY = "24,23";
+//Xfstates = 1;
+//page = 1;
+//warningrecordsn = undefined;
+//xfnumericals = null;
 
-@property (nonatomic,strong)NSString *Oper_flag;
-@property (nonatomic,strong)NSString *Name;
-//@property (nonatomic,strong)NSString *Xfnumericals;
-@property (nonatomic,strong)NSString *Xfstates;
+
+
+@property (nonatomic,strong)NSString *AFmaintenance;
+@property (nonatomic,strong)NSString *Count;
 @property (nonatomic,strong)NSString *Degree;
 @property (nonatomic,strong)NSString *Describe;
+@property (nonatomic,strong)NSString *Name;
+@property (nonatomic,strong)NSString *Oper_flag;
+@property (nonatomic,strong)NSString *XY;
+@property (nonatomic,strong)NSString *Xfstates;
+@property (nonatomic,strong)NSString *page;
+@property (nonatomic,strong)NSString *warningrecordsn;
+@property (nonatomic,strong)NSString *xfnumericals;
 
 @end

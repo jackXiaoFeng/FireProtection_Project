@@ -765,8 +765,8 @@
 			isa = PBXGroup;
 			children = (
 				3A9681921FA1CC9F00A6F7A3 /* main */,
-				3A96814E1FA1CC9E00A6F7A3 /* account */,
 				3A96816F1FA1CC9F00A6F7A3 /* invest */,
+				3A96814E1FA1CC9E00A6F7A3 /* account */,
 				3A9681A51FA1CC9F00A6F7A3 /* more */,
 			);
 			path = General;
@@ -853,10 +853,10 @@
 		3A9681701FA1CC9F00A6F7A3 /* control */ = {
 			isa = PBXGroup;
 			children = (
-				3A9681711FA1CC9F00A6F7A3 /* EquipmentWarningViewController.h */,
-				3A9681721FA1CC9F00A6F7A3 /* EquipmentWarningViewController.m */,
 				3A9681731FA1CC9F00A6F7A3 /* InvestViewController.h */,
 				3A9681741FA1CC9F00A6F7A3 /* InvestViewController.m */,
+				3A9681711FA1CC9F00A6F7A3 /* EquipmentWarningViewController.h */,
+				3A9681721FA1CC9F00A6F7A3 /* EquipmentWarningViewController.m */,
 				3A9681751FA1CC9F00A6F7A3 /* MalfunctionEquipmentViewController.h */,
 				3A9681761FA1CC9F00A6F7A3 /* MalfunctionEquipmentViewController.m */,
 				3A9681771FA1CC9F00A6F7A3 /* WarningHistoryViewController.h */,

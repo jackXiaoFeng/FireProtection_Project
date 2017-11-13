@@ -39,8 +39,6 @@
     
     self.titleLb.text = @"巡检操作";
     
-    [self.rightBtn setImage:DEF_IMAGENAME(@"scan") forState:UIControlStateNormal];
-    self.rightBtn.hidden = NO;
     
     self.controlHeight = DEF_DEVICE_SCLE_HEIGHT(222);
     
@@ -174,8 +172,7 @@
 {
     if (!_cycleScrollView) {
         // 情景一：采用本地图片实现
-        NSArray *imageNames = @[@"banner_image",@"banner_image",@"banner_image"];
-
+        NSArray *imageNames = @[@"banner_image"];
         
         // 网络加载 --- 创建带标题的图片轮播器
        // _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, self.view.width, self.controlHeight) delegate:self placeholderImage:[UIImage imageNamed:@"bannerPlacehoder"]];
