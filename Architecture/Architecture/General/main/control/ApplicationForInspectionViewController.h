@@ -10,4 +10,13 @@
 
 @interface ApplicationForInspectionViewController : BaseViewController
 
+
+/**
+ *  更新头像
+ *
+ *  @param headImage
+ *
+ *  @return 更新头像信号
+ */
+- (RACSignal *)updateHeadImage:(UIImage *)headImage;
 @end

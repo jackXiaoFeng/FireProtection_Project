@@ -13,6 +13,7 @@
 #import "EquipmentWarningViewController.h"
 #import "FixRecordViewController.h"
 #import "DetectionViewController.h"
+#import "PollingCompleteViewModel.h"
 
 @interface MainViewController ()<SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -26,6 +27,7 @@
 
 @property (assign, nonatomic) NSInteger progressSections;
 
+@property (nonatomic, strong)PollingCompleteViewModel *viewModel;
 @end
 
 @implementation MainViewController
@@ -35,12 +37,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
         
-    self.progressSections = 20;
+    self.progressSections = 0;
     
     self.titleLb.text = @"巡检操作";
     
-    
     self.controlHeight = DEF_DEVICE_SCLE_HEIGHT(222);
+    
+    self.viewModel = [[PollingCompleteViewModel alloc]init];
     
     /*
     // 情景二：采用网络图片实现
@@ -78,6 +81,13 @@
      };
      
      */
+    
+    @weakify(self)
+    SocketIO_Singleton.connectSuccess = ^{
+        @strongify(self)
+        //获取当前巡检度
+        [self requestNowpolling];
+    };    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -88,13 +98,6 @@
     //    [你的CycleScrollview adjustWhenControllerViewWillAppera];
 }
 
-- (void)rightBtnClick
-{
-    NSLog(@"二维码btn点击");
-    DetectionViewController *controller = [[DetectionViewController alloc]init];
-    [self.navigationController pushViewController:controller animated:YES];
-
-}
 
 #pragma mark - delegate  dataSource -
 
@@ -164,9 +167,6 @@
  
  */
 
-
-
-
 #pragma mark - get -
 -(SDCycleScrollView *)cycleScrollView
 {
@@ -208,6 +208,25 @@
     }
     return _tableView;
 }
+
+- (void)requestNowpolling
+{
+    NSLog(@"--------------s005ss");
+    @weakify(self)
+    [[self.viewModel feedData] subscribeNext:^(id x) {
+        @strongify(self);
+        //            self.footer.hidden = [x boolValue];
+        PollingCompleteModel*model = (PollingCompleteModel *)self.viewModel.pollingCompleteList[0];
+        if ([model.Type isEqualToString:@"1"])//代表当前时间完成度
+        {
+            self.progressSections = [model.Complete integerValue];
+            [self.tableView reloadData];
+        }
+    }error:^(NSError *error) {
+        [CMUtility showTips:@"当前巡检完成度获取失败"];
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -6,7 +6,7 @@
 //  Copyright © 2017年 xiaofeng. All rights reserved.
 //
 
-#define CellHeight DEF_DEVICE_SCLE_HEIGHT(68)
+#define CellHeight DEF_DEVICE_SCLE_HEIGHT(98)
 
 #import "EquipmentTableViewCell.h"
 @interface EquipmentTableViewCell()
@@ -43,6 +43,8 @@
     equipmentLab.backgroundColor = [UIColor clearColor];
     equipmentLab.textAlignment = NSTextAlignmentCenter;
     equipmentLab.textColor = DEF_COLOR_RGB(87, 87, 87);
+    equipmentLab.lineBreakMode = UILineBreakModeWordWrap;
+    equipmentLab.numberOfLines = 0;
     [self.contentView addSubview:equipmentLab];
     self.equipmentLab = equipmentLab;
     
@@ -88,8 +90,9 @@
 
 - (void)setEquipmentModel:(EquipmentModel *)equipmentModel
 {
-    self.equipmentLab.text = DEF_OBJECT_TO_STIRNG(equipmentModel.Name) ;
-    self.numLab.text = equipmentModel.XY;
+    self.equipmentLab.text = [NSString stringWithFormat:@"%@\n%@",DEF_OBJECT_TO_STIRNG(equipmentModel.Degree),DEF_OBJECT_TO_STIRNG(equipmentModel.Name)];
+    
+    self.numLab.text = DEF_OBJECT_TO_STIRNG(equipmentModel.xfnumericals);
     
     //0:正常
     //1:异常

@@ -264,11 +264,12 @@ typedef void (^FailViewBtnClickBlock) (void);
 +(BOOL)changeCharsWithText:(UITextView *)textView withTextBytes:(UILabel *)label withMax:(NSInteger)MaxNum withText:(NSString *)text;
 
 /**
- *  获取当前时间戳
+ *  获取当前时间戳 秒 毫秒
  *  @return NSString    时间戳字符串
  */
 
-+ (NSString *)currentTimestamp;
++ (NSString *)currentTimestampSecond;
++ (NSString *)currentTimestampMillisecond;
 
 
 /**

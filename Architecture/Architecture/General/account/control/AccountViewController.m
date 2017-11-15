@@ -7,6 +7,8 @@
 //
 
 #define BTN_SPACE DEF_DEVICE_SCLE_WIDTH(25)
+#define RoundViewTAG  300
+#define RoundLabTAG   400
 
 #import "AccountViewController.h"
 #import "PlanViewController.h"
@@ -19,9 +21,18 @@
 
 #import "MoreViewController.h"
 #import "DetectionViewController.h"
+#import "PollingCompleteViewModel.h"
 
 @interface AccountViewController ()
+@property (nonatomic, strong)PollingCompleteViewModel *viewModel;
+@property (nonatomic, strong)UIView *pressView;
 
+@property (nonatomic, assign)CGFloat diameter_y;
+@property (nonatomic, assign)CGFloat lineWidth;
+@property (nonatomic, assign)CGFloat space;
+@property (nonatomic, strong)NSArray *diameterArray;
+@property (nonatomic, strong)NSArray *strArray;
+@property (nonatomic, strong)NSArray *diameterClor;
 @end
 
 @implementation AccountViewController
@@ -30,6 +41,8 @@
     [super viewDidLoad];
     self.titleLb.text = @"巡检";
     
+    self.viewModel = [[PollingCompleteViewModel alloc]init];
+
     [self.rightBtn setImage:DEF_IMAGENAME(@"scan") forState:UIControlStateNormal];
     self.rightBtn.hidden = NO;
     
@@ -91,9 +104,9 @@
 
     
     
-    UIView *pressView =[[UIView alloc]initWithFrame:CGRectMake(DEF_DEVICE_SCLE_WIDTH(15), btnWidth + DEF_NAVIGATIONBAR_HEIGHT + DEF_DEVICE_SCLE_HEIGHT(40), DEF_DEVICE_WIDTH -DEF_DEVICE_SCLE_WIDTH(15)*2 , DEF_DEVICE_SCLE_HEIGHT(656))];
-    pressView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:pressView];
+    self.pressView =[[UIView alloc]initWithFrame:CGRectMake(DEF_DEVICE_SCLE_WIDTH(15), btnWidth + DEF_NAVIGATIONBAR_HEIGHT + DEF_DEVICE_SCLE_HEIGHT(40), DEF_DEVICE_WIDTH -DEF_DEVICE_SCLE_WIDTH(15)*2 , DEF_DEVICE_SCLE_HEIGHT(656))];
+    self.pressView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.pressView];
     
     
 #pragma mark - 圆绘制进度
@@ -101,24 +114,24 @@
 //    
 //    323.5
     
-    CGFloat diameter_y = DEF_DEVICE_SCLE_HEIGHT(90);
-    CGFloat lineWidth = DEF_DEVICE_SCLE_HEIGHT(20);
+    self.diameter_y = DEF_DEVICE_SCLE_HEIGHT(90);
+    self.lineWidth = DEF_DEVICE_SCLE_HEIGHT(20);
     
-    CGFloat space = DEF_DEVICE_SCLE_HEIGHT(13);
+    self.space = DEF_DEVICE_SCLE_HEIGHT(13);
     
-    NSArray *diameterArray = @[
+    self.diameterArray = @[
                                @(DEF_DEVICE_SCLE_HEIGHT(323.5)),
                                @(DEF_DEVICE_SCLE_HEIGHT(256.7)),
                                @(DEF_DEVICE_SCLE_HEIGHT(189.6))
                                ];
     
-    NSArray *strArray = @[
+    self.strArray = @[
                            @"当天\n",
                            @"本周\n",
                            @"本月\n"
                           ];
     
-    NSArray *diameterClor = @[
+    self.diameterClor = @[
                               [UIColor UIColorFromRGB:0x1EBFF0 alpha:1],
                               [UIColor UIColorFromRGB:0xFB7943 alpha:1],
                               [UIColor UIColorFromRGB:0xABF85A alpha:1]
@@ -127,33 +140,34 @@
 
     
     
-    [diameterArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.diameterArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        @strongify(self)
         NSNumber *num = (NSNumber *)obj;
         CGFloat diameter = num.floatValue;
         NSLog(@"dddd----%f",diameter);
         
-        RoundnessProgressView *roundnessProgressView = [[RoundnessProgressView alloc]initWithFrame:CGRectMake((pressView.width-diameter)/2 ,(lineWidth+space)*idx + diameter_y, diameter, diameter)];
-        roundnessProgressView.thicknessWidth = lineWidth;
+        RoundnessProgressView *roundnessProgressView = [[RoundnessProgressView alloc]initWithFrame:CGRectMake((self.pressView.width-diameter)/2 ,(self.lineWidth+self.space)*idx + self.diameter_y, diameter, diameter)];
+        roundnessProgressView.thicknessWidth = self.lineWidth;
         //    roundnessProgressView.completedColor = [UIColor UIColorFromRGB:0x1EBFF0 alpha:1];
         roundnessProgressView.completedColor = [UIColor clearColor];
-        roundnessProgressView.incompletedColor = diameterClor[idx];
+        roundnessProgressView.incompletedColor = self.diameterClor[idx];
         roundnessProgressView.backgroundColor = [UIColor clearColor];
         roundnessProgressView.isShowLabel = NO;
         //roundnessProgressView.labelColor = [UIColor UIColorFromRGB:COLOR_APP_MAIN alpha:1];
         
-        [pressView addSubview:roundnessProgressView];
+        [self.pressView addSubview:roundnessProgressView];
         
-        NSInteger progress = 60 + 10*idx;
         roundnessProgressView.progressTotal = 100;
-        roundnessProgressView.progressSections =progress;
+        roundnessProgressView.progressSections =0;
+        roundnessProgressView.tag =  RoundViewTAG +idx;
         
         if (idx == 2) {
-            UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(roundnessProgressView.x +lineWidth, roundnessProgressView.y + lineWidth, roundnessProgressView.width - lineWidth*2, roundnessProgressView.width - lineWidth*2)];
+            UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(roundnessProgressView.x +self.lineWidth, roundnessProgressView.y + self.lineWidth, roundnessProgressView.width - self.lineWidth*2, roundnessProgressView.width - self.lineWidth*2)];
             lab.text = @"完成度";
             lab.textColor = [UIColor UIColorFromRGB:0xE85151 alpha:1];
             lab.textAlignment = NSTextAlignmentCenter;
             
-            [pressView addSubview:lab];
+            [self.pressView addSubview:lab];
 
         }
         
@@ -162,25 +176,26 @@
         CGFloat yuandianSpace = DEF_DEVICE_SCLE_WIDTH(10);
 
         
-        NSString *str = [NSString stringWithFormat:@"%@%ld%%",strArray[idx],(long)progress];
+        NSString *str = [NSString stringWithFormat:@"%@%ld%%",self.strArray[idx],(long)0];
         
         CGSize size = [CMUtility calculateStringSize:str font:[UIFont fontWithName:@"Helvetica-Bold" size:15] constrainedSize:CGSizeMake(MAXFLOAT,MAXFLOAT)];
         
-        CGFloat space = (pressView.width - (yuandianWidth + yuandianSpace + size.width)*diameterArray.count)/(diameterArray.count+1);
+        CGFloat space = (self.pressView.width - (yuandianWidth + yuandianSpace + size.width)*self.diameterArray.count)/(self.diameterArray.count+1);
         
         
-        UILabel *yuandianLab = [[UILabel alloc]initWithFrame:CGRectMake((space + yuandianWidth + yuandianSpace)*(idx + 1) +size.width *idx, pressView.height - DEF_DEVICE_SCLE_HEIGHT(100), size.width, size.height)];
+        UILabel *yuandianLab = [[UILabel alloc]initWithFrame:CGRectMake((space + yuandianWidth + yuandianSpace)*(idx + 1) +size.width *idx, self.pressView.height - DEF_DEVICE_SCLE_HEIGHT(100), size.width + 10, size.height)];
         yuandianLab.text = str;//@"当天\n72%";
         yuandianLab.textAlignment = NSTextAlignmentCenter;
         yuandianLab.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
         yuandianLab.numberOfLines = 0; // 关键一句
-        [pressView addSubview:yuandianLab];
+        yuandianLab.tag = RoundLabTAG +idx;
+        [self.pressView addSubview:yuandianLab];
         
-        yuandianLab.textColor = diameterClor[idx];
+        yuandianLab.textColor = self.diameterClor[idx];
         
         
         //开始图像绘图
-        UIGraphicsBeginImageContext(pressView.bounds.size);
+        UIGraphicsBeginImageContext(self.pressView.bounds.size);
         //获取当前CGContextRef
         CGContextRef gc = UIGraphicsGetCurrentContext();
         //填充当前绘画区域内的颜色
@@ -190,7 +205,7 @@
         //以矩形frame为依据画一个圆
         CGContextAddEllipseInRect(gc, CGRectMake(yuandianLab.x - yuandianWidth -yuandianSpace, yuandianLab.y + (yuandianLab.height - yuandianWidth)/2, yuandianWidth, yuandianWidth));
         //填充当前绘画区域内的颜色
-        UIColor *color = diameterClor[idx];
+        UIColor *color = self.diameterClor[idx];
         [color set];
         //填充(沿着矩形内围填充出指定大小的圆)
         CGContextFillPath(gc);
@@ -199,7 +214,7 @@
         UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
-        [pressView addSubview:imgView];
+        [self.pressView addSubview:imgView];
         
         
 //        DrawView*yuandian =[[DrawView alloc]initWithFrame:CGRectMake(yuandianLab.x - yuandianWidth -5, yuandianLab.y + (yuandianLab.height - yuandianWidth)/2, yuandianWidth, yuandianWidth)];
@@ -219,10 +234,72 @@
     lab.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
     lab.textAlignment = NSTextAlignmentCenter;
     
-    [pressView addSubview:lab];
+    [self.pressView addSubview:lab];
 
 
+    
+    [self requestNowpolling];
+//    SocketIO_Singleton.connectSuccess = ^{
+//        @strongify(self)
+//        //获取当前巡检度
+//        [self requestNowpolling];
+//    };
     // Do any additional setup after loading the view.
+}
+
+- (void)requestNowpolling
+{
+    @weakify(self)
+    [[self.viewModel feedData] subscribeNext:^(id x) {
+        @strongify(self);
+        [self.diameterArray
+         enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            @strongify(self)
+             if (self.viewModel.pollingCompleteList.count < 3) {
+                 [CMUtility showTips:@"完成度获取失败"];
+                 return ;
+             }
+             PollingCompleteModel*model = (PollingCompleteModel *)self.viewModel.pollingCompleteList[idx];
+
+             NSInteger progressSections = [model.Complete intValue] + 20*(4 - idx);
+             
+             RoundnessProgressView *rpView = [self.pressView viewWithTag:RoundViewTAG +idx];
+             [rpView removeFromSuperview];
+             
+            NSNumber *num = (NSNumber *)obj;
+            CGFloat diameter = num.floatValue;
+            NSLog(@"dddd----%f",diameter);
+            
+            RoundnessProgressView *roundnessProgressView = [[RoundnessProgressView alloc]initWithFrame:CGRectMake((self.pressView.width-diameter)/2 ,(self.lineWidth+self.space)*idx + self.diameter_y, diameter, diameter)];
+            roundnessProgressView.thicknessWidth = self.lineWidth;
+            //    roundnessProgressView.completedColor = [UIColor UIColorFromRGB:0x1EBFF0 alpha:1];
+            roundnessProgressView.completedColor = [UIColor clearColor];
+            roundnessProgressView.incompletedColor = self.diameterClor[idx];
+            roundnessProgressView.backgroundColor = [UIColor clearColor];
+            roundnessProgressView.isShowLabel = NO;
+            //roundnessProgressView.labelColor = [UIColor UIColorFromRGB:COLOR_APP_MAIN alpha:1];
+            
+            [self.pressView addSubview:roundnessProgressView];
+            
+            roundnessProgressView.progressTotal = 100;
+            roundnessProgressView.progressSections =progressSections;
+            roundnessProgressView.tag =  RoundViewTAG +idx;
+            
+             
+             NSString *str = [NSString stringWithFormat:@"%@%ld%%",self.strArray[idx],progressSections];
+             UILabel *yuandianlab = [self.pressView viewWithTag:RoundLabTAG +idx];
+             yuandianlab.text = str;
+        }];
+        
+        //            self.footer.hidden = [x boolValue];
+//        if ([model.Type isEqualToString:@"1"])//代表当前时间完成度
+//        {
+//            self.progressSections = model.Complete;
+//            [self.tableView reloadData];
+//        }
+    }error:^(NSError *error) {
+        [CMUtility showTips:@"当前巡检完成度获取失败"];
+    }];
 }
 
 - (void)rightBtnClick

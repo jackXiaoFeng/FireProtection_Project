@@ -29,7 +29,7 @@
         NSArray *arr = [NSArray arrayWithObjects:datDic, nil];
         NSDictionary *tempDic = @{
                                   @"code":XS002,
-                                  @"serial_no":[NSString stringWithFormat:@"%@%@",[CMUtility currentTimestamp],XS002_serial_no],
+                                  @"serial_no":[NSString stringWithFormat:@"%@%@",[CMUtility currentTimestampMillisecond],XS002_serial_no],
                                   @"errorcode":@"0",
                                   @"errormsg":@"success",
                                   @"dat":arr                              };
@@ -115,7 +115,7 @@
         NSArray *arr = [NSArray arrayWithObjects:datDic, nil];
         NSDictionary *tempDic = @{
                                   @"code":XS001,
-                                  @"serial_no":[NSString stringWithFormat:@"%@%@",[CMUtility currentTimestamp],XS001_serial_no],
+                                  @"serial_no":[NSString stringWithFormat:@"%@%@",[CMUtility currentTimestampMillisecond],XS001_serial_no],
                                   @"errorcode":@"0",
                                   @"errormsg":@"success",
                                   @"dat":arr

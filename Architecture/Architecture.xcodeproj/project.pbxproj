@@ -113,6 +113,9 @@
 		3AE319BC1FBA776200199CFB /* IAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE319BB1FBA776200199CFB /* IAlertView.m */; };
 		3AE319BF1FBA9F8700199CFB /* ApplicationForInspectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE319BE1FBA9F8700199CFB /* ApplicationForInspectionViewController.m */; };
 		3AE319C31FBADBF300199CFB /* CMTakePhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE319C21FBADBF300199CFB /* CMTakePhoto.m */; };
+		3AE319C61FBBDBC700199CFB /* RequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE319C51FBBDBC700199CFB /* RequestOperationManager.m */; };
+		3AE319C91FBC26BF00199CFB /* PollingCompleteViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE319C81FBC26BF00199CFB /* PollingCompleteViewModel.m */; };
+		3AE319CC1FBC26D000199CFB /* PollingCompleteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE319CB1FBC26D000199CFB /* PollingCompleteModel.m */; };
 		3AFBC9B21F53EECC00DAD7EA /* DrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBC9B11F53EECC00DAD7EA /* DrawView.m */; };
 /* End PBXBuildFile section */
 
@@ -363,6 +366,12 @@
 		3AE319BE1FBA9F8700199CFB /* ApplicationForInspectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationForInspectionViewController.m; sourceTree = "<group>"; };
 		3AE319C11FBADBF300199CFB /* CMTakePhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTakePhoto.h; sourceTree = "<group>"; };
 		3AE319C21FBADBF300199CFB /* CMTakePhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTakePhoto.m; sourceTree = "<group>"; };
+		3AE319C41FBBDBC700199CFB /* RequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestOperationManager.h; sourceTree = "<group>"; };
+		3AE319C51FBBDBC700199CFB /* RequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestOperationManager.m; sourceTree = "<group>"; };
+		3AE319C71FBC26BF00199CFB /* PollingCompleteViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PollingCompleteViewModel.h; sourceTree = "<group>"; };
+		3AE319C81FBC26BF00199CFB /* PollingCompleteViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PollingCompleteViewModel.m; sourceTree = "<group>"; };
+		3AE319CA1FBC26D000199CFB /* PollingCompleteModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PollingCompleteModel.h; sourceTree = "<group>"; };
+		3AE319CB1FBC26D000199CFB /* PollingCompleteModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PollingCompleteModel.m; sourceTree = "<group>"; };
 		3AFBC9B01F53EECC00DAD7EA /* DrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawView.h; sourceTree = "<group>"; };
 		3AFBC9B11F53EECC00DAD7EA /* DrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawView.m; sourceTree = "<group>"; };
 		5EAB6D6BB45AD284BBE10F27 /* Pods_Architecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Architecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -766,6 +775,8 @@
 		3A95AD281D17E0490026EAFE /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				3AE319C41FBBDBC700199CFB /* RequestOperationManager.h */,
+				3AE319C51FBBDBC700199CFB /* RequestOperationManager.m */,
 				3A26E9F01F5A4E170086C553 /* SocketIO.h */,
 				3A26E9F11F5A4E170086C553 /* SocketIO.m */,
 			);
@@ -952,6 +963,8 @@
 				3A96819A1FA1CC9F00A6F7A3 /* FixRecordModel.m */,
 				3A96819B1FA1CC9F00A6F7A3 /* MainModel.h */,
 				3A96819C1FA1CC9F00A6F7A3 /* MainModel.m */,
+				3AE319CA1FBC26D000199CFB /* PollingCompleteModel.h */,
+				3AE319CB1FBC26D000199CFB /* PollingCompleteModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -972,6 +985,8 @@
 			children = (
 				3A9681A31FA1CC9F00A6F7A3 /* FixRecordViewModel.h */,
 				3A9681A41FA1CC9F00A6F7A3 /* FixRecordViewModel.m */,
+				3AE319C71FBC26BF00199CFB /* PollingCompleteViewModel.h */,
+				3AE319C81FBC26BF00199CFB /* PollingCompleteViewModel.m */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -1352,6 +1367,7 @@
 				3A9681D31FA1CC9F00A6F7A3 /* MalfunctionEquipmentTableViewCell.m in Sources */,
 				3AD29EF01F46D586005B600D /* UIColor+RGBColor.m in Sources */,
 				3AE319BC1FBA776200199CFB /* IAlertView.m in Sources */,
+				3AE319C61FBBDBC700199CFB /* RequestOperationManager.m in Sources */,
 				3A9681E01FA1CC9F00A6F7A3 /* LoginViewController.m in Sources */,
 				3A9681CC1FA1CC9F00A6F7A3 /* WarningHistoryViewController.m in Sources */,
 				3A40D5BD1F5E87C700D7E8DF /* GJCFDateUitil.m in Sources */,
@@ -1382,6 +1398,7 @@
 				3A40D5BC1F5E87C700D7E8DF /* CMMember.m in Sources */,
 				3A40D5CA1F5FEBBA00D7E8DF /* BaseViewModel.m in Sources */,
 				3A9681DA1FA1CC9F00A6F7A3 /* FixRecordModel.m in Sources */,
+				3AE319CC1FBC26D000199CFB /* PollingCompleteModel.m in Sources */,
 				3AC1A40A1FA8524300BE4035 /* DetectionViewController.m in Sources */,
 				3A95AD381D17EA410026EAFE /* TabBarViewController.m in Sources */,
 				3A9681E71FA1CC9F00A6F7A3 /* EquipmentViewModel.m in Sources */,
@@ -1396,6 +1413,7 @@
 				3A9681CF1FA1CC9F00A6F7A3 /* MalfunctionEquipmentModel.m in Sources */,
 				3A40D5C01F5E87C700D7E8DF /* GJCFQuickUIUitil.m in Sources */,
 				3A26EA281F5A4FE50086C553 /* SRMutex.m in Sources */,
+				3AE319C91FBC26BF00199CFB /* PollingCompleteViewModel.m in Sources */,
 				3AA1C8591F4A6F44004A52EF /* TAPageControl.m in Sources */,
 				3AA1C8621F4A6FD3004A52EF /* SDCollectionViewCell.m in Sources */,
 				3A9681E31FA1CC9F00A6F7A3 /* CMMemberData.m in Sources */,

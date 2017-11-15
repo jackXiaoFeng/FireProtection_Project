@@ -77,7 +77,7 @@
         NSArray *arr = [NSArray arrayWithObjects:datDic, nil];
         NSDictionary *tempDic = @{
                                   @"code":XS011,
-                                  @"serial_no":[NSString stringWithFormat:@"%@%@",[CMUtility currentTimestamp],XS011_serial_no],
+                                  @"serial_no":[NSString stringWithFormat:@"%@%@",[CMUtility currentTimestampMillisecond],XS011_serial_no],
                                   @"errorcode":@"0",
                                   @"errormsg":@"success",
                                   @"token":CMMemberEntity.token,

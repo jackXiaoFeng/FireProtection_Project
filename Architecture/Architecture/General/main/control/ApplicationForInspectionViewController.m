@@ -16,7 +16,7 @@
 
 @property (nonatomic,strong)UIView *whiteView;
 
-@property (nonatomic,strong)NSMutableArray *imageArray;
+@property (nonatomic,strong)NSMutableDictionary *imageDic;
 @property (nonatomic,strong)UITextView *textView;
 @property (nonatomic,strong)UIAlertController       *imgActionSheet;        //头像选择弹出框
 
@@ -31,7 +31,7 @@
     
     self.titleLb.text = @"设备名称";
     
-    self.imageArray = [NSMutableArray arrayWithCapacity:10];
+    self.imageDic = [NSMutableDictionary dictionaryWithCapacity:10];
     
     UILabel *contentLab = [[UILabel alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, DEF_DEVICE_WIDTH, DEF_DEVICE_SCLE_HEIGHT(78))];
     contentLab.font = DEF_MyFont(15);
@@ -219,15 +219,8 @@
 -(void)longPressView:(UILongPressGestureRecognizer *)longPressGest
 {
     UIImageView *view = longPressGest.view;
-    NSLog(@"----tag---%d",view.tag);
-//    if (longPressGest.state==UIGestureRecognizerStateBegan)
-//    { NSLog(@"长按手势开启");
-//
-//    } else
-//    {
-//        NSLog(@"长按手势结束");
-//
-//    }
+    NSLog(@"----tag---%ld",view.tag);
+
     if (view.image) {
         NSString *title = NSLocalizedString(@"A Short Title Is Best", nil);
         NSString *message = NSLocalizedString(@"是否要删除照片？", nil);
@@ -242,9 +235,14 @@
         }];
         
         UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            
             NSLog(@"删除照片");
             view.image = NULL;
+            
+            [self.imageDic removeObjectForKey:[NSString stringWithFormat:@"%ld",view.tag]];
+            [self.imageDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                NSLog(@"imageDic==%@", obj);
+                
+            }];
         }];
         
         // Add the actions.
@@ -347,10 +345,7 @@
             [self.photoPicker toTakePhotoWithViewController:self andComplete:^(UIImage *img){
                 @strongify(self)
                 if (img) {
-                    
-                    UIImageView *iV = [self.view viewWithTag:self.currentTag];
-                    iV.image =img;
-                    
+                    [self uploadingImage:img];
 //                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //                        self.headImageView.image = img;
 //                        self.headImg = [self imageCompressForWidth:img targetWidth:600];
@@ -369,9 +364,7 @@
             @strongify(self)
             [self.photoPicker toSelectPhotoWithViewController:self andComplete:^(UIImage *img){
                 if (img) {
-                    
-                    UIImageView *iV = [self.view viewWithTag:self.currentTag];
-                    iV.image =img;
+                    [self uploadingImage:img];
 //                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //                        self.headImageView.image = img;
 //                        //                        NSData *imgData = UIImageJPEGRepresentation(img, 0.5);
@@ -409,6 +402,57 @@
     UIAlertAction *action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) { actionTarget(action); }];
     [action setValue:color forKey:@"_titleTextColor"];
     [alertController addAction:action];
+}
+
+
+
+- (void)uploadingImage:(UIImage *)img
+{
+    NSLog(@"=======%@",img);
+    @weakify(self)
+    [CMUtility showMBProgress:self.view message:@"上传中..."];
+    [[self RACUploadingImage:img] subscribeNext:^(id result) {
+        @strongify(self)
+        [CMUtility hideMBProgress:self.view];
+        NSString *str = result;
+        if ([str containsString:@"ios_"]) {
+            UIImageView *iV = [self.view viewWithTag:self.currentTag];
+            iV.image =img;
+            //放入字典
+            [self.imageDic setObject:str forKey:[NSString stringWithFormat:@"%ld",self.currentTag]];
+            
+            [self.imageDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                NSLog(@"imageDic==%@", obj);
+                
+            }];
+            [CMUtility hideMBProgress:self.view];
+        } else {
+            [CMUtility hideMBProgress:self.view];
+            [CMUtility showTips:@"上传失败"];
+        }
+        
+    }];
+}
+
+- (RACSignal *)RACUploadingImage:(UIImage *)headImage
+{
+    return [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        //[CMUtility showMBProgress:self.view message:@"发送中..."];
+        //参数
+        NSDictionary *tempDic = @{
+                                  @"imgUploader" :headImage,
+                                  };
+        [RequestOperationManager apiPOSTImageRequestParametersDic:tempDic success:^(NSDictionary *result) {
+            [subscriber sendNext:result];
+            [subscriber sendCompleted];
+        } failture:^(id result) {
+            [subscriber sendNext:result];
+            [subscriber sendCompleted];
+        }];
+        return nil;
+    }] doError:^(NSError *error) {
+        
+    }];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

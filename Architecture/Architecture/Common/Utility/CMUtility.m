@@ -382,14 +382,24 @@
  *	@return
  */
 
-+ (NSString *)currentTimestamp
++ (NSString *)currentTimestampSecond
+{
+    NSDate *senddate = [NSDate date];
+    //NSLog(@"date1时间戳 = %ld",time(NULL));
+    // *1000 是精确到毫秒，不乘就是精确到秒
+    NSString *dateStr = [NSString stringWithFormat:@"%ld", (long)([senddate timeIntervalSince1970])];
+   return dateStr;
+
+}
+
++ (NSString *)currentTimestampMillisecond
 {
     NSDate *senddate = [NSDate date];
     //NSLog(@"date1时间戳 = %ld",time(NULL));
     // *1000 是精确到毫秒，不乘就是精确到秒
     NSString *dateStr = [NSString stringWithFormat:@"%ld", (long)([senddate timeIntervalSince1970]*1000)];
-   return dateStr;
-
+    return dateStr;
+    
 }
 
 //!!!!: 显示toast提示框 1秒后自动消失

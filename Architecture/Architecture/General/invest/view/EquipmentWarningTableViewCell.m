@@ -123,19 +123,38 @@
     UIImage *normalImage;
     UIImage *highlightedImage;
     BOOL isU;
-    if ([equipmentWarningModel.AFmaintenance isEqualToString:Warning_Fix_Malfunction])
+    
+    if ([equipmentWarningModel.AFmaintenance isEqualToString:Warning_Fix_Malfunction])//1故障
     {
         fixStr = @"故障";
         normalImage = DEF_IMAGENAME(@"apply_involution");
         highlightedImage = DEF_IMAGENAME(@"apply_involution");
         isU = YES;
-    }else if ([equipmentWarningModel.AFmaintenance isEqualToString:Warning_Fix_Maintain])
+    }else if ([equipmentWarningModel.AFmaintenance isEqualToString:Warning_Fix_Maintain])//2 需维修
     {
         fixStr = @"等待维修";
         normalImage = DEF_IMAGENAME(@"wait_involution");
         highlightedImage = DEF_IMAGENAME(@"wait_involution");
         isU = NO;
+    }else if ([equipmentWarningModel.AFmaintenance isEqualToString:Warning_Fix_Wait])//3:等待复归
+    {
+        fixStr = @"等待复归";
+        normalImage = DEF_IMAGENAME(@"wait_involution");
+        highlightedImage = DEF_IMAGENAME(@"wait_involution");
+        isU = NO;
+        
+    }else if ([equipmentWarningModel.AFmaintenance isEqualToString:Warning_Fix_Apply])//4:申请复归
+    {
+        fixStr = @"申请复归";
+        normalImage = DEF_IMAGENAME(@"apply_involution");
+        highlightedImage = DEF_IMAGENAME(@"apply_involution");
+        isU = YES;
+    }else
+    {
+        
     }
+        
+    
     [self.involutionBtn setBackgroundImage:normalImage forState:UIControlStateNormal];
     [self.involutionBtn setBackgroundImage:highlightedImage forState:UIControlStateSelected];
 

@@ -20,6 +20,7 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <SocketIO/SocketIO-Swift.h>
 #import "MJRefresh.h"
+#import <AFNetworking/AFNetworking.h>
 
 // 引入JPush功能所需头文件
 #import "JPUSHService.h"
@@ -47,6 +48,7 @@
  custom
  */
 #import "SocketIO.h"
+#import "RequestOperationManager.h"
 #import "CMMember.h"
 #import "BaseViewModel.h"
 #import "IAlertView.h"

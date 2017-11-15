@@ -67,29 +67,35 @@
     reconnecting：正在重连
     在这里要提下客户端socket发起连接时的顺序。当第一次连接时，事件触发顺序为：connecting->connect；当失去连接时，事件触发顺序为：disconnect->reconnecting（可能进行多次）->connecting->reconnect->connect。
     */
-    
+    @weakify(self);
     [self.client on:@"connect" callback:^(NSArray* data, SocketAckEmitter* ack) {
+        @strongify(self)
         self.isConnectSuccess = YES;
+        self.connectSuccess();
         NSLog(@"*************\n\n连接成功 iOS客户端上线\n\n*************");
     }];
     
     [self.client on:@"connecting" callback:^(NSArray* data, SocketAckEmitter* ack) {
+        @strongify(self)
         NSLog(@"*************\n\n正在连接\n\n*************");
     }];
     
 
     [self.client on:@"disconnect" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         NSLog(@"*************\n\n断开连接 iOS客户端下线\n\n*************%@",event?event[0]:@"");
         self.isConnectSuccess = NO;
     }];
     
     [self.client on:@"connect_failed" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         NSLog(@"*************\n\n连接失败 %@\n\n*************",event?event[0]:@"");
         self.isConnectSuccess = NO;
     }];
     
     
     [self.client on:@"error" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         NSLog(@"*************\n\nerror：%@\n\n*************",event?event[0]:@"");
         [CMUtility showTips:@"网络出错！"];
         self.isConnectSuccess = NO;
@@ -106,18 +112,22 @@
     */
     
     [self.client on:@"disconnect" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         NSLog(@"*************\n\n断开连接 iOS客户端下线\n\n*************%@",event?event[0]:@"");
     }];
     
     [self.client on:@"reconnect_failed" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         NSLog(@"*************\n\n重连失败 %@\n\n*************",event?event[0]:@"");
     }];
     
     [self.client on:@"reconnect" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         NSLog(@"*************\n\n成功重连 %@\n\n*************",event?event[0]:@"");
     }];
     
     [self.client on:@"reconnecting" callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         NSLog(@"*************\n\n正在重连 %@\n\n*************",event?event[0]:@"");
     }];
     
@@ -143,6 +153,7 @@
 
     //[xs001]登陆
     [self.client on:XR001 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         NSLog(@"*************\n\nXR001\n\n*************%@",event?event[0]:@"");
         if (event[0]) {
             NSDictionary *dic = event[0];
@@ -155,6 +166,7 @@
     
     //[xs002]短信
     [self.client on:XR002 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         NSLog(@"*************\n\nXR002\n\n*************%@",event?event[0]:@"");
 
         if (event[0]) {
@@ -168,6 +180,7 @@
     
 //    *   3.3	[xs003]当前区域设备
     [self.client on:XR003 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         NSLog(@"*************\n\nXR003\n\n*************%@",event?event[0]:@"");
 
         if (event[0]) {
@@ -180,6 +193,7 @@
     }];
 //    *   3.4	[xs004]设备告警信息
     [self.client on:XR004 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         NSLog(@"*************\n\nXR004\n\n*************%@",event?event[0]:@"");
 
         if (event[0]) {
@@ -192,6 +206,7 @@
     }];
 //    *   3.5	[xs005] 巡检完成度(当、周、月)
     [self.client on:XR005 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         if (event[0]) {
             NSDictionary *dic = event[0];
             self.xr005CallBackResult(dic);
@@ -202,6 +217,7 @@
     }];
 //    *   3.6	[xs006]查看巡检计划
     [self.client on:XR006 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         if (event[0]) {
             NSDictionary *dic = event[0];
             self.xr006CallBackResult(dic);
@@ -212,6 +228,7 @@
     }];
 //    *   3.7	[xs007]上传巡检
     [self.client on:XR007 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         if (event[0]) {
             NSDictionary *dic = event[0];
             self.xr007CallBackResult(dic);
@@ -222,6 +239,7 @@
     }];
 //    *   3.8	[xs008]查看巡检记录
     [self.client on:XR008 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         if (event[0]) {
             NSDictionary *dic = event[0];
             self.xr008CallBackResult(dic);
@@ -232,6 +250,7 @@
     }];
 //    *   3.9	[xs009]告警历史记录
     [self.client on:XR009 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         if (event[0]) {
             NSDictionary *dic = event[0];
             self.xr009CallBackResult(dic);
@@ -242,6 +261,7 @@
     }];
 //    *   3.10	[xs010]故障设备复归
     [self.client on:XR010 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         if (event[0]) {
             NSDictionary *dic = event[0];
             self.xr010CallBackResult(dic);
@@ -252,6 +272,7 @@
     }];
 //    *   3.11	[xs011]设备检修记录
     [self.client on:XR011 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         if (event[0]) {
             NSDictionary *dic = event[0];
             self.xr011CallBackResult(dic);
@@ -262,6 +283,7 @@
     }];
 //    *   3.12	[xs012]设备列表
     [self.client on:XR012 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         if (event[0]) {
             NSDictionary *dic = event[0];
             self.xr012CallBackResult(dic);
@@ -272,6 +294,7 @@
     }];
 //    *   3.13	[xs013]监控设备列表
     [self.client on:XR013 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         if (event[0]) {
             NSDictionary *dic = event[0];
             self.xr013CallBackResult(dic);
@@ -282,6 +305,7 @@
     }];
 //    *   3.14	[xs014]故障设备复归确认或申请
     [self.client on:XR014 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         if (event[0]) {
             NSDictionary *dic = event[0];
             self.xr014CallBackResult(dic);
@@ -292,6 +316,7 @@
     }];
 //    *   3.15	[xs015]告警设备复归或维修
     [self.client on:XR015 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         if (event[0]) {
             NSDictionary *dic = event[0];
             self.xr015CallBackResult(dic);
@@ -302,6 +327,7 @@
     }];
 //    *   3.16	[xs016]数据图
     [self.client on:XR016 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
         if (event[0]) {
             NSDictionary *dic = event[0];
             self.xr016CallBackResult(dic);

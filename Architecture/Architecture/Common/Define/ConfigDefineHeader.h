@@ -30,6 +30,8 @@
 #define DEF_IPAddress        @"http://apptest.tv183.net/Api" //正式环境
 #define ACT_URL      @"http://piao.huo.com/appwap/activity/index?agent=ios" //正式环境 活动页面地址
 
+#define DEF_IP_POSTIMAGE     @"http://wwwt.freshera.cn:2000/api/Upload" //上传图片环境
+
 
  //**********************第三方*************************
 //JPush 极光推送
@@ -122,6 +124,7 @@
 #define SUCCESS_CODE @"0"
 #define SUCCESS_MSG  @"success"
 
+#define DEF_API_CONNECT           @"connect"
 
 /**
  *   3.1	[xs001]登陆
