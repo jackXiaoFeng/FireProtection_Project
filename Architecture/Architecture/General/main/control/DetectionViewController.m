@@ -4,10 +4,12 @@
 //
 //  Created by ZTELiuyw on 15/9/7.
 //  Copyright (c) 2015年 liuyanwei. All rights reserved.
-//
 
+//旋转动画
+//http://blog.csdn.net/xinxisxx/article/details/45694063
 #import "DetectionViewController.h"
 #import <CoreBluetooth/CoreBluetooth.h>
+#import "ApplicationForInspectionViewController.h"
 
 @interface DetectionViewController ()
 {
@@ -37,6 +39,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //    IAlertView *alertView = [[IAlertView alloc] init]; // 无标题
+    
+    IAlertView *alterView = [[IAlertView alloc]initWithTitle:@"测试" titleColor:[UIColor whiteColor] titleBackgroundColor:DEF_COLOR_RGB(234,97,86)];
+    // 添加子布局
+    [alterView addContentView:[self addSubView]];
+    // 添加按钮
+    alterView.buttonTitles = @[ @"确认巡检", @"申请检修", @"取消" ];
+    alterView.buttonTitlesColor = @[[UIColor whiteColor], [UIColor whiteColor],[UIColor whiteColor] ];
+    alterView.buttonTitlesBackGroundColor = @[ DEF_COLOR_RGB(83,207,176),DEF_COLOR_RGB(233,129,113),DEF_COLOR_RGB(171,171,171)];
+    // 添加按钮点击事件
+    alterView.onButtonClickHandle = ^(IAlertView *alertView, NSInteger buttonIndex) {
+        if (buttonIndex == 0)
+        {
+            
+            
+        } else if (buttonIndex == 1)
+        {
+            ApplicationForInspectionViewController *avc = [[ApplicationForInspectionViewController alloc]init];
+            [self.navigationController pushViewController:avc animated:YES];
+        }else if (buttonIndex == 2)
+        {
+            NSLog(@"点击取消");
+        }
+        // 关闭
+        [alertView dismiss]; };
+    // 显示
+    [alterView show];
+    
     
     self.isPause = NO;
     self.navImageView.image = [UIImage imageNamed:@""];
@@ -139,6 +170,22 @@
     */
 }
 
+- (UIView *)addSubView
+{
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEF_DEVICE_WIDTH - DEF_DEVICE_SCLE_WIDTH(190), DEF_DEVICE_SCLE_HEIGHT(230))];
+    
+    UILabel *lab = [[UILabel alloc]initWithFrame:view.frame];
+    lab.text = @"1,水泵无损坏\n\n2,水泵无漏水\n\n3,水泵无漏油";
+    lab.textAlignment = NSTextAlignmentCenter;
+    lab.lineBreakMode = UILineBreakModeWordWrap;
+    lab.numberOfLines = 0;
+    lab.font =DEF_MyFont(16);
+    lab.textColor = DEF_COLOR_RGB(27,27,27);
+    [view addSubview:lab];
+    
+    return view;
+}
+
 -(void)handleTap:(id)sender{
     self.isPause = self.isPause;
     if (self.isPause) {
@@ -149,10 +196,6 @@
     }
 }
 
--(void)dealloc
-{
-    NSLog(@"---");
-}
 
 
 //暂停layer上面的动画

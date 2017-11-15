@@ -110,6 +110,9 @@
 		3AD29EF01F46D586005B600D /* UIColor+RGBColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EEE1F46D586005B600D /* UIColor+RGBColor.m */; };
 		3AD29EFE1F46D69F005B600D /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EF31F46D69F005B600D /* DDPageControl.m */; };
 		3AD29F021F46D69F005B600D /* PageImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29EFD1F46D69F005B600D /* PageImageScrollView.m */; };
+		3AE319BC1FBA776200199CFB /* IAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE319BB1FBA776200199CFB /* IAlertView.m */; };
+		3AE319BF1FBA9F8700199CFB /* ApplicationForInspectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE319BE1FBA9F8700199CFB /* ApplicationForInspectionViewController.m */; };
+		3AE319C31FBADBF300199CFB /* CMTakePhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE319C21FBADBF300199CFB /* CMTakePhoto.m */; };
 		3AFBC9B21F53EECC00DAD7EA /* DrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBC9B11F53EECC00DAD7EA /* DrawView.m */; };
 /* End PBXBuildFile section */
 
@@ -354,6 +357,12 @@
 		3AD29F071F46D87B005B600D /* IndexPageSkin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexPageSkin.h; sourceTree = "<group>"; };
 		3AD29F081F46D87B005B600D /* MineSkin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineSkin.h; sourceTree = "<group>"; };
 		3AD29F091F46D87B005B600D /* TicketSkin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketSkin.h; sourceTree = "<group>"; };
+		3AE319BA1FBA776200199CFB /* IAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IAlertView.h; sourceTree = "<group>"; };
+		3AE319BB1FBA776200199CFB /* IAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAlertView.m; sourceTree = "<group>"; };
+		3AE319BD1FBA9F8700199CFB /* ApplicationForInspectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationForInspectionViewController.h; sourceTree = "<group>"; };
+		3AE319BE1FBA9F8700199CFB /* ApplicationForInspectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationForInspectionViewController.m; sourceTree = "<group>"; };
+		3AE319C11FBADBF300199CFB /* CMTakePhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTakePhoto.h; sourceTree = "<group>"; };
+		3AE319C21FBADBF300199CFB /* CMTakePhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTakePhoto.m; sourceTree = "<group>"; };
 		3AFBC9B01F53EECC00DAD7EA /* DrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawView.h; sourceTree = "<group>"; };
 		3AFBC9B11F53EECC00DAD7EA /* DrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawView.m; sourceTree = "<group>"; };
 		5EAB6D6BB45AD284BBE10F27 /* Pods_Architecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Architecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -708,6 +717,8 @@
 		3A95AD241D17E0490026EAFE /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				3AE319C01FBADBF300199CFB /* TakePhoto */,
+				3AE319B61FBA75A100199CFB /* IAlertView */,
 				3AFBC9AF1F53EEB900DAD7EA /* DrawView */,
 				3AA1C8821F4AA962004A52EF /* RoundnessProgressView */,
 				3AA1C85B1F4A6FD3004A52EF /* SDCycleScrollView */,
@@ -928,6 +939,8 @@
 				3A9681971FA1CC9F00A6F7A3 /* MainViewController.m */,
 				3AC1A4081FA8524300BE4035 /* DetectionViewController.h */,
 				3AC1A4091FA8524300BE4035 /* DetectionViewController.m */,
+				3AE319BD1FBA9F8700199CFB /* ApplicationForInspectionViewController.h */,
+				3AE319BE1FBA9F8700199CFB /* ApplicationForInspectionViewController.m */,
 			);
 			path = control;
 			sourceTree = "<group>";
@@ -1085,6 +1098,24 @@
 				3AD29F091F46D87B005B600D /* TicketSkin.h */,
 			);
 			path = skin;
+			sourceTree = "<group>";
+		};
+		3AE319B61FBA75A100199CFB /* IAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				3AE319BA1FBA776200199CFB /* IAlertView.h */,
+				3AE319BB1FBA776200199CFB /* IAlertView.m */,
+			);
+			path = IAlertView;
+			sourceTree = "<group>";
+		};
+		3AE319C01FBADBF300199CFB /* TakePhoto */ = {
+			isa = PBXGroup;
+			children = (
+				3AE319C11FBADBF300199CFB /* CMTakePhoto.h */,
+				3AE319C21FBADBF300199CFB /* CMTakePhoto.m */,
+			);
+			path = TakePhoto;
 			sourceTree = "<group>";
 		};
 		3AFBC9AF1F53EEB900DAD7EA /* DrawView */ = {
@@ -1320,6 +1351,7 @@
 				3A26EA211F5A4FE50086C553 /* SRProxyConnect.m in Sources */,
 				3A9681D31FA1CC9F00A6F7A3 /* MalfunctionEquipmentTableViewCell.m in Sources */,
 				3AD29EF01F46D586005B600D /* UIColor+RGBColor.m in Sources */,
+				3AE319BC1FBA776200199CFB /* IAlertView.m in Sources */,
 				3A9681E01FA1CC9F00A6F7A3 /* LoginViewController.m in Sources */,
 				3A9681CC1FA1CC9F00A6F7A3 /* WarningHistoryViewController.m in Sources */,
 				3A40D5BD1F5E87C700D7E8DF /* GJCFDateUitil.m in Sources */,
@@ -1356,8 +1388,10 @@
 				3A26EA261F5A4FE50086C553 /* SRHTTPConnectMessage.m in Sources */,
 				3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */,
 				3A9681C61FA1CC9F00A6F7A3 /* UploadingTableViewCell.m in Sources */,
+				3AE319BF1FBA9F8700199CFB /* ApplicationForInspectionViewController.m in Sources */,
 				3A9681CD1FA1CC9F00A6F7A3 /* EquipmentWarningModel.m in Sources */,
 				3A9681D51FA1CC9F00A6F7A3 /* EquipmentWarningViewModel.m in Sources */,
+				3AE319C31FBADBF300199CFB /* CMTakePhoto.m in Sources */,
 				3A40D5C21F5E87C700D7E8DF /* GJCFSystemUitil.m in Sources */,
 				3A9681CF1FA1CC9F00A6F7A3 /* MalfunctionEquipmentModel.m in Sources */,
 				3A40D5C01F5E87C700D7E8DF /* GJCFQuickUIUitil.m in Sources */,

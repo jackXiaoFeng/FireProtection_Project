@@ -49,7 +49,8 @@
 #import "SocketIO.h"
 #import "CMMember.h"
 #import "BaseViewModel.h"
-
+#import "IAlertView.h"
+#import "CMTakePhoto.h"
 
 /*
  Define
