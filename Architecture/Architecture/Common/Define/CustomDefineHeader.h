@@ -157,4 +157,7 @@
  *  添加登录成功后的通知，方便成功后的处理
  */
 #define N_Login_Success         @"N_Login_Success"
+
+#define alert(msg) [[[UIAlertView alloc]initWithTitle:@"提醒" message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+
 #endif

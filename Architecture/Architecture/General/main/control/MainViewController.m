@@ -36,6 +36,12 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.rightBtn setImage:DEF_IMAGENAME(@"scan") forState:UIControlStateNormal];
+    self.rightBtn.hidden = NO;
+    
+    
+    
         
     self.progressSections = 0;
     
@@ -88,6 +94,78 @@
         //获取当前巡检度
         [self requestNowpolling];
     };    
+}
+
+- (void)rightBtnClick
+{
+    [[self getUserInfo] subscribeNext:^(id x) {
+        //        NSLog(@"%@",CMMemberEntity.user.uid);
+        //        [APService setAlias:CMMemberEntity.user.uid callbackSelector:@selector(tagsAliasCallback:tags:alias:)
+        //                     object:nil];
+    }];
+    
+}
+- (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString { if (jsonString == nil) { return nil; } NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding]; NSError *err; NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err]; if(err) { NSLog(@"json解析失败：%@",err); return nil; } return dic; }
+
+- (NSString*)convertToJSONData:(id)infoDict { NSError *error; NSData *jsonData = [NSJSONSerialization dataWithJSONObject:infoDict options:NSJSONWritingPrettyPrinted  error:&error]; NSString *jsonString = @""; if (! jsonData) { NSLog(@"Got an error: %@", error); }else { jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]; } jsonString = [jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];  [jsonString stringByReplacingOccurrencesOfString:@"\n" withString:@""]; return jsonString; }
+
+- (RACSignal *)getUserInfo
+{
+    return [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        //参数
+        
+        NSString *utf8Str = [NSString utf8ToUnicode:CMMemberEntity.userInfo.unitsn];
+        
+        NSDictionary *datDic = @{
+                                 @"Unitsn":utf8Str,
+                                 @"Oper_flag":@1,
+                                 @"Nrow":@"20",
+                                 @"Page":@"1",
+                                 };
+//        NSString *str = [NSString stringWithFormat:@"[{\"Unitsn\":\"%@\",Oper_flag:%d,Nrow:%}]"]
+        NSString *str = [self convertToJSONData:datDic];
+        NSLog(@"str=====%@",str);
+        NSString *jsonStr1 = [NSString deleteCharactersInJsonStr:str];
+        NSLog(@"jsonStr1=====%@",jsonStr1);
+        NSString *jsonStr2 = [NSString stringWithFormat:@"[%@]",jsonStr1];
+        NSLog(@"jsonStr2=====%@",jsonStr2);
+        
+        NSString *jsonStr3 = [NSString stringWithFormat:@"{\"Page\":\"1\"}"];
+        NSLog(@"jsonStr3=====%@",jsonStr3);
+        NSString *jsonStr4 = [NSString deleteCharactersInJsonStr:jsonStr3];
+        NSLog(@"jsonStr4=====%@",jsonStr4);
+
+        NSDictionary *tempDic = @{
+                                  @"code":XS006,
+                                  @"serial_no":[NSString stringWithFormat:@"%@%@",[CMUtility currentTimestampMillisecond],XS006_serial_no],
+                                  @"errorcode":@"0",
+                                  @"errormsg":@"success",
+                                  @"token":@"ZtpyQtAMazU2rKvNTzylzV5MPa9vz",
+                                  @"dat":jsonStr2
+                                  };
+        
+        NSLog(@"tempDic=====%@",tempDic);
+
+        //NSString *jsonStr = [NSString deleteCharactersInJsonStr:[tempDic JSONString]];
+        
+        //NSDictionary *paramDic = [self dictionaryWithJsonString:jsonStr];
+        //登录请求
+        [RequestOperationManager apiPOSTRequestParametersDic:tempDic
+                                                     success:^(NSDictionary *result) {
+                                                         NSLog(@"===%@",result);
+                                                         //保存到CMMember中
+                                                         [subscriber sendNext:result];
+                                                         [subscriber sendCompleted];
+                                                     }
+                                                    failture:^(id result) {
+                                                        [subscriber sendCompleted];
+                                                    }];
+        
+        return nil;
+    }] doError:^(NSError *error) {
+        
+    }];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated

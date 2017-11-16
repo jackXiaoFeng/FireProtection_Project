@@ -30,6 +30,7 @@
 		3A26EA321F5A50050086C553 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A26EA311F5A50050086C553 /* CFNetwork.framework */; };
 		3A26EA341F5A50290086C553 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A26EA331F5A50290086C553 /* Foundation.framework */; };
 		3A26EA361F5A50540086C553 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A26EA351F5A50540086C553 /* libicucore.tbd */; };
+		3A2AAA7D1FBD5B0C008E7E46 /* UploadingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AAA7C1FBD5B0C008E7E46 /* UploadingViewModel.m */; };
 		3A40D5BC1F5E87C700D7E8DF /* CMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40D59B1F5E87C700D7E8DF /* CMMember.m */; };
 		3A40D5BD1F5E87C700D7E8DF /* GJCFDateUitil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40D59E1F5E87C700D7E8DF /* GJCFDateUitil.m */; };
 		3A40D5BE1F5E87C700D7E8DF /* GJCFDispatchCenterUitil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40D5A31F5E87C700D7E8DF /* GJCFDispatchCenterUitil.m */; };
@@ -180,6 +181,8 @@
 		3A26EA311F5A50050086C553 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3A26EA331F5A50290086C553 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3A26EA351F5A50540086C553 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		3A2AAA7B1FBD5B0C008E7E46 /* UploadingViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadingViewModel.h; sourceTree = "<group>"; };
+		3A2AAA7C1FBD5B0C008E7E46 /* UploadingViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadingViewModel.m; sourceTree = "<group>"; };
 		3A40D59A1F5E87C700D7E8DF /* CMMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMember.h; sourceTree = "<group>"; };
 		3A40D59B1F5E87C700D7E8DF /* CMMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMember.m; sourceTree = "<group>"; };
 		3A40D59D1F5E87C700D7E8DF /* GJCFDateUitil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GJCFDateUitil.h; sourceTree = "<group>"; };
@@ -857,6 +860,8 @@
 				3A96816C1FA1CC9F00A6F7A3 /* PlanViewModel.m */,
 				3A96816D1FA1CC9F00A6F7A3 /* RecordViewModel.h */,
 				3A96816E1FA1CC9F00A6F7A3 /* RecordViewModel.m */,
+				3A2AAA7B1FBD5B0C008E7E46 /* UploadingViewModel.h */,
+				3A2AAA7C1FBD5B0C008E7E46 /* UploadingViewModel.m */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -1358,6 +1363,7 @@
 				3A26EA201F5A4FE50086C553 /* SRIOConsumerPool.m in Sources */,
 				3A26EA291F5A4FE50086C553 /* SRRandom.m in Sources */,
 				3AA1C8AB1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m in Sources */,
+				3A2AAA7D1FBD5B0C008E7E46 /* UploadingViewModel.m in Sources */,
 				3A26EA2B1F5A4FE50086C553 /* NSRunLoop+SRWebSocket.m in Sources */,
 				3AA1C8561F4A6F44004A52EF /* TAAbstractDotView.m in Sources */,
 				3A9681D11FA1CC9F00A6F7A3 /* EquipmentWarningTableViewCell.m in Sources */,

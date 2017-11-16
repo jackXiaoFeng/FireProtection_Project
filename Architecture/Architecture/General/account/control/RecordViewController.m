@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.titleLb.text = @"巡检计划";
+    self.titleLb.text = @"巡检记录";
     self.tableView.backgroundColor = [UIColor clearColor];
     
     //添加刷新

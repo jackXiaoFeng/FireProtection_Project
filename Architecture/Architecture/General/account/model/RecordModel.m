@@ -12,12 +12,18 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
     return @{
+             @"Count"             : @"Count",
+             @"Degree"             : @"Degree",
              @"Describe"             : @"Describe",
+             @"Images"            : @"Images",
+             @"Name"            : @"Name",
+             @"Number"            : @"Number",
              @"Oper_flag"            : @"Oper_flag",
-             @"Degree"               : @"Degree",
-             @"Name"                 : @"Name"
+             @"Xtime"            : @"Xtime",
+             @"page"                 : @"page"
              };
 }
+
 
 + (NSValueTransformer *)JSONTransformerForKey:(NSString *)key
 {

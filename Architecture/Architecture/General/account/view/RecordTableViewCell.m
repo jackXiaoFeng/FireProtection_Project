@@ -36,7 +36,7 @@
 {
     UILabel *addressLab = [[UILabel alloc] initWithFrame:CGRectMake(DEF_DEVICE_SCLE_WIDTH(32), 0, DEF_DEVICE_SCLE_WIDTH(610)-DEF_DEVICE_SCLE_WIDTH(32), CellHeight)];
     addressLab.font = DEF_MyFont(14.0f);
-    addressLab.text = @"设备名称＋地点";
+    addressLab.text = @"----";
     addressLab.userInteractionEnabled = YES;
     addressLab.backgroundColor = [UIColor clearColor];
     addressLab.textAlignment = NSTextAlignmentLeft;
@@ -47,7 +47,7 @@
     
     UILabel *timeLab = [[UILabel alloc] initWithFrame:CGRectMake(addressLab.x+addressLab.width, 0, DEF_DEVICE_SCLE_WIDTH(140), CellHeight)];
     timeLab.font = DEF_MyFont(14.0f);
-    timeLab.text = @"13:00";
+    timeLab.text = @"--:--";
     timeLab.userInteractionEnabled = YES;
     timeLab.backgroundColor = [UIColor clearColor];
     timeLab.textAlignment = NSTextAlignmentLeft;
@@ -74,15 +74,15 @@
 
 - (void)setRecordMode:(RecordModel *)RecordMode
 {
-    self.addressLab.text = [NSString stringWithFormat:@"%@ %@",RecordMode.Name,RecordMode.Describe];
+    self.addressLab.text = [NSString stringWithFormat:@"%@ %@",DEF_OBJECT_TO_STIRNG(RecordMode.Name),DEF_OBJECT_TO_STIRNG(RecordMode.Degree)];
     //YYYY-MM-dd HH:mm:ss
-//    if (RecordMode.Stime.length < 10) {
-//        self.timeLab.text = @"--:--";
-//        
-//    }else
-//    {
-//        self.timeLab.text = [CMUtility getTimeWithTimestamp:WarningHistoryModel.Stime WithDateFormat:@"HH:mm"];
-//    }
+    if (RecordMode.Xtime.length < 10) {
+        self.timeLab.text = @"--:--";
+        
+    }else
+    {
+        self.timeLab.text = [CMUtility getTimeWithTimestamp:RecordMode.Xtime WithDateFormat:@"HH:mm"];
+    }
    
 }
 

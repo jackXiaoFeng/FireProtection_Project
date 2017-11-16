@@ -9,5 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface UploadingModel : MTLModel <MTLJSONSerializing>
+@property (nonatomic,assign)BOOL isSelect;
+
+@property (nonatomic,strong)NSString *name;
 
 @end

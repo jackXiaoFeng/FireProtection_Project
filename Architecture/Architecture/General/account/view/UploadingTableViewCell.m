@@ -37,7 +37,7 @@
 {
     UILabel *addressLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, DEF_DEVICE_SCLE_WIDTH(448), CellHeight)];
     addressLab.font = DEF_MyFont(14.0f);
-    addressLab.text = @"设备名称＋地点";
+    addressLab.text = @"----";
     addressLab.userInteractionEnabled = YES;
     addressLab.backgroundColor = [UIColor clearColor];
     addressLab.textAlignment = NSTextAlignmentCenter;
@@ -48,7 +48,7 @@
     
     UILabel *timeLab = [[UILabel alloc] initWithFrame:CGRectMake(addressLab.x+addressLab.width, 0, DEF_DEVICE_SCLE_WIDTH(186), CellHeight)];
     timeLab.font = DEF_MyFont(14.0f);
-    timeLab.text = @"13:00";
+    timeLab.text = @"--:--";
     timeLab.userInteractionEnabled = YES;
     timeLab.backgroundColor = [UIColor clearColor];
     timeLab.textAlignment = NSTextAlignmentLeft;
@@ -76,6 +76,19 @@
 
 - (void)setUploadingMode:(UploadingModel *)UploadingMode
 {
+    self.addressLab.text = UploadingMode.name;
+    self.timeLab.text = UploadingMode.name;
+
+    UIImage *selectBtnImage;
+    if (UploadingMode.isSelect) {
+        selectBtnImage =DEF_IMAGENAME(@"uploading_btn_selected");
+    }else
+    {
+        selectBtnImage =DEF_IMAGENAME(@"uploading_btn_normal");
+    }
+    [self.selectBtn setImage:selectBtnImage forState:UIControlStateNormal];
+
+    
     //    self.nameLab.text = myGroupModel.gname;
     //
     //    self.messageNumLab.text = myGroupModel.unreadmsgnum;

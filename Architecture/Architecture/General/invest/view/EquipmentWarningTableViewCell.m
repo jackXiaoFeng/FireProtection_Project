@@ -109,51 +109,53 @@
         statusStr = @"正常";
     }else
     {
-        statusStr = @"异常";
+        statusStr = @"告警";
     }
     self.statusLab.text = statusStr;
 
-    
-    //0:正常
-    //1:故障
-    //2:需维修
-    //3:等待复归
-    //4:申请复归
+//    AFmaintenance 优先级1
+//    //0:正常     判断Xfstates
+//    //1:故障
+//    //／2:申请检修 2，4 不用Xfstates
+//    //3:等待复归
+//    //／4:复归
+//
+//    Xfstates优 先级2
+//    0 告警 AFmaintenance 复位
+//    1 正常 AFmaintenance 正常
+
     NSString *fixStr = @"";
     UIImage *normalImage;
     UIImage *highlightedImage;
-    BOOL isU;
     
-    if ([equipmentWarningModel.AFmaintenance isEqualToString:Warning_Fix_Malfunction])//1故障
+    BOOL isU = NO;
+    if([equipmentWarningModel.AFmaintenance isEqualToString:Warning_Fix_Maintain])//2 需维修
     {
-        fixStr = @"故障";
-        normalImage = DEF_IMAGENAME(@"apply_involution");
-        highlightedImage = DEF_IMAGENAME(@"apply_involution");
+        fixStr = @"申请检修";
+        normalImage = DEF_IMAGENAME(@"wait_involution");
+        highlightedImage = DEF_IMAGENAME(@"wait_involution");
         isU = YES;
-    }else if ([equipmentWarningModel.AFmaintenance isEqualToString:Warning_Fix_Maintain])//2 需维修
-    {
-        fixStr = @"等待维修";
-        normalImage = DEF_IMAGENAME(@"wait_involution");
-        highlightedImage = DEF_IMAGENAME(@"wait_involution");
-        isU = NO;
-    }else if ([equipmentWarningModel.AFmaintenance isEqualToString:Warning_Fix_Wait])//3:等待复归
-    {
-        fixStr = @"等待复归";
-        normalImage = DEF_IMAGENAME(@"wait_involution");
-        highlightedImage = DEF_IMAGENAME(@"wait_involution");
-        isU = NO;
-        
     }else if ([equipmentWarningModel.AFmaintenance isEqualToString:Warning_Fix_Apply])//4:申请复归
     {
-        fixStr = @"申请复归";
+        fixStr = @"复归";
         normalImage = DEF_IMAGENAME(@"apply_involution");
         highlightedImage = DEF_IMAGENAME(@"apply_involution");
         isU = YES;
     }else
     {
-        
+        if ([equipmentWarningModel.Xfstates isEqualToString:Warning_Fix_Normal]) {
+            fixStr = @"正常";
+            normalImage = DEF_IMAGENAME(@"wait_involution");
+            highlightedImage = DEF_IMAGENAME(@"wait_involution");
+            isU = NO;
+        }else
+        {
+            fixStr = @"复归";
+            normalImage = DEF_IMAGENAME(@"apply_involution");
+            highlightedImage = DEF_IMAGENAME(@"apply_involution");
+            isU = YES;
+        }
     }
-        
     
     [self.involutionBtn setBackgroundImage:normalImage forState:UIControlStateNormal];
     [self.involutionBtn setBackgroundImage:highlightedImage forState:UIControlStateSelected];

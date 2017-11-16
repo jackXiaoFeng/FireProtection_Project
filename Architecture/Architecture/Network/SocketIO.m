@@ -149,6 +149,7 @@
      *   3.14	[xs014]故障设备复归确认或申请
      *   3.15	[xs015]告警设备复归或维修
      *   3.16	[xs016]数据图
+     *   3.32   [xs032]上传巡检记录表
      */
 
     //[xs001]登陆
@@ -334,6 +335,18 @@
         }else
         {
             self.xr016CallBackResult(@{@"errormsg":@"获取数据图失败"});
+        }
+    }];
+    
+    //    *   3.32    [xs032]上传巡检记录表
+    [self.client on:XR032 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr032CallBackResult(dic);
+        }else
+        {
+            self.xr032CallBackResult(@{@"errormsg":@"获取巡检记录失败"});
         }
     }];
  }

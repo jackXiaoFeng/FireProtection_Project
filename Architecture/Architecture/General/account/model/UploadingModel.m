@@ -10,4 +10,10 @@
 
 @implementation UploadingModel
 
+
+////设置默认选择
+//- (BOOL)isSelect
+//{
+//    return NO;
+//}
 @end

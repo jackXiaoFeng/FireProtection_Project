@@ -195,8 +195,8 @@ static RequestOperationManager *operationManager;
 //    NSDictionary *dic = @{@"data":encryptStr};
     
     NSString *key = [parameters allKeys][0];
-    NSDictionary *newParameters = [parameters objectForKey:key];
-    NSString *url = [NSString stringWithFormat:@"%@%@",DEF_IPAddress,key];
+    NSDictionary *newParameters = parameters;
+    NSString *url = [NSString stringWithFormat:@"%@",DEF_IPAddress];
     //过滤字符串前后的空格
     url = [url stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     //过滤中间空格
@@ -205,7 +205,7 @@ static RequestOperationManager *operationManager;
 
     NSLog(@"IPAddress:%@\n%@",url,newParameters);
     [manager POST:url parameters:newParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+        NSLog(@"responseObject:%@",responseObject);
         [RequestOperationManager requestSuccess:responseObject operation:operation finishHandle:finishHandle failHandle:failHandle];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
