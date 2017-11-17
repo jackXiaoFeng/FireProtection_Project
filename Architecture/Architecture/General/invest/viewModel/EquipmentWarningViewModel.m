@@ -122,17 +122,17 @@
         @strongify(self);
         NSString *utf8Str = [NSString utf8ToUnicode:CMMemberEntity.userInfo.unitsn];
         
-        NSString *utf8Degree = [NSString allUtf8ToUnicode:degree];
+        //NSString *utf8Degree = [NSString allUtf8ToUnicode:degree];
 
         NSDictionary *datDic = @{
                                  @"Unitsn":utf8Str,
                                  @"Oper_flag":@1,
-                                 @"Degree":utf8Degree
+                                 @"Degree":degree
                                  };
         NSArray *arr = [NSArray arrayWithObjects:datDic, nil];
         NSDictionary *tempDic = @{
-                                  @"code":XS015,
-                                  @"serial_no":[NSString stringWithFormat:@"%@%@",[CMUtility currentTimestampMillisecond],XS015_serial_no],
+                                  @"code":XS014,
+                                  @"serial_no":[NSString stringWithFormat:@"%@%@",[CMUtility currentTimestampMillisecond],XS014_serial_no],
                                   @"errorcode":@"0",
                                   @"errormsg":@"success",
                                   @"token":CMMemberEntity.token,
@@ -142,8 +142,8 @@
 
         NSString *jsonStr = [NSString deleteCharactersInJsonStr:jsonStrTmp];
         @weakify(self)
-        [SocketIO_Singleton sendEmit:XS015 withMessage:jsonStr];
-        SocketIO_Singleton.xr015CallBackResult = ^(NSDictionary *resultDict){
+        [SocketIO_Singleton sendEmit:XS014 withMessage:jsonStr];
+        SocketIO_Singleton.xr014CallBackResult = ^(NSDictionary *resultDict){
             @strongify(self)
             NSString *errorcode = DEF_OBJECT_TO_STIRNG([resultDict objectForKey:@"errorcode"]);
             NSString *errormsg = DEF_OBJECT_TO_STIRNG([resultDict objectForKey:@"errormsg"]);
@@ -159,7 +159,7 @@
 //                
 //                [self.warningHistoryList addObjectsFromArray:(NSMutableArray *)[MTLJSONAdapter modelsOfClass:[WarningHistoryModel class] fromJSONArray:resultDict[@"datas"] error:nil]];
 //                
-//                [subscriber sendNext: self.warningHistoryList];
+                [subscriber sendNext:SUCCESS_MSG];
                 [subscriber sendCompleted];
             }else
             {

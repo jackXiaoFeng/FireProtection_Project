@@ -132,15 +132,18 @@
     if([equipmentWarningModel.AFmaintenance isEqualToString:Warning_Fix_Maintain])//2 需维修
     {
         fixStr = @"申请检修";
-        normalImage = DEF_IMAGENAME(@"wait_involution");
-        highlightedImage = DEF_IMAGENAME(@"wait_involution");
+        normalImage = DEF_IMAGENAME(@"apply_involution");
+        highlightedImage = DEF_IMAGENAME(@"apply_involution");
         isU = YES;
+        equipmentWarningModel.involutionOrRecondition = JIANXIU;
+        
     }else if ([equipmentWarningModel.AFmaintenance isEqualToString:Warning_Fix_Apply])//4:申请复归
     {
         fixStr = @"复归";
         normalImage = DEF_IMAGENAME(@"apply_involution");
         highlightedImage = DEF_IMAGENAME(@"apply_involution");
         isU = YES;
+        equipmentWarningModel.involutionOrRecondition = FUGUI;
     }else
     {
         if ([equipmentWarningModel.Xfstates isEqualToString:Warning_Fix_Normal]) {
@@ -148,12 +151,14 @@
             normalImage = DEF_IMAGENAME(@"wait_involution");
             highlightedImage = DEF_IMAGENAME(@"wait_involution");
             isU = NO;
+            
         }else
         {
             fixStr = @"复归";
             normalImage = DEF_IMAGENAME(@"apply_involution");
             highlightedImage = DEF_IMAGENAME(@"apply_involution");
             isU = YES;
+            equipmentWarningModel.involutionOrRecondition = FUGUI;
         }
     }
     

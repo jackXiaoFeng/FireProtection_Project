@@ -10,6 +10,7 @@
 #import "RecordTableViewCell.h"
 #import "RecordModel.h"
 #import "RecordViewModel.h"
+#import "NoneRecordViewController.h"
 
 @interface RecordViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -26,6 +27,10 @@
     self.titleLb.text = @"巡检记录";
     self.tableView.backgroundColor = [UIColor clearColor];
     
+    [self.rightBtn setImage:DEF_IMAGENAME(@"info_normal") forState:UIControlStateNormal];
+    self.rightBtn.hidden = NO;
+    
+    
     //添加刷新
     self.viewModel  = [[RecordViewModel alloc]init];
     //首次刷新数据
@@ -39,6 +44,13 @@
         [self footerWithRefreshing];
     }];
     
+    
+}
+
+- (void)rightBtnClick
+{
+    NoneRecordViewController *controller = [[NoneRecordViewController alloc]init];
+    [self.navigationController pushViewController:controller animated:YES];
     
 }
 

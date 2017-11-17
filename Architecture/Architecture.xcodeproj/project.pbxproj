@@ -31,6 +31,12 @@
 		3A26EA341F5A50290086C553 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A26EA331F5A50290086C553 /* Foundation.framework */; };
 		3A26EA361F5A50540086C553 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A26EA351F5A50540086C553 /* libicucore.tbd */; };
 		3A2AAA7D1FBD5B0C008E7E46 /* UploadingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AAA7C1FBD5B0C008E7E46 /* UploadingViewModel.m */; };
+		3A2AAA801FBE93E4008E7E46 /* DetectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AAA7F1FBE93E4008E7E46 /* DetectionViewModel.m */; };
+		3A2AAA831FBEACD2008E7E46 /* DetectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AAA821FBEACD2008E7E46 /* DetectionModel.m */; };
+		3A2AAA861FBED0D0008E7E46 /* NoneRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AAA851FBED0D0008E7E46 /* NoneRecordViewController.m */; };
+		3A2AAA891FBED0EB008E7E46 /* NoneRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AAA881FBED0EB008E7E46 /* NoneRecordModel.m */; };
+		3A2AAA8C1FBED0FF008E7E46 /* NoneRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AAA8B1FBED0FF008E7E46 /* NoneRecordTableViewCell.m */; };
+		3A2AAA8F1FBED112008E7E46 /* NoneRecordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AAA8E1FBED112008E7E46 /* NoneRecordViewModel.m */; };
 		3A40D5BC1F5E87C700D7E8DF /* CMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40D59B1F5E87C700D7E8DF /* CMMember.m */; };
 		3A40D5BD1F5E87C700D7E8DF /* GJCFDateUitil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40D59E1F5E87C700D7E8DF /* GJCFDateUitil.m */; };
 		3A40D5BE1F5E87C700D7E8DF /* GJCFDispatchCenterUitil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40D5A31F5E87C700D7E8DF /* GJCFDispatchCenterUitil.m */; };
@@ -183,6 +189,18 @@
 		3A26EA351F5A50540086C553 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		3A2AAA7B1FBD5B0C008E7E46 /* UploadingViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadingViewModel.h; sourceTree = "<group>"; };
 		3A2AAA7C1FBD5B0C008E7E46 /* UploadingViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadingViewModel.m; sourceTree = "<group>"; };
+		3A2AAA7E1FBE93E4008E7E46 /* DetectionViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetectionViewModel.h; sourceTree = "<group>"; };
+		3A2AAA7F1FBE93E4008E7E46 /* DetectionViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetectionViewModel.m; sourceTree = "<group>"; };
+		3A2AAA811FBEACD2008E7E46 /* DetectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetectionModel.h; sourceTree = "<group>"; };
+		3A2AAA821FBEACD2008E7E46 /* DetectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetectionModel.m; sourceTree = "<group>"; };
+		3A2AAA841FBED0D0008E7E46 /* NoneRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoneRecordViewController.h; sourceTree = "<group>"; };
+		3A2AAA851FBED0D0008E7E46 /* NoneRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoneRecordViewController.m; sourceTree = "<group>"; };
+		3A2AAA871FBED0EB008E7E46 /* NoneRecordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoneRecordModel.h; sourceTree = "<group>"; };
+		3A2AAA881FBED0EB008E7E46 /* NoneRecordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoneRecordModel.m; sourceTree = "<group>"; };
+		3A2AAA8A1FBED0FF008E7E46 /* NoneRecordTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoneRecordTableViewCell.h; sourceTree = "<group>"; };
+		3A2AAA8B1FBED0FF008E7E46 /* NoneRecordTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoneRecordTableViewCell.m; sourceTree = "<group>"; };
+		3A2AAA8D1FBED112008E7E46 /* NoneRecordViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoneRecordViewModel.h; sourceTree = "<group>"; };
+		3A2AAA8E1FBED112008E7E46 /* NoneRecordViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoneRecordViewModel.m; sourceTree = "<group>"; };
 		3A40D59A1F5E87C700D7E8DF /* CMMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMember.h; sourceTree = "<group>"; };
 		3A40D59B1F5E87C700D7E8DF /* CMMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMember.m; sourceTree = "<group>"; };
 		3A40D59D1F5E87C700D7E8DF /* GJCFDateUitil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GJCFDateUitil.h; sourceTree = "<group>"; };
@@ -819,6 +837,8 @@
 				3A9681551FA1CC9E00A6F7A3 /* PlanViewController.m */,
 				3A9681561FA1CC9E00A6F7A3 /* RecordViewController.h */,
 				3A9681571FA1CC9F00A6F7A3 /* RecordViewController.m */,
+				3A2AAA841FBED0D0008E7E46 /* NoneRecordViewController.h */,
+				3A2AAA851FBED0D0008E7E46 /* NoneRecordViewController.m */,
 				3A9681581FA1CC9F00A6F7A3 /* StatementViewController.h */,
 				3A9681591FA1CC9F00A6F7A3 /* StatementViewController.m */,
 				3A96815A1FA1CC9F00A6F7A3 /* UploadingViewController.h */,
@@ -836,6 +856,8 @@
 				3A9681601FA1CC9F00A6F7A3 /* RecordModel.m */,
 				3A9681611FA1CC9F00A6F7A3 /* UploadingModel.h */,
 				3A9681621FA1CC9F00A6F7A3 /* UploadingModel.m */,
+				3A2AAA871FBED0EB008E7E46 /* NoneRecordModel.h */,
+				3A2AAA881FBED0EB008E7E46 /* NoneRecordModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -849,6 +871,8 @@
 				3A9681671FA1CC9F00A6F7A3 /* RecordTableViewCell.m */,
 				3A9681681FA1CC9F00A6F7A3 /* UploadingTableViewCell.h */,
 				3A9681691FA1CC9F00A6F7A3 /* UploadingTableViewCell.m */,
+				3A2AAA8A1FBED0FF008E7E46 /* NoneRecordTableViewCell.h */,
+				3A2AAA8B1FBED0FF008E7E46 /* NoneRecordTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -862,6 +886,8 @@
 				3A96816E1FA1CC9F00A6F7A3 /* RecordViewModel.m */,
 				3A2AAA7B1FBD5B0C008E7E46 /* UploadingViewModel.h */,
 				3A2AAA7C1FBD5B0C008E7E46 /* UploadingViewModel.m */,
+				3A2AAA8D1FBED112008E7E46 /* NoneRecordViewModel.h */,
+				3A2AAA8E1FBED112008E7E46 /* NoneRecordViewModel.m */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -970,6 +996,8 @@
 				3A96819C1FA1CC9F00A6F7A3 /* MainModel.m */,
 				3AE319CA1FBC26D000199CFB /* PollingCompleteModel.h */,
 				3AE319CB1FBC26D000199CFB /* PollingCompleteModel.m */,
+				3A2AAA811FBEACD2008E7E46 /* DetectionModel.h */,
+				3A2AAA821FBEACD2008E7E46 /* DetectionModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -988,6 +1016,8 @@
 		3A9681A21FA1CC9F00A6F7A3 /* viewModel */ = {
 			isa = PBXGroup;
 			children = (
+				3A2AAA7E1FBE93E4008E7E46 /* DetectionViewModel.h */,
+				3A2AAA7F1FBE93E4008E7E46 /* DetectionViewModel.m */,
 				3A9681A31FA1CC9F00A6F7A3 /* FixRecordViewModel.h */,
 				3A9681A41FA1CC9F00A6F7A3 /* FixRecordViewModel.m */,
 				3AE319C71FBC26BF00199CFB /* PollingCompleteViewModel.h */,
@@ -1354,6 +1384,7 @@
 				3A9681D61FA1CC9F00A6F7A3 /* MalfunctionEquipmentViewModel.m in Sources */,
 				3AA1C8581F4A6F44004A52EF /* TADotView.m in Sources */,
 				3A95ACF11D17D4BA0026EAFE /* AppDelegate.m in Sources */,
+				3A2AAA861FBED0D0008E7E46 /* NoneRecordViewController.m in Sources */,
 				3A9681D91FA1CC9F00A6F7A3 /* MainViewController.m in Sources */,
 				3A9681C11FA1CC9F00A6F7A3 /* PlanModel.m in Sources */,
 				3A40D5C11F5E87C700D7E8DF /* GJCFStringUitil.m in Sources */,
@@ -1368,6 +1399,7 @@
 				3AA1C8561F4A6F44004A52EF /* TAAbstractDotView.m in Sources */,
 				3A9681D11FA1CC9F00A6F7A3 /* EquipmentWarningTableViewCell.m in Sources */,
 				3A26E9F21F5A4E170086C553 /* SocketIO.m in Sources */,
+				3A2AAA8C1FBED0FF008E7E46 /* NoneRecordTableViewCell.m in Sources */,
 				3A40D5C31F5E87C700D7E8DF /* Tools.m in Sources */,
 				3A26EA211F5A4FE50086C553 /* SRProxyConnect.m in Sources */,
 				3A9681D31FA1CC9F00A6F7A3 /* MalfunctionEquipmentTableViewCell.m in Sources */,
@@ -1387,6 +1419,7 @@
 				3A9681C21FA1CC9F00A6F7A3 /* RecordModel.m in Sources */,
 				3A26EA241F5A4FE50086C553 /* SRError.m in Sources */,
 				3AFBC9B21F53EECC00DAD7EA /* DrawView.m in Sources */,
+				3A2AAA891FBED0EB008E7E46 /* NoneRecordModel.m in Sources */,
 				3A26EA221F5A4FE50086C553 /* SRRunLoopThread.m in Sources */,
 				3A9681DD1FA1CC9F00A6F7A3 /* MainTableViewCell.m in Sources */,
 				3A9681D71FA1CC9F00A6F7A3 /* WarningHistoryViewModel.m in Sources */,
@@ -1395,6 +1428,7 @@
 				3A9681BC1FA1CC9F00A6F7A3 /* InfoViewController.m in Sources */,
 				3A26EA271F5A4FE50086C553 /* SRLog.m in Sources */,
 				3A9681CA1FA1CC9F00A6F7A3 /* InvestViewController.m in Sources */,
+				3A2AAA801FBE93E4008E7E46 /* DetectionViewModel.m in Sources */,
 				3AA1C8571F4A6F44004A52EF /* TAAnimatedDotView.m in Sources */,
 				3A9681E61FA1CC9F00A6F7A3 /* EquipmentTableViewCell.m in Sources */,
 				3AD29F021F46D69F005B600D /* PageImageScrollView.m in Sources */,
@@ -1416,6 +1450,7 @@
 				3A9681D51FA1CC9F00A6F7A3 /* EquipmentWarningViewModel.m in Sources */,
 				3AE319C31FBADBF300199CFB /* CMTakePhoto.m in Sources */,
 				3A40D5C21F5E87C700D7E8DF /* GJCFSystemUitil.m in Sources */,
+				3A2AAA831FBEACD2008E7E46 /* DetectionModel.m in Sources */,
 				3A9681CF1FA1CC9F00A6F7A3 /* MalfunctionEquipmentModel.m in Sources */,
 				3A40D5C01F5E87C700D7E8DF /* GJCFQuickUIUitil.m in Sources */,
 				3A26EA281F5A4FE50086C553 /* SRMutex.m in Sources */,
@@ -1452,6 +1487,7 @@
 				3A26EA2C1F5A4FE50086C553 /* NSURLRequest+SRWebSocket.m in Sources */,
 				3AA1C8881F4AA9F1004A52EF /* CMUtility.m in Sources */,
 				3A95AD2E1D17E4E60026EAFE /* BaseViewController.m in Sources */,
+				3A2AAA8F1FBED112008E7E46 /* NoneRecordViewModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

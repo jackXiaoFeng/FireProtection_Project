@@ -149,7 +149,9 @@
      *   3.14	[xs014]故障设备复归确认或申请
      *   3.15	[xs015]告警设备复归或维修
      *   3.16	[xs016]数据图
+     *   3.20   [xs020]nfc扫描设备返回信息
      *   3.32   [xs032]上传巡检记录表
+     *   3.33   [xs033]未巡检通知表
      */
 
     //[xs001]登陆
@@ -338,6 +340,18 @@
         }
     }];
     
+    //    *   3.20    [xs020]nfc扫描设备返回信息
+    [self.client on:XR020 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr020CallBackResult(dic);
+        }else
+        {
+            self.xr020CallBackResult(@{@"errormsg":@"获取设备信息失败"});
+        }
+    }];
+    
     //    *   3.32    [xs032]上传巡检记录表
     [self.client on:XR032 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
         @strongify(self)
@@ -347,6 +361,18 @@
         }else
         {
             self.xr032CallBackResult(@{@"errormsg":@"获取巡检记录失败"});
+        }
+    }];
+    
+    //    *   3.33    [xs033]未巡检通知表
+    [self.client on:XR033 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr033CallBackResult(dic);
+        }else
+        {
+            self.xr033CallBackResult(@{@"errormsg":@"获取未巡检记录失败"});
         }
     }];
  }

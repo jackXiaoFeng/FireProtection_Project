@@ -53,7 +53,9 @@ typedef void (^ConnectSuccess) (void);
  *   3.14	[xs014]故障设备复归确认或申请
  *   3.15	[xs015]告警设备复归或维修
  *   3.16	[xs016]数据图
+ *   3.20   [xs020]nfc扫描设备返回信息
  *   3.32   [xs032]上传巡检记录表
+ *   3.33   [xs033]未巡检通知表
 
  */
 
@@ -73,7 +75,9 @@ typedef void (^Xr013CallBackResult) (NSDictionary *);
 typedef void (^Xr014CallBackResult) (NSDictionary *);
 typedef void (^Xr015CallBackResult) (NSDictionary *);
 typedef void (^Xr016CallBackResult) (NSDictionary *);
+typedef void (^Xr020CallBackResult) (NSDictionary *);
 typedef void (^Xr032CallBackResult) (NSDictionary *);
+typedef void (^Xr033CallBackResult) (NSDictionary *);
 
 
 @interface SocketIO : NSObject<SRWebSocketDelegate>
@@ -105,8 +109,9 @@ typedef void (^Xr032CallBackResult) (NSDictionary *);
 @property (nonatomic, copy) Xr014CallBackResult xr014CallBackResult;
 @property (nonatomic, copy) Xr015CallBackResult xr015CallBackResult;
 @property (nonatomic, copy) Xr016CallBackResult xr016CallBackResult;
-
-@property (nonatomic, copy) Xr016CallBackResult xr032CallBackResult;
+@property (nonatomic, copy) Xr020CallBackResult xr020CallBackResult;
+@property (nonatomic, copy) Xr032CallBackResult xr032CallBackResult;
+@property (nonatomic, copy) Xr033CallBackResult xr033CallBackResult;
 
 //@property (nonatomic, strong) ChatMessageModel *chatMessageModel;
 //

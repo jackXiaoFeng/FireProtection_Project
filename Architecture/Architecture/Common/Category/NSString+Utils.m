@@ -141,13 +141,9 @@
 +(NSString *) utf8ToUnicode:(NSString *)string
 
 {
-    
     NSUInteger length = [string length];
-    
     NSMutableString *s = [NSMutableString stringWithCapacity:0];
-    
     for (int i = 0;i < length; i++)
-        
     {
         unichar _char = [string characterAtIndex:i];
         //不够4位直接用0补齐4位16进制数

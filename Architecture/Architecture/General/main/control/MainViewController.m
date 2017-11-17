@@ -115,32 +115,28 @@
         //参数
         
         NSString *utf8Str = [NSString utf8ToUnicode:CMMemberEntity.userInfo.unitsn];
-        
         NSDictionary *datDic = @{
                                  @"Unitsn":utf8Str,
                                  @"Oper_flag":@1,
                                  @"Nrow":@"20",
                                  @"Page":@"1",
                                  };
-//        NSString *str = [NSString stringWithFormat:@"[{\"Unitsn\":\"%@\",Oper_flag:%d,Nrow:%}]"]
+        //字典转json字符串
         NSString *str = [self convertToJSONData:datDic];
         NSLog(@"str=====%@",str);
+        //去除json字符串中多余的“\”
         NSString *jsonStr1 = [NSString deleteCharactersInJsonStr:str];
         NSLog(@"jsonStr1=====%@",jsonStr1);
+        //拼接需要的字符串加"[]"
         NSString *jsonStr2 = [NSString stringWithFormat:@"[%@]",jsonStr1];
         NSLog(@"jsonStr2=====%@",jsonStr2);
-        
-        NSString *jsonStr3 = [NSString stringWithFormat:@"{\"Page\":\"1\"}"];
-        NSLog(@"jsonStr3=====%@",jsonStr3);
-        NSString *jsonStr4 = [NSString deleteCharactersInJsonStr:jsonStr3];
-        NSLog(@"jsonStr4=====%@",jsonStr4);
 
         NSDictionary *tempDic = @{
                                   @"code":XS006,
                                   @"serial_no":[NSString stringWithFormat:@"%@%@",[CMUtility currentTimestampMillisecond],XS006_serial_no],
                                   @"errorcode":@"0",
                                   @"errormsg":@"success",
-                                  @"token":@"ZtpyQtAMazU2rKvNTzylzV5MPa9vz",
+                                  @"token":@"FsFsbSfZfp0Zi6c4mLBRZuaXhyY",
                                   @"dat":jsonStr2
                                   };
         

@@ -27,7 +27,7 @@
 #endif
 
 
-#define DEF_IPAddress        @"http://192.168.1.62:3000" //正式环境
+#define DEF_IPAddress        @"http://192.168.1.62:22224" //正式环境
 #define ACT_URL      @"http://piao.huo.com/appwap/activity/index?agent=ios" //正式环境 活动页面地址
 
 #define DEF_IP_POSTIMAGE     @"http://wwwt.freshera.cn:2000/api/Upload" //上传图片环境
@@ -118,6 +118,7 @@
 #define Warning_Fix_Maintain    @"2"
 #define Warning_Fix_Wait        @"3"
 #define Warning_Fix_Apply       @"4"
+
 
 #pragma mark - connect
 
@@ -341,6 +342,19 @@
 #define XR016 @"xr016"
 
 /**
+ *   3.20    [xs020]nfc设备返回信息
+ 
+ ＊  3.20.1
+ */
+#define XS020 @"xs020"
+#define XS020_serial_no @"00020"
+
+/**
+ *   3.20.2    响应报文体
+ */
+#define XR020 @"xr020"
+
+/**
  *   3.32    [xs032]数据图
  
  ＊  3.32.1
@@ -352,4 +366,17 @@
  *   3.32.2    响应报文体
  */
 #define XR032 @"xr032"
+
+/**
+ *   3.33    [xs033]未巡检通知
+ 
+ ＊  3.33.1
+ */
+#define XS033 @"xs033"
+#define XS033_serial_no @"00033"
+
+/**
+ *   3.33.2    响应报文体
+ */
+#define XR033 @"xr033"
 #endif

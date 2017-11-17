@@ -11,6 +11,7 @@
 #import "EquipmentWarningTableViewCell.h"
 #import "EquipmentWarningModel.h"
 #import "EquipmentWarningViewModel.h"
+#import "DetectionViewController.h"
 
 
 @interface EquipmentWarningViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -204,7 +205,24 @@
         @weakify(self);
         cell.fixBtnClickBlock = ^(NSIndexPath *indexPath){
             @strongify(self);
-            [self cellClickIndexPath:indexPath];
+            EquipmentWarningModel *model = self.viewModel.equipmentList[indexPath.row];
+            if (model.involutionOrRecondition.length > 0) {
+                
+            //fix_debug:暂时调试
+                if ([model.involutionOrRecondition isEqualToString:FUGUI]) {
+                    [self cellClickIndexPath:indexPath];
+                }else if ([model.involutionOrRecondition isEqualToString:JIANXIU])
+                {
+                    DetectionViewController *controller = [[DetectionViewController alloc]init];
+                    controller.nfcDetectionStatus = NFC_DETECTION_JIANXIU;
+                    [self.navigationController pushViewController:controller animated:YES];
+                }else
+                {
+                    
+                }
+                 
+            }
+           
         };
     }
     
@@ -223,18 +241,22 @@
     model.AFmaintenance =@"2";
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     
-    NSLog(@"===============%@",model.Degree);
     [[self.viewModel alarmEquipmentMaintenanceWithDegree:model.Degree] subscribeNext:^(NSString *str) {
         
             @strongify(self);
-//            if ([activityModel.isJoin integerValue] == 1) {
-//                self.isCanJoinActivity = 1;
-//                [self pushToSeatSelectionViewControllerWithIndexPath:indexPath];
-//                
-//            }else {
-//                self.isCanJoinActivity = 2;
-//                [CMUtility showTips:@"当前用户不能参加此次活动"];
-//            }
+        if ([str isEqualToString:SUCCESS_MSG]) {
+            
+            if ([self.viewModel.equipmentList containsObject:model])
+            {
+                [self.viewModel.equipmentList removeObject:model];
+            }
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationLeft];
+            [CMUtility showTips:@"复归成功"];
+        }else
+        {
+            [CMUtility showTips:@"复归失败"];
+        }
+
         } error:^(NSError *error) {
             
     }];

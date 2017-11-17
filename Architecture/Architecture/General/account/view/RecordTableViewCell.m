@@ -74,7 +74,7 @@
 
 - (void)setRecordMode:(RecordModel *)RecordMode
 {
-    self.addressLab.text = [NSString stringWithFormat:@"%@ %@",DEF_OBJECT_TO_STIRNG(RecordMode.Name),DEF_OBJECT_TO_STIRNG(RecordMode.Degree)];
+    self.addressLab.text = [NSString stringWithFormat:@"%@ ",DEF_OBJECT_TO_STIRNG(RecordMode.Name)];
     //YYYY-MM-dd HH:mm:ss
     if (RecordMode.Xtime.length < 10) {
         self.timeLab.text = @"--:--";

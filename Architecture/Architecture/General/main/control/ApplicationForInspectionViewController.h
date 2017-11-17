@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DetectionViewController.h"
 
 @interface ApplicationForInspectionViewController : BaseViewController
 
+@property (nonatomic, assign) NFC_DETECTION_STATUS nfcDetectionStatus;
 
 /**
  *  更新头像

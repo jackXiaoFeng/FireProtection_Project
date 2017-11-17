@@ -10,6 +10,7 @@
 #import "DetectionViewController.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "ApplicationForInspectionViewController.h"
+#import "DetectionViewModel.h"
 
 @interface DetectionViewController ()
 {
@@ -33,6 +34,9 @@
 
 @property (nonatomic,strong)UILabel *companyLab;
 
+
+@property (nonatomic,strong)DetectionViewModel *viewModel;
+
 @end
 
 @implementation DetectionViewController
@@ -41,32 +45,7 @@
     [super viewDidLoad];
     
     //    IAlertView *alertView = [[IAlertView alloc] init]; // 无标题
-    
-    IAlertView *alterView = [[IAlertView alloc]initWithTitle:@"测试" titleColor:[UIColor whiteColor] titleBackgroundColor:DEF_COLOR_RGB(234,97,86)];
-    // 添加子布局
-    [alterView addContentView:[self addSubView]];
-    // 添加按钮
-    alterView.buttonTitles = @[ @"确认巡检", @"申请检修", @"取消" ];
-    alterView.buttonTitlesColor = @[[UIColor whiteColor], [UIColor whiteColor],[UIColor whiteColor] ];
-    alterView.buttonTitlesBackGroundColor = @[ DEF_COLOR_RGB(83,207,176),DEF_COLOR_RGB(233,129,113),DEF_COLOR_RGB(171,171,171)];
-    // 添加按钮点击事件
-    alterView.onButtonClickHandle = ^(IAlertView *alertView, NSInteger buttonIndex) {
-        if (buttonIndex == 0)
-        {
-            
-            
-        } else if (buttonIndex == 1)
-        {
-            ApplicationForInspectionViewController *avc = [[ApplicationForInspectionViewController alloc]init];
-            [self.navigationController pushViewController:avc animated:YES];
-        }else if (buttonIndex == 2)
-        {
-            NSLog(@"点击取消");
-        }
-        // 关闭
-        [alertView dismiss]; };
-    // 显示
-    [alterView show];
+    self.viewModel = [[DetectionViewModel alloc]init];
     
     
     self.isPause = NO;
@@ -96,28 +75,7 @@
     
     self.rotateImage= DEF_IMAGENAME(@"device_rotate");
     
- 
-    
-    
-//
-//    self.layertime = [CALayer layer];
-//    self.layertime.frame = CGRectMake((DEF_DEVICE_WIDTH - self.rotateImage.size.width)/2, DEF_STATUS_HEIGHT+DEF_DEVICE_SCLE_HEIGHT(256) + (scanImage.size.height/2) - self.rotateImage.size.height, self.rotateImage.size.width , self.rotateImage.size.height);
-//    //self.layertime.backgroundColor = [UIColor blackColor].CGColor;
-//    self.layertime.position = CGPointMake(self.device_scan.centerX, self.device_scan.centerY);
-//    [self.view.layer addSublayer:self.layertime];
-//    [self.layertime setNeedsDisplay];
-//    //动画运动时的锚点
-//    self.layertime.anchorPoint = CGPointMake(0.5, 0);
-//    self.layertime.delegate = self;
-//    self.animation3 = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-//    self.animation3.duration = 3;
-//    self.animation3.fromValue = [NSNumber numberWithFloat:0];
-//    self.animation3.toValue = [NSNumber numberWithFloat:((360*M_PI)/180)];
-//    self.animation3.fillMode = kCAFillModeForwards;
-//    self.animation3.repeatCount = HUGE_VALF;
-//    [self.layertime addAnimation:self.animation3 forKey:@"rotation.x"];
-   
-    
+
     
     self.device_rotate = [[UIImageView alloc]initWithImage:self.rotateImage];
     //self.device_rotate.frame = CGRectMake((DEF_DEVICE_WIDTH - self.rotateImage.size.width)/2, DEF_STATUS_HEIGHT+DEF_DEVICE_SCLE_HEIGHT(256) + (scanImage.size.height/2) - self.rotateImage.size.height- 20, self.rotateImage.size.width , self.rotateImage.size.height);
@@ -140,6 +98,10 @@
     [self.view addSubview:self.nfcLab];
     [self.view addSubview:self.scanLab];
     [self.view addSubview:self.companyLab];
+    
+    //根据设备degree获取 设备信息
+    [self requestNFCDetection];
+    
     
     //以下是蓝牙代码
     /*
@@ -170,17 +132,111 @@
     */
 }
 
-- (UIView *)addSubView
+- (void)requestNFCDetection
 {
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEF_DEVICE_WIDTH - DEF_DEVICE_SCLE_WIDTH(190), DEF_DEVICE_SCLE_HEIGHT(230))];
+    @weakify(self)
+    NSString *degreeStr = @"ba2c1704";
+    [[self.viewModel nfcDetectionFromDegree:degreeStr] subscribeNext:^(id result) {
+        @strongify(self);
+        
+        DetectionModel *model = self.viewModel.detectionList[0];
+       
+        NSArray *buttonTitles;
+        NSArray *buttonTitlesColor;
+        NSArray *buttonTitlesBackGroundColor;
+        
+        if (self.nfcDetectionStatus == NFC_DETECTION_Normal) {
+            buttonTitles = @[ @"确认巡检", @"申请检修", @"取消" ];
+            buttonTitlesColor = @[[UIColor whiteColor], [UIColor whiteColor],[UIColor whiteColor] ];
+            buttonTitlesBackGroundColor = @[ DEF_COLOR_RGB(83,207,176),DEF_COLOR_RGB(233,129,113),DEF_COLOR_RGB(171,171,171)];
+        }else if (self.nfcDetectionStatus == NFC_DETECTION_JIANXIU)
+        {
+            buttonTitles = @[ @"申请检修", @"取消" ];
+            buttonTitlesColor = @[[UIColor whiteColor],[UIColor whiteColor] ];
+            buttonTitlesBackGroundColor = @[ DEF_COLOR_RGB(233,129,113),DEF_COLOR_RGB(171,171,171)];
+        }
+        
+        IAlertView *alterView = [[IAlertView alloc]initWithTitle:model.Eqname titleColor:[UIColor whiteColor] titleBackgroundColor:DEF_COLOR_RGB(234,97,86)];
+        // 添加子布局
+        [alterView addContentView:[self addSubViewWithContent:model.Standard]];
+        // 添加按钮
+        alterView.buttonTitles = buttonTitles;
+        alterView.buttonTitlesColor = buttonTitlesColor;
+        alterView.buttonTitlesBackGroundColor = buttonTitlesBackGroundColor;
+        // 添加按钮点击事件
+        alterView.onButtonClickHandle = ^(IAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 0)
+            {
+                ApplicationForInspectionViewController *avc = [[ApplicationForInspectionViewController alloc]init];
+                avc.nfcDetectionStatus = self.nfcDetectionStatus;
+                [self.navigationController pushViewController:avc animated:YES];
+              
+            } else if (buttonIndex == 1)
+            {
+                if (self.nfcDetectionStatus == NFC_DETECTION_Normal)
+                {
+                    ApplicationForInspectionViewController *avc = [[ApplicationForInspectionViewController alloc]init];
+                    avc.nfcDetectionStatus = self.nfcDetectionStatus;
+                    [self.navigationController pushViewController:avc animated:YES];
+                }else if (self.nfcDetectionStatus == NFC_DETECTION_JIANXIU)
+                {
+                    NSLog(@"点击取消");
+                }
+               
+            }else if (buttonIndex == 2)
+            {
+                NSLog(@"点击取消");
+            }
+            // 关闭
+            [alertView dismiss]; };
+        // 显示
+        [alterView show];
+        
+       
+    }error:^(NSError *error) {
+        [CMUtility showTips:@"当前巡检完成度获取失败"];
+    }];
+}
+
+
+- (UIView *)addSubViewWithContent:(NSString *)content
+{
+    NSString *str = content;
+    //NSString *str = @"1,水泵无损坏\n\n2,水泵无漏水\n\n3,水泵无漏油";
+    NSArray *array = [content componentsSeparatedByString:@","];
+    __block NSString *tmpStr = @"";
+    __block NSInteger tmpStrLen = 0;
+
+    [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *str = [NSString stringWithFormat:@"%ld.%@",(idx+1),obj];
+        NSString *symbol = idx == (array.count - 1) ?@"\n":@",\n";
+        NSString *newStr = [str stringByAppendingString:symbol];
+        tmpStr =[tmpStr stringByAppendingString:newStr];
+        
+        tmpStrLen = tmpStr.length > tmpStrLen?tmpStr.length:tmpStrLen;
+    }];
     
-    UILabel *lab = [[UILabel alloc]initWithFrame:view.frame];
-    lab.text = @"1,水泵无损坏\n\n2,水泵无漏水\n\n3,水泵无漏油";
-    lab.textAlignment = NSTextAlignmentCenter;
+     CGSize contentSize = [CMUtility boundingRectWithSize:CGSizeMake(MAXFLOAT, DEF_DEVICE_SCLE_WIDTH(190)) font:DEF_MyFont(16) string:tmpStr withSpacing:0];
+    
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEF_DEVICE_WIDTH - DEF_DEVICE_SCLE_WIDTH(190), contentSize.height + DEF_DEVICE_SCLE_HEIGHT(70) + DEF_DEVICE_SCLE_HEIGHT(50))];
+    
+    UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, view.width/2, DEF_DEVICE_SCLE_HEIGHT(70))];
+    titleLab.text = @"巡检要求";
+    titleLab.textAlignment = NSTextAlignmentCenter;
+    titleLab.font =DEF_MyFont(20);
+    titleLab.textColor = DEF_COLOR_RGB(132,132,132);
+    titleLab.backgroundColor = [UIColor yellowColor];
+    [view addSubview:titleLab];
+    
+    
+    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake((view.width - contentSize.width)/2, DEF_DEVICE_SCLE_HEIGHT(70) + DEF_DEVICE_SCLE_HEIGHT(25), contentSize.width, contentSize.height)];
+    lab.text = tmpStr;
+    lab.textAlignment = NSTextAlignmentLeft;
     lab.lineBreakMode = UILineBreakModeWordWrap;
     lab.numberOfLines = 0;
     lab.font =DEF_MyFont(16);
     lab.textColor = DEF_COLOR_RGB(27,27,27);
+    lab.backgroundColor = [UIColor yellowColor];
     [view addSubview:lab];
     
     return view;

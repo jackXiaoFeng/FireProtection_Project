@@ -63,7 +63,7 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         
         CGFloat btnX = idx == 0? btnLineSpace : btnLineSpace +btnWidth +btnSpace;
-        btn.frame = CGRectMake(btnX, DEF_DEVICE_HEIGHT - DEF_DEVICE_SCLE_HEIGHT(57) - btnHeight, btnWidth, btnHeight);
+        btn.frame = CGRectMake(btnX, DEF_DEVICE_HEIGHT - DEF_DEVICE_SCLE_HEIGHT(37) - btnHeight, btnWidth, btnHeight);
         
         [btn setTitle:nameArray[idx] forState:UIControlStateNormal];
         

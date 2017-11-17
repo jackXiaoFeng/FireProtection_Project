@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#define FUGUI @"复归"
+#define JIANXIU @"申请检修"
 
 @interface EquipmentWarningModel : MTLModel<MTLJSONSerializing>
 
@@ -28,6 +29,9 @@
 @property (nonatomic,strong)NSString *name;
 @property (nonatomic,strong)NSString *page;
 @property (nonatomic,strong)NSString *warningrecordsn;
+
+//判断是否是检修或者复归
+@property (nonatomic,strong)NSString *involutionOrRecondition;
 
 //{
 //    AFmaintenance = 1;

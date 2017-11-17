@@ -1,37 +1,36 @@
 //
-//  MoreViewController.m
+//  NoneRecordViewController.m
 //  Architecture
 //
-//  Created by xiaofeng on 16/6/20.
-//  Copyright © 2016年 xiaofeng. All rights reserved.
+//  Created by xiaofeng on 17/8/22.
+//  Copyright © 2017年 xiaofeng. All rights reserved.
 //
+#define HeadView_height 100
 
-#import "MoreViewController.h"
-#import "EquipmentModel.h"
-#import "EquipmentTableViewCell.h"
-#import "EquipmentViewModel.h"
-#import "DetectionViewController.h"
+#import "NoneRecordViewController.h"
+#import "NoneRecordTableViewCell.h"
+#import "NoneRecordModel.h"
+#import "NoneRecordViewModel.h"
 
-@interface MoreViewController ()
-<UITableViewDelegate,UITableViewDataSource>
+@interface NoneRecordViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
-@property (nonatomic, strong) EquipmentModel *model;
-@property (nonatomic, strong) EquipmentViewModel *viewModel;
+@property (nonatomic, strong) UIView *headView;
+@property (nonatomic, strong) NoneRecordModel *model;
+@property (nonatomic, strong) NoneRecordViewModel *viewModel;
+
 @end
 
-@implementation MoreViewController
+@implementation NoneRecordViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titleLb.text = @"设备";
+    // Do any additional setup after loading the view.
+    self.titleLb.text = @"未巡检设备通知";
     
-    [self.rightBtn setImage:DEF_IMAGENAME(@"scan") forState:UIControlStateNormal];
-    self.rightBtn.hidden = NO;
-
     self.tableView.backgroundColor = [UIColor clearColor];
     
     //添加刷新
-    self.viewModel  = [[EquipmentViewModel alloc]init];
+    self.viewModel  = [[NoneRecordViewModel alloc]init];
     //首次刷新数据
     [self headerWithRefreshing];
     //mj刷新
@@ -45,14 +44,7 @@
     
     
 }
-- (void)rightBtnClick
-{
-    NSLog(@"二维码btn点击");
-    DetectionViewController *controller = [[DetectionViewController alloc]init];
-    controller.nfcDetectionStatus = NFC_DETECTION_Normal;
-    [self.navigationController pushViewController:controller animated:YES];
-    
-}
+
 - (void)headerWithRefreshing
 {
     @weakify(self)
@@ -61,7 +53,7 @@
         
         [CMUtility removeFailViewWith:self.view];
         
-        return self.viewModel.equipmentList;
+        return self.viewModel.noneRecordList;
         
     }] map:^id(NSMutableArray *arr) {
         if ([arr count] < 10) {
@@ -72,17 +64,29 @@
     }] subscribeNext:^(id x) {
         @strongify(self);
         //            self.footer.hidden = [x boolValue];
+//        if (self.viewModel.noneRecordList.count == 0) {
+//            //提示没有更多的数据
+//            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+//        }
+        
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         
-        BOOL hidden = self.tableView.contentSize.height > self.tableView.height?NO:YES;
+        BOOL hidden;
+        if (self.viewModel.noneRecordList.count == 0) {
+            hidden = NO;
+        }else
+        {
+            hidden = self.tableView.contentSize.height > self.tableView.height?NO:YES;
+        }
+        
         //数据不超出屏幕不显示foot
         self.tableView.mj_footer.hidden = hidden;
         //最后一页加提示语
         if ([x boolValue]) {
             //提示没有更多的数据
-            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            [self.tableView.mj_footer resetNoMoreData];
         }
         
     } error:^(NSError *error) {
@@ -104,7 +108,7 @@
         
         [CMUtility removeFailViewWith:self.view];
         
-        return self.viewModel.equipmentList;
+        return self.viewModel.noneRecordList;
     }] map:^id(NSMutableArray * arr) {
         return @([arr count] % 10 != 0 ? YES : NO);
     }] subscribeNext:^(id x) {
@@ -138,15 +142,13 @@
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] init];
-    NSArray *nameArray = @[@"设备",@"数值",@"状态"];
+    NSArray *nameArray = @[@"设备名称+地点信息",@"时间周期"];
     
     NSArray *widthArray = @[
-                            @(DEF_DEVICE_SCLE_WIDTH(212)),
-                            @(DEF_DEVICE_SCLE_WIDTH(320)),
-                            @(DEF_DEVICE_SCLE_WIDTH(220))];
+                            @(DEF_DEVICE_SCLE_WIDTH(448)),
+                            @(DEF_DEVICE_SCLE_WIDTH(303))];
     NSArray *xArray = @[@0,
-                        @(DEF_DEVICE_SCLE_WIDTH(212)),
-                        @(DEF_DEVICE_SCLE_WIDTH(212)+DEF_DEVICE_SCLE_WIDTH(320))
+                        @(DEF_DEVICE_SCLE_WIDTH(448))
                         ];
     
     [nameArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -183,27 +185,28 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [EquipmentTableViewCell equipmentCellHeight];
+    return [NoneRecordTableViewCell NoneRecordHeight];
 }
 
 -(NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.viewModel.equipmentList.count;
+    return self.viewModel.noneRecordList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentify = @"EquipmentTableViewCellIdentify";
-    EquipmentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentify];
+    static NSString *cellIdentify = @"NoneRecordCellIdentify";
+    NoneRecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentify];
     if (!cell) {
-        cell = [[EquipmentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentify];
+        cell = [[NoneRecordTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentify];
         cell.backgroundColor = [UIColor whiteColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    if (self.viewModel.equipmentList.count > 0) {
-        cell.equipmentModel  = self.viewModel.equipmentList[indexPath.row];
-        cell.hidenLine= (indexPath.row== self.viewModel.equipmentList.count-1); //通过组模型数组来拿到每组最后一行
+    if (self.viewModel.noneRecordList.count > 0) {
+        cell.noneRecordModel  = self.viewModel.noneRecordList[indexPath.row];
+        cell.hidenLine= (indexPath.row== self.viewModel.noneRecordList.count-1); //通过组模型数组来拿到每组最后一行
     }
+    
     return cell;
 }
 
@@ -217,9 +220,7 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        
-        CGFloat tableHeight = self.isNoneTabber?DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT :DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT- DEF_TABBAR_HEIGHT;
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, DEF_DEVICE_WIDTH, tableHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, DEF_DEVICE_WIDTH, DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT) style:UITableViewStylePlain];
         _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
         _tableView.delegate =self;
         _tableView.dataSource = self;
@@ -244,19 +245,32 @@
     return _tableView;
 }
 
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//
+//    CGFloat offset = scrollView.contentOffset.y;
+//
+//    if (scrollView.contentOffset.y < 0) {
+//        self.headView.frame = CGRectMake(offset,0, DEF_DEVICE_WIDTH - offset * 2, HeadView_height - offset);
+//    }else {
+//        self.headView.frame = CGRectMake(0,-offset, DEF_DEVICE_WIDTH, HeadView_height);
+//    }
+//}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
+
