@@ -11,6 +11,7 @@
 @interface ApplicationForInspectionViewController ()<UIPickerViewDelegate,UIPickerViewDataSource>
 @property (nonatomic,strong)UIPickerView *myPickerView;
 @property (nonatomic,strong)NSArray *proTimeList;
+@property (nonatomic,strong)NSString *actegoriesStr;
 @property (nonatomic,assign)NSInteger selectRow;
 @property (nonatomic,assign)NSInteger currentTag;
 
@@ -18,7 +19,7 @@
 
 @property (nonatomic,strong)NSMutableDictionary *imageDic;
 @property (nonatomic,strong)UITextView *textView;
-@property (nonatomic,strong)UIAlertController       *imgActionSheet;        //头像选择弹出框
+@property (nonatomic,strong)UIAlertController      *imgActionSheet;        //头像选择弹出框
 
 @property (nonatomic,strong)CMTakePhoto *photoPicker;           //照片选择器
 
@@ -29,14 +30,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleLb.text = @"设备名称";
+    
+    
+    self.titleLb.text = self.detectionModel.Eqname;
     
     self.imageDic = [NSMutableDictionary dictionaryWithCapacity:10];
     
     UILabel *contentLab = [[UILabel alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, DEF_DEVICE_WIDTH, DEF_DEVICE_SCLE_HEIGHT(78))];
     contentLab.font = DEF_MyFont(15);
     contentLab.textColor =DEF_COLOR_RGB(87,87,87);
-    contentLab.text = @"     申请检修内容";
+    contentLab.text = self.nfcDetectionStatus == NFC_DETECTION_JIANXIU?@"     申请检修内容":@"     确认巡检内容";
     contentLab.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:contentLab];
     
@@ -49,27 +52,26 @@
     
     
     
-    
-    // 选择框
-    self.myPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake((DEF_DEVICE_WIDTH - 200)/2, DEF_DEVICE_SCLE_HEIGHT(172), 200, 216)];
-    // 显示选中框
-    self.myPickerView.showsSelectionIndicator=YES;
-    self.myPickerView.dataSource = self;
-    self.myPickerView.delegate = self;
-    [self.whiteView addSubview:self.myPickerView];
-    
-    _proTimeList = [[NSArray alloc]initWithObjects:@"水泵无漏水",@"水泵无损坏",@"水泵无漏油",@"其他",nil];
-    
-    UILabel *fixLab = [[UILabel alloc]initWithFrame:CGRectMake(0, DEF_DEVICE_SCLE_HEIGHT(172), DEF_DEVICE_WIDTH, DEF_DEVICE_SCLE_HEIGHT(20))];
-    fixLab.font = DEF_MyFont(19);
-    fixLab.textColor =DEF_COLOR_RGB(244,205,203);
-    fixLab.text = @"请选择检修类型";
-    fixLab.textAlignment = NSTextAlignmentCenter;
-    [self.whiteView addSubview:fixLab];
-    
-    
-    
-    
+    if (self.nfcDetectionStatus == NFC_DETECTION_JIANXIU) {
+        // 选择框
+        self.myPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake((DEF_DEVICE_WIDTH - 200)/2, DEF_DEVICE_SCLE_HEIGHT(172), 200, 216)];
+        // 显示选中框
+        self.myPickerView.showsSelectionIndicator=YES;
+        self.myPickerView.dataSource = self;
+        self.myPickerView.delegate = self;
+        [self.whiteView addSubview:self.myPickerView];
+        
+        
+        _proTimeList = [self.detectionModel.Faulttypes componentsSeparatedByString:@","];
+        self.actegoriesStr = _proTimeList[0];
+        
+        UILabel *fixLab = [[UILabel alloc]initWithFrame:CGRectMake(0, DEF_DEVICE_SCLE_HEIGHT(172), DEF_DEVICE_WIDTH, DEF_DEVICE_SCLE_HEIGHT(20))];
+        fixLab.font = DEF_MyFont(19);
+        fixLab.textColor =DEF_COLOR_RGB(244,205,203);
+        fixLab.text = @"请选择检修类型";
+        fixLab.textAlignment = NSTextAlignmentCenter;
+        [self.whiteView addSubview:fixLab];
+    }
     
     
     
@@ -194,11 +196,14 @@
     }
 }
 
+- (void)leftBtnClick
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (void)handleTap:(UITapGestureRecognizer *)sender{
     
     UIView *view = sender.view;
-    NSLog(@"----tag---%d",view.tag);
-    
     if (view.tag == 200) {
         NSLog(@"调用相机");
 //        if (self.imageArray.count < 4) {
@@ -218,11 +223,10 @@
 
 -(void)longPressView:(UILongPressGestureRecognizer *)longPressGest
 {
-    UIImageView *view = longPressGest.view;
-    NSLog(@"----tag---%ld",view.tag);
+    UIImageView *view = (UIImageView *)longPressGest.view;
 
     if (view.image) {
-        NSString *title = NSLocalizedString(@"A Short Title Is Best", nil);
+        //NSString *title = NSLocalizedString(@"A Short Title Is Best", nil);
         NSString *message = NSLocalizedString(@"是否要删除照片？", nil);
         NSString *cancelButtonTitle = NSLocalizedString(@"否", nil);
         NSString *otherButtonTitle = NSLocalizedString(@"是", nil);
@@ -256,7 +260,60 @@
 - (void)xunjianBtnclick:(UIButton *)btn
 {
     NSUInteger BtnTag = btn.tag;
-    NSLog(@"BtnTag----%lu",(unsigned long)BtnTag);
+    if (BtnTag == 100) {
+        
+        __block NSString *imagesStr = @"";
+        NSArray *imageArray = (NSArray *)self.imageDic.allKeys;
+        if (imageArray.count > 0) {
+            [imageArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSString *str = [NSString stringWithFormat:@"%@",obj];
+                NSString *symbol = idx == (imageArray.count - 1) ?@"":@",";
+                NSString *newStr = [str stringByAppendingString:symbol];
+                imagesStr =[imagesStr stringByAppendingString:newStr];
+            }];
+        }
+        if ([DEF_OBJECT_TO_STIRNG(self.textView.text) isEqualToString:@""]) {
+            [CMUtility showTips:@"请输入异常描述"];
+            return;
+        }
+        if ([DEF_OBJECT_TO_STIRNG(self.actegoriesStr)  isEqualToString:@""]) {
+            [CMUtility showTips:@"请选择检修类型"];
+            return;
+        }
+        
+        NSString *path = [UploadingModel filePath];
+
+        UploadingModel *uploadingModel = [[UploadingModel alloc]init];
+        uploadingModel.Degree = self.degreeStr;
+        uploadingModel.State = @"4";
+        uploadingModel.images = imagesStr;
+        uploadingModel.Describe = self.textView.text;
+        uploadingModel.Actegories = self.actegoriesStr;
+        
+        uploadingModel.Eqname = self.detectionModel.Eqname;
+        uploadingModel.Floorsn = self.detectionModel.Floorsn;
+        uploadingModel.timeT = [CMUtility currentTimestampSecond];
+        
+        NSMutableDictionary *tmpDic = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        if (tmpDic == nil) {
+            tmpDic =[NSMutableDictionary dictionaryWithCapacity:10];
+        }
+        [tmpDic setObject:uploadingModel forKey:uploadingModel.Degree];
+        
+        BOOL isSave = [NSKeyedArchiver archiveRootObject:tmpDic toFile:path];
+        if (isSave) {
+            [CMUtility showTips:@"提交检修成功"];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }else
+        {
+            [CMUtility showTips:@"提交检修失败"];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        
+    }else
+    {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 #pragma Mark -- UIPickerViewDataSource
@@ -285,6 +342,7 @@
 {
     
     NSString  *_proTimeStr = [_proTimeList objectAtIndex:row];
+    self.actegoriesStr = _proTimeStr;
     NSLog(@"_proTimeStr=%@",_proTimeStr);
     self.selectRow = row;
     [self.myPickerView reloadAllComponents];

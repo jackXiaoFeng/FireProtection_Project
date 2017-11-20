@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "DetectionViewController.h"
+#import "DetectionModel.h"
 
 @interface ApplicationForInspectionViewController : BaseViewController
 
 @property (nonatomic, assign) NFC_DETECTION_STATUS nfcDetectionStatus;
+
+@property (nonatomic, strong)DetectionModel *detectionModel;
+@property (nonatomic, strong)NSString *degreeStr;
 
 /**
  *  更新头像
@@ -20,5 +24,5 @@
  *
  *  @return 更新头像信号
  */
-- (RACSignal *)updateHeadImage:(UIImage *)headImage;
+//- (RACSignal *)updateHeadImage:(UIImage *)headImage;
 @end

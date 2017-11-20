@@ -33,6 +33,10 @@
     
     self.selectArray = [NSMutableArray arrayWithCapacity:10];
     
+    
+    
+    
+    
     NSArray *nameArray = @[
                            @"上传选中信息",
                            @"上传全部记录"
@@ -87,8 +91,24 @@
     
     //添加刷新
     self.viewModel  = [[UploadingViewModel alloc]init];
+    
+    NSString *path = [UploadingModel filePath];
+    NSMutableDictionary *tmpDic = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+    if (tmpDic == nil) {
+        tmpDic = [NSMutableDictionary dictionaryWithCapacity:10];;
+    }
+
+    [tmpDic.allKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        @strongify(self)
+        NSLog(@"====key:%@",obj);
+        UploadingModel *modelALL = [tmpDic objectForKey:obj];
+        NSLog(@"====Degree:%@===State:%@===Eqname:%@===State:%@",modelALL.Degree,modelALL.State,modelALL.Eqname,modelALL.State);
+        [self.viewModel.uploadingList addObject:modelALL];
+    }];
+
+    
     //首次刷新数据
-    [self headerWithRefreshing];
+    //[self headerWithRefreshing];
     //mj刷新
 //    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
 //        [self headerWithRefreshing];
@@ -185,7 +205,55 @@
 - (void)xunjianBtnclick:(UIButton *)btn
 {
     NSUInteger BtnTag = btn.tag;
+    if (self.viewModel.uploadingList.count == 0) {
+        [CMUtility showTips:@"暂无巡检记录"];
+        return;
+    }
     NSLog(@"BtnTag----%lu",(unsigned long)BtnTag);
+    __block NSMutableArray *array =[NSMutableArray arrayWithCapacity:10];
+    if (BtnTag == 100) {
+        if (self.selectArray.count == 0) {
+            [CMUtility showTips:@"请选择巡检记录"];
+            return ;
+        }else
+        {
+            array = self.selectArray;
+        }
+    }else
+    {
+        [self.viewModel.uploadingList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [array addObject:[NSString stringWithFormat:@"%ld",idx]];
+        }];
+        
+    }
+    
+    @weakify(self)
+    [[self.viewModel uploadingDataWithUploadingModel:array] subscribeNext:^(id x) {
+        @strongify(self);
+        if ([x isEqualToString:SUCCESS_MSG]) {
+            [CMUtility showTips:@"上传成功"];
+        }
+        
+        //上传成功删除本地记录
+        /*
+        NSString *path = [UploadingModel filePath];
+        NSMutableDictionary *tmpDic = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        if (tmpDic == nil) {
+            tmpDic = [NSMutableDictionary dictionaryWithCapacity:10];;
+        }
+        [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            @strongify(self);
+            NSString *objStr = (NSString *)obj;
+            NSInteger objIndex = [objStr integerValue];
+            UploadingModel *uploadingModel = self.viewModel.uploadingList[objIndex];
+            [tmpDic removeObjectForKey:uploadingModel.Degree];
+        }];
+        BOOL isSave = [NSKeyedArchiver archiveRootObject:tmpDic toFile:path];
+*/
+        
+    }error:^(NSError *error) {
+        [CMUtility showTips:@"上传失败"];
+    }];
 }
 
 
@@ -239,8 +307,7 @@
     
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
     [self.selectArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSLog(@"self.selectArray=====%ld==值：%@",indexPath.row,obj);
-
+        NSLog(@"self.selectArray=====%ld==值：%@",idx,obj);
     }];
     NSLog(@"=====%ld",indexPath.row);
     

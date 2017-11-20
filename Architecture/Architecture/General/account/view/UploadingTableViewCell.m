@@ -37,10 +37,10 @@
 {
     UILabel *addressLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, DEF_DEVICE_SCLE_WIDTH(448), CellHeight)];
     addressLab.font = DEF_MyFont(14.0f);
-    addressLab.text = @"----";
+    addressLab.text = @"    ----";
     addressLab.userInteractionEnabled = YES;
     addressLab.backgroundColor = [UIColor clearColor];
-    addressLab.textAlignment = NSTextAlignmentCenter;
+    addressLab.textAlignment = NSTextAlignmentLeft;
     addressLab.textColor = DEF_COLOR_RGB(87, 87, 87);
     [self.contentView addSubview:addressLab];
     self.addressLab = addressLab;
@@ -76,8 +76,13 @@
 
 - (void)setUploadingMode:(UploadingModel *)UploadingMode
 {
-    self.addressLab.text = UploadingMode.name;
-    self.timeLab.text = UploadingMode.name;
+    self.addressLab.text = [NSString stringWithFormat:@"    %@",UploadingMode.Eqname];
+    if (UploadingMode.timeT.length < 10) {
+        self.timeLab.text = @"--:--";
+    }else
+    {
+        self.timeLab.text = [CMUtility getTimeWithTimestamp:UploadingMode.timeT WithDateFormat:@"HH:mm"];
+    }
 
     UIImage *selectBtnImage;
     if (UploadingMode.isSelect) {
@@ -160,10 +165,9 @@
         [selectBtn setImage:selectBtnImage forState:UIControlStateNormal];
         [selectBtn setTitleColor:DEF_COLOR_RGB(254, 254, 254)forState:UIControlStateNormal];
         selectBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-        
+        selectBtn.userInteractionEnabled = NO;
         
         _selectBtn = selectBtn;
-        
     }
     return _selectBtn;
 }

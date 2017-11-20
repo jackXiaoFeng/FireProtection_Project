@@ -53,7 +53,7 @@
 #import "BaseViewModel.h"
 #import "IAlertView.h"
 #import "CMTakePhoto.h"
-
+#import "UploadingModel.h"
 /*
  Define
  */

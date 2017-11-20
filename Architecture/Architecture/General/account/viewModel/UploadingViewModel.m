@@ -101,12 +101,75 @@
                 //[self.uploadingList addObjectsFromArray:(NSMutableArray *)[MTLJSONAdapter modelsOfClass:[UploadingModel class] fromJSONArray:resultDict[@"datas"] error:nil]];
                 for (int i = 0; i< 30; i++) {
                     UploadingModel *model =[[UploadingModel alloc]init];
-                    model.name = [NSString stringWithFormat:@"name:%d",i];
+                    //model.name = [NSString stringWithFormat:@"name:%d",i];
                     model.isSelect = NO;
                     [self.uploadingList addObject:model];
                 }
                 
                 [subscriber sendNext: self.uploadingList];
+                [subscriber sendCompleted];
+            }else
+            {
+                id obj =resultDict;
+                [subscriber sendError:obj];
+            }
+        };
+        return nil;
+    }];
+}
+
+-(RACSignal *)uploadingDataWithUploadingModel:(NSArray *)modelArray
+{
+    @weakify(self);
+    
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        
+        @strongify(self);
+        
+        NSMutableArray *arr = [NSMutableArray arrayWithCapacity:10];
+
+        [modelArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSString *objStr = (NSString *)obj;
+            NSInteger objIndex = [objStr integerValue];
+            UploadingModel *uploadingModel = self.uploadingList[objIndex];
+            NSDictionary *datDic = @{
+                                     @"Oper_flag":@1,
+                                     @"Degree":uploadingModel.Degree,
+                                     @"State":uploadingModel.State,
+                                     @"images":uploadingModel.images,
+                                     @"Describe":uploadingModel.Describe,
+                                     @"Actegories":uploadingModel.Actegories
+                                     };
+            [arr addObject:datDic];
+        }];
+       
+        
+        NSDictionary *tempDic = @{
+                                  @"code":XS007,
+                                  @"serial_no":[NSString stringWithFormat:@"%@%@",[CMUtility currentTimestampMillisecond],XS007_serial_no],
+                                  @"errorcode":@"0",
+                                  @"errormsg":@"success",
+                                  @"token":CMMemberEntity.token,
+                                  @"dat":arr
+                                  };
+        
+        NSString *jsonStr = [NSString deleteCharactersInJsonStr:[tempDic JSONString]];
+        @weakify(self)
+        [SocketIO_Singleton sendEmit:XS007 withMessage:jsonStr];
+        SocketIO_Singleton.xr007CallBackResult = ^(NSDictionary *resultDict){
+            @strongify(self)
+            NSString *errorcode = DEF_OBJECT_TO_STIRNG([resultDict objectForKey:@"errorcode"]);
+            NSString *errormsg = DEF_OBJECT_TO_STIRNG([resultDict objectForKey:@"errormsg"]);
+            NSLog(@"errorcode is :%@",errorcode);
+            NSLog(@"errormsg is :%@",errormsg);
+            
+            //fixpangu: 暂定200 测试
+            if ([errorcode isEqualToString:SUCCESS_CODE]) {
+                
+                //[self.uploadingList addObjectsFromArray:(NSMutableArray *)[MTLJSONAdapter modelsOfClass:[UploadingModel class] fromJSONArray:resultDict[@"datas"] error:nil]];
+                
+                
+                [subscriber sendNext: SUCCESS_MSG];
                 [subscriber sendCompleted];
             }else
             {

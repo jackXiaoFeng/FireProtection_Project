@@ -39,7 +39,7 @@
 {
     NSLog(@"二维码btn点击");
     DetectionViewController *controller = [[DetectionViewController alloc]init];
-    controller.nfcDetectionStatus = NFC_DETECTION_Normal;
+    controller.nfcDetectionStatus = NFC_DETECTION_AFFIRNM;
     [self.navigationController pushViewController:controller animated:YES];
     
 }

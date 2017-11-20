@@ -80,13 +80,12 @@
         {
             hidden = self.tableView.contentSize.height > self.tableView.height?NO:YES;
         }
-        
         //数据不超出屏幕不显示foot
         self.tableView.mj_footer.hidden = hidden;
         //最后一页加提示语
         if ([x boolValue]) {
             //提示没有更多的数据
-            [self.tableView.mj_footer resetNoMoreData];
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
         }
         
     } error:^(NSError *error) {

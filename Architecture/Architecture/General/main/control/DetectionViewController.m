@@ -11,6 +11,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "ApplicationForInspectionViewController.h"
 #import "DetectionViewModel.h"
+#import "UploadingModel.h"
 
 @interface DetectionViewController ()
 {
@@ -135,7 +136,9 @@
 - (void)requestNFCDetection
 {
     @weakify(self)
-    NSString *degreeStr = @"ba2c1704";
+    NSString *degreeStr  = @"ba646f04";
+    NSString *degreeStr1 = @"ba2c1704";
+
     [[self.viewModel nfcDetectionFromDegree:degreeStr] subscribeNext:^(id result) {
         @strongify(self);
         
@@ -145,7 +148,7 @@
         NSArray *buttonTitlesColor;
         NSArray *buttonTitlesBackGroundColor;
         
-        if (self.nfcDetectionStatus == NFC_DETECTION_Normal) {
+        if (self.nfcDetectionStatus == NFC_DETECTION_AFFIRNM) {
             buttonTitles = @[ @"确认巡检", @"申请检修", @"取消" ];
             buttonTitlesColor = @[[UIColor whiteColor], [UIColor whiteColor],[UIColor whiteColor] ];
             buttonTitlesBackGroundColor = @[ DEF_COLOR_RGB(83,207,176),DEF_COLOR_RGB(233,129,113),DEF_COLOR_RGB(171,171,171)];
@@ -165,27 +168,85 @@
         alterView.buttonTitlesBackGroundColor = buttonTitlesBackGroundColor;
         // 添加按钮点击事件
         alterView.onButtonClickHandle = ^(IAlertView *alertView, NSInteger buttonIndex) {
+            @strongify(self);
             if (buttonIndex == 0)
             {
-                ApplicationForInspectionViewController *avc = [[ApplicationForInspectionViewController alloc]init];
-                avc.nfcDetectionStatus = self.nfcDetectionStatus;
-                [self.navigationController pushViewController:avc animated:YES];
+                if (self.nfcDetectionStatus == NFC_DETECTION_JIANXIU) {
+                    ApplicationForInspectionViewController *avc = [[ApplicationForInspectionViewController alloc]init];
+                    avc.nfcDetectionStatus = self.nfcDetectionStatus == NFC_DETECTION_JIANXIU?NFC_DETECTION_JIANXIU:NFC_DETECTION_AFFIRNM;
+                    avc.detectionModel = model;
+                    avc.degreeStr = degreeStr;
+                    [self.navigationController pushViewController:avc animated:YES];
+                }else if (self.nfcDetectionStatus == NFC_DETECTION_AFFIRNM)
+                {
+                    NSString *path = [UploadingModel filePath];
+
+                    UploadingModel *uploadingModel = [[UploadingModel alloc]init];
+                    uploadingModel.Degree = degreeStr;
+                    uploadingModel.State = @"1";
+                    uploadingModel.images = @"";
+                    uploadingModel.Describe = @"";
+                    uploadingModel.Actegories = @"";
+                    
+                    uploadingModel.Eqname = model.Eqname;
+                    uploadingModel.Floorsn = model.Floorsn;
+                    uploadingModel.timeT = [CMUtility currentTimestampSecond];
+                    
+                    NSMutableDictionary *tmpDic = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+                    if (tmpDic == nil) {
+                        tmpDic =[NSMutableDictionary dictionaryWithCapacity:10];
+                    }
+                    [tmpDic setObject:uploadingModel forKey:uploadingModel.Degree];
+                    
+                    BOOL isSave = [NSKeyedArchiver archiveRootObject:tmpDic toFile:path];
+
+//                    NSMutableDictionary *tmpDic = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+//                    if (tmpDic == nil) {
+//                        tmpDic = [NSMutableDictionary dictionaryWithCapacity:10];;
+//                    }
+//
+//                    [tmpDic.allKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                        NSLog(@"====key:%@",obj);
+//                        UploadingModel *modelALL = [tmpDic objectForKey:obj];
+//
+//                        NSLog(@"====Degree:%@===State:%@===Eqname:%@",modelALL.Degree,modelALL.State,modelALL.Eqname);
+//
+//
+//                    }];
+                    
+                    if (isSave) {
+                        [CMUtility showTips:@"确认巡检成功"];
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                    }else
+                    {
+                        [CMUtility showTips:@"确认巡检失败"];
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                    }
+                    
+
+                    
+                }
               
             } else if (buttonIndex == 1)
             {
-                if (self.nfcDetectionStatus == NFC_DETECTION_Normal)
+                if (self.nfcDetectionStatus == NFC_DETECTION_AFFIRNM)
                 {
                     ApplicationForInspectionViewController *avc = [[ApplicationForInspectionViewController alloc]init];
-                    avc.nfcDetectionStatus = self.nfcDetectionStatus;
+                    avc.nfcDetectionStatus = NFC_DETECTION_JIANXIU;
+                    avc.detectionModel = model;
+                    avc.degreeStr = degreeStr1;
                     [self.navigationController pushViewController:avc animated:YES];
                 }else if (self.nfcDetectionStatus == NFC_DETECTION_JIANXIU)
                 {
                     NSLog(@"点击取消");
+                    [self.navigationController popViewControllerAnimated:YES];
+
                 }
                
             }else if (buttonIndex == 2)
             {
                 NSLog(@"点击取消");
+                [self.navigationController popViewControllerAnimated:YES];
             }
             // 关闭
             [alertView dismiss]; };
@@ -216,7 +277,7 @@
         tmpStrLen = tmpStr.length > tmpStrLen?tmpStr.length:tmpStrLen;
     }];
     
-     CGSize contentSize = [CMUtility boundingRectWithSize:CGSizeMake(MAXFLOAT, DEF_DEVICE_SCLE_WIDTH(190)) font:DEF_MyFont(16) string:tmpStr withSpacing:0];
+     CGSize contentSize = [CMUtility boundingRectWithSize:CGSizeMake(DEF_DEVICE_SCLE_WIDTH(190), MAXFLOAT) font:DEF_MyFont(16) string:tmpStr withSpacing:5];
     
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEF_DEVICE_WIDTH - DEF_DEVICE_SCLE_WIDTH(190), contentSize.height + DEF_DEVICE_SCLE_HEIGHT(70) + DEF_DEVICE_SCLE_HEIGHT(50))];
     
@@ -225,18 +286,18 @@
     titleLab.textAlignment = NSTextAlignmentCenter;
     titleLab.font =DEF_MyFont(20);
     titleLab.textColor = DEF_COLOR_RGB(132,132,132);
-    titleLab.backgroundColor = [UIColor yellowColor];
+//    titleLab.backgroundColor = [UIColor yellowColor];
     [view addSubview:titleLab];
     
     
     UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake((view.width - contentSize.width)/2, DEF_DEVICE_SCLE_HEIGHT(70) + DEF_DEVICE_SCLE_HEIGHT(25), contentSize.width, contentSize.height)];
-    lab.text = tmpStr;
+    lab.attributedText = [CMUtility setLineSpacingWithString:tmpStr withFont:16 spacing:5];
     lab.textAlignment = NSTextAlignmentLeft;
     lab.lineBreakMode = UILineBreakModeWordWrap;
     lab.numberOfLines = 0;
     lab.font =DEF_MyFont(16);
     lab.textColor = DEF_COLOR_RGB(27,27,27);
-    lab.backgroundColor = [UIColor yellowColor];
+//    lab.backgroundColor = [UIColor yellowColor];
     [view addSubview:lab];
     
     return view;
