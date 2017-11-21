@@ -382,4 +382,9 @@ typedef void (^FailViewBtnClickBlock) (void);
                                     unitColor:(UIColor *) unColor;
 
 
+//其中将十六进制字符串转换成NSData的代码如下:
++ (NSData *)convertHexStrToData:(NSString *)str;
+//将NSData转换成十六进制的字符串则可使用如下方式:
++ (NSString *)convertDataToHexStr:(NSData *)data;
+
 @end

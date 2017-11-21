@@ -213,9 +213,9 @@
                     [self cellClickIndexPath:indexPath];
                 }else if ([model.involutionOrRecondition isEqualToString:JIANXIU])
                 {
-                    DetectionViewController *controller = [[DetectionViewController alloc]init];
-                    controller.nfcDetectionStatus = NFC_DETECTION_JIANXIU;
-                    [self.navigationController pushViewController:controller animated:YES];
+//                    DetectionViewController *controller = [[DetectionViewController alloc]init];
+//                    controller.nfcDetectionStatus = NFC_DETECTION_JIANXIU;
+//                    [self.navigationController pushViewController:controller animated:YES];
                 }else
                 {
                     
@@ -238,19 +238,19 @@
 {
     @weakify(self);
     EquipmentWarningModel *model  = self.viewModel.equipmentList[indexPath.row];
-    model.AFmaintenance =@"2";
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//    model.AFmaintenance =@"2";
+//    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     
     [[self.viewModel alarmEquipmentMaintenanceWithDegree:model.Degree] subscribeNext:^(NSString *str) {
         
             @strongify(self);
         if ([str isEqualToString:SUCCESS_MSG]) {
-            
-            if ([self.viewModel.equipmentList containsObject:model])
-            {
-                [self.viewModel.equipmentList removeObject:model];
-            }
-            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationLeft];
+            [self headerWithRefreshing];
+//            if ([self.viewModel.equipmentList containsObject:model])
+//            {
+//                [self.viewModel.equipmentList removeObject:model];
+//            }
+//            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationLeft];
             [CMUtility showTips:@"复归成功"];
         }else
         {

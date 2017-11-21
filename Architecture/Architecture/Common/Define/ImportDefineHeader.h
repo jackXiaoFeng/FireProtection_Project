@@ -25,6 +25,8 @@
 // 引入JPush功能所需头文件
 #import "JPUSHService.h"
 
+//蓝牙nfc http://pan.baidu.com/s/1nvFQN6D
+#import "DKBleNfc.h"
 
 //#import "JPUSHService.h"
 //#import "WXApi.h"

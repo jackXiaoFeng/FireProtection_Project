@@ -36,7 +36,17 @@
 @end
 
 @implementation AccountViewController
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    
+    if (SocketIO_Singleton.isConnectSuccess == YES)
+    {
+        //获取当前巡检度
+        [self requestNowpolling];
+    }
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.titleLb.text = @"巡检";
@@ -238,7 +248,7 @@
 
 
     
-    [self requestNowpolling];
+    //[self requestNowpolling];
 //    SocketIO_Singleton.connectSuccess = ^{
 //        @strongify(self)
 //        //获取当前巡检度
@@ -261,8 +271,9 @@
              }
              PollingCompleteModel*model = (PollingCompleteModel *)self.viewModel.pollingCompleteList[idx];
 
-             NSInteger progressSections = [model.Complete intValue] + 20*(4 - idx);
-             
+             NSInteger progressSections = [model.Complete intValue];
+             NSInteger Unfinishe = [model.Unfinishe intValue];
+
              RoundnessProgressView *rpView = [self.pressView viewWithTag:RoundViewTAG +idx];
              [rpView removeFromSuperview];
              
@@ -281,12 +292,15 @@
             
             [self.pressView addSubview:roundnessProgressView];
             
-            roundnessProgressView.progressTotal = 100;
+            roundnessProgressView.progressTotal = Unfinishe + progressSections;
             roundnessProgressView.progressSections =progressSections;
             roundnessProgressView.tag =  RoundViewTAG +idx;
             
-             
-             NSString *str = [NSString stringWithFormat:@"%@%ld%%",self.strArray[idx],progressSections];
+             CGFloat d = Unfinishe;
+             CGFloat c = progressSections;
+             CGFloat b= c/(d  + c);
+             NSInteger a = b*100;
+             NSString *str = [NSString stringWithFormat:@"%@%ld%%",self.strArray[idx],a];
              UILabel *yuandianlab = [self.pressView viewWithTag:RoundLabTAG +idx];
              yuandianlab.text = str;
         }];
@@ -306,7 +320,7 @@
 {
     NSLog(@"二维码btn点击");
     DetectionViewController *controller = [[DetectionViewController alloc]init];
-    controller.nfcDetectionStatus = NFC_DETECTION_AFFIRNM;
+    controller.nfcDetectionStatus = NFC_DETECTION_POLLING;
     [self.navigationController pushViewController:controller animated:YES];
     
 }

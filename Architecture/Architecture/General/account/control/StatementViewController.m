@@ -172,8 +172,9 @@
              tmpIdx = tmpIdx < 0?0:tmpIdx;
              PollingCompleteModel*model = (PollingCompleteModel *)self.viewModel.pollingCompleteList[tmpIdx];
              
-             NSInteger progressSections = [model.Complete intValue] + 20*(4 - idx);
-             
+             NSInteger progressSections = [model.Complete intValue];
+             NSInteger progressTotal = [model.Complete intValue]+[model.Unfinishe intValue];
+
              
              UIView *bgView = [self.view viewWithTag:BGVIEW_TAG + idx];
              
@@ -191,7 +192,7 @@
                  _roundnessProgressView.backgroundColor = [UIColor clearColor];
                  [bgView addSubview:_roundnessProgressView];
                  
-                 _roundnessProgressView.progressTotal = 100;
+                 _roundnessProgressView.progressTotal = progressTotal;
                  _roundnessProgressView.progressSections =progressSections;
                  _roundnessProgressView.tag =  ROUNDVIEW_TAG +idx;
              

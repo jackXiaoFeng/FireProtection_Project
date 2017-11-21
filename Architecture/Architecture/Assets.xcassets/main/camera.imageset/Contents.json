@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "申请检修页面_MarkMan_03-2.png",
+      "filename" : "相机@1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "申请检修页面_MarkMan_03.png",
+      "filename" : "相机@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "申请检修页面_MarkMan_03-1.png",
+      "filename" : "相机@3x.png",
       "scale" : "3x"
     }
   ],

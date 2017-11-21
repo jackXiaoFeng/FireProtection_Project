@@ -25,8 +25,8 @@
 
 @property (assign, nonatomic)int controlHeight;
 
-@property (assign, nonatomic) NSInteger progressSections;
-
+@property (assign, nonatomic) NSInteger Complete;
+@property (assign, nonatomic) NSInteger Unfinishe;
 @property (nonatomic, strong)PollingCompleteViewModel *viewModel;
 @end
 
@@ -34,16 +34,30 @@
 {
     NSArray *_imagesURLStrings;
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    
+    if (SocketIO_Singleton.isConnectSuccess == YES)
+    {
+        //获取当前巡检度
+        [self requestNowpolling];
+    }
+    
+    // 如果你发现你的CycleScrollview会在viewWillAppear时图片卡在中间位置，你可以调用此方法调整图片位置
+    //    [你的CycleScrollview adjustWhenControllerViewWillAppera];
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.rightBtn setImage:DEF_IMAGENAME(@"scan") forState:UIControlStateNormal];
-    self.rightBtn.hidden = NO;
-    
-    
+//    [self.rightBtn setImage:DEF_IMAGENAME(@"scan") forState:UIControlStateNormal];
+//    self.rightBtn.hidden = NO;
     
         
-    self.progressSections = 0;
+    self.Complete = 0;
+    self.Unfinishe = 0;
     
     self.titleLb.text = @"巡检操作";
     
@@ -164,13 +178,7 @@
     
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    // 如果你发现你的CycleScrollview会在viewWillAppear时图片卡在中间位置，你可以调用此方法调整图片位置
-    //    [你的CycleScrollview adjustWhenControllerViewWillAppera];
-}
+
 
 
 #pragma mark - delegate  dataSource -
@@ -194,7 +202,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     MainModel *model = [[MainModel alloc]init];
-    model.progressSections = self.progressSections;
+    model.Complete = self.Complete;
+    model.Unfinishe = self.Unfinishe;
     model.row = indexPath.row;
     cell.mainModel = model;
     
@@ -293,7 +302,8 @@
         PollingCompleteModel*model = (PollingCompleteModel *)self.viewModel.pollingCompleteList[0];
         if ([model.Type isEqualToString:@"1"])//代表当前时间完成度
         {
-            self.progressSections = [model.Complete integerValue];
+            self.Complete = [model.Complete integerValue];
+            self.Unfinishe = [model.Unfinishe integerValue];
             [self.tableView reloadData];
         }
     }error:^(NSError *error) {

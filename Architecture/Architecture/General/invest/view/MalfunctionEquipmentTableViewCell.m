@@ -49,7 +49,7 @@
         
         UILabel *deviceLab = [[UILabel alloc] initWithFrame:CGRectMake(timeLab.x+timeLab.width, 0, DEF_DEVICE_SCLE_WIDTH(258), CellHeight)];
         deviceLab.font = DEF_MyFont(14.0f);
-        deviceLab.text = @"设备＋地点";
+        deviceLab.text = @"----";
         deviceLab.userInteractionEnabled = YES;
         deviceLab.backgroundColor = [UIColor clearColor];
         deviceLab.textAlignment = NSTextAlignmentCenter;

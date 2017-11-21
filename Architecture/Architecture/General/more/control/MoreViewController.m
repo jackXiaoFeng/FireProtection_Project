@@ -11,12 +11,15 @@
 #import "EquipmentTableViewCell.h"
 #import "EquipmentViewModel.h"
 #import "DetectionViewController.h"
-
+#import "EquipmentWarningViewModel.h"
 @interface MoreViewController ()
 <UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong) EquipmentModel *model;
 @property (nonatomic, strong) EquipmentViewModel *viewModel;
+
+@property (nonatomic, strong) EquipmentWarningViewModel *warningViewModel;
+
 @end
 
 @implementation MoreViewController
@@ -32,6 +35,8 @@
     
     //添加刷新
     self.viewModel  = [[EquipmentViewModel alloc]init];
+    self.warningViewModel  = [[EquipmentWarningViewModel alloc]init];
+
     //首次刷新数据
     [self headerWithRefreshing];
     //mj刷新
@@ -49,7 +54,7 @@
 {
     NSLog(@"二维码btn点击");
     DetectionViewController *controller = [[DetectionViewController alloc]init];
-    controller.nfcDetectionStatus = NFC_DETECTION_AFFIRNM;
+    controller.nfcDetectionStatus = NFC_DETECTION_DEVICE;
     [self.navigationController pushViewController:controller animated:YES];
     
 }
@@ -202,9 +207,53 @@
     
     if (self.viewModel.equipmentList.count > 0) {
         cell.equipmentModel  = self.viewModel.equipmentList[indexPath.row];
+        
+        EquipmentModel *model  = self.viewModel.equipmentList[indexPath.row];
+        if (indexPath.row == 0) {
+            model.AFmaintenance = @"4";
+        }
+        [cell setEquipmentModel:model indexPath:indexPath];
+        
         cell.hidenLine= (indexPath.row== self.viewModel.equipmentList.count-1); //通过组模型数组来拿到每组最后一行
+        
+        @weakify(self);
+        cell.fixBtnClickBlock = ^(NSIndexPath *indexPath){
+            @strongify(self);
+            //EquipmentModel *model = self.viewModel.equipmentList[indexPath.row];
+            [self cellClickIndexPath:indexPath];
+        };
     }
     return cell;
+}
+
+- (void)cellClickIndexPath:(NSIndexPath *)indexPath
+{
+    @weakify(self);
+    EquipmentModel *model  = self.viewModel.equipmentList[indexPath.row];
+    
+//    model.AFmaintenance =@"2";
+//    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    
+    [[self.warningViewModel alarmEquipmentMaintenanceWithDegree:model.Degree] subscribeNext:^(NSString *str) {
+        
+        @strongify(self);
+        if ([str isEqualToString:SUCCESS_MSG]) {
+            [self headerWithRefreshing];
+//            if ([self.viewModel.equipmentList containsObject:model])
+//            {
+//                [self.viewModel.equipmentList removeObject:model];
+//            }
+//            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationLeft];
+            [CMUtility showTips:@"复归成功"];
+        }else
+        {
+            [CMUtility showTips:@"复归失败"];
+        }
+        
+    } error:^(NSError *error) {
+        
+    }];
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

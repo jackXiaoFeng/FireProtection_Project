@@ -38,7 +38,9 @@
         int nowInt = [[CMUtility currentTimestampSecond] intValue];
         int Zero = nowInt - (nowInt + 28800)%86400;
         
+        NSString *utf8Str = [NSString utf8ToUnicode:CMMemberEntity.userInfo.unitsn];
         NSDictionary *datDic = @{
+                                 @"Unitsn":utf8Str,
                                  @"Stime":[NSString stringWithFormat:@"%d",Zero],
                                  @"Otime":[NSString stringWithFormat:@"%d",nowInt],
                                  };

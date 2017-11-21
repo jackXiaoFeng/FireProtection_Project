@@ -150,6 +150,7 @@
      *   3.15	[xs015]告警设备复归或维修
      *   3.16	[xs016]数据图
      *   3.20   [xs020]nfc扫描设备返回信息
+     *   3.27   [xs027]nfc 告警，设备模块专用 扫描设备返回信息
      *   3.32   [xs032]上传巡检记录表
      *   3.33   [xs033]未巡检通知表
      */
@@ -340,7 +341,7 @@
         }
     }];
     
-    //    *   3.20    [xs020]nfc扫描设备返回信息
+    //    *   3.20    [xs020]nfc 巡检模块专用 扫描设备返回信息
     [self.client on:XR020 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
         @strongify(self)
         if (event[0]) {
@@ -349,6 +350,18 @@
         }else
         {
             self.xr020CallBackResult(@{@"errormsg":@"获取设备信息失败"});
+        }
+    }];
+    
+    //    *   3.27    [xs027]nfc 告警 设备专用扫描设备返回信息
+    [self.client on:XR027 callback:^(NSArray * _Nonnull event, SocketAckEmitter * _Nonnull ack) {
+        @strongify(self)
+        if (event[0]) {
+            NSDictionary *dic = event[0];
+            self.xr027CallBackResult(dic);
+        }else
+        {
+            self.xr027CallBackResult(@{@"errormsg":@"获取设备信息失败"});
         }
     }];
     

@@ -123,6 +123,24 @@
 		3AE319C61FBBDBC700199CFB /* RequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE319C51FBBDBC700199CFB /* RequestOperationManager.m */; };
 		3AE319C91FBC26BF00199CFB /* PollingCompleteViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE319C81FBC26BF00199CFB /* PollingCompleteViewModel.m */; };
 		3AE319CC1FBC26D000199CFB /* PollingCompleteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE319CB1FBC26D000199CFB /* PollingCompleteModel.m */; };
+		3AF629E41FC2AC10004BF686 /* DKBleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629BC1FC2AC10004BF686 /* DKBleManager.m */; };
+		3AF629E61FC2AC10004BF686 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629C11FC2AC10004BF686 /* Card.m */; };
+		3AF629E71FC2AC10004BF686 /* CpuCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629C31FC2AC10004BF686 /* CpuCard.m */; };
+		3AF629E81FC2AC10004BF686 /* DESFire.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629C51FC2AC10004BF686 /* DESFire.m */; };
+		3AF629E91FC2AC10004BF686 /* FeliCa.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629C71FC2AC10004BF686 /* FeliCa.m */; };
+		3AF629EA1FC2AC10004BF686 /* Iso14443bCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629C91FC2AC10004BF686 /* Iso14443bCard.m */; };
+		3AF629EB1FC2AC10004BF686 /* Iso15693Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629CB1FC2AC10004BF686 /* Iso15693Card.m */; };
+		3AF629EC1FC2AC10004BF686 /* Mifare.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629CD1FC2AC10004BF686 /* Mifare.m */; };
+		3AF629ED1FC2AC10004BF686 /* Ntag21x.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629CF1FC2AC10004BF686 /* Ntag21x.m */; };
+		3AF629EE1FC2AC10004BF686 /* Ultralight.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629D11FC2AC10004BF686 /* Ultralight.m */; };
+		3AF629EF1FC2AC10004BF686 /* DKBleDevInitInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629D41FC2AC10004BF686 /* DKBleDevInitInfo.m */; };
+		3AF629F01FC2AC10004BF686 /* DKComByteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629D61FC2AC10004BF686 /* DKComByteManager.m */; };
+		3AF629F11FC2AC10004BF686 /* DKDeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629D81FC2AC10004BF686 /* DKDeviceManager.m */; };
+		3AF629F21FC2AC10004BF686 /* DKBleNfcDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629DB1FC2AC10004BF686 /* DKBleNfcDevice.m */; };
+		3AF629F31FC2AC10004BF686 /* DKCardNoResponseException.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629DE1FC2AC10004BF686 /* DKCardNoResponseException.m */; };
+		3AF629F41FC2AC10004BF686 /* DKDeviceNoResponseException.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629E01FC2AC10004BF686 /* DKDeviceNoResponseException.m */; };
+		3AF629F51FC2AC10004BF686 /* NSData+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629E31FC2AC10004BF686 /* NSData+Hex.m */; };
+		3AF629F81FC2B2F9004BF686 /* SZTCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF629F71FC2B2F9004BF686 /* SZTCard.m */; };
 		3AFBC9B21F53EECC00DAD7EA /* DrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBC9B11F53EECC00DAD7EA /* DrawView.m */; };
 /* End PBXBuildFile section */
 
@@ -393,6 +411,43 @@
 		3AE319C81FBC26BF00199CFB /* PollingCompleteViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PollingCompleteViewModel.m; sourceTree = "<group>"; };
 		3AE319CA1FBC26D000199CFB /* PollingCompleteModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PollingCompleteModel.h; sourceTree = "<group>"; };
 		3AE319CB1FBC26D000199CFB /* PollingCompleteModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PollingCompleteModel.m; sourceTree = "<group>"; };
+		3AF629BB1FC2AC10004BF686 /* DKBleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKBleManager.h; sourceTree = "<group>"; };
+		3AF629BC1FC2AC10004BF686 /* DKBleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKBleManager.m; sourceTree = "<group>"; };
+		3AF629C01FC2AC10004BF686 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		3AF629C11FC2AC10004BF686 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		3AF629C21FC2AC10004BF686 /* CpuCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpuCard.h; sourceTree = "<group>"; };
+		3AF629C31FC2AC10004BF686 /* CpuCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpuCard.m; sourceTree = "<group>"; };
+		3AF629C41FC2AC10004BF686 /* DESFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESFire.h; sourceTree = "<group>"; };
+		3AF629C51FC2AC10004BF686 /* DESFire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESFire.m; sourceTree = "<group>"; };
+		3AF629C61FC2AC10004BF686 /* FeliCa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeliCa.h; sourceTree = "<group>"; };
+		3AF629C71FC2AC10004BF686 /* FeliCa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeliCa.m; sourceTree = "<group>"; };
+		3AF629C81FC2AC10004BF686 /* Iso14443bCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Iso14443bCard.h; sourceTree = "<group>"; };
+		3AF629C91FC2AC10004BF686 /* Iso14443bCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Iso14443bCard.m; sourceTree = "<group>"; };
+		3AF629CA1FC2AC10004BF686 /* Iso15693Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Iso15693Card.h; sourceTree = "<group>"; };
+		3AF629CB1FC2AC10004BF686 /* Iso15693Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Iso15693Card.m; sourceTree = "<group>"; };
+		3AF629CC1FC2AC10004BF686 /* Mifare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mifare.h; sourceTree = "<group>"; };
+		3AF629CD1FC2AC10004BF686 /* Mifare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mifare.m; sourceTree = "<group>"; };
+		3AF629CE1FC2AC10004BF686 /* Ntag21x.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ntag21x.h; sourceTree = "<group>"; };
+		3AF629CF1FC2AC10004BF686 /* Ntag21x.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ntag21x.m; sourceTree = "<group>"; };
+		3AF629D01FC2AC10004BF686 /* Ultralight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ultralight.h; sourceTree = "<group>"; };
+		3AF629D11FC2AC10004BF686 /* Ultralight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ultralight.m; sourceTree = "<group>"; };
+		3AF629D31FC2AC10004BF686 /* DKBleDevInitInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKBleDevInitInfo.h; sourceTree = "<group>"; };
+		3AF629D41FC2AC10004BF686 /* DKBleDevInitInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKBleDevInitInfo.m; sourceTree = "<group>"; };
+		3AF629D51FC2AC10004BF686 /* DKComByteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKComByteManager.h; sourceTree = "<group>"; };
+		3AF629D61FC2AC10004BF686 /* DKComByteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKComByteManager.m; sourceTree = "<group>"; };
+		3AF629D71FC2AC10004BF686 /* DKDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKDeviceManager.h; sourceTree = "<group>"; };
+		3AF629D81FC2AC10004BF686 /* DKDeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKDeviceManager.m; sourceTree = "<group>"; };
+		3AF629D91FC2AC10004BF686 /* DKBleNfc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKBleNfc.h; sourceTree = "<group>"; };
+		3AF629DA1FC2AC10004BF686 /* DKBleNfcDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKBleNfcDevice.h; sourceTree = "<group>"; };
+		3AF629DB1FC2AC10004BF686 /* DKBleNfcDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKBleNfcDevice.m; sourceTree = "<group>"; };
+		3AF629DD1FC2AC10004BF686 /* DKCardNoResponseException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKCardNoResponseException.h; sourceTree = "<group>"; };
+		3AF629DE1FC2AC10004BF686 /* DKCardNoResponseException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKCardNoResponseException.m; sourceTree = "<group>"; };
+		3AF629DF1FC2AC10004BF686 /* DKDeviceNoResponseException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKDeviceNoResponseException.h; sourceTree = "<group>"; };
+		3AF629E01FC2AC10004BF686 /* DKDeviceNoResponseException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKDeviceNoResponseException.m; sourceTree = "<group>"; };
+		3AF629E21FC2AC10004BF686 /* NSData+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Hex.h"; sourceTree = "<group>"; };
+		3AF629E31FC2AC10004BF686 /* NSData+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Hex.m"; sourceTree = "<group>"; };
+		3AF629F61FC2B2F9004BF686 /* SZTCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTCard.h; sourceTree = "<group>"; };
+		3AF629F71FC2B2F9004BF686 /* SZTCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTCard.m; sourceTree = "<group>"; };
 		3AFBC9B01F53EECC00DAD7EA /* DrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawView.h; sourceTree = "<group>"; };
 		3AFBC9B11F53EECC00DAD7EA /* DrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawView.m; sourceTree = "<group>"; };
 		5EAB6D6BB45AD284BBE10F27 /* Pods_Architecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Architecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -696,6 +751,7 @@
 		3A95AD201D17E0340026EAFE /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				3AF629B91FC2AC10004BF686 /* bleNfc */,
 				3A26E9F31F5A4FE50086C553 /* SocketRocket */,
 			);
 			path = ThirdParty;
@@ -983,6 +1039,8 @@
 				3AC1A4091FA8524300BE4035 /* DetectionViewController.m */,
 				3AE319BD1FBA9F8700199CFB /* ApplicationForInspectionViewController.h */,
 				3AE319BE1FBA9F8700199CFB /* ApplicationForInspectionViewController.m */,
+				3AF629F61FC2B2F9004BF686 /* SZTCard.h */,
+				3AF629F71FC2B2F9004BF686 /* SZTCard.m */,
 			);
 			path = control;
 			sourceTree = "<group>";
@@ -1166,6 +1224,88 @@
 				3AE319C21FBADBF300199CFB /* CMTakePhoto.m */,
 			);
 			path = TakePhoto;
+			sourceTree = "<group>";
+		};
+		3AF629B91FC2AC10004BF686 /* bleNfc */ = {
+			isa = PBXGroup;
+			children = (
+				3AF629BA1FC2AC10004BF686 /* BleManager */,
+				3AF629BF1FC2AC10004BF686 /* card */,
+				3AF629D21FC2AC10004BF686 /* DeviceManager */,
+				3AF629D91FC2AC10004BF686 /* DKBleNfc.h */,
+				3AF629DA1FC2AC10004BF686 /* DKBleNfcDevice.h */,
+				3AF629DB1FC2AC10004BF686 /* DKBleNfcDevice.m */,
+				3AF629DC1FC2AC10004BF686 /* Exception */,
+				3AF629E11FC2AC10004BF686 /* Tool */,
+			);
+			path = bleNfc;
+			sourceTree = "<group>";
+		};
+		3AF629BA1FC2AC10004BF686 /* BleManager */ = {
+			isa = PBXGroup;
+			children = (
+				3AF629BB1FC2AC10004BF686 /* DKBleManager.h */,
+				3AF629BC1FC2AC10004BF686 /* DKBleManager.m */,
+			);
+			path = BleManager;
+			sourceTree = "<group>";
+		};
+		3AF629BF1FC2AC10004BF686 /* card */ = {
+			isa = PBXGroup;
+			children = (
+				3AF629C01FC2AC10004BF686 /* Card.h */,
+				3AF629C11FC2AC10004BF686 /* Card.m */,
+				3AF629C21FC2AC10004BF686 /* CpuCard.h */,
+				3AF629C31FC2AC10004BF686 /* CpuCard.m */,
+				3AF629C41FC2AC10004BF686 /* DESFire.h */,
+				3AF629C51FC2AC10004BF686 /* DESFire.m */,
+				3AF629C61FC2AC10004BF686 /* FeliCa.h */,
+				3AF629C71FC2AC10004BF686 /* FeliCa.m */,
+				3AF629C81FC2AC10004BF686 /* Iso14443bCard.h */,
+				3AF629C91FC2AC10004BF686 /* Iso14443bCard.m */,
+				3AF629CA1FC2AC10004BF686 /* Iso15693Card.h */,
+				3AF629CB1FC2AC10004BF686 /* Iso15693Card.m */,
+				3AF629CC1FC2AC10004BF686 /* Mifare.h */,
+				3AF629CD1FC2AC10004BF686 /* Mifare.m */,
+				3AF629CE1FC2AC10004BF686 /* Ntag21x.h */,
+				3AF629CF1FC2AC10004BF686 /* Ntag21x.m */,
+				3AF629D01FC2AC10004BF686 /* Ultralight.h */,
+				3AF629D11FC2AC10004BF686 /* Ultralight.m */,
+			);
+			path = card;
+			sourceTree = "<group>";
+		};
+		3AF629D21FC2AC10004BF686 /* DeviceManager */ = {
+			isa = PBXGroup;
+			children = (
+				3AF629D31FC2AC10004BF686 /* DKBleDevInitInfo.h */,
+				3AF629D41FC2AC10004BF686 /* DKBleDevInitInfo.m */,
+				3AF629D51FC2AC10004BF686 /* DKComByteManager.h */,
+				3AF629D61FC2AC10004BF686 /* DKComByteManager.m */,
+				3AF629D71FC2AC10004BF686 /* DKDeviceManager.h */,
+				3AF629D81FC2AC10004BF686 /* DKDeviceManager.m */,
+			);
+			path = DeviceManager;
+			sourceTree = "<group>";
+		};
+		3AF629DC1FC2AC10004BF686 /* Exception */ = {
+			isa = PBXGroup;
+			children = (
+				3AF629DD1FC2AC10004BF686 /* DKCardNoResponseException.h */,
+				3AF629DE1FC2AC10004BF686 /* DKCardNoResponseException.m */,
+				3AF629DF1FC2AC10004BF686 /* DKDeviceNoResponseException.h */,
+				3AF629E01FC2AC10004BF686 /* DKDeviceNoResponseException.m */,
+			);
+			path = Exception;
+			sourceTree = "<group>";
+		};
+		3AF629E11FC2AC10004BF686 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				3AF629E21FC2AC10004BF686 /* NSData+Hex.h */,
+				3AF629E31FC2AC10004BF686 /* NSData+Hex.m */,
+			);
+			path = Tool;
 			sourceTree = "<group>";
 		};
 		3AFBC9AF1F53EEB900DAD7EA /* DrawView */ = {
@@ -1390,20 +1530,28 @@
 				3A40D5C11F5E87C700D7E8DF /* GJCFStringUitil.m in Sources */,
 				3A9681C41FA1CC9F00A6F7A3 /* PlanTableViewCell.m in Sources */,
 				3A40D5BF1F5E87C700D7E8DF /* GJCFQuickCacheUitil.m in Sources */,
+				3AF629EE1FC2AC10004BF686 /* Ultralight.m in Sources */,
 				3A9681DB1FA1CC9F00A6F7A3 /* MainModel.m in Sources */,
 				3A26EA201F5A4FE50086C553 /* SRIOConsumerPool.m in Sources */,
 				3A26EA291F5A4FE50086C553 /* SRRandom.m in Sources */,
 				3AA1C8AB1F4ACE7A004A52EF /* UIButton+LXMImagePosition.m in Sources */,
+				3AF629E91FC2AC10004BF686 /* FeliCa.m in Sources */,
+				3AF629EF1FC2AC10004BF686 /* DKBleDevInitInfo.m in Sources */,
 				3A2AAA7D1FBD5B0C008E7E46 /* UploadingViewModel.m in Sources */,
+				3AF629EC1FC2AC10004BF686 /* Mifare.m in Sources */,
 				3A26EA2B1F5A4FE50086C553 /* NSRunLoop+SRWebSocket.m in Sources */,
 				3AA1C8561F4A6F44004A52EF /* TAAbstractDotView.m in Sources */,
+				3AF629F11FC2AC10004BF686 /* DKDeviceManager.m in Sources */,
 				3A9681D11FA1CC9F00A6F7A3 /* EquipmentWarningTableViewCell.m in Sources */,
 				3A26E9F21F5A4E170086C553 /* SocketIO.m in Sources */,
 				3A2AAA8C1FBED0FF008E7E46 /* NoneRecordTableViewCell.m in Sources */,
 				3A40D5C31F5E87C700D7E8DF /* Tools.m in Sources */,
+				3AF629EA1FC2AC10004BF686 /* Iso14443bCard.m in Sources */,
 				3A26EA211F5A4FE50086C553 /* SRProxyConnect.m in Sources */,
 				3A9681D31FA1CC9F00A6F7A3 /* MalfunctionEquipmentTableViewCell.m in Sources */,
+				3AF629F51FC2AC10004BF686 /* NSData+Hex.m in Sources */,
 				3AD29EF01F46D586005B600D /* UIColor+RGBColor.m in Sources */,
+				3AF629F31FC2AC10004BF686 /* DKCardNoResponseException.m in Sources */,
 				3AE319BC1FBA776200199CFB /* IAlertView.m in Sources */,
 				3AE319C61FBBDBC700199CFB /* RequestOperationManager.m in Sources */,
 				3A9681E01FA1CC9F00A6F7A3 /* LoginViewController.m in Sources */,
@@ -1411,6 +1559,7 @@
 				3A40D5BD1F5E87C700D7E8DF /* GJCFDateUitil.m in Sources */,
 				3A9681DE1FA1CC9F00A6F7A3 /* FixRecordViewModel.m in Sources */,
 				3A9681C91FA1CC9F00A6F7A3 /* EquipmentWarningViewController.m in Sources */,
+				3AF629E41FC2AC10004BF686 /* DKBleManager.m in Sources */,
 				3A9681E11FA1CC9F00A6F7A3 /* MoreViewController.m in Sources */,
 				3AA1C8631F4A6FD3004A52EF /* SDCycleScrollView.m in Sources */,
 				3A9681E51FA1CC9F00A6F7A3 /* LoginModel.m in Sources */,
@@ -1421,9 +1570,11 @@
 				3AFBC9B21F53EECC00DAD7EA /* DrawView.m in Sources */,
 				3A2AAA891FBED0EB008E7E46 /* NoneRecordModel.m in Sources */,
 				3A26EA221F5A4FE50086C553 /* SRRunLoopThread.m in Sources */,
+				3AF629F21FC2AC10004BF686 /* DKBleNfcDevice.m in Sources */,
 				3A9681DD1FA1CC9F00A6F7A3 /* MainTableViewCell.m in Sources */,
 				3A9681D71FA1CC9F00A6F7A3 /* WarningHistoryViewModel.m in Sources */,
 				3A9681C71FA1CC9F00A6F7A3 /* PlanViewModel.m in Sources */,
+				3AF629F01FC2AC10004BF686 /* DKComByteManager.m in Sources */,
 				3A95AD2B1D17E3E70026EAFE /* BaseNavigationController.m in Sources */,
 				3A9681BC1FA1CC9F00A6F7A3 /* InfoViewController.m in Sources */,
 				3A26EA271F5A4FE50086C553 /* SRLog.m in Sources */,
@@ -1433,9 +1584,11 @@
 				3A9681E61FA1CC9F00A6F7A3 /* EquipmentTableViewCell.m in Sources */,
 				3AD29F021F46D69F005B600D /* PageImageScrollView.m in Sources */,
 				3A9681BF1FA1CC9F00A6F7A3 /* StatementViewController.m in Sources */,
+				3AF629E81FC2AC10004BF686 /* DESFire.m in Sources */,
 				3AD29EFE1F46D69F005B600D /* DDPageControl.m in Sources */,
 				3A9681C51FA1CC9F00A6F7A3 /* RecordTableViewCell.m in Sources */,
 				3A40D5BC1F5E87C700D7E8DF /* CMMember.m in Sources */,
+				3AF629ED1FC2AC10004BF686 /* Ntag21x.m in Sources */,
 				3A40D5CA1F5FEBBA00D7E8DF /* BaseViewModel.m in Sources */,
 				3A9681DA1FA1CC9F00A6F7A3 /* FixRecordModel.m in Sources */,
 				3AE319CC1FBC26D000199CFB /* PollingCompleteModel.m in Sources */,
@@ -1446,7 +1599,9 @@
 				3AD29EEF1F46D586005B600D /* NSString+Utils.m in Sources */,
 				3A9681C61FA1CC9F00A6F7A3 /* UploadingTableViewCell.m in Sources */,
 				3AE319BF1FBA9F8700199CFB /* ApplicationForInspectionViewController.m in Sources */,
+				3AF629F41FC2AC10004BF686 /* DKDeviceNoResponseException.m in Sources */,
 				3A9681CD1FA1CC9F00A6F7A3 /* EquipmentWarningModel.m in Sources */,
+				3AF629EB1FC2AC10004BF686 /* Iso15693Card.m in Sources */,
 				3A9681D51FA1CC9F00A6F7A3 /* EquipmentWarningViewModel.m in Sources */,
 				3AE319C31FBADBF300199CFB /* CMTakePhoto.m in Sources */,
 				3A40D5C21F5E87C700D7E8DF /* GJCFSystemUitil.m in Sources */,
@@ -1454,6 +1609,7 @@
 				3A9681CF1FA1CC9F00A6F7A3 /* MalfunctionEquipmentModel.m in Sources */,
 				3A40D5C01F5E87C700D7E8DF /* GJCFQuickUIUitil.m in Sources */,
 				3A26EA281F5A4FE50086C553 /* SRMutex.m in Sources */,
+				3AF629E61FC2AC10004BF686 /* Card.m in Sources */,
 				3AE319C91FBC26BF00199CFB /* PollingCompleteViewModel.m in Sources */,
 				3AA1C8591F4A6F44004A52EF /* TAPageControl.m in Sources */,
 				3AA1C8621F4A6FD3004A52EF /* SDCollectionViewCell.m in Sources */,
@@ -1469,6 +1625,7 @@
 				3A26EA251F5A4FE50086C553 /* SRHash.m in Sources */,
 				3A9681BD1FA1CC9F00A6F7A3 /* PlanViewController.m in Sources */,
 				3A26EA2A1F5A4FE50086C553 /* SRURLUtilities.m in Sources */,
+				3AF629F81FC2B2F9004BF686 /* SZTCard.m in Sources */,
 				3A9681E21FA1CC9F00A6F7A3 /* UserProtocolViewController.m in Sources */,
 				3A26EA1E1F5A4FE50086C553 /* SRDelegateController.m in Sources */,
 				3A9681E41FA1CC9F00A6F7A3 /* EquipmentModel.m in Sources */,
@@ -1484,6 +1641,7 @@
 				3A9681CE1FA1CC9F00A6F7A3 /* InvestModel.m in Sources */,
 				3A9681DC1FA1CC9F00A6F7A3 /* FixRecordTableViewCell.m in Sources */,
 				3AA1C8641F4A6FD3004A52EF /* UIView+SDExtension.m in Sources */,
+				3AF629E71FC2AC10004BF686 /* CpuCard.m in Sources */,
 				3A26EA2C1F5A4FE50086C553 /* NSURLRequest+SRWebSocket.m in Sources */,
 				3AA1C8881F4AA9F1004A52EF /* CMUtility.m in Sources */,
 				3A95AD2E1D17E4E60026EAFE /* BaseViewController.m in Sources */,

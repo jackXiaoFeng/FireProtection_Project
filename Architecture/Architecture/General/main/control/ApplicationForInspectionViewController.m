@@ -39,7 +39,7 @@
     UILabel *contentLab = [[UILabel alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, DEF_DEVICE_WIDTH, DEF_DEVICE_SCLE_HEIGHT(78))];
     contentLab.font = DEF_MyFont(15);
     contentLab.textColor =DEF_COLOR_RGB(87,87,87);
-    contentLab.text = self.nfcDetectionStatus == NFC_DETECTION_JIANXIU?@"     申请检修内容":@"     确认巡检内容";
+    contentLab.text = @"     申请检修内容";
     contentLab.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:contentLab];
     
@@ -52,7 +52,6 @@
     
     
     
-    if (self.nfcDetectionStatus == NFC_DETECTION_JIANXIU) {
         // 选择框
         self.myPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake((DEF_DEVICE_WIDTH - 200)/2, DEF_DEVICE_SCLE_HEIGHT(172), 200, 216)];
         // 显示选中框
@@ -70,10 +69,7 @@
         fixLab.textColor =DEF_COLOR_RGB(244,205,203);
         fixLab.text = @"请选择检修类型";
         fixLab.textAlignment = NSTextAlignmentCenter;
-        [self.whiteView addSubview:fixLab];
-    }
-    
-    
+        [self.whiteView addSubview:fixLab];    
     
     
     
@@ -131,7 +127,7 @@
     //描述
     UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(DEF_DEVICE_SCLE_WIDTH(52), self.whiteView.height - DEF_DEVICE_SCLE_HEIGHT(218) - btnHeight, 50, 50)];
     lab.textAlignment = NSTextAlignmentCenter;
-    lab.lineBreakMode = UILineBreakModeWordWrap;
+    lab.lineBreakMode = NSLineBreakByWordWrapping;
     lab.numberOfLines = 0;
     lab.textColor = DEF_COLOR_RGB(27,27,27);
 //    lab.backgroundColor = [UIColor yellowColor];

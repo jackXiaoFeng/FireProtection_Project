@@ -126,7 +126,7 @@
 
 - (void)setMainModel:(MainModel *)mainModel
 {
-    NSLog(@"index--%ld--%ld",(long)mainModel.row,(long)mainModel.progressSections);
+    NSLog(@"index--%ld--%ld",(long)mainModel.row,(long)mainModel.Complete);
  
     self.pressWidth = 60;
 
@@ -145,8 +145,9 @@
     _roundnessProgressView.backgroundColor = [UIColor clearColor];
     [self.pressIV addSubview:_roundnessProgressView];
     
-    _roundnessProgressView.progressTotal = 100;
-    _roundnessProgressView.progressSections =mainModel.progressSections + 0.5;
+    
+    _roundnessProgressView.progressTotal = mainModel.Complete + mainModel.Unfinishe;
+    _roundnessProgressView.progressSections =mainModel.Complete;
     
     
     if (mainModel.row == 0) {

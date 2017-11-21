@@ -10,6 +10,7 @@
 
 @interface MainModel : NSObject
 @property (nonatomic,assign)NSInteger row;
-@property (assign, nonatomic) NSInteger progressSections;
+@property (assign, nonatomic) NSInteger Complete;
+@property (assign, nonatomic) NSInteger Unfinishe;
 
 @end

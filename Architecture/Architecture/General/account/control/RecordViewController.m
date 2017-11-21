@@ -27,7 +27,7 @@
     self.titleLb.text = @"巡检记录";
     self.tableView.backgroundColor = [UIColor clearColor];
     
-    [self.rightBtn setImage:DEF_IMAGENAME(@"info_normal") forState:UIControlStateNormal];
+    [self.rightBtn setImage:DEF_IMAGENAME(@"no_record") forState:UIControlStateNormal];
     self.rightBtn.hidden = NO;
     
     
