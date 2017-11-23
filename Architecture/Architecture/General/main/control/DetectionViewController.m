@@ -1087,10 +1087,10 @@ Byte      tradeN   = 1;
                 
                 //读写卡成功，蜂鸣器快响3声
                 if (isSuc) {
-                    //[self.bleNfcDevice openBeep:50 offDelay:50 cnt:3];
+                    [self.bleNfcDevice openBeep:50 offDelay:50 cnt:3];
                 }
                 else {
-                    //[self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
+                    [self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
                 }
                 
                 //读卡结束，重新打开自动寻卡
@@ -1117,10 +1117,10 @@ Byte      tradeN   = 1;
                 
                 //读写卡成功，蜂鸣器快响3声
                 if (isSuc) {
-                    //[self.bleNfcDevice openBeep:50 offDelay:50 cnt:3];
+                    [self.bleNfcDevice openBeep:50 offDelay:50 cnt:3];
                 }
                 else {
-                    //[self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
+                    [self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
                 }
             }
         } @catch (NSException *exception) {
@@ -1129,7 +1129,7 @@ Byte      tradeN   = 1;
                 @strongify(self)
                 self.msgTextView.text = self.msgBuffer;
             });
-            //[self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
+            [self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
             
             if (isAutoSearchCardFlag) {
                 //读卡失败，重新打开自动寻卡
