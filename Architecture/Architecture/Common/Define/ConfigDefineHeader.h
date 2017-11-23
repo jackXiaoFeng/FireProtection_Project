@@ -19,10 +19,10 @@
 //#define DEBUG_SOCKETIO
 
 #ifdef  DEBUG_SOCKETIO
-#define SOCKETIO_ADDRESS          @"http://192.168.1.123:22223" //socketIO 环境
-//行情@"https://yshjhqapi.yishouhuangjin.com/socket.io/socket.io.js" 
+#define SOCKETIO_ADDRESS          @"http://192.168.1.123:22223"
+    //socketIO 测试环境
 #else
-//  #define SOCKETIO_ADDRESS        @"http://apit.freshcn.cn:22223" //socketIO 环境
+   //socketIO 测试环境
    #define SOCKETIO_ADDRESS        @"http://wwwt.freshera.cn:22223"
 #endif
 

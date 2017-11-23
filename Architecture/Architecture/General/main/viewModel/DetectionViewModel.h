@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DetectionModel.h"
+#import "DetectionViewController.h"
 
 @interface DetectionViewModel : NSObject
 
@@ -27,5 +28,5 @@
  *  @return RACSignal
  */
 
--(RACSignal *)nfcDetectionFromDegree:(NSString *)Degree;
+-(RACSignal *)nfcDetectionFromDegree:(NSString *)Degree NFC_DETECTION_STATUS:(NFC_DETECTION_STATUS)nfcDetectionStatus;
 @end

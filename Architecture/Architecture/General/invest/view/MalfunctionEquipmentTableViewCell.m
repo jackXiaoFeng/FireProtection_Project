@@ -101,7 +101,7 @@
     NSString *fixStr = @"";
     UIImage *normalImage;
     UIImage *highlightedImage;
-    BOOL isU;
+    BOOL isU = NO;
     if ([malfunctionEquipmentMode.AFmaintenance isEqualToString:Warning_Fix_Apply])
     {
         fixStr = @"申请复归";
@@ -114,6 +114,8 @@
         normalImage = DEF_IMAGENAME(@"wait_involution");
         highlightedImage = DEF_IMAGENAME(@"wait_involution");
         isU = NO;
+    }else
+    {
     }
     [self.involutionBtn setBackgroundImage:normalImage forState:UIControlStateNormal];
     [self.involutionBtn setBackgroundImage:highlightedImage forState:UIControlStateSelected];

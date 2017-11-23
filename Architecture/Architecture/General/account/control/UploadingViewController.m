@@ -102,10 +102,22 @@
         @strongify(self)
         NSLog(@"====key:%@",obj);
         UploadingModel *modelALL = [tmpDic objectForKey:obj];
-        NSLog(@"====Degree:%@===State:%@===Eqname:%@===State:%@",modelALL.Degree,modelALL.State,modelALL.Eqname,modelALL.State);
+        NSLog(@"====Degree:%@===State:%@===Eqname:%@===State:%@===modelALL.images:%@",modelALL.Degree,modelALL.State,modelALL.Eqname,modelALL.State,modelALL.images);
         [self.viewModel.uploadingList addObject:modelALL];
     }];
 
+    if (self.viewModel.uploadingList.count == 0) {
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, DEF_DEVICE_WIDTH, 50)];
+        lab.text = @"暂无巡检记录";
+        lab.font = DEF_MyFont(15);
+        lab.textAlignment = NSTextAlignmentCenter;
+        lab.textColor = [UIColor lightGrayColor];
+        self.tableView.tableFooterView = lab;
+    }else
+    {
+        self.tableView.tableFooterView = [UIView new];
+    }
+    
     
     //首次刷新数据
     //[self headerWithRefreshing];
@@ -144,7 +156,13 @@
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         
-        BOOL hidden = self.tableView.contentSize.height > self.tableView.height?NO:YES;
+        BOOL hidden;
+        if (self.viewModel.uploadingList.count == 0) {
+            hidden = NO;
+        }else
+        {
+            hidden = self.tableView.contentSize.height > self.tableView.height?NO:YES;
+        }
         //数据不超出屏幕不显示foot
         self.tableView.mj_footer.hidden = hidden;
         //最后一页加提示语
@@ -217,7 +235,8 @@
             return ;
         }else
         {
-            array = self.selectArray;
+            array = [NSMutableArray arrayWithArray:self.selectArray];
+            
         }
     }else
     {
@@ -234,22 +253,89 @@
             [CMUtility showTips:@"上传成功"];
         }
         
+        if(BtnTag == 100)
+        {
+            //清空全局数组
+            [self.selectArray removeAllObjects];
+        }
+        
         //上传成功删除本地记录
-        /*
         NSString *path = [UploadingModel filePath];
         NSMutableDictionary *tmpDic = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
         if (tmpDic == nil) {
             tmpDic = [NSMutableDictionary dictionaryWithCapacity:10];;
         }
+        
+        NSMutableArray *tmpArray = [NSMutableArray arrayWithCapacity:10];
         [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            NSLog(@"obj-%@--idx-%ld",obj,idx);
+
             @strongify(self);
-            NSString *objStr = (NSString *)obj;
-            NSInteger objIndex = [objStr integerValue];
+            
+            NSInteger objIndex;
+            if (BtnTag == 100) {
+                NSString *objStr = (NSString *)obj;
+                objIndex = [objStr integerValue];
+            }else
+            {
+                objIndex = (self.viewModel.uploadingList.count - 1) < idx ? 0 :self.viewModel.uploadingList.count - 1 - idx;
+            }
+            
             UploadingModel *uploadingModel = self.viewModel.uploadingList[objIndex];
             [tmpDic removeObjectForKey:uploadingModel.Degree];
+            [tmpArray addObject:uploadingModel];
+            
+//            //删除数据源
+//            [self.viewModel.uploadingList removeObject:uploadingModel];
+            
+            //删除选中行
+ //           NSIndexPath *indexPath = [NSIndexPath indexPathForRow:objIndex inSection:0];
+            
+//            if (self.viewModel.uploadingList.count == 0) { // 要根据情况直接删除section或者仅仅删除row
+//                [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+//
+//            } else {
+//                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//            }
+            
         }];
         BOOL isSave = [NSKeyedArchiver archiveRootObject:tmpDic toFile:path];
-*/
+        
+        [tmpArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            UploadingModel *uploadingModel = (UploadingModel*)obj;
+            if ([self.viewModel.uploadingList containsObject:uploadingModel]) {
+                [self.viewModel.uploadingList removeObject:uploadingModel];
+            }
+        }];
+        
+        if (self.viewModel.uploadingList.count == 0) {
+            UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, DEF_DEVICE_WIDTH, 50)];
+            lab.text = @"暂无巡检记录";
+            lab.font = DEF_MyFont(15);
+            lab.textAlignment = NSTextAlignmentCenter;
+            lab.textColor = [UIColor lightGrayColor];
+            self.tableView.tableFooterView = lab;
+        }else
+        {
+            self.tableView.tableFooterView = [UIView new];
+        }
+        
+//        [self.viewModel.uploadingList removeAllObjects];
+//        NSMutableDictionary *newTmpDic = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+//        if (newTmpDic == nil) {
+//            newTmpDic = [NSMutableDictionary dictionaryWithCapacity:10];;
+//        }
+//
+//        [newTmpDic.allKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//            @strongify(self)
+//            NSLog(@"====key:%@",obj);
+//            UploadingModel *modelALL = [tmpDic objectForKey:obj];
+//            NSLog(@"====Degree:%@===State:%@===Eqname:%@===State:%@",modelALL.Degree,modelALL.State,modelALL.Eqname,modelALL.State);
+//            [self.viewModel.uploadingList addObject:modelALL];
+//        }];
+        [self.tableView reloadData];
+
         
     }error:^(NSError *error) {
         [CMUtility showTips:@"上传失败"];
@@ -264,6 +350,11 @@
     return [UploadingTableViewCell UploadingCellHeight];
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView{
+    
+    return 1;// 分组
+    
+}
 -(NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.viewModel.uploadingList.count;;
 }
@@ -318,7 +409,7 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, DEF_DEVICE_WIDTH, DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT - DEF_DEVICE_SCLE_HEIGHT(150)) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, DEF_DEVICE_WIDTH, DEF_DEVICE_HEIGHT-DEF_NAVIGATIONBAR_HEIGHT - DEF_DEVICE_SCLE_HEIGHT(150))];
         _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
         _tableView.delegate =self;
         _tableView.dataSource = self;

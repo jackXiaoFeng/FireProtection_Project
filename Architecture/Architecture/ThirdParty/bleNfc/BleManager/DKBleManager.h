@@ -58,7 +58,7 @@ typedef void(^onWriteSuccessListener)();
 
 -(id)initWithDelegate:(id)theDelegate;
 + (DKBleManager *)sharedInstance;
-
++(void)dKBleManagerDealloc;
 //代码块设置相关
 -(void)setOnScannerCallbackListenerBlock:(onScannerCallbackListener)block;
 -(void)setOnReceiveDataListenerBlock:(onReceiveDataListener)block;

@@ -38,10 +38,15 @@ static onWriteSuccessListener onWriteSuccessListenerBlock = nil;
     return BLInstance;
 }
 
++(void)dKBleManagerDealloc{
+    BLInstance = nil;
+}
+
 //初始化
 - (id)init {
     self = [super init];//获得父类的对象并进行初始化
     if (self){
+        
         self.manager = [[CBCentralManager alloc]initWithDelegate:self queue:nil];
         self.peripherals = [[NSMutableArray alloc] init];
     }

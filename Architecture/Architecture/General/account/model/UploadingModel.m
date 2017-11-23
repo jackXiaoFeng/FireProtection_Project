@@ -27,6 +27,10 @@
         self.images = [aDecoder decodeObjectForKey:@"images"];
         self.Describe = [aDecoder decodeObjectForKey:@"Describe"];
         self.Actegories = [aDecoder decodeObjectForKey:@"Actegories"];
+        
+        self.Oper_flag = [aDecoder decodeObjectForKey:@"Oper_flag"];
+        self.Warningrecordsn = [aDecoder decodeObjectForKey:@"Warningrecordsn"];
+        self.AFmaintenance = [aDecoder decodeObjectForKey:@"AFmaintenance"];
     }
     return self;
 }
@@ -42,7 +46,10 @@
     [aCoder encodeObject:self.images forKey:@"images"];
     [aCoder encodeObject:self.Describe forKey:@"Describe"];
     [aCoder encodeObject:self.Actegories forKey:@"Actegories"];
-
+    
+    [aCoder encodeObject:self.Oper_flag forKey:@"Oper_flag"];
+    [aCoder encodeObject:self.Warningrecordsn forKey:@"Warningrecordsn"];
+    [aCoder encodeObject:self.AFmaintenance forKey:@"AFmaintenance"];
 }
 ////设置默认选择
 //- (BOOL)isSelect

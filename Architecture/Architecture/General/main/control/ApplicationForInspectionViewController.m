@@ -8,7 +8,11 @@
 
 #import "ApplicationForInspectionViewController.h"
 
-@interface ApplicationForInspectionViewController ()<UIPickerViewDelegate,UIPickerViewDataSource>
+@interface ApplicationForInspectionViewController ()<UIPickerViewDelegate,UIPickerViewDataSource,UITextViewDelegate>
+{
+    CGFloat _currentKeyboardH;
+    CGFloat _transformY;
+}
 @property (nonatomic,strong)UIPickerView *myPickerView;
 @property (nonatomic,strong)NSArray *proTimeList;
 @property (nonatomic,strong)NSString *actegoriesStr;
@@ -46,7 +50,7 @@
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT + contentLab.height -2, DEF_DEVICE_WIDTH,2)];
     lineView.backgroundColor = DEF_COLOR_RGB(247,247,247);
     [self.view addSubview:lineView];
-    self.whiteView = [[UIView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT + contentLab.height, DEF_DEVICE_WIDTH, DEF_DEVICE_HEIGHT - DEF_NAVIGATIONBAR_HEIGHT - contentLab.height)];
+    self.whiteView = [[UIView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT + DEF_DEVICE_SCLE_HEIGHT(78), DEF_DEVICE_WIDTH, DEF_DEVICE_HEIGHT - DEF_NAVIGATIONBAR_HEIGHT - DEF_DEVICE_SCLE_HEIGHT(78))];
     self.whiteView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.whiteView];
     
@@ -154,6 +158,8 @@
     self.textView = [[UITextView alloc]initWithFrame:CGRectMake(DEF_DEVICE_SCLE_WIDTH(52) + 50, lab.y + 5, DEF_DEVICE_WIDTH - DEF_DEVICE_SCLE_WIDTH(110) - 50, DEF_DEVICE_SCLE_HEIGHT(108))];
     // 设置文本框背景颜色
     self.textView.backgroundColor = DEF_COLOR_RGB(238,238,238);
+    self.textView.returnKeyType = UIReturnKeyDone;
+    self.textView.delegate = self;
     //外框
 //    self.textView.layer.borderColor = [UIColor redColor].CGColor;
 //    self.textView.layer.borderWidth = 1;
@@ -190,6 +196,38 @@
         
         
     }
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+#pragma mark --键盘的显示隐藏--
+-(void)keyboardWillShow:(NSNotification *)notification{
+    //键盘最后的frame
+    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat height = keyboardFrame.size.height;
+    //需要移动的距离
+    if (height > 0) {
+        _transformY = height-_currentKeyboardH;
+        _currentKeyboardH = height;
+        //移动
+        [UIView animateWithDuration:0.3 animations:^{
+            self.whiteView.y-=_transformY;
+        }];
+    }
+}
+-(void)keyboardWillHide:(NSNotification *)notification{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.whiteView.y+=_currentKeyboardH;
+        _currentKeyboardH = 0;
+    }];
 }
 
 - (void)leftBtnClick
@@ -263,8 +301,9 @@
         if (imageArray.count > 0) {
             [imageArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 NSString *str = [NSString stringWithFormat:@"%@",obj];
+                NSString *valueStr = [self.imageDic objectForKey:str];
                 NSString *symbol = idx == (imageArray.count - 1) ?@"":@",";
-                NSString *newStr = [str stringByAppendingString:symbol];
+                NSString *newStr = [valueStr stringByAppendingString:symbol];
                 imagesStr =[imagesStr stringByAppendingString:newStr];
             }];
         }
@@ -290,6 +329,20 @@
         uploadingModel.Floorsn = self.detectionModel.Floorsn;
         uploadingModel.timeT = [CMUtility currentTimestampSecond];
         
+        if (self.nfcDetectionStatus == NFC_DETECTION_POLLING)
+        {
+            uploadingModel.Oper_flag = @"2";//1，告警和设备模块 2，巡检模块
+        }else
+        {
+            uploadingModel.Oper_flag = @"1";
+        }
+        uploadingModel.Warningrecordsn = self.detectionModel.Warningrecordsn;//告警和设备模块需要加上这个字段
+        uploadingModel.AFmaintenance = @"4";//0正常巡检4申请检修
+        
+        //@"Oper_flag":@1,//1，告警和设备模块 2，巡检模块
+        //@"Warningrecordsn":@"",//告警和设备模块需要加上这个字段
+        //@"AFmaintenance":@"4",//0正常巡检4申请检修
+        
         NSMutableDictionary *tmpDic = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
         if (tmpDic == nil) {
             tmpDic =[NSMutableDictionary dictionaryWithCapacity:10];
@@ -305,6 +358,10 @@
             [CMUtility showTips:@"提交检修失败"];
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
+        
+        
+        
+        NSLog(@"================%@",imagesStr);
         
     }else
     {
@@ -476,7 +533,7 @@
             [self.imageDic setObject:str forKey:[NSString stringWithFormat:@"%ld",self.currentTag]];
             
             [self.imageDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-                NSLog(@"imageDic==%@", obj);
+                NSLog(@"key==%@==imageDic==%@",key,obj);
                 
             }];
             [CMUtility hideMBProgress:self.view];
@@ -517,6 +574,23 @@
 - (void)keyBoardHide
 {
     [self.view endEditing:YES];
+}
+//实现UITextField代理方法
+
+//-(BOOL)textFieldShouldReturn:(UITextField *)textField
+//{
+//    return [textField resignFirstResponder];
+//
+//}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
+        //在这里做你响应return键的代码
+        [self.view endEditing:YES];
+        return NO; //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
+    }
+    
+    return YES;
 }
 /*
 #pragma mark - Navigation

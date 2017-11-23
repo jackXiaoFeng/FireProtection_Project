@@ -95,11 +95,13 @@
         
         if (self.isShowLabel) {
             
-             NSAttributedString * str = [CMUtility getFormatedAmountWithColor:[UIColor UIColorFromRGB:COLOR_APP_MAIN alpha:1] amount:[NSString stringWithFormat:@"%.0f",progress*self.progressTotal] unit:@"%" amountFont:20 unitFont:10];
+//            NSLog(@"[NSString stringWithForm--%@-%f---%d---",[NSString stringWithFormat:@"%.0f",progress*self.progressTotal],progress,self.progressTotal);
+            NSInteger progressInt = progress*100;
+             NSAttributedString * str = [CMUtility getFormatedAmountWithColor:[UIColor UIColorFromRGB:COLOR_APP_MAIN alpha:1] amount:[NSString stringWithFormat:@"%ld",progressInt] unit:@"%" amountFont:20 unitFont:10];
             
             self.label.attributedText = str;
             
-            CGSize size = [self boundingRectWithSize:CGSizeMake(self.frame.size.width - self.thicknessWidth*2, self.frame.size.height - self.thicknessWidth*2) font:[UIFont systemFontOfSize:20] string:[NSString stringWithFormat:@"%.0f",progress*self.progressTotal] withSpacing:2];
+            CGSize size = [self boundingRectWithSize:CGSizeMake(self.frame.size.width - self.thicknessWidth*2, self.frame.size.height - self.thicknessWidth*2) font:[UIFont systemFontOfSize:20] string:[NSString stringWithFormat:@"%ld",progressInt] withSpacing:2];
             self.label.textAlignment = NSTextAlignmentCenter;
             self.label.frame = CGRectMake(0, (self.frame.size.height - size.height)/2,self.frame.size.width,size.height);
             
@@ -116,7 +118,8 @@
     
     progress = (float)num/self.progressTotal;
     
-    num++;
+    num = num + (self.progressTotal)/100;
+    //num++;
     
     [self setNeedsDisplay];
 }

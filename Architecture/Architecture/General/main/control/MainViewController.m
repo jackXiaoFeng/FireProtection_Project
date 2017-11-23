@@ -210,7 +210,6 @@
     @weakify(self)
     cell.mainTablecellclick = ^(int index){
         @strongify(self)
-        NSLog(@"index----%d-----",index);
         [self.tableView reloadData];
         
         UIViewController *controller;

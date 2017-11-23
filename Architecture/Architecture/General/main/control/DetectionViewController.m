@@ -17,8 +17,10 @@
 #import "DKBleNfc.h"
 #import "NSData+Hex.h"
 #import "SZTCard.h"
+#import "EquipmentWarningViewModel.h"
 
 #define SEARCH_BLE_NAME   @"BLE_NFC"
+#define IAlertView_TAG 888
 
 @interface DetectionViewController ()<DKBleManagerDelegate, DKBleNfcDeviceDelegate>
 
@@ -47,6 +49,15 @@
 
 
 @property (nonatomic,strong)DetectionViewModel *viewModel;
+
+@property (nonatomic, strong) EquipmentWarningViewModel *equipmentWarningviewModel;
+
+@property (nonatomic,assign)BOOL isSkip;
+
+@property (nonatomic,strong)UIViewController *tmpVC;
+@property (nonatomic,assign)BOOL isPush;
+
+@property (nonatomic,assign)BOOL isNoConnectBlue;
 
 @end
 
@@ -109,30 +120,6 @@ Byte      tradeN   = 1;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    
-//    if ([self.bleManager isConnect] ) {
-//
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//            @try {
-//                //关闭自动寻卡
-//                BOOL isSuc = [self.bleNfcDevice stoptAutoSearchCard];
-//                if (isSuc) {
-//
-//                    [self.msgBuffer appendString:@"自动寻卡已开启，正在寻卡..\r\n"];
-//                    [self getDeviceMsg];
-//
-//                }
-//                else {
-//                    [self.msgBuffer appendString:@"自动寻卡已关闭！\r\n"];
-//                }
-//
-//            } @catch (NSException *exception) {
-//                [self.msgBuffer appendString:[exception reason]];
-//
-//            } @finally {
-//            }
-//        });
-//    }
 }
 
 - (void)viewDidLoad {
@@ -140,9 +127,14 @@ Byte      tradeN   = 1;
     
     //    IAlertView *alertView = [[IAlertView alloc] init]; // 无标题
     self.viewModel = [[DetectionViewModel alloc]init];
-    
+    self.equipmentWarningviewModel = [[EquipmentWarningViewModel alloc]init];
     
     self.isPause = NO;
+    self.isSkip = NO;
+    self.tmpVC = NULL;
+    self.isPush = NO;
+    self.isNoConnectBlue = NO;
+    
     self.navImageView.image = [UIImage imageNamed:@""];
     
     UIColor *startColor = DEF_COLOR_RGB(238, 122, 92);
@@ -195,14 +187,22 @@ Byte      tradeN   = 1;
     
     
     self.msgTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, DEF_NAVIGATIONBAR_HEIGHT, DEF_DEVICE_WIDTH, DEF_DEVICE_HEIGHT - DEF_NAVIGATIONBAR_HEIGHT)];
-    self.msgTextView.textColor = [UIColor blueColor];
+    self.msgTextView.textColor = [UIColor clearColor];
     self.msgTextView.backgroundColor = [UIColor clearColor];
+    self.msgTextView.userInteractionEnabled = NO;
     [self.view addSubview:self.msgTextView];
     
     //初始化 blue_nfc_sdk
     self.msgBuffer = [[NSMutableString alloc] init];
     lastRssi = -100;
     self.mNearestBle = nil;
+    
+    [self.bleManager cancelConnect];
+    [self.bleManager stopScan];
+    if ( [self.bleManager isConnect] ) {
+        [self.bleManager cancelConnect];
+    }
+    [DKBleManager dKBleManagerDealloc];
     
     self.bleManager = [DKBleManager sharedInstance];
     self.bleManager.delegate = self;
@@ -234,7 +234,51 @@ Byte      tradeN   = 1;
 
 - (void)leftBtnClick
 {
-    [self.navigationController popViewControllerAnimated:YES];
+//    if (![self.bleManager isConnect]) {
+//        [self.bleManager stopScan];
+//        [self.bleManager cancelConnect];
+//        [DKBleManager dKBleManagerDealloc];
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }else
+//    {
+    if(self.isNoConnectBlue == YES)
+    {
+        [self.bleManager stopScan];
+        [self.bleManager cancelConnect];
+        [DKBleManager dKBleManagerDealloc];
+        [self popOrPushVC];
+    }else
+    {
+        [self skipOtherViewController:NULL Push:NO];
+    }
+    
+//    }
+}
+
+
+
+#pragma mark - 跳转其他界面 根据需求判断是否关闭蓝牙  -
+- (void)skipOtherViewController:(UIViewController *)vc Push:(BOOL)push
+{
+    self.isPush = push;
+    self.tmpVC = vc;
+    //如果已经连接设备，则断开连接设备，如果没有连接设备则开始搜索设备，搜到指定名字的设备后开始连接
+    self.isSkip = YES;
+
+    [self.bleManager stopScan];
+    [self.bleManager cancelConnect];
+    [DKBleManager dKBleManagerDealloc];
+}
+
+- (void)popOrPushVC
+{
+    if(self.isPush && self.tmpVC)
+    {
+        [self.navigationController pushViewController:self.tmpVC animated:YES];
+    }else
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - 根据设备degree获取 设备信息
@@ -250,9 +294,22 @@ Byte      tradeN   = 1;
         return;
     }
     
-    @weakify(self)
+    //删除
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIView *view = [[[UIApplication sharedApplication] windows] firstObject];
+        IAlertView *alterViewOld = [view viewWithTag:IAlertView_TAG];
+        if (alterViewOld) {
+            for (UIView *v in [alterViewOld subviews]) {
+                [v removeFromSuperview];
+            }
+            [alterViewOld removeFromSuperview];
+        }
+        //self.searchButton.titleLabel.text = @"搜索设备";
+    });
     
-    [[self.viewModel nfcDetectionFromDegree:degreeStr] subscribeNext:^(id result) {
+    
+    @weakify(self)
+    [[self.viewModel nfcDetectionFromDegree:degreeStr NFC_DETECTION_STATUS:self.nfcDetectionStatus] subscribeNext:^(id result) {
         @strongify(self);
         
         DetectionModel *model = self.viewModel.detectionList[0];
@@ -284,24 +341,23 @@ Byte      tradeN   = 1;
         alterView.buttonTitles = buttonTitles;
         alterView.buttonTitlesColor = buttonTitlesColor;
         alterView.buttonTitlesBackGroundColor = buttonTitlesBackGroundColor;
+        alterView.tag = IAlertView_TAG;
         // 添加按钮点击事件
         alterView.onButtonClickHandle = ^(IAlertView *alertView, NSInteger buttonIndex) {
             @strongify(self);
             if (buttonIndex == 0)
             {
-                /*
-                if (self.nfcDetectionStatus == NFC_DETECTION_JIANXIU) {
-                    ApplicationForInspectionViewController *avc = [[ApplicationForInspectionViewController alloc]init];
-                    avc.nfcDetectionStatus = self.nfcDetectionStatus == NFC_DETECTION_JIANXIU?NFC_DETECTION_JIANXIU:NFC_DETECTION_AFFIRNM;
-                    avc.detectionModel = model;
-                    avc.degreeStr = degreeStr;
-                    [self.navigationController pushViewController:avc animated:YES];
-                }else if (self.nfcDetectionStatus == NFC_DETECTION_AFFIRNM)
+                //如果是巡检模块 则是确认巡检存在本地
+                //如果是告警和设备模块 则014复归
+                if (self.nfcDetectionStatus == NFC_DETECTION_POLLING)
                 {
                     NSString *path = [UploadingModel filePath];
                     
                     UploadingModel *uploadingModel = [[UploadingModel alloc]init];
+                    //fix_debug:暂时添加不同设备id
+//                    uploadingModel.Degree = [NSString stringWithFormat:@"%@%@",degreeStr,[CMUtility currentTimestampSecond]];
                     uploadingModel.Degree = degreeStr;
+
                     uploadingModel.State = @"1";
                     uploadingModel.images = @"";
                     uploadingModel.Describe = @"";
@@ -310,6 +366,15 @@ Byte      tradeN   = 1;
                     uploadingModel.Eqname = model.Eqname;
                     uploadingModel.Floorsn = model.Floorsn;
                     uploadingModel.timeT = [CMUtility currentTimestampSecond];
+                    
+                    uploadingModel.Oper_flag = @"2";//1，告警和设备模块 2，巡检模块
+                    uploadingModel.Warningrecordsn = model.Warningrecordsn;//告警和设备模块需要加上这个字段
+                    uploadingModel.AFmaintenance = @"0";//0正常巡检4申请检修
+
+                    //@"Oper_flag":@1,//1，告警和设备模块 2，巡检模块
+                    //@"Warningrecordsn":@"",//告警和设备模块需要加上这个字段
+                    //@"AFmaintenance":@"4",//0正常巡检4申请检修
+                    
                     
                     NSMutableDictionary *tmpDic = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
                     if (tmpDic == nil) {
@@ -335,41 +400,53 @@ Byte      tradeN   = 1;
                     
                     if (isSave) {
                         [CMUtility showTips:@"确认巡检成功"];
-                        [self.navigationController popToRootViewControllerAnimated:YES];
+                        [self skipOtherViewController:NULL Push:NO];
                     }else
                     {
                         [CMUtility showTips:@"确认巡检失败"];
-                        [self.navigationController popToRootViewControllerAnimated:YES];
+                        [self skipOtherViewController:NULL Push:NO];
                     }
-                    
-                    
-                    
+                }else {
+                    @weakify(self);
+                    [[self.equipmentWarningviewModel alarmEquipmentMaintenanceWithDegree:degreeStr] subscribeNext:^(NSString *str) {
+                        
+                        @strongify(self);
+                        if ([str isEqualToString:SUCCESS_MSG]) {
+                            [CMUtility showTips:@"复归成功"];
+                            [self skipOtherViewController:NULL Push:NO];
+                        }else
+                        {
+                            [CMUtility showTips:@"复归失败"];
+                        }
+                        
+                    } error:^(NSError *error) {
+                        
+                    }];
                 }
-                */
+                
             } else if (buttonIndex == 1)
             {
-                /*
-                if (self.nfcDetectionStatus == NFC_DETECTION_AFFIRNM)
-                {
-                    ApplicationForInspectionViewController *avc = [[ApplicationForInspectionViewController alloc]init];
-                    avc.nfcDetectionStatus = NFC_DETECTION_JIANXIU;
-                    avc.detectionModel = model;
-                    avc.degreeStr = degreeStr;
-                    [self.navigationController pushViewController:avc animated:YES];
-                }else if (self.nfcDetectionStatus == NFC_DETECTION_JIANXIU)
+                if (self.nfcDetectionStatus == NFC_DETECTION_DEVICE)
                 {
                     NSLog(@"点击取消");
-                    [self.navigationController popViewControllerAnimated:YES];
-                    
+                    [self skipOtherViewController:NULL Push:NO];
+                }else
+                {
+                    ApplicationForInspectionViewController *avc = [[ApplicationForInspectionViewController alloc]init];
+                    avc.nfcDetectionStatus = self.nfcDetectionStatus;
+                    avc.detectionModel = model;
+                    avc.degreeStr = degreeStr;
+                    [self skipOtherViewController:avc Push:YES];
                 }
-                */
             }else if (buttonIndex == 2)
             {
                 NSLog(@"点击取消");
-                [self.navigationController popViewControllerAnimated:YES];
+                [self skipOtherViewController:NULL Push:NO];
             }
             // 关闭
-            [alertView dismiss]; };
+            [alertView dismiss];
+            
+        };
         // 显示
         [alterView show];
         
@@ -488,6 +565,7 @@ Byte      tradeN   = 1;
 -(void)fineNearBle{
     //self.searchButton.titleLabel.text = @"正在搜索设备..";
     self.msgTextView.text = @"正在搜索设备..";
+    self.nfcLab.text = @"正在搜索蓝牙设备";
     self.mNearestBle = nil;
     lastRssi = -100;
     [self.bleManager startScan];
@@ -505,6 +583,8 @@ Byte      tradeN   = 1;
             dispatch_async(dispatch_get_main_queue(), ^{
                 @strongify(self)
                 self.msgTextView.text = @"未找到设备！";
+                self.nfcLab.text = @"未找到蓝牙设备";
+                self.isNoConnectBlue = YES;
             });
         }
         else{
@@ -512,6 +592,7 @@ Byte      tradeN   = 1;
             dispatch_async(dispatch_get_main_queue(), ^{
                 @strongify(self)
                 self.msgTextView.text = @"正在连接设备..";
+                self.nfcLab.text = @"正在连接蓝牙设备..";
             });
             [self.bleManager connect:self.mNearestBle callbackBlock:^(BOOL isConnectSucceed) {
                 if (isConnectSucceed) {
@@ -520,6 +601,8 @@ Byte      tradeN   = 1;
                         @strongify(self)
                         [self.msgBuffer setString:@"设备连接成功！\r\n"];
                         self.msgTextView.text = self.msgBuffer;
+                        
+                        self.nfcLab.text = @"蓝牙设备连接成功";
                         //self.searchButton.titleLabel.text = @"断开连接";
                         //获取设备信息
                         [self getDeviceMsg];
@@ -530,6 +613,8 @@ Byte      tradeN   = 1;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         @strongify(self)
                         self.msgTextView.text = @"设备已断开！";
+                        self.nfcLab.text = @"蓝牙设备已断开";
+                        self.isNoConnectBlue = YES;
                         //self.searchButton.titleLabel.text = @"搜索设备";
                     });
                 }
@@ -1002,10 +1087,10 @@ Byte      tradeN   = 1;
                 
                 //读写卡成功，蜂鸣器快响3声
                 if (isSuc) {
-//                    [self.bleNfcDevice openBeep:50 offDelay:50 cnt:3];
+                    //[self.bleNfcDevice openBeep:50 offDelay:50 cnt:3];
                 }
                 else {
-//                    [self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
+                    //[self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
                 }
                 
                 //读卡结束，重新打开自动寻卡
@@ -1032,10 +1117,10 @@ Byte      tradeN   = 1;
                 
                 //读写卡成功，蜂鸣器快响3声
                 if (isSuc) {
-//                    [self.bleNfcDevice openBeep:50 offDelay:50 cnt:3];
+                    //[self.bleNfcDevice openBeep:50 offDelay:50 cnt:3];
                 }
                 else {
-//                    [self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
+                    //[self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
                 }
             }
         } @catch (NSException *exception) {
@@ -1044,7 +1129,7 @@ Byte      tradeN   = 1;
                 @strongify(self)
                 self.msgTextView.text = self.msgBuffer;
             });
-//            [self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
+            //[self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
             
             if (isAutoSearchCardFlag) {
                 //读卡失败，重新打开自动寻卡
@@ -1108,9 +1193,21 @@ Byte      tradeN   = 1;
 #pragma mark - DKBleManagerDelegate 蓝牙状态
 -(void)DKCentralManagerDidUpdateState:(CBCentralManager *)central {
     NSError *error = nil;
+    UIViewController * viewControllerNow = [self currentViewController];
+    if ([viewControllerNow  isKindOfClass:[DetectionViewController class]]) {   //如果是页面XXX，则执行下面语句
+        NSLog(@"%@是扫描界面,显示识别信息DKCentralManagerDidUpdateState!!!!!!!!!!!!",viewControllerNow);
+    }else
+    {
+        NSLog(@"%@不是扫描界面,不显示识别信息,直接跳出DKCentralManagerDidUpdateState!!!!!!!!!!!!",viewControllerNow);
+        return;
+        
+    }
+    
     switch (central.state) {
         case CBCentralManagerStatePoweredOn://蓝牙打开
         {
+            self.isSkip = NO;
+            self.isNoConnectBlue = NO;
             //开始搜索设备
             [self fineNearBle];
         }
@@ -1119,6 +1216,14 @@ Byte      tradeN   = 1;
         {
             error = [NSError errorWithDomain:@"CBCentralManagerStatePoweredOff" code:-1 userInfo:nil];
             [CMUtility showTips:@"本机蓝牙未开启，请开启蓝牙"];
+            self.nfcLab.text =@"本机蓝牙未开启，请开启蓝牙";
+            [self.msgBuffer appendString:[NSString stringWithFormat:@"本机蓝牙未开启，请开启蓝牙！\r\n"]];
+            self.isNoConnectBlue = YES;
+            @weakify(self);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                @strongify(self)
+                self.msgTextView.text = self.msgBuffer;
+            });
         }
             break;
         case CBCentralManagerStateResetting://蓝牙重置
@@ -1130,12 +1235,16 @@ Byte      tradeN   = 1;
         {
             error = [NSError errorWithDomain:@"CBCentralManagerStateUnknown" code:-1 userInfo:nil];
             [CMUtility showTips:@"蓝牙未知"];
+            self.nfcLab.text =@"蓝牙未知";
+            self.isNoConnectBlue = YES;
         }
             break;
         case CBCentralManagerStateUnsupported://设备不支持
         {
             error = [NSError errorWithDomain:@"CBCentralManagerStateUnsupported" code:-1 userInfo:nil];
             [CMUtility showTips:@"本机不支持蓝牙"];
+            self.nfcLab.text =@"本机不支持蓝牙";
+            self.isNoConnectBlue = YES;
         }
             break;
         default:
@@ -1147,10 +1256,34 @@ Byte      tradeN   = 1;
 -(void)DKCentralManagerConnectState:(CBCentralManager *)central state:(BOOL)state{
     if (state) {
         NSLog(@"蓝牙连接成功");
+        //[CMUtility showTips:@"蓝牙连接成功"];
+        UIViewController * viewControllerNow = [self currentViewController];
+        if ([viewControllerNow  isKindOfClass:[DetectionViewController class]]) {   //如果是页面XXX，则执行下面语句
+            NSLog(@"%@是扫描界面,显示识别信息!!!!!!!!!!!!",viewControllerNow);
+            if (self.isSkip) {
+
+                [self.bleManager stopScan];
+                [self.bleManager cancelConnect];
+                [DKBleManager dKBleManagerDealloc];
+            }
+        }else
+        {
+            NSLog(@"%@不是扫描界面,不显示识别信息,直接跳出!!!!!!!!!!!!",viewControllerNow);
+            self.isSkip = YES;
+            
+            [self.bleManager stopScan];
+            [self.bleManager cancelConnect];
+            [DKBleManager dKBleManagerDealloc];
+        }
     }
     else {
         NSLog(@"蓝牙连接失败");
-        [CMUtility showTips:@"蓝牙连接失败"];
+        if (!self.isSkip) {
+            [CMUtility showTips:@"蓝牙连接失败"];
+        }
+        
+        [self popOrPushVC];
+        
         @weakify(self)
         dispatch_async(dispatch_get_main_queue(), ^{
             @strongify(self)
@@ -1165,9 +1298,9 @@ Byte      tradeN   = 1;
 - (UILabel *)nfcLab
 {
     if (!_nfcLab) {
-        _nfcLab = [[UILabel alloc]initWithFrame:CGRectMake((DEF_DEVICE_WIDTH - 200)/2, self.device_scan.y+self.device_scan.height +DEF_DEVICE_SCLE_HEIGHT(94), 200, DEF_DEVICE_SCLE_HEIGHT(30))];
-        _nfcLab.text = @"NFC";
-        _nfcLab.font = DEF_MyFont(28);
+        _nfcLab = [[UILabel alloc]initWithFrame:CGRectMake(0, self.device_scan.y+self.device_scan.height +DEF_DEVICE_SCLE_HEIGHT(94), DEF_DEVICE_WIDTH, DEF_DEVICE_SCLE_HEIGHT(30))];
+        _nfcLab.text = @"----";
+        _nfcLab.font = DEF_MyFont(20);
         _nfcLab.textColor = DEF_COLOR_RGB(246, 156, 153);
         _nfcLab.textAlignment = NSTextAlignmentCenter;
     }

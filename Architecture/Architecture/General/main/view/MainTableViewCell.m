@@ -145,8 +145,9 @@
     _roundnessProgressView.backgroundColor = [UIColor clearColor];
     [self.pressIV addSubview:_roundnessProgressView];
     
-    
-    _roundnessProgressView.progressTotal = mainModel.Complete + mainModel.Unfinishe;
+    NSInteger total = mainModel.Complete + mainModel.Unfinishe;
+    total = total == 0?100:total;
+    _roundnessProgressView.progressTotal = total;
     _roundnessProgressView.progressSections =mainModel.Complete;
     
     

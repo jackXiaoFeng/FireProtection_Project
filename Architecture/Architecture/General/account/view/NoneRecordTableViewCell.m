@@ -47,7 +47,7 @@
     
     UILabel *timeLab = [[UILabel alloc] initWithFrame:CGRectMake(nameLab.x+nameLab.width, 0, DEF_DEVICE_SCLE_WIDTH(303), CellHeight)];
     timeLab.font = DEF_MyFont(14.0f);
-    timeLab.text = @"--:--";
+    timeLab.text = @"--天";
     timeLab.userInteractionEnabled = YES;
     timeLab.backgroundColor = [UIColor clearColor];
     timeLab.textAlignment = NSTextAlignmentCenter;
@@ -74,7 +74,8 @@
 
 - (void)setNoneRecordModel:(NoneRecordModel *)noneRecordModel
 {
-    //    self.nameLab.text = PlanModel.Name;
+    self.nameLab.text = DEF_OBJECT_TO_STIRNG(noneRecordModel.Eqname);
+    self.timeLab.text = [NSString stringWithFormat:@"%@天",noneRecordModel.Number];
     //    self.addressLab.text  = PlanModel.Describe;
     //    self.cycleLab.text  = PlanModel.Cycle;
     

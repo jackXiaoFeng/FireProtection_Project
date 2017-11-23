@@ -132,14 +132,49 @@
             NSString *objStr = (NSString *)obj;
             NSInteger objIndex = [objStr integerValue];
             UploadingModel *uploadingModel = self.uploadingList[objIndex];
-            NSDictionary *datDic = @{
-                                     @"Oper_flag":@1,
-                                     @"Degree":uploadingModel.Degree,
-                                     @"State":uploadingModel.State,
-                                     @"images":uploadingModel.images,
-                                     @"Describe":uploadingModel.Describe,
-                                     @"Actegories":uploadingModel.Actegories
-                                     };
+            
+            NSString *utf8Str = [NSString utf8ToUnicode:CMMemberEntity.userInfo.unitsn];
+            NSString *uusernameStr = CMMemberEntity.userInfo.username;
+            
+            NSDictionary *datDic = nil;
+            if (uploadingModel.Warningrecordsn) {
+                datDic = @{
+                           @"Oper_flag":[NSNumber numberWithInteger:[uploadingModel.Oper_flag integerValue]],//1，告警和设备模块 2，巡检模块
+                           @"Warningrecordsn":uploadingModel.Warningrecordsn,//告警和设备模块需要加上这个字段
+                           @"AFmaintenance":uploadingModel.AFmaintenance,//0正常巡检4申请检修
+                           
+                           
+                           @"Unitsn":utf8Str,
+                           @"Uusername":uusernameStr,
+                           
+                           @"Eqname":uploadingModel.Eqname,
+                           @"Degree":uploadingModel.Degree,
+                           @"State":uploadingModel.State,
+                           @"Images":uploadingModel.images,
+                           @"Describe":uploadingModel.Describe,
+                           @"Acategories":uploadingModel.Actegories
+                           
+                           };
+            }else
+            {
+                datDic = @{
+                           @"Oper_flag":[NSNumber numberWithInteger:[uploadingModel.Oper_flag integerValue]],//1，告警和设备模块 2，巡检模块
+                           //@"Warningrecordsn":@"",//告警和设备模块需要加上这个字段
+                           @"AFmaintenance":uploadingModel.AFmaintenance,//0正常巡检4申请检修
+                           
+                           
+                           @"Unitsn":utf8Str,
+                           @"Uusername":uusernameStr,
+                           @"Eqname":uploadingModel.Eqname,
+                           @"Degree":uploadingModel.Degree,
+                           @"State":uploadingModel.State,
+                           @"Images":uploadingModel.images,
+                           @"Describe":uploadingModel.Describe,
+                           @"Acategories":uploadingModel.Actegories
+                           
+                           };
+            }
+            
             [arr addObject:datDic];
         }];
        

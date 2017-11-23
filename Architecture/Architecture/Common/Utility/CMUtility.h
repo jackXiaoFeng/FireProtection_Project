@@ -387,4 +387,8 @@ typedef void (^FailViewBtnClickBlock) (void);
 //将NSData转换成十六进制的字符串则可使用如下方式:
 + (NSString *)convertDataToHexStr:(NSData *)data;
 
+//获取当前屏幕显示的viewcontroller
++ (UIViewController*) findBestViewController:(UIViewController*)vc;
++ (UIViewController*) currentViewController;
+
 @end

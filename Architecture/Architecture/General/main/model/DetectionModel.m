@@ -15,7 +15,8 @@
              @"Eqname"        : @"Eqname",
              @"Faulttypes"         : @"Faulttypes",
              @"Floorsn"           : @"Floorsn",
-             @"Standard"             : @"Standard"
+             @"Standard"             : @"Standard",
+             @"Warningrecordsn"      : @"Warningrecordsn"
              };
 }
 

@@ -97,8 +97,8 @@
             @strongify(self)
             NSString *errorcode = DEF_OBJECT_TO_STIRNG([resultDict objectForKey:@"errorcode"]);
             NSString *errormsg = DEF_OBJECT_TO_STIRNG([resultDict objectForKey:@"errormsg"]);
-            NSLog(@"errorcode is :%@",errorcode);
-            NSLog(@"errormsg is :%@",errormsg);
+            //NSLog(@"errorcode is :%@",errorcode);
+            //NSLog(@"errormsg is :%@",errormsg);
             
             //fixpangu: 暂定200 测试
             if ([errorcode isEqualToString:SUCCESS_CODE]) {

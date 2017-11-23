@@ -20,5 +20,5 @@
 @property (nonatomic,strong)NSString *Faulttypes;
 @property (nonatomic,strong)NSString *Floorsn;
 @property (nonatomic,strong)NSString *Standard;
-
+@property (nonatomic,strong)NSString *Warningrecordsn;
 @end

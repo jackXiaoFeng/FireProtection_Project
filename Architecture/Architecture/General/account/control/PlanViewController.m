@@ -68,7 +68,13 @@
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         
-        BOOL hidden = self.tableView.contentSize.height > self.tableView.height?NO:YES;
+        BOOL hidden;
+        if (self.viewModel.planList.count == 0) {
+            hidden = NO;
+        }else
+        {
+            hidden = self.tableView.contentSize.height > self.tableView.height?NO:YES;
+        }
         //数据不超出屏幕不显示foot
         self.tableView.mj_footer.hidden = hidden;
         //最后一页加提示语
