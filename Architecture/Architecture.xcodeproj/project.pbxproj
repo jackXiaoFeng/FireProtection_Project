@@ -1768,8 +1768,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Architecture/Architecture.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: li  xiling (4WEV3XJ3P3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: li  xiling (4WEV3XJ3P3)";
 				DEVELOPMENT_TEAM = 4WEV3XJ3P3;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Architecture/Architecture.pch";
 				INFOPLIST_FILE = Architecture/Info.plist;
@@ -1777,8 +1777,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.wuziqi;
 				PRODUCT_NAME = Architecture;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "2a3aec73-39aa-486b-bcdc-c23461f34250";
+				PROVISIONING_PROFILE_SPECIFIER = li_xiling_ADHOC;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1790,7 +1790,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Architecture/Architecture.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: li  xiling (4WEV3XJ3P3)";
 				DEVELOPMENT_TEAM = 4WEV3XJ3P3;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Architecture/Architecture.pch";
 				INFOPLIST_FILE = Architecture/Info.plist;
@@ -1798,8 +1798,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.wuziqi;
 				PRODUCT_NAME = Architecture;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "2a3aec73-39aa-486b-bcdc-c23461f34250";
+				PROVISIONING_PROFILE_SPECIFIER = li_xiling_ADHOC;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
