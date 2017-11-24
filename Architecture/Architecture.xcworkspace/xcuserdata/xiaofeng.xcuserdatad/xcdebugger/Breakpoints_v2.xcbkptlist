@@ -10,22 +10,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Architecture/General/account/viewModel/PlanViewModel.m"
-            timestampString = "532512568.303951"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "-feedDataWithType:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Architecture/General/account/viewModel/PlanViewModel.m"
             timestampString = "532512568.304041"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -48,22 +32,6 @@
             startingLineNumber = "107"
             endingLineNumber = "107"
             landmarkName = "-feedDataWithType:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Architecture/AppDelegate.m"
-            timestampString = "533118829.726084"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "-load"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -106,12 +74,12 @@
                   moduleName = "Architecture"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xiaofeng/Desktop/projectGit/FireProtection_Project/Architecture/Architecture/Network/RequestOperationManager.m"
-                  timestampString = "533186814.839689"
+                  timestampString = "533195762.328781"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "207"
                   endingLineNumber = "207"
-                  offsetFromSymbolStart = "536">
+                  offsetFromSymbolStart = "643">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -121,12 +89,12 @@
                   moduleName = "Architecture"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xiaofeng/Desktop/projectGit/FireProtection_Project/Architecture/Architecture/Network/RequestOperationManager.m"
-                  timestampString = "533186814.842278"
+                  timestampString = "533195762.332184"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "207"
                   endingLineNumber = "207"
-                  offsetFromSymbolStart = "24">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -169,38 +137,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Architecture/General/account/control/NoneRecordViewController.m"
-            timestampString = "533186814.634815"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "-headerWithRefreshing"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Architecture/General/account/control/NoneRecordViewController.m"
-            timestampString = "533186814.634905"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "-headerWithRefreshing"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Architecture/General/account/control/UploadingViewController.m"
             timestampString = "533182412.647607"
             startingColumnNumber = "9223372036854775807"
@@ -218,12 +154,12 @@
                   moduleName = "Architecture"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xiaofeng/Desktop/projectGit/FireProtection_Project/Architecture/Architecture/General/account/control/UploadingViewController.m"
-                  timestampString = "533186814.861242"
+                  timestampString = "533195762.357483"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "302"
                   endingLineNumber = "302"
-                  offsetFromSymbolStart = "820">
+                  offsetFromSymbolStart = "825">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -233,12 +169,12 @@
                   moduleName = "Architecture"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xiaofeng/Desktop/projectGit/FireProtection_Project/Architecture/Architecture/General/account/control/UploadingViewController.m"
-                  timestampString = "533186814.864454"
+                  timestampString = "533195762.360745"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "302"
                   endingLineNumber = "302"
-                  offsetFromSymbolStart = "136">
+                  offsetFromSymbolStart = "150">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -248,12 +184,12 @@
                   moduleName = "Architecture"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/xiaofeng/Desktop/projectGit/FireProtection_Project/Architecture/Architecture/General/account/control/UploadingViewController.m"
-                  timestampString = "533186814.86675"
+                  timestampString = "533195762.364228"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "302"
                   endingLineNumber = "302"
-                  offsetFromSymbolStart = "84">
+                  offsetFromSymbolStart = "75">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -281,7 +217,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Architecture/General/main/control/ApplicationForInspectionViewController.m"
-            timestampString = "533182412.64815"
+            timestampString = "533197830.721588"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "386"
@@ -313,13 +249,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Architecture/General/main/control/ApplicationForInspectionViewController.m"
-            timestampString = "533182412.648278"
+            timestampString = "533197830.721711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "610"
             endingLineNumber = "610"
-            landmarkName = "ApplicationForInspectionViewController"
-            landmarkType = "3">
+            landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

@@ -22,8 +22,10 @@
 #define SOCKETIO_ADDRESS          @"http://192.168.1.123:22223"
     //socketIO 测试环境
 #else
-   //socketIO 测试环境
-   #define SOCKETIO_ADDRESS        @"http://wwwt.freshera.cn:22223"
+   //socketIO 正式环境
+   //#define SOCKETIO_ADDRESS        @"http://wwwt.freshera.cn:22223"
+
+   #define SOCKETIO_ADDRESS        @"https://jkapit.freshera.cn"
 #endif
 
 

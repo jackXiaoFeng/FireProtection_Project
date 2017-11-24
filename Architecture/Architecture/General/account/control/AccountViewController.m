@@ -53,6 +53,9 @@
     
     self.viewModel = [[PollingCompleteViewModel alloc]init];
 
+    [self.leftBtn setImage:DEF_IMAGENAME(@"quit_login") forState:UIControlStateNormal];
+    self.leftBtn.hidden = NO;
+    
     [self.rightBtn setImage:DEF_IMAGENAME(@"scan") forState:UIControlStateNormal];
     self.rightBtn.hidden = NO;
     
@@ -257,6 +260,47 @@
     // Do any additional setup after loading the view.
 }
 
+
+- (void)leftBtnClick
+{
+    NSString *title = NSLocalizedString(@"退出登录", nil);
+    NSString *message = NSLocalizedString(@"是否要退出登录？", nil);
+    NSString *cancelButtonTitle = NSLocalizedString(@"否", nil);
+    NSString *otherButtonTitle = NSLocalizedString(@"是", nil);
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    // Create the actions.
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        NSLog(@"The \"Cancel\" alert's cancel action occured.");
+    }];
+    
+    UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSLog(@"退出登录");
+        [CMUtility showTips:@"退出登录成功"];
+        
+        [DEF_UserDefaults removeObjectForKey:@"phone"];
+        [DEF_UserDefaults removeObjectForKey:@"unitname"];
+        [DEF_UserDefaults removeObjectForKey:@"token"];
+        [DEF_UserDefaults removeObjectForKey:@"unitsn"];
+        [DEF_UserDefaults removeObjectForKey:@"username"];
+        [DEF_UserDefaults synchronize];
+        
+        LoginViewController *loginViewController = [LoginViewController new];
+        @weakify(self);
+        loginViewController.completion = ^(){
+            @strongify(self);
+            [self dismissViewControllerAnimated:YES completion:nil];
+        };
+        [self presentViewController:loginViewController animated:YES completion:nil];
+    }];
+    
+    // Add the actions.
+    [alertController addAction:cancelAction];
+    [alertController addAction:otherAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 - (void)requestNowpolling
 {
     @weakify(self)

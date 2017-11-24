@@ -241,6 +241,17 @@ Byte      tradeN   = 1;
 
 - (void)leftBtnClick
 {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIView *view = [[[UIApplication sharedApplication] windows] firstObject];
+        IAlertView *alterViewOld = [view viewWithTag:IAlertView_TAG];
+        if (alterViewOld) {
+            for (UIView *v in [alterViewOld subviews]) {
+                [v removeFromSuperview];
+            }
+            [alterViewOld removeFromSuperview];
+        }
+        //self.searchButton.titleLabel.text = @"搜索设备";
+    });
 //    if (![self.bleManager isConnect]) {
 //        [self.bleManager stopScan];
 //        [self.bleManager cancelConnect];
@@ -600,7 +611,7 @@ Byte      tradeN   = 1;
         int searchCnt = 0;
         while ((self.mNearestBle == nil) && (searchCnt++ < 5000) && ([self.bleManager isScanning])) {
             [NSThread sleepForTimeInterval:0.001f];
-        }1，告警历史记录界面，数据显示异常修复 2，告警模块，NFC扫描->申请检修页面 直接调用007api 3，设备界面注册通知，设备状态改变则刷新界面 4，修复蓝牙界面扫描阶段退出过慢bug
+        }
         //[NSThread sleepForTimeInterval:1.0f];
         [self.bleManager stopScan];
         
@@ -981,6 +992,8 @@ Byte      tradeN   = 1;
 
                 if (newStr.length > 0) {
                     //根据设备degree获取 设备信息
+                    //fix_debug:测试使用 根据设备degree获取 设备信息
+                    //[self requestNFCDetection:@"ba646d04"];
                     [self requestNFCDetection:newStr];
                 }else
                 {
@@ -1116,10 +1129,10 @@ Byte      tradeN   = 1;
                 
                 //读写卡成功，蜂鸣器快响3声
                 if (isSuc) {
-                    [self.bleNfcDevice openBeep:50 offDelay:50 cnt:3];
+                    //[self.bleNfcDevice openBeep:50 offDelay:50 cnt:3];
                 }
                 else {
-                    [self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
+                    //[self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
                 }
                 
                 //读卡结束，重新打开自动寻卡
@@ -1146,10 +1159,10 @@ Byte      tradeN   = 1;
                 
                 //读写卡成功，蜂鸣器快响3声
                 if (isSuc) {
-                    [self.bleNfcDevice openBeep:50 offDelay:50 cnt:3];
+                    //[self.bleNfcDevice openBeep:50 offDelay:50 cnt:3];
                 }
                 else {
-                    [self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
+                    //[self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
                 }
             }
         } @catch (NSException *exception) {
@@ -1158,7 +1171,7 @@ Byte      tradeN   = 1;
                 @strongify(self)
                 self.msgTextView.text = self.msgBuffer;
             });
-            [self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
+            //[self.bleNfcDevice openBeep:100 offDelay:100 cnt:2];
             
             if (isAutoSearchCardFlag) {
                 //读卡失败，重新打开自动寻卡

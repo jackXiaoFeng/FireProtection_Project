@@ -56,6 +56,8 @@
 #import "IAlertView.h"
 #import "CMTakePhoto.h"
 #import "UploadingModel.h"
+#import "LoginViewController.h"
+
 /*
  Define
  */

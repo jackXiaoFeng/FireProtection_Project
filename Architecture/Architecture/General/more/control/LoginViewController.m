@@ -60,7 +60,7 @@
     
     
     CGFloat user_x =DEF_DEVICE_SCLE_WIDTH(65);
-    CGFloat user_y =logoIV.y+logoIV.height+ DEF_DEVICE_SCLE_WIDTH(94);
+    CGFloat user_y =logoIV.y+logoIV.height+ DEF_DEVICE_SCLE_WIDTH(34);
     
     
     self.userView = [[UIView alloc]initWithFrame:CGRectMake(user_x, user_y, DEF_DEVICE_WIDTH - user_x*2, DEF_DEVICE_SCLE_HEIGHT(476))];
@@ -137,7 +137,7 @@
         
         //登录按钮
         _btnNext = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btnNext.frame = CGRectMake(self.tfVericode.x, self.tfVericode.y + self.tfVericode.height + DEF_DEVICE_SCLE_HEIGHT(74), self.tfPhoneNum.width, self.tfPhoneNum.height);
+        _btnNext.frame = CGRectMake(self.tfVericode.x, self.tfVericode.y + self.tfVericode.height + DEF_DEVICE_SCLE_HEIGHT(54), self.tfPhoneNum.width, self.tfPhoneNum.height);
         [_btnNext setTitle:@"登  录" forState:UIControlStateNormal];
         [_btnNext setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_btnNext setBackgroundImage:DEF_IMAGENAME(@"login_btn_normal") forState:UIControlStateNormal];
@@ -346,6 +346,7 @@
         field.leftView = [self createLeftViewWithName:@"login_user"];
         field.leftViewMode = UITextFieldViewModeAlways;
         field.delegate = self;
+        field.font = DEF_MyFont(14);
         field.layer.borderColor= [UIColor UIColorFromRGB:0xEEEEEE alpha:1].CGColor;
         field.layer.borderWidth= 1.0f;
         field.layer.cornerRadius = 5;
@@ -368,6 +369,7 @@
         tf.leftViewMode = UITextFieldViewModeAlways;
         tf.leftView = [self createLeftViewWithName:@"login_code"];
         tf.delegate = self;
+        tf.font = DEF_MyFont(14);
         tf.layer.borderColor= [UIColor UIColorFromRGB:0xEEEEEE alpha:1].CGColor;
         tf.layer.borderWidth= 1.0f;
         tf.layer.cornerRadius = 5;
