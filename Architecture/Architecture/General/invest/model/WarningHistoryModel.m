@@ -25,7 +25,8 @@
              @"Udetailed"                 : @"Udetailed",
              @"Username"                 : @"Username",
              @"Utime"                 : @"Utime",
-             @"Uusername"                 : @"Uusername"
+             @"Uusername"                 : @"Uusername",
+             @"Xfstates"    :@"Xfstates"
              };
 
 }

@@ -59,6 +59,8 @@
 
 @property (nonatomic,assign)BOOL isNoConnectBlue;
 
+@property (nonatomic,assign)BOOL isScanBlue;
+
 @end
 
 NSInteger lastRssi = -100;
@@ -134,6 +136,7 @@ Byte      tradeN   = 1;
     self.tmpVC = NULL;
     self.isPush = NO;
     self.isNoConnectBlue = NO;
+    self.isScanBlue  = YES;
     
     self.navImageView.image = [UIImage imageNamed:@""];
     
@@ -230,6 +233,10 @@ Byte      tradeN   = 1;
         }
     }];
     
+    
+    //fix_debug:测试使用 根据设备degree获取 设备信息
+    //[self requestNFCDetection:@"ba646d04"];
+    
 }
 
 - (void)leftBtnClick
@@ -241,16 +248,26 @@ Byte      tradeN   = 1;
 //        [self.navigationController popViewControllerAnimated:YES];
 //    }else
 //    {
-    if(self.isNoConnectBlue == YES)
-    {
+    
+    if (self.isScanBlue) {
         [self.bleManager stopScan];
         [self.bleManager cancelConnect];
         [DKBleManager dKBleManagerDealloc];
-        [self popOrPushVC];
+        [self.navigationController popViewControllerAnimated:YES];
     }else
     {
-        [self skipOtherViewController:NULL Push:NO];
+        if(self.isNoConnectBlue == YES)
+        {
+            [self.bleManager stopScan];
+            [self.bleManager cancelConnect];
+            [DKBleManager dKBleManagerDealloc];
+            [self popOrPushVC];
+        }else
+        {
+            [self skipOtherViewController:NULL Push:NO];
+        }
     }
+    
     
 //    }
 }
@@ -401,6 +418,9 @@ Byte      tradeN   = 1;
                     if (isSave) {
                         [CMUtility showTips:@"确认巡检成功"];
                         [self skipOtherViewController:NULL Push:NO];
+                        
+                        //发送一个通知 刷新设备页面
+                        [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_DEVICEINFO_VC object:nil];
                     }else
                     {
                         [CMUtility showTips:@"确认巡检失败"];
@@ -414,6 +434,9 @@ Byte      tradeN   = 1;
                         if ([str isEqualToString:SUCCESS_MSG]) {
                             [CMUtility showTips:@"复归成功"];
                             [self skipOtherViewController:NULL Push:NO];
+                            
+                            //发送一个通知 刷新设备页面
+                            [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_DEVICEINFO_VC object:nil];
                         }else
                         {
                             [CMUtility showTips:@"复归失败"];
@@ -423,6 +446,8 @@ Byte      tradeN   = 1;
                         
                     }];
                 }
+                
+                
                 
             } else if (buttonIndex == 1)
             {
@@ -576,8 +601,12 @@ Byte      tradeN   = 1;
         while ((self.mNearestBle == nil) && (searchCnt++ < 5000) && ([self.bleManager isScanning])) {
             [NSThread sleepForTimeInterval:0.001f];
         }
-        [NSThread sleepForTimeInterval:1.0f];
+        //[NSThread sleepForTimeInterval:1.0f];
         [self.bleManager stopScan];
+        
+        self.isScanBlue = NO;
+        NSLog(@"2======%@",[CMUtility currentTimestampSecond]);
+
         if (self.mNearestBle == nil) {
             //开始连接设备
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -1202,7 +1231,9 @@ Byte      tradeN   = 1;
         return;
         
     }
-    
+    self.isScanBlue  = YES;
+    NSLog(@"1======%@",[CMUtility currentTimestampSecond]);
+
     switch (central.state) {
         case CBCentralManagerStatePoweredOn://蓝牙打开
         {
@@ -1250,6 +1281,8 @@ Byte      tradeN   = 1;
         default:
             break;
     }
+    NSLog(@"3======%@",[CMUtility currentTimestampSecond]);
+
 }
 
 //蓝牙连接状态回调

@@ -7,7 +7,7 @@
 //
 
 #import "ApplicationForInspectionViewController.h"
-
+#import "UploadingViewModel.h"
 @interface ApplicationForInspectionViewController ()<UIPickerViewDelegate,UIPickerViewDataSource,UITextViewDelegate>
 {
     CGFloat _currentKeyboardH;
@@ -26,7 +26,7 @@
 @property (nonatomic,strong)UIAlertController      *imgActionSheet;        //头像选择弹出框
 
 @property (nonatomic,strong)CMTakePhoto *photoPicker;           //照片选择器
-
+@property (nonatomic,strong)UploadingViewModel *uploadingViewModel;
 @end
 
 @implementation ApplicationForInspectionViewController
@@ -37,6 +37,7 @@
     
     
     self.titleLb.text = self.detectionModel.Eqname;
+    self.uploadingViewModel = [[UploadingViewModel alloc]init];
     
     self.imageDic = [NSMutableDictionary dictionaryWithCapacity:10];
     
@@ -343,25 +344,47 @@
         //@"Warningrecordsn":@"",//告警和设备模块需要加上这个字段
         //@"AFmaintenance":@"4",//0正常巡检4申请检修
         
-        NSMutableDictionary *tmpDic = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
-        if (tmpDic == nil) {
-            tmpDic =[NSMutableDictionary dictionaryWithCapacity:10];
-        }
-        [tmpDic setObject:uploadingModel forKey:uploadingModel.Degree];
-        
-        BOOL isSave = [NSKeyedArchiver archiveRootObject:tmpDic toFile:path];
-        if (isSave) {
-            [CMUtility showTips:@"提交检修成功"];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+        if (self.nfcDetectionStatus == NFC_DETECTION_POLLING)
+        {
+            NSMutableDictionary *tmpDic = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+            if (tmpDic == nil) {
+                tmpDic =[NSMutableDictionary dictionaryWithCapacity:10];
+            }
+            [tmpDic setObject:uploadingModel forKey:uploadingModel.Degree];
+            
+            BOOL isSave = [NSKeyedArchiver archiveRootObject:tmpDic toFile:path];
+            if (isSave) {
+                [CMUtility showTips:@"提交检修成功"];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                //发送一个通知 刷新设备页面
+                [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_DEVICEINFO_VC object:nil];
+            }else
+            {
+                [CMUtility showTips:@"提交检修失败"];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
         }else
         {
-            [CMUtility showTips:@"提交检修失败"];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            @weakify(self)
+            [[self.uploadingViewModel uploadingDataWithModel:uploadingModel] subscribeNext:^(id x) {
+                @strongify(self);
+                if ([x isEqualToString:SUCCESS_MSG]) {
+                    [CMUtility showTips:@"申请检修成功"];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    //发送一个通知 刷新设备页面
+                    [[NSNotificationCenter defaultCenter] postNotificationName:REFRESH_DEVICEINFO_VC object:nil];
+                }
+            }error:^(NSError *error) {
+                [CMUtility showTips:@"申请检修失败"];
+            }];
         }
+        
+       
         
         
         
         NSLog(@"================%@",imagesStr);
+        
         
     }else
     {

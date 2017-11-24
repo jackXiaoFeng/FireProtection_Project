@@ -24,8 +24,25 @@
 
 @implementation MoreViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+}
+- (void)refreshDeviceInfo {
+    
+    [self headerWithRefreshing];
+}
+- (void)dealloc {
+    //移除观察者 self
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // 添加一个通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshDeviceInfo) name:REFRESH_DEVICEINFO_VC object:nil];
+    
     self.titleLb.text = @"设备";
     
     [self.rightBtn setImage:DEF_IMAGENAME(@"scan") forState:UIControlStateNormal];
@@ -37,8 +54,10 @@
     self.viewModel  = [[EquipmentViewModel alloc]init];
     self.warningViewModel  = [[EquipmentWarningViewModel alloc]init];
 
+    
     //首次刷新数据
     [self headerWithRefreshing];
+    
     //mj刷新
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self headerWithRefreshing];

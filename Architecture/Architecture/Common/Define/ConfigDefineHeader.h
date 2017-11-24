@@ -126,6 +126,7 @@
 #define SUCCESS_MSG  @"success"
 
 #define DEF_API_CONNECT           @"connect"
+#define REFRESH_DEVICEINFO_VC     @"REFRESH_DEVICEINFO_VC"
 
 /**
  *   3.1	[xs001]登陆

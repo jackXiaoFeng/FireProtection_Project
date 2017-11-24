@@ -238,7 +238,7 @@
     
     
     
-    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(DEF_DEVICE_SCLE_WIDTH(518), DEF_DEVICE_SCLE_HEIGHT(78), DEF_DEVICE_SCLE_WIDTH(150), DEF_DEVICE_SCLE_HEIGHT(24))];
+    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(DEF_DEVICE_SCLE_WIDTH(518), DEF_DEVICE_SCLE_HEIGHT(78), DEF_DEVICE_SCLE_WIDTH(200), DEF_DEVICE_SCLE_HEIGHT(24))];
     lab.text = @"巡检完成度";
     lab.textColor = [UIColor UIColorFromRGB:0xFB7943 alpha:1];
     lab.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];

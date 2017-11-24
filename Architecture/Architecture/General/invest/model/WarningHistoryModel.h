@@ -46,6 +46,7 @@
 @property (nonatomic,strong)NSString *Username;
 @property (nonatomic,strong)NSString *Utime;
 @property (nonatomic,strong)NSString *Uusername;
+@property (nonatomic,strong)NSString *Xfstates;
 
 
 @end

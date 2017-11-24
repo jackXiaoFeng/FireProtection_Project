@@ -37,4 +37,6 @@
 -(RACSignal *)feedDataWithType:(LoadType)loadType;
 
 -(RACSignal *)uploadingDataWithUploadingModel:(NSArray *)modelArray;
+
+-(RACSignal *)uploadingDataWithModel:(UploadingModel *)uploadingModel;
 @end

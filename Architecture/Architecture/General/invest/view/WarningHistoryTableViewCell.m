@@ -111,8 +111,12 @@
     {
         //YYYY-MM-dd HH:mm:ss
         if (WarningHistoryModel.Stime.length < 10) {
-            self.timeLab.text = @"--:--";
-            
+            if (WarningHistoryModel.Mtime.length < 10) {
+                self.timeLab.text = @"--:--";
+            }else
+            {
+                self.timeLab.text = [CMUtility getTimeWithTimestamp:WarningHistoryModel.Mtime WithDateFormat:@"HH:mm"];
+            }
         }else
         {
             self.timeLab.text = [CMUtility getTimeWithTimestamp:WarningHistoryModel.Stime WithDateFormat:@"HH:mm"];
@@ -120,28 +124,26 @@
         
         self.deviceLab.text = [NSString stringWithFormat:@"%@ ",WarningHistoryModel.Name];
         
-        //0:正常
-        //1:异常
+        //1:正常 Warning_Fix_Malfunction
         NSString *statusStr = @"";
-//        if ([WarningHistoryModel.Xfstates isEqualToString:Warning_Fix_Normal]) {
-//            statusStr = @"正常";
-//        }else
-//        {
-//            statusStr = @"异常";
-//        }
+        if ([WarningHistoryModel.Xfstates isEqualToString:Warning_Fix_Malfunction]) {
+            statusStr = @"正常";
+        }else
+        {
+            statusStr = @"异常";
+        }
         self.statusLab.text = statusStr;
         
         //复归时间
         if (WarningHistoryModel.Utime.length < 10) {
-            self.restorationTimeLab.text = @"--:--";
-            
+            self.restorationTimeLab.text = @"未处理";
         }else
         {
             self.restorationTimeLab.text = [CMUtility getTimeWithTimestamp:WarningHistoryModel.Utime WithDateFormat:@"HH:mm"];
         }
         
         
-        self.restorationLab.text = DEF_OBJECT_TO_STIRNG(WarningHistoryModel.Username);
+        self.restorationLab.text = DEF_OBJECT_TO_STIRNG(WarningHistoryModel.Uusername);
     }
     
 - (void)prepareForReuse {
