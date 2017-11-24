@@ -600,7 +600,7 @@ Byte      tradeN   = 1;
         int searchCnt = 0;
         while ((self.mNearestBle == nil) && (searchCnt++ < 5000) && ([self.bleManager isScanning])) {
             [NSThread sleepForTimeInterval:0.001f];
-        }
+        }1，告警历史记录界面，数据显示异常修复 2，告警模块，NFC扫描->申请检修页面 直接调用007api 3，设备界面注册通知，设备状态改变则刷新界面 4，修复蓝牙界面扫描阶段退出过慢bug
         //[NSThread sleepForTimeInterval:1.0f];
         [self.bleManager stopScan];
         
