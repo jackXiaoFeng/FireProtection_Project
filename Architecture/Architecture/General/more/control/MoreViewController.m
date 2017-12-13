@@ -47,8 +47,11 @@
     self.titleLb.text = @"设备";
     
     
-    [self.leftBtn setImage:DEF_IMAGENAME(@"quit_login") forState:UIControlStateNormal];
-    self.leftBtn.hidden = NO;
+    if (!self.isNoneTabber) {
+        [self.leftBtn setImage:DEF_IMAGENAME(@"quit_login") forState:UIControlStateNormal];
+        self.leftBtn.hidden = NO;
+    }
+    
     
     [self.rightBtn setImage:DEF_IMAGENAME(@"scan") forState:UIControlStateNormal];
     self.rightBtn.hidden = NO;
@@ -76,6 +79,11 @@
 }
 - (void)leftBtnClick
 {
+    if (self.isNoneTabber) {
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+    
     NSString *title = NSLocalizedString(@"退出登录", nil);
     NSString *message = NSLocalizedString(@"是否要退出登录？", nil);
     NSString *cancelButtonTitle = NSLocalizedString(@"否", nil);

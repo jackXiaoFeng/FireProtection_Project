@@ -317,6 +317,10 @@
 
              NSInteger progressSections = [model.Complete intValue];
              NSInteger Unfinishe = [model.Unfinishe intValue];
+             
+             //fix_debug:演示
+//             progressSections = (3 - idx)*90;
+//             Unfinishe = 80;
 
              RoundnessProgressView *rpView = [self.pressView viewWithTag:RoundViewTAG +idx];
              [rpView removeFromSuperview];

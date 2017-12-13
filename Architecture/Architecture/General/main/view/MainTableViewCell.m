@@ -128,6 +128,10 @@
 {
     NSLog(@"index--%ld--%ld",(long)mainModel.row,(long)mainModel.Complete);
  
+    //fix_debug:演示
+//    mainModel.Complete = 50;
+//    mainModel.Unfinishe = 80;
+    
     self.pressWidth = 60;
 
 #pragma mark - 圆绘制进度

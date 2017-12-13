@@ -259,6 +259,7 @@
         if (!self.sessionid) {
             self.sessionid = @"";//1469166550
         }
+        NSLog(@"---%@---%@---%@",self.tfPhoneNum.text,self.tfVericode.text,self.sessionid);
         [self.loginModel loginWithPhoneNum:self.tfPhoneNum.text tfVericode:self.tfVericode.text Vericode:self.sessionid isAgreeProtocol:self.isAgreeProtocol complete:^(NSString * str) {
             [subscriber sendNext:str];
             [subscriber sendCompleted];

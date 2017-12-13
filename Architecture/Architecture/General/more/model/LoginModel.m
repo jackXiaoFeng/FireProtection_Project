@@ -15,64 +15,55 @@
  */
 - (void)fetchVericode:(NSString *)phoneNum withCompleteBlock:(CompleteBlock)complete;
 {
-    
-    if (!SocketIO_Singleton.isConnectSuccess) {
-        BLOCK_SAFE(complete)(@"服务器连接失败");
-        return;
+    //fix_debug:审核使用
+    if ([phoneNum isEqualToString:TEST_PHONENUME]) {
+        BLOCK_SAFE(complete)(TEST_CODE);
     }else
     {
-        NSDictionary *datDic = @{
-                                 @"Oper_flag":@1,
-                                 @"Username":phoneNum,
-                                 @"Sms_template":@1,
-                                 };
-        NSArray *arr = [NSArray arrayWithObjects:datDic, nil];
-        NSDictionary *tempDic = @{
-                                  @"code":XS002,
-                                  @"serial_no":[NSString stringWithFormat:@"%@%@",[CMUtility currentTimestampMillisecond],XS002_serial_no],
-                                  @"errorcode":@"0",
-                                  @"errormsg":@"success",
-                                  @"dat":arr                              };
-        
-        
-        //@"{\"code\":\"xs001\",\"serial_no\":\"\",\"token\":\"2hACkIzVnNqCjEciwCaZ2flveBGv\",\"errorcode\":\"0\",\"errormsg\":\"success\",\"dat\":[{\"Oper_flag\":\"1\",\"Username\":\"123456\",\"Vcode\":\"123456\",\"Areas_sn\":\"12345\"}]}"
-        
-        NSString *jsonStr = [tempDic JSONString];
-        @weakify(self)
-        [SocketIO_Singleton sendEmit:XS002 withMessage:jsonStr];
-        SocketIO_Singleton.xr002CallBackResult = ^(NSDictionary *resultDict){
-            @strongify(self)
-            NSString *errorcode = DEF_OBJECT_TO_STIRNG([resultDict objectForKey:@"errorcode"]);
-            NSString *errormsg = DEF_OBJECT_TO_STIRNG([resultDict objectForKey:@"errormsg"]);
-            NSLog(@"errorcode is :%@",errorcode);
-            NSLog(@"errormsg is :%@",errormsg);
+        if (!SocketIO_Singleton.isConnectSuccess) {
+            BLOCK_SAFE(complete)(@"服务器连接失败");
+            return;
+        }else
+        {
+            NSDictionary *datDic = @{
+                                     @"Oper_flag":@1,
+                                     @"Username":phoneNum,
+                                     @"Sms_template":@1,
+                                     };
+            NSArray *arr = [NSArray arrayWithObjects:datDic, nil];
+            NSDictionary *tempDic = @{
+                                      @"code":XS002,
+                                      @"serial_no":[NSString stringWithFormat:@"%@%@",[CMUtility currentTimestampMillisecond],XS002_serial_no],
+                                      @"errorcode":@"0",
+                                      @"errormsg":@"success",
+                                      @"dat":arr                              };
             
-            //fixpangu: 暂定200 测试
-            if ([errorcode isEqualToString:SUCCESS_CODE]) {
+            
+            //@"{\"code\":\"xs001\",\"serial_no\":\"\",\"token\":\"2hACkIzVnNqCjEciwCaZ2flveBGv\",\"errorcode\":\"0\",\"errormsg\":\"success\",\"dat\":[{\"Oper_flag\":\"1\",\"Username\":\"123456\",\"Vcode\":\"123456\",\"Areas_sn\":\"12345\"}]}"
+            
+            NSString *jsonStr = [tempDic JSONString];
+            @weakify(self)
+            [SocketIO_Singleton sendEmit:XS002 withMessage:jsonStr];
+            SocketIO_Singleton.xr002CallBackResult = ^(NSDictionary *resultDict){
+                @strongify(self)
+                NSString *errorcode = DEF_OBJECT_TO_STIRNG([resultDict objectForKey:@"errorcode"]);
+                NSString *errormsg = DEF_OBJECT_TO_STIRNG([resultDict objectForKey:@"errormsg"]);
+                NSLog(@"errorcode is :%@",errorcode);
+                NSLog(@"errormsg is :%@",errormsg);
                 
-                NSArray *list = [resultDict objectForKey:@"datas"];
-                NSDictionary *dic = list[0];
-                BLOCK_SAFE(complete)([dic objectForKey:@"Sms_template"]);
-            }else
-            {
-                 BLOCK_SAFE(complete)(FailToCheckNum);
-            }
-        };
+                //fixpangu: 暂定200 测试
+                if ([errorcode isEqualToString:SUCCESS_CODE]) {
+                    
+                    NSArray *list = [resultDict objectForKey:@"datas"];
+                    NSDictionary *dic = list[0];
+                    BLOCK_SAFE(complete)([dic objectForKey:@"Sms_template"]);
+                }else
+                {
+                    BLOCK_SAFE(complete)(FailToCheckNum);
+                }
+            };
+    }
         
-        /*
-        [{
-            code = xs002;
-            datas =     (
-                         {
-                             "Sms_template" = 12345;
-                         }
-                         );
-            errorcode = 200;
-            errormsg = "\U9a8c\U8bc1\U7801\U9519\U8bef";
-            "serial_no" = 150468062637100002;
-            token = undefined;
-        }]
-         */
     }
 }
 
@@ -86,6 +77,7 @@
                  complete:(CompleteBlock)complete
                      fail:(FailBlock)fail
 {
+
     if (!SocketIO_Singleton.isConnectSuccess) {
         BLOCK_SAFE(complete)(@"服务器连接失败");
         return;
@@ -99,14 +91,20 @@
         BLOCK_SAFE(complete)(@"请输入验证码");
         return;
     }
-//    else if (![tfVericode isEqualToString:vericode]){
-//        BLOCK_SAFE(complete)(@"验证码输入有误");
-//        return;
-//    }
+    else if (![tfVericode isEqualToString:vericode]){
+        if ([phoneNum isEqualToString:TEST_PHONENUME] && [tfVericode isEqualToString:TEST_CODE]) {
+            vericode = tfVericode;
+        }else
+        {
+            BLOCK_SAFE(complete)(@"验证码输入有误");
+            return;
+        }
+    }
     else if(!isAgreeProtocol){
         BLOCK_SAFE(complete)(@"请同意相关协议");
         return;
-    }else{
+    }
+    
         NSDictionary *datDic = @{
                                  @"Oper_flag":@1,
                                  @"Username":phoneNum,
@@ -165,7 +163,7 @@
             }
         };
 
-    }
+    
 }
 
 

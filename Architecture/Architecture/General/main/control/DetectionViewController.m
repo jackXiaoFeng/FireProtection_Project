@@ -1288,6 +1288,8 @@ Byte      tradeN   = 1;
             error = [NSError errorWithDomain:@"CBCentralManagerStateUnsupported" code:-1 userInfo:nil];
             [CMUtility showTips:@"本机不支持蓝牙"];
             self.nfcLab.text =@"本机不支持蓝牙";
+            //fix_debug:演示
+//            self.nfcLab.text =@"蓝牙已连接";
             self.isNoConnectBlue = YES;
         }
             break;

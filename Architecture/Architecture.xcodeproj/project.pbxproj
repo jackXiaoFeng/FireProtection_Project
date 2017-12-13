@@ -1401,7 +1401,7 @@
 				TargetAttributes = {
 					3A95ACE81D17D4BA0026EAFE = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 4WEV3XJ3P3;
+						DevelopmentTeam = W6VZ5WM393;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1770,15 +1770,15 @@
 				CODE_SIGN_ENTITLEMENTS = Architecture/Architecture.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 4WEV3XJ3P3;
+				DEVELOPMENT_TEAM = W6VZ5WM393;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Architecture/Architecture.pch";
 				INFOPLIST_FILE = Architecture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.wuziqi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pangu.panguwulian;
 				PRODUCT_NAME = Architecture;
-				PROVISIONING_PROFILE = "2a3aec73-39aa-486b-bcdc-c23461f34250";
-				PROVISIONING_PROFILE_SPECIFIER = li_xiling_ADHOC;
+				PROVISIONING_PROFILE = "2c76c102-ab84-4a97-8c71-7fe13d906707";
+				PROVISIONING_PROFILE_SPECIFIER = pp_Distribution;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1791,15 +1791,16 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Architecture/Architecture.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 4WEV3XJ3P3;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = W6VZ5WM393;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Architecture/Architecture.pch";
 				INFOPLIST_FILE = Architecture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.wuziqi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pangu.panguwulian;
 				PRODUCT_NAME = Architecture;
-				PROVISIONING_PROFILE = "2a3aec73-39aa-486b-bcdc-c23461f34250";
-				PROVISIONING_PROFILE_SPECIFIER = li_xiling_ADHOC;
+				PROVISIONING_PROFILE = "2c76c102-ab84-4a97-8c71-7fe13d906707";
+				PROVISIONING_PROFILE_SPECIFIER = pp_Distribution;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

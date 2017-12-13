@@ -18,13 +18,15 @@
 
 //#define DEBUG_SOCKETIO
 
+#define TEST_PHONENUME            @"18837736111"
+#define TEST_CODE                 @"504850"
+
 #ifdef  DEBUG_SOCKETIO
 #define SOCKETIO_ADDRESS          @"http://192.168.1.123:22223"
     //socketIO 测试环境
 #else
    //socketIO 正式环境
    //#define SOCKETIO_ADDRESS        @"http://wwwt.freshera.cn:22223"
-
    #define SOCKETIO_ADDRESS        @"https://jkapit.freshera.cn"
 #endif
 
@@ -37,7 +39,7 @@
 
  //**********************第三方*************************
 //JPush 极光推送
-#define APPKEY_JPush      @"5f15ee535b2c83f9738d20b8"
+#define APPKEY_JPush      @"08529c7bd074bd838a4884a1"
 #define CHANNEL_JPush     @"AppStore"
 
 //ShareSDK appKey
